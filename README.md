@@ -1,0 +1,4 @@
+pracamgr
+========
+
+Praca magisterska
