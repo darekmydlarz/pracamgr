@@ -12,10 +12,12 @@ Autor
 -----
 in¿. Dariusz Mydlarz
 
-Akademia Górniczo-Hutnicza im. Stanis³awa Staszica w Krakowie  
-Wydzia³ Informatyki, Elektroniki i Telekomunikacji  
-Katedra Informatyki  
+Akademia Górniczo-Hutnicza im. Stanis³awa Staszica w Krakowie
+-------------------------------------------------------------
+Wydzia³ Informatyki, Elektroniki i Telekomunikacji  - Katedra Informatyki  
 Informatyka - Wytwarzanie i integracja systemów rozproszonych, Studia stacjonarne II stopnia  
 
+Rok akademicki
+--------------
 2013/2014
 
