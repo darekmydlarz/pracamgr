@@ -2,7 +2,8 @@ Requirements
 ============
 * Maven
 * PostgreSQL (9.3)
-* File `twitter4j.properties` in `main/resources` with following structure:
+* File `src/main/resources/twitter4j.properties` with following structure:
+
 ```
 oauth.consumerKey=***
 oauth.consumerSecret=***
