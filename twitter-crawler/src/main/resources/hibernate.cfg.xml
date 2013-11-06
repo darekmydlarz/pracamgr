@@ -18,6 +18,11 @@
 
 		<mapping class="pl.edu.agh.twitter.model.Tweet" />
 		<mapping class="pl.edu.agh.twitter.model.UserEntity" />
+		<mapping class="pl.edu.agh.twitter.model.Competition" />
+		<mapping class="pl.edu.agh.twitter.model.Manager" />
+		<mapping class="pl.edu.agh.twitter.model.MatchEvent" />
+		<mapping class="pl.edu.agh.twitter.model.Player" />
+		<mapping class="pl.edu.agh.twitter.model.Team" />
 
 	</session-factory>
 

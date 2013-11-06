@@ -1,10 +1,13 @@
 package pl.edu.agh.twitter;
 
+import com.google.common.collect.Iterables;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import pl.edu.agh.twitter.crawler.Polygon;
 import pl.edu.agh.twitter.crawler.TwitterServiceProvider;
+import pl.edu.agh.twitter.model.MatchEvent;
 import pl.edu.agh.twitter.model.Tweet;
 import pl.edu.agh.twitter.model.UserEntity;
 import twitter4j.FilterQuery;
@@ -16,46 +19,40 @@ import twitter4j.TwitterException;
 import twitter4j.TwitterStream;
 import twitter4j.User;
 
+import java.util.List;
+
 public class Main {
-	private static final String[] TRACK = new String[] { 
-		"mufc",  "manutd", "manchester united", "manchesterunited",
-		"saf", "moyes", "De Gea", "ferguson", "alex ferguson",
-		"Rafael", "Jones", "Evans", "Evra", "Carrick", "Giggs", "Valencia", "Rooney", "Kagawa", "Hernandez", "van Persie", "rvp",
-		"Lindegaard", "Buttner", "Smalling", "Fellaini", "Nani", "Young", "Januzaj"
-	};
-	
-	
-	private static final String[] ARSENAL_CHELSEA = new String[] {
-		"arsenal", "chelsea", "afc", "cfc", "arsene wenger", "jose mourinho", "special one",
-		"emirates stadium", "capitalonecup", "capital one cup", 
-		"Lukasz Fabianski", "thomas vermaelen", "nacho monreal", "laurent koscielny", "carl jenkinson",
-		"thomas rosicky", "santi cazorla", "jack wilshere", "aaron ramsey", "nicklas bendtner",
-		"mark schwarzer", "gary cahill", "david luiz", "cesar azplicueta", "ryan bertrand", 
-		"mickael essien", "john obi mikel", "wilian", "kevin de bruyne", "samuel eto", "juan mata",
-		"emilio viviano", "chu-young park", "issac hayden", "bakari sagna", "mesut ozil", "olivier giroud",
-		"ramires", "fernando torres", "demba ba", "jamal blackman", "branislav ivanovic", "eden hazard",
-		"tomas kalas"
-	};
 	
 	private static final String[] LANGUAGES = new String[] { "en" };
 	private static TwitterStream twitterStream;
 
 	public static void main(String[] args) {
 		twitterStream = TwitterServiceProvider.getTwitterStream();
-		consume();
+        MatchEvent barcelonaMilan = findMatchEvent("barcelona", "milan");
+        System.out.println(barcelonaMilan.getId());
+		consume(barcelonaMilan);
 	}
 
-	private static FilterQuery filterQuery() {
+    public static MatchEvent findMatchEvent(String homeTeam, String awayTeam) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        final String queryString = "FROM MatchEvent e WHERE lower(e.homeTeam.name) LIKE :homeTeam AND lower(e.awayTeam.name) LIKE :awayTeam";
+        Query query = session.createQuery(queryString);
+        final List items = query.setParameter("homeTeam", "%" + homeTeam.toLowerCase() + "%").setParameter("awayTeam", "%" + awayTeam.toLowerCase() + "%").list();
+        MatchEvent matchEvent = (MatchEvent) items.get(0);
+        session.close();
+        return matchEvent;
+    }
+
+	private static FilterQuery filterQuery(MatchEvent matchEvent) {
 		final FilterQuery query = new FilterQuery();
-//		query.locations(Polygon.England.getTwitter4jRepresentation());
 		query.language(LANGUAGES);
-		query.track(ARSENAL_CHELSEA);
+        query.track(Iterables.toArray(matchEvent.getKeywords(), String.class));
 		return query;
 	}
 
-	private static void consume() {
-		twitterStream.addListener(listener);
-		twitterStream.filter(filterQuery());
+	private static void consume(MatchEvent matchEvent) {
+		twitterStream.addListener(new MyStatusListener(matchEvent));
+		twitterStream.filter(filterQuery(matchEvent));
 	}
 
 	private static UserEntity createOrGetUser(User user) throws TwitterException {
@@ -93,11 +90,17 @@ public class Main {
 		System.out.println("Tweet " + tweet.getId() + " persisted");
 	}
 
-	private static StatusListener listener = new StatusListener() {
-		public void onStatus(Status status) {
+    public static class MyStatusListener implements StatusListener {
+        private MatchEvent matchEvent;
+
+        MyStatusListener(MatchEvent matchEvent) {
+            this.matchEvent = matchEvent;
+        }
+
+        public void onStatus(Status status) {
 			try {
 				if(status.getGeoLocation() != null) {
-					Tweet tweet = new Tweet(status, createOrGetUser(status.getUser()));
+					Tweet tweet = new Tweet(status, createOrGetUser(status.getUser()), matchEvent);
 					persist(tweet);
 				} else {
 					System.out.println("Geo is NULL");
@@ -123,6 +126,7 @@ public class Main {
 
 		@Override
 		public void onStallWarning(StallWarning arg0) {
-		}
+            System.out.println(arg0);
+        }
 	};
 }

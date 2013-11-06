@@ -1,139 +1,145 @@
 package pl.edu.agh.twitter.model;
 
-import java.util.Date;
-
-import javax.persistence.Column;
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
 import twitter4j.Status;
+
+import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(schema = "mgr", name = "tweets")
 public class Tweet {
-	@Id
-	private Long id;
+    @Id
+    private Long id;
 
-	@Column(length = 140)
-	private String text;
+    @Column(length = 140)
+    private String text;
 
-	private Date createdAt;
+    private Date createdAt;
 
-	private String source;
+    private String source;
 
-	private Long inReplyToStatusId;
+    private Long inReplyToStatusId;
 
-	private Long inReplyToUserId;
+    private Long inReplyToUserId;
 
-	@ManyToOne
-	@JoinColumn(name = "userId")
-	private UserEntity user;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private UserEntity user;
 
-	@Embedded
-	private Coordinates coordinates;
+    @ManyToOne
+    @JoinColumn(name = "match_event")
+    private MatchEvent matchEvent;
 
-	private int retweetCount;
+    @Embedded
+    private Coordinates coordinates;
 
-	private int favouriteCount;
+    private int retweetCount;
 
-	public Tweet(Status status, UserEntity user) {
-		coordinates = new Coordinates(status.getGeoLocation());
-		createdAt = status.getCreatedAt();
-		favouriteCount = status.getFavoriteCount();
-		id = status.getId();
-		inReplyToStatusId = status.getInReplyToStatusId();
-		inReplyToUserId = status.getInReplyToUserId();
-		retweetCount = status.getRetweetCount();
-		source = status.getSource();
-		text = status.getText();
-		this.user = user;
-	}
+    private int favouriteCount;
 
-	public Tweet() {
-	}
 
-	public Long getId() {
-		return id;
-	}
+    public Tweet(Status status, UserEntity user, MatchEvent matchEvent) {
+        this.user = user;
+        this.matchEvent = matchEvent;
+        coordinates = new Coordinates(status.getGeoLocation());
+        createdAt = status.getCreatedAt();
+        favouriteCount = status.getFavoriteCount();
+        id = status.getId();
+        inReplyToStatusId = status.getInReplyToStatusId();
+        inReplyToUserId = status.getInReplyToUserId();
+        retweetCount = status.getRetweetCount();
+        source = status.getSource();
+        text = status.getText();
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public Tweet() {
+    }
 
-	public String getText() {
-		return text;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setText(String text) {
-		this.text = text;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public Date getCreatedAt() {
-		return createdAt;
-	}
+    public String getText() {
+        return text;
+    }
 
-	public void setCreatedAt(Date createdAt) {
-		this.createdAt = createdAt;
-	}
+    public void setText(String text) {
+        this.text = text;
+    }
 
-	public String getSource() {
-		return source;
-	}
+    public Date getCreatedAt() {
+        return createdAt;
+    }
 
-	public void setSource(String source) {
-		this.source = source;
-	}
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
 
-	public Long getInReplyToStatusId() {
-		return inReplyToStatusId;
-	}
+    public String getSource() {
+        return source;
+    }
 
-	public void setInReplyToStatusId(Long inReplyToStatusId) {
-		this.inReplyToStatusId = inReplyToStatusId;
-	}
+    public void setSource(String source) {
+        this.source = source;
+    }
 
-	public UserEntity getUser() {
-		return user;
-	}
+    public Long getInReplyToStatusId() {
+        return inReplyToStatusId;
+    }
 
-	public void setUser(UserEntity user) {
-		this.user = user;
-	}
+    public void setInReplyToStatusId(Long inReplyToStatusId) {
+        this.inReplyToStatusId = inReplyToStatusId;
+    }
 
-	public Coordinates getCoordinates() {
-		return coordinates;
-	}
+    public UserEntity getUser() {
+        return user;
+    }
 
-	public void setCoordinates(Coordinates coordinates) {
-		this.coordinates = coordinates;
-	}
+    public void setUser(UserEntity user) {
+        this.user = user;
+    }
 
-	public int getRetweetCount() {
-		return retweetCount;
-	}
+    public Coordinates getCoordinates() {
+        return coordinates;
+    }
 
-	public void setRetweetCount(int retweetCount) {
-		this.retweetCount = retweetCount;
-	}
+    public void setCoordinates(Coordinates coordinates) {
+        this.coordinates = coordinates;
+    }
 
-	public int getFavouriteCount() {
-		return favouriteCount;
-	}
+    public int getRetweetCount() {
+        return retweetCount;
+    }
 
-	public void setFavouriteCount(int favouriteCount) {
-		this.favouriteCount = favouriteCount;
-	}
+    public void setRetweetCount(int retweetCount) {
+        this.retweetCount = retweetCount;
+    }
 
-	public Long getInReplyToUserId() {
-		return inReplyToUserId;
-	}
+    public int getFavouriteCount() {
+        return favouriteCount;
+    }
 
-	public void setInReplyToUserId(Long inReplyToUserId) {
-		this.inReplyToUserId = inReplyToUserId;
-	}
+    public void setFavouriteCount(int favouriteCount) {
+        this.favouriteCount = favouriteCount;
+    }
 
+    public Long getInReplyToUserId() {
+        return inReplyToUserId;
+    }
+
+    public void setInReplyToUserId(Long inReplyToUserId) {
+        this.inReplyToUserId = inReplyToUserId;
+    }
+
+    public MatchEvent getMatchEvent() {
+        return matchEvent;
+    }
+
+    public void setMatchEvent(MatchEvent matchEvent) {
+        this.matchEvent = matchEvent;
+    }
 }
