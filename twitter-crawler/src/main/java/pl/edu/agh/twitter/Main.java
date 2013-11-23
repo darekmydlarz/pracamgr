@@ -4,22 +4,17 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 import pl.edu.agh.twitter.crawler.TwitterServiceProvider;
 import pl.edu.agh.twitter.model.MatchEvent;
-import pl.edu.agh.twitter.model.Tweet;
-import pl.edu.agh.twitter.model.UserEntity;
 import twitter4j.*;
 
 import java.util.List;
 
 public class Main {
-
+    private static TwitterStream twitterStream = TwitterServiceProvider.getTwitterStream();
     private static final String[] LANGUAGES = new String[]{"en"};
-    private static TwitterStream twitterStream;
 
     public static void main(String[] args) {
-        twitterStream = TwitterServiceProvider.getTwitterStream();
         MatchEvent evertonLiverpool = findMatchEvent("everton", "liverpool");
         System.out.println(evertonLiverpool.getKeywords().size());
         consume(evertonLiverpool);
@@ -55,41 +50,6 @@ public class Main {
         return Iterables.toArray(keywords, String.class);
     }
 
-    private static UserEntity createOrGetUser(User user) throws TwitterException {
-        UserEntity userEntity = getUser(user);
-        if (userEntity != null)
-            return userEntity;
-        return persistUser(user);
-    }
-
-    private static UserEntity persistUser(User user) throws TwitterException {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Transaction transaction = session.beginTransaction();
-        final UserEntity userEntity = new UserEntity(user);
-        session.persist(userEntity);
-        transaction.commit();
-        session.close();
-        return userEntity;
-    }
-
-    private static UserEntity getUser(User user) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Transaction transaction = session.beginTransaction();
-        final UserEntity userEntity = (UserEntity) session.get(UserEntity.class, user.getId());
-        transaction.commit();
-        session.close();
-        return userEntity;
-    }
-
-    private static void persist(Tweet tweet) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Transaction transaction = session.beginTransaction();
-        session.persist(tweet);
-        transaction.commit();
-        session.close();
-        System.out.println("Tweet " + tweet.getId() + " persisted");
-    }
-
     public static class MyStatusListener implements StatusListener {
         private MatchEvent[] matchEvents;
 
@@ -97,24 +57,9 @@ public class Main {
             this.matchEvents = matchEvents;
         }
 
-        private MatchEvent getMatchEvent(String text) {
-            for(MatchEvent matchEvent : matchEvents) {
-                if(matchEvent.isKeywordInString(text)) {
-                    return matchEvent;
-                }
-            }
-            throw new IllegalStateException();
-        }
-
         public void onStatus(Status status) {
-            try {
-                Tweet tweet = new Tweet(status, createOrGetUser(status.getUser()), getMatchEvent(status.getText()));
-                persist(tweet);
-            } catch (TwitterException e) {
-                e.printStackTrace();
-            } catch (IllegalStateException e) {
-                System.err.println("No match event found for: " + status);
-            }
+            Thread thread = new Thread(new TweetDAO(matchEvents, status));
+            thread.start();
         }
 
         public void onDeletionNotice(StatusDeletionNotice statusDeletionNotice) {
