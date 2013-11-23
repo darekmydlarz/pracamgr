@@ -91,8 +91,9 @@ public class MatchEvent {
     }
 
     public boolean isKeywordInString(String givenString) {
+        String givenLower = givenString.toLowerCase();
         for(String keyword : getKeywords()) {
-            if(givenString.contains(keyword)) {
+            if(givenLower.contains(keyword.toLowerCase())) {
                 return true;
             }
         }

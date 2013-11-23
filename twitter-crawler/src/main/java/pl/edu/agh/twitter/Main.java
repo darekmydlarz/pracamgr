@@ -22,7 +22,7 @@ public class Main {
         twitterStream = TwitterServiceProvider.getTwitterStream();
         MatchEvent evertonLiverpool = findMatchEvent("everton", "liverpool");
         System.out.println(evertonLiverpool.getKeywords().size());
-//        consume(barcelonaMilan);
+        consume(evertonLiverpool);
     }
 
     public static MatchEvent findMatchEvent(String homeTeam, String awayTeam) {
