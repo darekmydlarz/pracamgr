@@ -22,7 +22,7 @@ public class MatchEvent {
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(schema = "mgr", name = "matchevent_keywords")
     @Column(name = "keyword")
-    private Set<String> additionalKeywords = new HashSet<>();
+    private Set<String> additionalKeywords = new HashSet<String>();
 
     public MatchEvent() {
     }

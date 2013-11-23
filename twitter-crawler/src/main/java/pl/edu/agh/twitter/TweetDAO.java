@@ -1,5 +1,6 @@
 package pl.edu.agh.twitter;
 
+import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import pl.edu.agh.twitter.model.MatchEvent;
@@ -13,6 +14,8 @@ public class TweetDAO implements Runnable {
     private final Status status;
     private final MatchEvent[] matchEvents;
 
+    private Logger logger = Logger.getLogger(TweetDAO.class);
+
     public TweetDAO(MatchEvent[] matchEvents, Status status) {
         this.matchEvents = matchEvents;
         this.status = status;
@@ -23,11 +26,11 @@ public class TweetDAO implements Runnable {
         try {
             Tweet tweet = new Tweet(status, createOrGetUser(status.getUser()), getMatchEvent(status.getText()));
             persist(tweet);
-            System.out.println("Tweet " + tweet.getId() + " persisted");
+            logger.info("Tweet " + tweet.getId() + " persisted");
         } catch (TwitterException e) {
             e.printStackTrace();
         } catch (IllegalStateException e) {
-            System.err.println("No match event found for: " + status);
+            logger.error("No match event found for: " + status);
         }
     }
 

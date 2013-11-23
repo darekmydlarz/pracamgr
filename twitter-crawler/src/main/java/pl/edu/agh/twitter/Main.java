@@ -2,6 +2,7 @@ package pl.edu.agh.twitter;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import org.apache.log4j.Logger;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import pl.edu.agh.twitter.crawler.TwitterServiceProvider;
@@ -13,10 +14,11 @@ import java.util.List;
 public class Main {
     private static TwitterStream twitterStream = TwitterServiceProvider.getTwitterStream();
     private static final String[] LANGUAGES = new String[]{"en"};
+    private static Logger logger = Logger.getLogger(Main.class);
 
     public static void main(String[] args) {
         MatchEvent evertonLiverpool = findMatchEvent("everton", "liverpool");
-        System.out.println(evertonLiverpool.getKeywords().size());
+        logger.info(evertonLiverpool.getKeywords().size());
         consume(evertonLiverpool);
     }
 
