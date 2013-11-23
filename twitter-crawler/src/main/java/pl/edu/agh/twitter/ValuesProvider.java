@@ -8,15 +8,13 @@ import org.hibernate.exception.ConstraintViolationException;
 import org.joda.time.DateTime;
 import pl.edu.agh.twitter.model.*;
 
-import java.sql.BatchUpdateException;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
 public class ValuesProvider {
     public static void main(String[] args) {
-        List<MatchEvent> matchEvents = Lists.newArrayList(barcelonaMilan());
-        for(MatchEvent matchEvent : matchEvents) {
+        List<MatchEvent> matchEvents = Lists.newArrayList(evertonLiverpool());
+        for (MatchEvent matchEvent : matchEvents) {
             try {
                 persistMatchEvent(matchEvent);
             } catch (ConstraintViolationException e) {
@@ -107,14 +105,78 @@ public class ValuesProvider {
         Manager gerardoMartino = new Manager("Gerardo Martino", Sets.newHashSet("Tata Martino", "Martino"));
         Manager massimilianoAllegri = new Manager("Massimiliano Allegri", Sets.newHashSet("Allegri"));
         Team fcBarcelona = new Team(Country.SP, "FC Barcelona", gerardoMartino, barcelonaPlayers,
-                Sets.newHashSet("fcb", "blaugrana", "barca", "barcelona", "barza", "@FCBarcelona"));
+                "fcb", "blaugrana", "barca", "barcelona", "barza", "@FCBarcelona");
         Team acMilan = new Team(Country.IT, "AC Milan", massimilianoAllegri, acmilanPlayers,
-                Sets.newHashSet("@acmilan", "ac milano", "milan"));
-
+                "@acmilan", "ac milano", "milan");
 
         DateTime startDate = new DateTime(2013, 11, 06, 20, 45, 00);
         MatchEvent matchEvent = new MatchEvent(startDate.toDate(), fcBarcelona, acMilan, championsLeague);
         matchEvent.setAdditionalKeywords(Sets.newHashSet("barcamilan", "camp nou"));
         return matchEvent;
     }
+
+    private static MatchEvent evertonLiverpool() {
+        Competition premiership = new Competition("Barclays Premier League");
+        Set<Player> evertonPlayers = evertonPlayers();
+        Set<Player> liverpoolPlayers = liverpoolPlayers();
+        Manager robertoMartinez = new Manager("roberto martinez");
+        Manager brendanRodgers = new Manager("brendan rodgers");
+        Team evertonFc = new Team(Country.EN, "Everton FC", robertoMartinez, evertonPlayers,
+                "everton", "efc", "coyb", "Toffees");
+        Team liverpoolFc = new Team(Country.EN, "Liverpool FC", brendanRodgers, liverpoolPlayers,
+                "liverpool", "lfc", "reds", "kopites", "pool");
+
+        DateTime startDate = new DateTime(2013, 11, 23, 13, 45, 00);
+        return new MatchEvent(startDate.toDate(), evertonFc, liverpoolFc, premiership, "efclfc", "goodison");
+    }
+
+    private static Set<Player> evertonPlayers() {
+        return Sets.newHashSet(
+                new Player("Howard"),
+                new Player("Jagielka"),
+                new Player("Baines"),
+                new Player("Distin"),
+                new Player("Pienaar"),
+                new Player("Barry"),
+                new Player("Osman"),
+                new Player("Coleman"),
+                new Player("McCarthy"),
+                new Player("Mirallas"),
+                new Player("Lukaku"),
+                new Player("Deulofeu"),
+                new Player("Barkley"),
+                new Player("Robles"),
+                new Player("Heitinga"),
+                new Player("Jelavic"),
+                new Player("Naismith"),
+                new Player("Stones")
+        );
+    }
+
+    ;
+
+    private static Set<Player> liverpoolPlayers() {
+        return Sets.newHashSet(
+                new Player("Mignolet"),
+                new Player("Glen Johnson"),
+                new Player("Agger"),
+                new Player("Skrtel"),
+                new Player("Cissokho"),
+                new Player("Gerrard"),
+                new Player("Lucas Leiva"),
+                new Player("Coutinho"),
+                new Player("Suarez"),
+                new Player("Sturridge"),
+                new Player("Allen"),
+                new Player("Moses"),
+                new Player("Bradley Jones"),
+                new Player("Luis Alberto"),
+                new Player("Sakho"),
+                new Player("Sterling")
+        );
+    }
+
+    ;
+
+
 }

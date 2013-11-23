@@ -22,16 +22,17 @@ public class MatchEvent {
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(schema = "mgr", name = "matchevent_keywords")
     @Column(name = "keyword")
-    private Set<String> additionalKeywords = new HashSet<String>();
+    private Set<String> additionalKeywords = new HashSet<>();
 
     public MatchEvent() {
     }
 
-    public MatchEvent(Date startDate, Team homeTeam, Team awayTeam, Competition competition) {
+    public MatchEvent(Date startDate, Team homeTeam, Team awayTeam, Competition competition, String ... keywords) {
         this.startDate = startDate;
         this.homeTeam = homeTeam;
         this.awayTeam = awayTeam;
         this.competition = competition;
+        additionalKeywords.addAll(Arrays.asList(keywords));
     }
 
     public Long getId() {

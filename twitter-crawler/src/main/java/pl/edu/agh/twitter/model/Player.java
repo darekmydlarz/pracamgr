@@ -28,6 +28,10 @@ public class Player {
         this.nicknames.addAll(nicknames);
     }
 
+    public Player(String lastName, String ... nicknames) {
+        this(lastName, Sets.newHashSet(nicknames));
+    }
+
     public Player(String lastName) {
         this.lastName = lastName;
     }

@@ -3,10 +3,7 @@ package pl.edu.agh.twitter.model;
 import com.google.common.collect.Lists;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(schema = "mgr", name = "teams")
@@ -34,12 +31,12 @@ public class Team {
     public Team() {
     }
 
-    public Team(Country country, String name, Manager manager, Set<Player> players, Set<String> nicknames) {
+    public Team(Country country, String name, Manager manager, Set<Player> players, String ... nicknames) {
         this.country = country;
         this.name = name;
         this.manager = manager;
         this.players = players;
-        this.nicknames = nicknames;
+        this.nicknames.addAll(Arrays.asList(nicknames));
     }
 
     public Long getId() {
