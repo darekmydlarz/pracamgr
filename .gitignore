@@ -1,1 +1,21 @@
 *~
+
+# Eclipse
+.classpath
+.project
+.settings/
+
+# Intellij
+.idea/
+*.iml
+*.iws
+
+# Mac
+.DS_Store
+
+# Maven
+log/
+target/
+
+# Credentials
+twitter-crawler/src/main/resources/twitter4j.properties
