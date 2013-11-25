@@ -1,5 +1,5 @@
 package pl.edu.agh.twitter.model;
 
 public enum Country {
-    SP, EN, IT
+    SP, EN, FR, CH, IT
 }

@@ -31,6 +31,10 @@ public class Team {
     public Team() {
     }
 
+    public Team(String name) {
+        this(null, name, null, null);
+    }
+
     public Team(Country country, String name, Manager manager, Set<Player> players, String ... nicknames) {
         this.country = country;
         this.name = name;

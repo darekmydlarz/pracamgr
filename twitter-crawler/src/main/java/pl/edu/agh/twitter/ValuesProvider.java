@@ -12,8 +12,11 @@ import java.util.List;
 import java.util.Set;
 
 public class ValuesProvider {
+    private static TwitterDAO twitterDAO = new TwitterDAO();
+
+
     public static void main(String[] args) {
-        List<MatchEvent> matchEvents = Lists.newArrayList(evertonLiverpool());
+        List<MatchEvent> matchEvents = Lists.newArrayList(baselChelsea());
         for (MatchEvent matchEvent : matchEvents) {
             try {
                 persistMatchEvent(matchEvent);
@@ -99,7 +102,7 @@ public class ValuesProvider {
     }
 
     private static MatchEvent barcelonaMilan() {
-        Competition championsLeague = new Competition("UEFA Champions League");
+        Competition championsLeague = twitterDAO.createOrGetCompetition("UEFA Champions League");
         Set<Player> barcelonaPlayers = barcelonaPlayers();
         Set<Player> acmilanPlayers = acmilanPlayers();
         Manager gerardoMartino = new Manager("Gerardo Martino", Sets.newHashSet("Tata Martino", "Martino"));
@@ -116,7 +119,7 @@ public class ValuesProvider {
     }
 
     private static MatchEvent evertonLiverpool() {
-        Competition premiership = new Competition("Barclays Premier League");
+        Competition premiership = twitterDAO.createOrGetCompetition("Barclays Premier League");
         Set<Player> evertonPlayers = evertonPlayers();
         Set<Player> liverpoolPlayers = liverpoolPlayers();
         Manager robertoMartinez = new Manager("roberto martinez");
@@ -153,7 +156,6 @@ public class ValuesProvider {
         );
     }
 
-    ;
 
     private static Set<Player> liverpoolPlayers() {
         return Sets.newHashSet(
@@ -176,7 +178,136 @@ public class ValuesProvider {
         );
     }
 
-    ;
+    private static MatchEvent arsenalOlympique() {
+        Competition championsLeague = twitterDAO.createOrGetCompetition("UEFA Champions League");
+        Team arsenal = twitterDAO.createOrGetTeam("arsenal");
+        if (arsenal.getId() == null) {
+            Set<Player> arsenalPlayers = arsenalPlayers();
+            Manager arseneWenger = new Manager("Wenger");
+            arsenal = new Team(Country.EN, "Arsenal Londyn", arseneWenger, arsenalPlayers, "arsenal", "afc", "gunners");
+        }
+        Team olympique = twitterDAO.createOrGetTeam("marseille");
+        if (olympique.getId() == null) {
+            Set<Player> olympiquePlayers = olympiquePlayers();
+            Manager elieBaup = new Manager("Elie Baup");
+            olympique = new Team(Country.FR, "OLYMPIQUE MARSEILLE", elieBaup, olympiquePlayers, "marseille");
+
+        }
+        DateTime startDate = new DateTime(2013, 11, 26, 20, 45, 00);
+        MatchEvent matchEvent = new MatchEvent(startDate.toDate(), arsenal, olympique, championsLeague);
+        matchEvent.setAdditionalKeywords(Sets.newHashSet("emirates", "antonio mateu"));
+        return matchEvent;
+    }
+
+    private static Set<Player> olympiquePlayers() {
+        return Sets.newHashSet(
+                new Player("mandanda"),
+                new Player("morel"),
+                new Player("diawara"),
+                new Player("nkoulou"),
+                new Player("abdallah"),
+                new Player("cheyrou"),
+                new Player("valbuena"),
+                new Player("romao"),
+                new Player("thauvin"),
+                new Player("ayew"),
+                new Player("payet"),
+                new Player("gignac"),
+                new Player("lemina"),
+                new Player("brice samba"),
+                new Player("benjamin mendy"),
+                new Player("imbula"),
+                new Player("khelifa")
+        );
+    }
 
 
+    private static Set<Player> arsenalPlayers() {
+        return Sets.newHashSet(
+                new Player("szczesny", "13szczesny13"),
+                new Player("sagna"),
+                new Player("vermaelen"),
+                new Player("gibbs"),
+                new Player("koscielny"),
+                new Player("ozil", "oezil"),
+                new Player("arteta"),
+                new Player("cazorla"),
+                new Player("ramsey"),
+                new Player("giroud"),
+                new Player("wilshere"),
+                new Player("bendtner"),
+                new Player("gnabry"),
+                new Player("nacho monreal"),
+                new Player("fabianski"),
+                new Player("jenkinson"),
+                new Player("hayden")
+        );
+    }
+
+
+
+    private static MatchEvent baselChelsea() {
+        Competition championsLeague = twitterDAO.createOrGetCompetition("UEFA Champions League");
+        Team basel = twitterDAO.createOrGetTeam("basel");
+        if (basel.getId() == null) {
+            Set<Player> players = baselPlayers();
+            Manager manager = new Manager("Yakin");
+            basel = new Team(Country.CH, "FC Basel", manager, players, "basel", "bebbi", "rotblau");
+        }
+        Team chelsea = twitterDAO.createOrGetTeam("chelsea");
+        if (chelsea.getId() == null) {
+            Set<Player> players = chelseaPlayers();
+            Manager manager = new Manager("Mourinho");
+            chelsea = new Team(Country.EN, "Chelsea Londyn", manager, players, "chelsea", "cfc");
+
+        }
+        DateTime startDate = new DateTime(2013, 11, 26, 20, 45, 00);
+        MatchEvent matchEvent = new MatchEvent(startDate.toDate(), basel, chelsea, championsLeague);
+        matchEvent.setAdditionalKeywords(Sets.newHashSet("jakob-park", "stephane lannoy"));
+        return matchEvent;
+    }
+
+    private static Set<Player> baselPlayers() {
+        return Sets.newHashSet(
+                new Player("sommer"),
+                new Player("voser"),
+                new Player("ivanov"),
+                new Player("schar"),
+                new Player("xhaka"),
+                new Player("delgado"),
+                new Player("stocker"),
+                new Player("serey die"),
+                new Player("fabian frei"),
+                new Player("mohamed salah"),
+                new Player("streller"),
+                new Player("giovanni sio"),
+                new Player("marcelo diaz"),
+                new Player("david degen"),
+                new Player("ajeti"),
+                new Player("vailati"),
+                new Player("el nenny")
+        );
+    }
+
+    private static Set<Player> chelseaPlayers() {
+        return Sets.newHashSet(
+                new Player("cech"),
+                new Player("terry"),
+                new Player("cahill"),
+                new Player("ivanovic"),
+                new Player("azpilicueta"),
+                new Player("obi mikel"),
+                new Player("wilian"),
+                new Player("ramires"),
+                new Player("samuel eto"),
+                new Player("schurrle", "schuerrle"),
+                new Player("demba ba"),
+                new Player("de bruyne"),
+                new Player("frank lampard"),
+                new Player("ashley cole"),
+                new Player("david luiz"),
+                new Player("juan mata"),
+                new Player("mark schwarzer")
+        );
+    }
 }

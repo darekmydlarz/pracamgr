@@ -15,6 +15,7 @@ public class Main {
     private static TwitterStream twitterStream = TwitterServiceProvider.getTwitterStream();
     private static final String[] LANGUAGES = new String[]{"en"};
     private static Logger logger = Logger.getLogger(Main.class);
+    private static TwitterDAO twitterDAO = new TwitterDAO();
 
     public static void main(String[] args) {
         MatchEvent evertonLiverpool = findMatchEvent("everton", "liverpool");
@@ -60,8 +61,7 @@ public class Main {
         }
 
         public void onStatus(Status status) {
-            Thread thread = new Thread(new TweetDAO(matchEvents, status));
-            thread.start();
+            twitterDAO.parseAndPersistTweet(matchEvents, status);
         }
 
         public void onDeletionNotice(StatusDeletionNotice statusDeletionNotice) {
