@@ -244,7 +244,110 @@ public class ValuesProvider {
         );
     }
 
+    private static MatchEvent leverkusenUnited() {
+        Competition championsLeague = twitterDAO.createOrGetCompetition("UEFA Champions League");
+        Team leverkusen = twitterDAO.createOrGetTeam("leverkusen");
+        if (leverkusen.getId() == null) {
+            Set<Player> players = leverkusenPlayers();
+            Manager manager = new Manager("Hyypia");
+            leverkusen = new Team(Country.DE, "Bayer Leverkusen", manager, players, "leverkusen");
+        }
+        Team manu = twitterDAO.createOrGetTeam("manchester united");
+        if (manu.getId() == null)  {
+            Set<Player> players = manuPlayers();
+            Manager manager = new Manager("Moyes");
+            manu = new Team(Country.EN, "Manchester United", manager, players, "Man United");
+        }
+        DateTime startDate = new DateTime(2013, 11, 27, 20, 45, 00);
+        MatchEvent matchEvent = new MatchEvent(startDate.toDate(), leverkusen, united, championsLeague);
+        matchEvent.setAdditionalKeywords(Sets.newHashSet("bayarena", "svein moen"));
+        return matchEvent;    
+    }
+    
+    private static Set<Player> leverkusenPlayers() {
+        return Sets.newHashSet(
+            new Player("bernd leno"),
+            new Player("boenisch", "bonisch"),
+            new Player("spahic"),
+            new Player("toprak"),
+            new Player("donati"),
+            new Player("rolfes"),
+            new Player("sidney sam"),
+            new Player("bender"),
+            new Player("gonzalo castro"),
+            new Player("kiessling", "kiesling"),
+            new Player("hueng min son"),
+            new Player("emre can"),
+            new Player("jens hegeler"),
+            new Player("robbie kruse"),
+            new Player("wollscheid"),
+            new Player("derdiyok"),
+            new Player("roberto hilbert"),
+            new Player("david yelldell")
+        );
+    }
+    
+    private static Set<Player> manuPlayers() {
+        return Sets.newHashSet(
+            new Player("de gea"),
+            new Player("ferdinand"),
+            new Player("vidic"),
+            new Player("evra"),
+            new Player("smalling"),
+            new Player("antonio valencia"),
+            new Player("giggs"),
+            new Player("fellaini"),
+            new Player("rooney"),
+            new Player("kagawa"),
+            new Player("hernandez"),
+            new Player("ashley young"),
+            new Player("van persie", "rvp"),
+            new Player("phil jones"),
+            new Player("anderson"),
+            new Player("lindegaard"),
+            new Player("nani"),
+            new Player("buttner"),
+        );
+    }
 
+
+    private static MatchEvent leverkusenUnited() {
+        Competition championsLeague = twitterDAO.createOrGetCompetition("UEFA Champions League");
+        Team mancity = twitterDAO.createOrGetTeam("manchester city");
+        if (mancity.getId() == null) {
+            Set<Player> players = mancityPlayers();
+            Manager manager = new Manager("Pellegrini");
+            mancity = new Team(Country.EN, "Manchester City", manager, players);
+        }
+        Team viktoria = twitterDAO.createOrGetTeam("viktoria plzen");
+        if (viktoria.getId() == null)  {
+            Set<Player> players = viktoriaPlayers();
+            Manager manager = new Manager("vrba");
+            viktoria = new Team(Country.CZ, "Viktoria Plzen", manager, players);
+        }
+        DateTime startDate = new DateTime(2013, 11, 27, 20, 45, 00);
+        MatchEvent matchEvent = new MatchEvent(startDate.toDate(), mancity, viktoria, championsLeague);
+        matchEvent.setAdditionalKeywords(Sets.newHashSet("etihad", "aydinus"));
+        return matchEvent;    
+    }
+    
+    private static Set<Player> mancityPlayers() {
+        return Sets.newHashSet(
+            new Player("pantilimon"),
+            new Player("demichelis"),
+            new Player("clichy"),
+            new Player("zabaleta"),
+            new Player("nastastic"),
+            new Player("nasri"),
+            new Player("silva"),
+        );
+    }
+    
+    private static Set<Player> viktoriaPlayers() {
+        return Sets.newHashSet(
+            new Player(""),
+        );
+    }
 
     private static MatchEvent baselChelsea() {
         Competition championsLeague = twitterDAO.createOrGetCompetition("UEFA Champions League");
