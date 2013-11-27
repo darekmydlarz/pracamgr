@@ -16,7 +16,7 @@ public class ValuesProvider {
 
 
     public static void main(String[] args) {
-        List<MatchEvent> matchEvents = Lists.newArrayList(baselChelsea());
+        List<MatchEvent> matchEvents = Lists.newArrayList(leverkusenUnited(), mancityViktoria());
         for (MatchEvent matchEvent : matchEvents) {
             try {
                 persistMatchEvent(matchEvent);
@@ -250,16 +250,16 @@ public class ValuesProvider {
         if (leverkusen.getId() == null) {
             Set<Player> players = leverkusenPlayers();
             Manager manager = new Manager("Hyypia");
-            leverkusen = new Team(Country.DE, "Bayer Leverkusen", manager, players, "leverkusen");
+            leverkusen = new Team(Country.DE, "Bayer Leverkusen", manager, players, "leverkusen", "bayer");
         }
-        Team manu = twitterDAO.createOrGetTeam("manchester united");
-        if (manu.getId() == null)  {
+        Team manuited = twitterDAO.createOrGetTeam("manchester united");
+        if (manuited.getId() == null)  {
             Set<Player> players = manuPlayers();
             Manager manager = new Manager("Moyes");
-            manu = new Team(Country.EN, "Manchester United", manager, players, "Man United");
+            manuited = new Team(Country.EN, "Manchester United", manager, players, "Man United", "manutd");
         }
         DateTime startDate = new DateTime(2013, 11, 27, 20, 45, 00);
-        MatchEvent matchEvent = new MatchEvent(startDate.toDate(), leverkusen, united, championsLeague);
+        MatchEvent matchEvent = new MatchEvent(startDate.toDate(), leverkusen, manuited, championsLeague);
         matchEvent.setAdditionalKeywords(Sets.newHashSet("bayarena", "svein moen"));
         return matchEvent;    
     }
@@ -306,12 +306,12 @@ public class ValuesProvider {
             new Player("anderson"),
             new Player("lindegaard"),
             new Player("nani"),
-            new Player("buttner"),
+            new Player("buttner")
         );
     }
 
 
-    private static MatchEvent leverkusenUnited() {
+    private static MatchEvent mancityViktoria() {
         Competition championsLeague = twitterDAO.createOrGetCompetition("UEFA Champions League");
         Team mancity = twitterDAO.createOrGetTeam("manchester city");
         if (mancity.getId() == null) {
@@ -340,12 +340,39 @@ public class ValuesProvider {
             new Player("nastastic"),
             new Player("nasri"),
             new Player("silva"),
+            new Player("yaya toure"),
+            new Player("fernandinho"),
+            new Player("aguero"),
+            new Player("negredo"),
+            new Player("kolarov"),
+            new Player("navas"),
+            new Player("hart"),
+            new Player("micah richards"),
+            new Player("lescott"),
+            new Player("dzeko")
         );
     }
     
     private static Set<Player> viktoriaPlayers() {
         return Sets.newHashSet(
-            new Player(""),
+            new Player("kozacik"),
+            new Player("hubnik"),
+            new Player("prochazka"),
+            new Player("cisovsky"),
+            new Player("rajtoral"),
+            new Player("petrzela"),
+            new Player("kolar"),
+            new Player("horvath"),
+            new Player("horava"),
+            new Player("duris"),
+            new Player("tecl"),
+            new Player("radim reznik"),
+            new Player("pospisil"),
+            new Player("bakos"),
+            new Player("hejda"),
+            new Player("petr bolek"),
+            new Player("thomas wagner"),
+            new Player("kovarik")
         );
     }
 

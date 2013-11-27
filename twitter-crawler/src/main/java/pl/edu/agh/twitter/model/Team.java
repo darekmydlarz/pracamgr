@@ -93,6 +93,7 @@ public class Team {
 
     public List<String> getKeywords() {
         List<String> keywords = Lists.newArrayList(nicknames);
+        keywords.add(name);
         keywords.addAll(manager.getKeywords());
         for(Player player : players) {
             keywords.addAll(player.getKeywords());
