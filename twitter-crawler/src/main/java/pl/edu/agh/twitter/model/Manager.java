@@ -32,6 +32,10 @@ public class Manager {
         this.nicknames = nicknames;
     }
 
+    public Manager(String lastName, String ... nicknames) {
+        this(lastName, Sets.newHashSet(nicknames));
+    }
+
     public Long getId() {
         return id;
     }

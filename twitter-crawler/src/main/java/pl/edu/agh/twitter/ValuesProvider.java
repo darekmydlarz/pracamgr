@@ -16,7 +16,7 @@ public class ValuesProvider {
 
 
     public static void main(String[] args) {
-        List<MatchEvent> matchEvents = Lists.newArrayList(leverkusenUnited(), mancityViktoria());
+        List<MatchEvent> matchEvents = Lists.newArrayList(mancitySwansea());
         for (MatchEvent matchEvent : matchEvents) {
             try {
                 persistMatchEvent(matchEvent);
@@ -191,13 +191,102 @@ public class ValuesProvider {
             Set<Player> olympiquePlayers = olympiquePlayers();
             Manager elieBaup = new Manager("Elie Baup");
             olympique = new Team(Country.FR, "OLYMPIQUE MARSEILLE", elieBaup, olympiquePlayers, "marseille");
-
         }
         DateTime startDate = new DateTime(2013, 11, 26, 20, 45, 00);
         MatchEvent matchEvent = new MatchEvent(startDate.toDate(), arsenal, olympique, championsLeague);
         matchEvent.setAdditionalKeywords(Sets.newHashSet("emirates", "antonio mateu"));
         return matchEvent;
     }
+
+    private static MatchEvent chelseaSouthampton() {
+        Competition competition = twitterDAO.createOrGetCompetition("Barclays Premier League");
+        Team chelsea = twitterDAO.createOrGetTeam("chelsea");
+        Team southampton = twitterDAO.createOrGetTeam("southampton");
+
+        DateTime startDate = new DateTime(2013, 12, 1, 17, 10, 00);
+        MatchEvent matchEvent = new MatchEvent(startDate.toDate(), chelsea, southampton, competition);
+        matchEvent.setAdditionalKeywords(Sets.newHashSet("stamford bridge", "michael oliver"));
+        return matchEvent;
+    }
+
+    private static MatchEvent hullLiverpool() {
+        Competition competition = twitterDAO.createOrGetCompetition("Barclays Premier League");
+        Team liverpool = twitterDAO.createOrGetTeam("liverpool");
+        Team hull = twitterDAO.createOrGetTeam("hull");
+        if (hull.getId() == null) {
+            Set<Player> players = hullPlayers();
+            Manager manager = new Manager("Steve Bruce");
+            hull = new Team(Country.EN, "Hull City", manager, players, "hull");
+        }
+
+        DateTime startDate = new DateTime(2013, 12, 1, 15, 5, 00);
+        MatchEvent matchEvent = new MatchEvent(startDate.toDate(), hull, liverpool, competition);
+        matchEvent.setAdditionalKeywords(Sets.newHashSet("howard webb"));
+        return matchEvent;
+    }
+
+    private static Set<Player> hullPlayers() {
+        return Sets.newHashSet(
+                new Player("allan mcgregor"),
+                new Player("Maynor FIGUEROA"),
+                new Player("curtis davies"),
+                new Player("paul mcshane"),
+                new Player("huddlestone"),
+                new Player("robert koren"),
+                new Player("ahmed el mohamady"),
+                new Player("jake livermore"),
+                new Player("yannick sagbo"),
+                new Player("geore boyd"),
+                new Player("robert brady"),
+                new Player("danny graham"),
+                new Player("liam rosenior"),
+                new Player("mohamed gedo"),
+                new Player("alex bruce"),
+                new Player("david meyler"),
+                new Player("stephen harper"),
+                new Player("Abdoulaye Fayé")
+        );
+    }
+
+    private static MatchEvent cardiffArsenal() {
+        Competition competition = twitterDAO.createOrGetCompetition("Barclays Premier League");
+        Team arsenal = twitterDAO.createOrGetTeam("arsenal");
+        Team cardiff = twitterDAO.createOrGetTeam("cardiff");
+        if (cardiff.getId() == null) {
+            Set<Player> players = cardiffPlayers();
+            Manager manager = new Manager("Mackay");
+            cardiff = new Team(Country.EN, "Cardiff City FC", manager, players, "ccfc", "cardiff", "@Bluebirds_News");
+        }
+
+        DateTime startDate = new DateTime(2013, 11, 30, 16, 00, 00);
+        MatchEvent matchEvent = new MatchEvent(startDate.toDate(), cardiff, arsenal, competition);
+        matchEvent.setAdditionalKeywords(Sets.newHashSet("CCFCvAFC"));
+        return matchEvent;
+    }
+
+    private static Set<Player> cardiffPlayers() {
+        return Sets.newHashSet(
+                new Player("david marshall"),
+                new Player("andrew taylor"),
+                new Player("ben turner"),
+                new Player("theophile catherine"),
+                new Player("caulker"),
+                new Player("whittingham"),
+                new Player("don cowie"),
+                new Player("gary medel"),
+                new Player("jordon mutch"),
+                new Player("odemwingie"),
+                new Player("craig noone"),
+                new Player("bo-kyung kim"),
+                new Player("andreas kornelius"),
+                new Player("mark hudson"),
+                new Player("gunnarsson"),
+                new Player("joe lewis"),
+                new Player("craig bellamy"),
+                new Player("frazier campbell")
+        );
+    }
+
 
     private static Set<Player> olympiquePlayers() {
         return Sets.newHashSet(
@@ -244,6 +333,44 @@ public class ValuesProvider {
         );
     }
 
+    private static MatchEvent tottenhamUnited() {
+        Competition competition = twitterDAO.createOrGetCompetition("Barclays Premier League");
+        Team tottenham = twitterDAO.createOrGetTeam("tottenham");
+        if (tottenham.getId() == null) {
+            Set<Player> players = tottenhamPlayers();
+            Manager manager = new Manager("Villas-Boas", "avb", "boas");
+            tottenham = new Team(Country.EN, "Tottenham Hotspur", manager, players, "tottenham", "@SpursOfficial");
+        }
+        Team manuited = twitterDAO.createOrGetTeam("manchester united");
+        DateTime startDate = new DateTime(2013, 12, 1, 13, 00, 00);
+        MatchEvent matchEvent = new MatchEvent(startDate.toDate(), tottenham, manuited, competition);
+        matchEvent.setAdditionalKeywords(Sets.newHashSet("spurs united", "white hart lane"));
+        return matchEvent;
+    }
+
+    private static Set<Player> tottenhamPlayers() {
+        return Sets.newHashSet(
+                new Player("lloris"),
+                new Player("younes kaboul"),
+                new Player("vertonghen"),
+                new Player("michael dawson"),
+                new Player("kyle walker"),
+                new Player("aaron lennon"),
+                new Player("paulinho"),
+                new Player("lewis holtby"),
+                new Player("soldado"),
+                new Player("erik lamela"),
+                new Player("adebayor"),
+                new Player("dembele"),
+                new Player("sigurdsson"),
+                new Player("chiriches"),
+                new Player("townsend"),
+                new Player("defoe"),
+                new Player("brad friedel")
+        );
+    }
+
+
     private static MatchEvent leverkusenUnited() {
         Competition championsLeague = twitterDAO.createOrGetCompetition("UEFA Champions League");
         Team leverkusen = twitterDAO.createOrGetTeam("leverkusen");
@@ -253,7 +380,7 @@ public class ValuesProvider {
             leverkusen = new Team(Country.DE, "Bayer Leverkusen", manager, players, "leverkusen", "bayer");
         }
         Team manuited = twitterDAO.createOrGetTeam("manchester united");
-        if (manuited.getId() == null)  {
+        if (manuited.getId() == null) {
             Set<Player> players = manuPlayers();
             Manager manager = new Manager("Moyes");
             manuited = new Team(Country.EN, "Manchester United", manager, players, "Man United", "manutd");
@@ -261,54 +388,93 @@ public class ValuesProvider {
         DateTime startDate = new DateTime(2013, 11, 27, 20, 45, 00);
         MatchEvent matchEvent = new MatchEvent(startDate.toDate(), leverkusen, manuited, championsLeague);
         matchEvent.setAdditionalKeywords(Sets.newHashSet("bayarena", "svein moen"));
-        return matchEvent;    
+        return matchEvent;
     }
-    
+
     private static Set<Player> leverkusenPlayers() {
         return Sets.newHashSet(
-            new Player("bernd leno"),
-            new Player("boenisch", "bonisch"),
-            new Player("spahic"),
-            new Player("toprak"),
-            new Player("donati"),
-            new Player("rolfes"),
-            new Player("sidney sam"),
-            new Player("bender"),
-            new Player("gonzalo castro"),
-            new Player("kiessling", "kiesling"),
-            new Player("hueng min son"),
-            new Player("emre can"),
-            new Player("jens hegeler"),
-            new Player("robbie kruse"),
-            new Player("wollscheid"),
-            new Player("derdiyok"),
-            new Player("roberto hilbert"),
-            new Player("david yelldell")
+                new Player("bernd leno"),
+                new Player("boenisch", "bonisch"),
+                new Player("spahic"),
+                new Player("toprak"),
+                new Player("donati"),
+                new Player("rolfes"),
+                new Player("sidney sam"),
+                new Player("bender"),
+                new Player("gonzalo castro"),
+                new Player("kiessling", "kiesling"),
+                new Player("hueng min son"),
+                new Player("emre can"),
+                new Player("jens hegeler"),
+                new Player("robbie kruse"),
+                new Player("wollscheid"),
+                new Player("derdiyok"),
+                new Player("roberto hilbert"),
+                new Player("david yelldell")
         );
     }
-    
+
     private static Set<Player> manuPlayers() {
         return Sets.newHashSet(
-            new Player("de gea"),
-            new Player("ferdinand"),
-            new Player("vidic"),
-            new Player("evra"),
-            new Player("smalling"),
-            new Player("antonio valencia"),
-            new Player("giggs"),
-            new Player("fellaini"),
-            new Player("rooney"),
-            new Player("kagawa"),
-            new Player("hernandez"),
-            new Player("ashley young"),
-            new Player("van persie", "rvp"),
-            new Player("phil jones"),
-            new Player("anderson"),
-            new Player("lindegaard"),
-            new Player("nani"),
-            new Player("buttner")
+                new Player("de gea"),
+                new Player("ferdinand"),
+                new Player("vidic"),
+                new Player("evra"),
+                new Player("smalling"),
+                new Player("antonio valencia"),
+                new Player("giggs"),
+                new Player("fellaini"),
+                new Player("rooney"),
+                new Player("kagawa"),
+                new Player("hernandez"),
+                new Player("ashley young"),
+                new Player("van persie", "rvp"),
+                new Player("phil jones"),
+                new Player("anderson"),
+                new Player("lindegaard"),
+                new Player("nani"),
+                new Player("buttner")
         );
     }
+
+
+    private static MatchEvent mancitySwansea() {
+        Competition competition = twitterDAO.createOrGetCompetition("Barclays Premier League");
+        Team mancity = twitterDAO.createOrGetTeam("manchester city");
+        Team swansea = twitterDAO.createOrGetTeam("swansea");
+        if (swansea.getId() == null) {
+            Set<Player> players = swanseaPlayers();
+            Manager manager = new Manager("Laudrup");
+            swansea = new Team(Country.EN, "Swansea City", manager, players, "swans");
+        }
+        DateTime startDate = new DateTime(2013, 12, 1, 17, 10, 00);
+        MatchEvent matchEvent = new MatchEvent(startDate.toDate(), mancity, swansea, competition);
+        matchEvent.setAdditionalKeywords(Sets.newHashSet("etihad", "mark clattenburg"));
+        return matchEvent;
+    }
+
+    private static Set<Player> swanseaPlayers() {
+        return Sets.newHashSet(
+            new Player("michael vorm"),
+            new Player("ashley williams"),
+            new Player("angel rangel"),
+            new Player("benjamin davies"),
+            new Player("jonathan de guzman"),
+            new Player("nathan dyer"),
+            new Player("jose canas"),
+            new Player("alejandro pozuelo"),
+            new Player("roland lamah"),
+            new Player("bono wilfried", "wilfred bony"),
+            new Player("jonjo shelvey"),
+            new Player("dwight tiendalli"),
+            new Player("alvaro vazquez"),
+            new Player("jordi amat"),
+            new Player("neil taylor"),
+            new Player("leon britton"),
+            new Player("gerhard tremmel")
+        );
+    }
+
 
 
     private static MatchEvent mancityViktoria() {
@@ -320,7 +486,7 @@ public class ValuesProvider {
             mancity = new Team(Country.EN, "Manchester City", manager, players);
         }
         Team viktoria = twitterDAO.createOrGetTeam("viktoria plzen");
-        if (viktoria.getId() == null)  {
+        if (viktoria.getId() == null) {
             Set<Player> players = viktoriaPlayers();
             Manager manager = new Manager("vrba");
             viktoria = new Team(Country.CZ, "Viktoria Plzen", manager, players);
@@ -328,51 +494,51 @@ public class ValuesProvider {
         DateTime startDate = new DateTime(2013, 11, 27, 20, 45, 00);
         MatchEvent matchEvent = new MatchEvent(startDate.toDate(), mancity, viktoria, championsLeague);
         matchEvent.setAdditionalKeywords(Sets.newHashSet("etihad", "aydinus"));
-        return matchEvent;    
+        return matchEvent;
     }
-    
+
     private static Set<Player> mancityPlayers() {
         return Sets.newHashSet(
-            new Player("pantilimon"),
-            new Player("demichelis"),
-            new Player("clichy"),
-            new Player("zabaleta"),
-            new Player("nastastic"),
-            new Player("nasri"),
-            new Player("silva"),
-            new Player("yaya toure"),
-            new Player("fernandinho"),
-            new Player("aguero"),
-            new Player("negredo"),
-            new Player("kolarov"),
-            new Player("navas"),
-            new Player("hart"),
-            new Player("micah richards"),
-            new Player("lescott"),
-            new Player("dzeko")
+                new Player("pantilimon"),
+                new Player("demichelis"),
+                new Player("clichy"),
+                new Player("zabaleta"),
+                new Player("nastastic"),
+                new Player("nasri"),
+                new Player("silva"),
+                new Player("yaya toure"),
+                new Player("fernandinho"),
+                new Player("aguero"),
+                new Player("negredo"),
+                new Player("kolarov"),
+                new Player("navas"),
+                new Player("hart"),
+                new Player("micah richards"),
+                new Player("lescott"),
+                new Player("dzeko")
         );
     }
-    
+
     private static Set<Player> viktoriaPlayers() {
         return Sets.newHashSet(
-            new Player("kozacik"),
-            new Player("hubnik"),
-            new Player("prochazka"),
-            new Player("cisovsky"),
-            new Player("rajtoral"),
-            new Player("petrzela"),
-            new Player("kolar"),
-            new Player("horvath"),
-            new Player("horava"),
-            new Player("duris"),
-            new Player("tecl"),
-            new Player("radim reznik"),
-            new Player("pospisil"),
-            new Player("bakos"),
-            new Player("hejda"),
-            new Player("petr bolek"),
-            new Player("thomas wagner"),
-            new Player("kovarik")
+                new Player("kozacik"),
+                new Player("hubnik"),
+                new Player("prochazka"),
+                new Player("cisovsky"),
+                new Player("rajtoral"),
+                new Player("petrzela"),
+                new Player("kolar"),
+                new Player("horvath"),
+                new Player("horava"),
+                new Player("duris"),
+                new Player("tecl"),
+                new Player("radim reznik"),
+                new Player("pospisil"),
+                new Player("bakos"),
+                new Player("hejda"),
+                new Player("petr bolek"),
+                new Player("thomas wagner"),
+                new Player("kovarik")
         );
     }
 
@@ -440,4 +606,6 @@ public class ValuesProvider {
                 new Player("mark schwarzer")
         );
     }
+
+
 }
