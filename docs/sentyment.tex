@@ -1,0 +1,37 @@
+\section{Badanie sentymentu}
+\label{sec:sentyment}
+\subsection{Narzędzie: TextBlob - Simplified Text Processing}
+\texttt{TextBlob} (\url{https://textblob.readthedocs.org}) jest biblioteką dla
+Pythona (2 i 3) stworzoną do przetwarzania danych tekstowych.
+Udostępnia proste API dla popularnych operacji związanych z przetwarzaniem
+języka naturalnego, takich jak klasyfikacja części mowy, ekstrakcja podmiotów
+zdań, \textbf{analiza sentymentu, klasyfikacja}, tłumaczenie i wiele innych.
+
+TextBlob jest zbudowany z wykorzystaniem innych narzędzi związanych z
+przetwarzaniem tekstu: \texttt{NLTK} (\url{http://nltk.org/}) i \texttt{pattern}
+(\url{http://www.clips.ua.ac.be/pages/pattern-en}).
+
+\subsubsection{Klasyfikacja tekstu}
+\texttt{TextBlob} dostarcza narzędzie do klasyfikacji tekstu na podstawie zbioru
+testowego, wykorzystując do tego naiwnego klasyfikatora bayesowskiego.
+Posiadając więc taki zbiór testowy, możliwe jest sklasyfikowanie tekstu na
+przykład pod kątem sentymentu. Możliwa jest ocena całego tekstu lub z podziałem
+na zdania, ocena prawdopodobieństwa każdej z klas czy sprawdzenie dokładności
+klasyfikacji zbioru testowego.
+
+\subsubsection{Analiza sentymentu}
+Wyżej wymieniona biblioteka zawiera także dwie implementacje analizy sentymentu.
+Są to \texttt{PatternAnalyzer} (domyślna - pochodząca z biblioteki
+\texttt{pattern}) oraz \texttt{NaiveBayesAnalyzer} (\texttt{NTLK}).
+
+\texttt{PatternAnalyzer} korzysta z leksykonu przymiotników angielskich
+ocenionych pod kątem ich sentymentu w skali od -1.0 do +1.0 (-1.0 -- negatywny,
++1.0 - pozytywny).
+Klasyfikator zwraca średnią arytmetyczną spośród wszystkich przymiotników, które
+pojawiły się w tekście - czyli im wartość bliżej +1.0, tym sentyment bardziej
+pozytywny, a im bliżej -1.0, tym sentyment bardziej negatywny.
+
+\texttt{NaiveBayesAnalyzer} został wytrenowany na korpusie z recenzjami filmów
+(ocenionych jako negatywne lub pozytywne), zwraca prawdopodobieństwa, że
+sentyment jest pozytywny lub negatywny oraz klasyfikuje jednoznacznie na
+podstawie tego, która z tych wartości jest wyższa.

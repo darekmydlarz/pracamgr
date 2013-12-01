@@ -1,10 +1,12 @@
-\documentclass[pdflatex,11pt]{aghdpl}
+\documentclass[pdflatex,11pt,hidelinks]{aghdpl}
 % \documentclass{aghdpl}               % przy kompilacji programem latex
 % \documentclass[pdflatex,en]{aghdpl}  % praca w języku angielskim
 % \usepackage[polish]{babel}
 \usepackage[MeX]{polski} 
 \usepackage[utf8]{inputenc}
 \usepackage{url}
+\usepackage{hyperref}  % makes refs clickable	% makes links normal look-a-like
+\urlstyle{same}			% prints URLs in normal font (instead of monospaced)
 
 % dodatkowe pakiety
 \usepackage{enumerate}
@@ -34,6 +36,7 @@ portalach społecznościowych.}
 \tableofcontents \clearpage
 %---------------------------------------------------------------------------
 \include{wprowadzenie}
+\include{sentyment}
 \nocite{artykul2011,ksiazka2011}
 \bibliography{bibliografia}
 %---------------------------------------------------------------------------
