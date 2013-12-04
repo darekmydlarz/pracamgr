@@ -148,13 +148,13 @@ im. Stanis\l{}awa Staszica w Krakowie}}}
 \flushbottom
 
 %---------------------------------------------------------------------------
-% Ustawienia parametrów dla tytu³ów rozdzia³ów, podrozdzia³ów, itd.
+% Ustawienia parametrï¿½w dla tytuï¿½ï¿½w rozdziaï¿½ï¿½w, podrozdziaï¿½ï¿½w, itd.
 %---------------------------------------------------------------------------
 
 
 \titleformat{\chapter}[block]
 {\bfseries\LARGE}{\filright \LARGE \makebox[6.7mm][l]{\thechapter.}}{0ex}{}
-%odstêpy: lewy, góra, dó³
+%odstï¿½py: lewy, gï¿½ra, dï¿½
 \titlespacing{\chapter}{0pt}{17mm}{19mm}
 \titleformat{\section}[block]
 {\bfseries\Large}{\filright \Large\thesection. }{0ex}{}
@@ -167,7 +167,7 @@ im. Stanis\l{}awa Staszica w Krakowie}}}
 \titlespacing{\subsubsection}{7mm}{3mm}{1.5mm}
 
 %---------------------------------------------------------------------------
-% Ustawienia parametrów generowania spisu tre¶ci i spisu rysunków
+% Ustawienia parametrï¿½w generowania spisu treï¿½ci i spisu rysunkï¿½w
 %---------------------------------------------------------------------------
 
 \renewcommand{\cfttoctitlefont}{\bfseries\Large}
