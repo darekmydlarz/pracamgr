@@ -16,7 +16,7 @@ public class ValuesProvider {
 
 
     public static void main(String[] args) {
-        List<MatchEvent> matchEvents = Lists.newArrayList(mancitySwansea());
+        List<MatchEvent> matchEvents = Lists.newArrayList(westBromwichMancity());
         for (MatchEvent matchEvent : matchEvents) {
             try {
                 persistMatchEvent(matchEvent);
@@ -118,6 +118,26 @@ public class ValuesProvider {
         return matchEvent;
     }
 
+    private static MatchEvent arsenalHull() {
+        Competition competition = twitterDAO.createOrGetCompetition("Barclays Premier League");
+        Team arsenal = twitterDAO.createOrGetTeam("arsenal");
+        Team hull = twitterDAO.createOrGetTeam("hull");
+        DateTime startDate = new DateTime(2013, 12, 04, 20, 45, 00);
+        MatchEvent matchEvent = new MatchEvent(startDate.toDate(), arsenal, hull, competition);
+        matchEvent.setAdditionalKeywords(Sets.newHashSet("andre marriner", "emirates"));
+        return matchEvent;
+    }
+
+    private static MatchEvent manunitedEverton() {
+        Competition competition = twitterDAO.createOrGetCompetition("Barclays Premier League");
+        Team manunited = twitterDAO.createOrGetTeam("manchester united");
+        Team everton = twitterDAO.createOrGetTeam("everton");
+        DateTime startDate = new DateTime(2013, 12, 04, 20, 45, 00);
+        MatchEvent matchEvent = new MatchEvent(startDate.toDate(), manunited, everton, competition);
+        matchEvent.setAdditionalKeywords(Sets.newHashSet("martin atkinson", "old trafford"));
+        return matchEvent;
+    }
+
     private static MatchEvent evertonLiverpool() {
         Competition premiership = twitterDAO.createOrGetCompetition("Barclays Premier League");
         Set<Player> evertonPlayers = evertonPlayers();
@@ -207,6 +227,46 @@ public class ValuesProvider {
         MatchEvent matchEvent = new MatchEvent(startDate.toDate(), chelsea, southampton, competition);
         matchEvent.setAdditionalKeywords(Sets.newHashSet("stamford bridge", "michael oliver"));
         return matchEvent;
+    }
+
+
+    private static MatchEvent sunderlandChelsea() {
+        Competition competition = twitterDAO.createOrGetCompetition("Barclays Premier League");
+        Team sunderland = twitterDAO.createOrGetTeam("sunderland");
+        if(sunderland.getId() == null) {
+            Set<Player> players = sunderlandPlayers();
+            Manager manager = new Manager("Poyet");
+            sunderland = new Team(Country.EN, "Sunderland AFC", manager, players, "safc", "SAFCofficial", "sunderland");
+        }
+        Team chelsea = twitterDAO.createOrGetTeam("chelsea");
+
+        DateTime startDate = new DateTime(2013, 12, 04, 20, 45, 00);
+        MatchEvent matchEvent = new MatchEvent(startDate.toDate(), sunderland, chelsea, competition);
+        matchEvent.setAdditionalKeywords(Sets.newHashSet("stadium of light", "philip dowd"));
+        return matchEvent;
+    }
+
+    private static Set<Player> sunderlandPlayers() {
+        return Sets.newHashSet(
+                new Player("vito mannone"),
+                new Player("wesley brown"),
+                new Player("john oshea"),
+                new Player("adrea dossena"),
+                new Player("philip bardsley"),
+                new Player("craig gardner"),
+                new Player("sebastian larsson"),
+                new Player("sung yong ki"),
+                new Player("emanuele giaccherini"),
+                new Player("steven fletcher"),
+                new Player("fabio borini"),
+                new Player("adam johnson"),
+                new Player("jack colback"),
+                new Player("ondrej celustka"),
+                new Player("jordan pickford"),
+                new Player("josmer altidore"),
+                new Player("valentin roberge"),
+                new Player("lee cattermole")
+        );
     }
 
     private static MatchEvent hullLiverpool() {
@@ -434,6 +494,44 @@ public class ValuesProvider {
                 new Player("lindegaard"),
                 new Player("nani"),
                 new Player("buttner")
+        );
+    }
+
+
+    private static MatchEvent westBromwichMancity() {
+        Competition competition = twitterDAO.createOrGetCompetition("Barclays Premier League");
+        Team wba = twitterDAO.createOrGetTeam("West Bromwich");
+        Team mancity = twitterDAO.createOrGetTeam("manchester city");
+        if (wba.getId() == null) {
+            Set<Player> players = wbaPlayers();
+            Manager manager = new Manager("Steve Clarke");
+            wba = new Team(Country.EN, "West Bromwich Albion", manager, players, "west brom", "west bromwich", "WBAFCofficial", "baggies");
+        }
+        DateTime startDate = new DateTime(2013, 12, 04, 21, 00, 00);
+        MatchEvent matchEvent = new MatchEvent(startDate.toDate(), wba, mancity, competition);
+        matchEvent.setAdditionalKeywords(Sets.newHashSet("Hawthorns", "chris foy"));
+        return matchEvent;
+    }
+
+    private static Set<Player> wbaPlayers() {
+        return Sets.newHashSet(
+                new Player("boaz myhill"),
+                new Player("jonas olsson"),
+                new Player("liam ridgewell"),
+                new Player("billy jones"),
+                new Player("gareth mcauley"),
+                new Player("morgan amalfitano"),
+                new Player("stephane sessegnon"),
+                new Player("youssouf mulumbu"),
+                new Player("chris brunt"),
+                new Player("shane long"),
+                new Player("saido berahino"),
+                new Player("victor anichebe"),
+                new Player("zoltan gera"),
+                new Player("goran popov"),
+                new Player("claudio yacob"),
+                new Player("diego lugano"),
+                new Player("luke daniels")
         );
     }
 
