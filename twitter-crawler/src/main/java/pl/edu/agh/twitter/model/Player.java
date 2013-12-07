@@ -10,7 +10,7 @@ import java.util.*;
 @Table(schema = "mgr", name = "players")
 public class Player {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     @Column(unique = true)
     private String lastName;

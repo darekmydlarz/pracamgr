@@ -18,12 +18,9 @@ public class Main {
     private static TwitterDAO twitterDAO = new TwitterDAO();
 
     public static void main(String[] args) {
-        MatchEvent match1 = findMatchEvent("arsenal", "hull");
-        MatchEvent match2 = findMatchEvent("manchester united", "everton");
-        MatchEvent match3 = findMatchEvent("sunderland", "chelsea");
-        MatchEvent match4 = findMatchEvent("west bromwich", "manchester city");
-//        logger.info(match4.getKeywords());
-        consume(match1, match2, match3, match4);
+        MatchEvent match1 = findMatchEvent("manchester united", "newcastle");
+        logger.info(match1.getKeywords());
+        consume(match1);
     }
 
     public static MatchEvent findMatchEvent(String homeTeam, String awayTeam) {

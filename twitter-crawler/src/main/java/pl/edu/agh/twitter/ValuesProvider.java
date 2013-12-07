@@ -16,7 +16,7 @@ public class ValuesProvider {
 
 
     public static void main(String[] args) {
-        List<MatchEvent> matchEvents = Lists.newArrayList(westBromwichMancity());
+        List<MatchEvent> matchEvents = Lists.newArrayList(arsenalEverton());
         for (MatchEvent matchEvent : matchEvents) {
             try {
                 persistMatchEvent(matchEvent);
@@ -128,6 +128,16 @@ public class ValuesProvider {
         return matchEvent;
     }
 
+    private static MatchEvent arsenalEverton() {
+        Competition competition = twitterDAO.createOrGetCompetition("Barclays Premier League");
+        Team arsenal = twitterDAO.createOrGetTeam("arsenal");
+        Team everton = twitterDAO.createOrGetTeam("everton");
+        DateTime startDate = new DateTime(2013, 12, 8, 17, 00, 00);
+        MatchEvent matchEvent = new MatchEvent(startDate.toDate(), arsenal, everton, competition);
+        matchEvent.setAdditionalKeywords(Sets.newHashSet("howard webb", "emirates"));
+        return matchEvent;
+    }
+
     private static MatchEvent manunitedEverton() {
         Competition competition = twitterDAO.createOrGetCompetition("Barclays Premier League");
         Team manunited = twitterDAO.createOrGetTeam("manchester united");
@@ -218,6 +228,17 @@ public class ValuesProvider {
         return matchEvent;
     }
 
+    private static MatchEvent southamptonMcfc() {
+        Competition competition = twitterDAO.createOrGetCompetition("Barclays Premier League");
+        Team southampton = twitterDAO.createOrGetTeam("southampton");
+        Team mcfc = twitterDAO.createOrGetTeam("manchester city");
+
+        DateTime startDate = new DateTime(2013, 12, 07, 16, 00, 00);
+        MatchEvent matchEvent = new MatchEvent(startDate.toDate(), southampton, mcfc, competition);
+        matchEvent.setAdditionalKeywords(Sets.newHashSet("anthony taylor", "st mary stadium"));
+        return matchEvent;
+    }
+
     private static MatchEvent chelseaSouthampton() {
         Competition competition = twitterDAO.createOrGetCompetition("Barclays Premier League");
         Team chelsea = twitterDAO.createOrGetTeam("chelsea");
@@ -229,6 +250,82 @@ public class ValuesProvider {
         return matchEvent;
     }
 
+
+    private static MatchEvent manunitedNewcastle() {
+        Competition competition = twitterDAO.createOrGetCompetition("Barclays Premier League");
+        Team manunited = twitterDAO.createOrGetTeam("manchester united");
+        Team newcastle = twitterDAO.createOrGetTeam("newcastle");
+        if(newcastle.getId() == null) {
+            Set<Player> players = newcastlePlayers();
+            Manager manager = new Manager("Pardew");
+            newcastle = new Team(Country.EN, "Newcastle United", manager, players, "nufc", "newcastle");
+        }
+        DateTime startDate = new DateTime(2013, 12, 07, 13, 45, 00);
+        MatchEvent matchEvent = new MatchEvent(startDate.toDate(), manunited, newcastle, competition);
+        matchEvent.setAdditionalKeywords(Sets.newHashSet("andre marriner", "old trafford"));
+        return matchEvent;
+    }
+
+    private static Set<Player> newcastlePlayers() {
+        return Sets.newHashSet(
+            new Player("krul"),
+            new Player("coloccini"),
+            new Player("debuchy"),
+            new Player("mike williamson"),
+            new Player("santon"),
+            new Player("cabaye"),
+            new Player("tiote"),
+            new Player("sissoko"),
+            new Player("shola ameobi"),
+            new Player("remy"),
+            new Player("gouffran"),
+            new Player("haidara"),
+            new Player("obertan"),
+            new Player("mbiwa"),
+            new Player("vurnon anita"),
+            new Player("robert elliot"),
+            new Player("sammy ameobi"),
+            new Player("paul dummett")
+        );
+    }
+
+    private static MatchEvent stokeChelsea() {
+        Competition competition = twitterDAO.createOrGetCompetition("Barclays Premier League");
+        Team stoke = twitterDAO.createOrGetTeam("stoke");
+        if(stoke.getId() == null) {
+            Set<Player> players = stokePlayers();
+            Manager manager = new Manager("mark hughes");
+            stoke = new Team(Country.EN, "Stoke City", manager, players, "stoke");
+        }
+        Team chelsea = twitterDAO.createOrGetTeam("chelsea");
+
+        DateTime startDate = new DateTime(2013, 12, 07, 16, 00, 00);
+        MatchEvent matchEvent = new MatchEvent(startDate.toDate(), stoke, chelsea, competition);
+        matchEvent.setAdditionalKeywords(Sets.newHashSet("britannia stadium", "jonathan moss"));
+        return matchEvent;
+    }
+
+    private static Set<Player> stokePlayers() {
+        return Sets.newHashSet(
+            new Player("asmir begovic"),
+            new Player("erik pieters"),
+            new Player("shawcross"),
+            new Player("marc wilson"),
+            new Player("geoff cameron"),
+            new Player("charlie adam"),
+            new Player("glenn whelan"),
+            new Player("steven nzozi"),
+            new Player("peter crouch"),
+            new Player("arnautovic"),
+            new Player("muniesa"),
+            new Player("stephen ireland"),
+            new Player("jermaine pennant"),
+            new Player("wilson palacios"),
+            new Player("kenwyne jones"),
+            new Player("jonathan walters"),
+            new Player("thomas sorensen")
+        );
+    }
 
     private static MatchEvent sunderlandChelsea() {
         Competition competition = twitterDAO.createOrGetCompetition("Barclays Premier League");
