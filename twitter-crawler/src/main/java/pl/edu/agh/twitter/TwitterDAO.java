@@ -9,11 +9,13 @@ import twitter4j.Status;
 import twitter4j.TwitterException;
 import twitter4j.User;
 
+import java.util.List;
+
 public class TwitterDAO {
 
     private Logger logger = Logger.getLogger(TwitterDAO.class);
 
-    public void parseAndPersistTweet(MatchEvent[] matchEvents, Status status) {
+    public void parseAndPersistTweet(List<MatchEvent> matchEvents, Status status) {
         try {
             Tweet tweet = new Tweet(status, createOrGetUser(status.getUser()), getMatchEvent(matchEvents, status.getText()));
             persistTweet(tweet);
@@ -49,7 +51,7 @@ public class TwitterDAO {
         return userEntity;
     }
 
-    private MatchEvent getMatchEvent(MatchEvent[] matchEvents, String text) {
+    private MatchEvent getMatchEvent(List<MatchEvent> matchEvents, String text) {
         for(MatchEvent matchEvent : matchEvents) {
             if(matchEvent.isKeywordInString(text)) {
                 return matchEvent;

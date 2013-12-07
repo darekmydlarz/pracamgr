@@ -9,6 +9,7 @@ import pl.edu.agh.twitter.crawler.TwitterServiceProvider;
 import pl.edu.agh.twitter.model.MatchEvent;
 import twitter4j.*;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class Main {
@@ -18,9 +19,15 @@ public class Main {
     private static TwitterDAO twitterDAO = new TwitterDAO();
 
     public static void main(String[] args) {
-        MatchEvent match1 = findMatchEvent("manchester united", "newcastle");
-        logger.info(match1.getKeywords());
-        consume(match1);
+        List<MatchEvent> matchEvents = Arrays.asList(
+            findMatchEvent("manchester united", "newcastle"),
+            findMatchEvent("southampton", "manchester city"),
+            findMatchEvent("stoke", "chelsea")
+        );
+        for(MatchEvent matchEvent : matchEvents) {
+            logger.info(matchEvent.getKeywords().size() + ":" + matchEvent.getKeywords());
+        }
+        consume(matchEvents);
     }
 
     public static MatchEvent findMatchEvent(String homeTeam, String awayTeam) {
@@ -33,19 +40,19 @@ public class Main {
         return matchEvent;
     }
 
-    private static FilterQuery filterQuery(MatchEvent ... matchEvents) {
+    private static FilterQuery filterQuery(List<MatchEvent> matchEvents) {
         final FilterQuery query = new FilterQuery();
         query.language(LANGUAGES);
         query.track(getKeywords(matchEvents));
         return query;
     }
 
-    private static void consume(MatchEvent ... matchEvents) {
+    private static void consume(List<MatchEvent> matchEvents) {
         twitterStream.addListener(new MyStatusListener(matchEvents));
         twitterStream.filter(filterQuery(matchEvents));
     }
 
-    private static String[] getKeywords(MatchEvent[] matchEvents) {
+    private static String[] getKeywords(List<MatchEvent> matchEvents) {
         List<String> keywords = Lists.newArrayList();
         for(MatchEvent matchEvent : matchEvents) {
             keywords.addAll(matchEvent.getKeywords());
@@ -54,9 +61,9 @@ public class Main {
     }
 
     public static class MyStatusListener implements StatusListener {
-        private MatchEvent[] matchEvents;
+        private List<MatchEvent> matchEvents;
 
-        MyStatusListener(MatchEvent[] matchEvents) {
+        MyStatusListener(List<MatchEvent> matchEvents) {
             this.matchEvents = matchEvents;
         }
 
