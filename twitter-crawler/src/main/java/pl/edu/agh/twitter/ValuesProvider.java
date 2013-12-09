@@ -16,7 +16,7 @@ public class ValuesProvider {
 
 
     public static void main(String[] args) {
-        List<MatchEvent> matchEvents = Lists.newArrayList(arsenalEverton());
+        List<MatchEvent> matchEvents = Lists.newArrayList(napoliArsenal());
         for (MatchEvent matchEvent : matchEvents) {
             try {
                 persistMatchEvent(matchEvent);
@@ -142,10 +142,45 @@ public class ValuesProvider {
         Competition competition = twitterDAO.createOrGetCompetition("Barclays Premier League");
         Team manunited = twitterDAO.createOrGetTeam("manchester united");
         Team everton = twitterDAO.createOrGetTeam("everton");
-        DateTime startDate = new DateTime(2013, 12, 04, 20, 45, 00);
+        DateTime startDate = new DateTime(2013, 12, 10, 20, 45, 00);
         MatchEvent matchEvent = new MatchEvent(startDate.toDate(), manunited, everton, competition);
         matchEvent.setAdditionalKeywords(Sets.newHashSet("martin atkinson", "old trafford"));
         return matchEvent;
+    }
+
+    private static MatchEvent manunitedShakhtar() {
+        Competition competition = twitterDAO.createOrGetCompetition("UEFA Champions League");
+        Team manunited = twitterDAO.createOrGetTeam("manchester united");
+        Team shakhtar = twitterDAO.createOrGetTeam("shakhtar");
+        if(shakhtar.getId() == null) {
+            Set<Player> players = shakhtarPlayers();
+            Manager manager = new Manager("Lucescu");
+            shakhtar = new Team(Country.UA, "Shakhtar Donetsk", manager, players, "shakhtar", "donetsk");
+        }
+        DateTime startDate = new DateTime(2013, 12, 10, 20, 45, 00);
+        MatchEvent matchEvent = new MatchEvent(startDate.toDate(), manunited, shakhtar, competition);
+        matchEvent.setAdditionalKeywords(Sets.newHashSet("old trafford"));
+        return matchEvent;
+    }
+
+    private static Set<Player> shakhtarPlayers() {
+        return Sets.newHashSet(
+                new Player("pyatov"),
+                new Player("srna"),
+                new Player("aleksandr kucher"),
+                new Player("vyacheslav schevchuk"),
+                new Player("Rakitskiy"),
+                new Player("alex teixeira"),
+                new Player("taras stepanenko"),
+                new Player("douglas costa"),
+                new Player("luiz adriano"),
+                new Player("facundo ferreyra"),
+                new Player("eduardo da silva"),
+                new Player("tomas hubschmann"),
+                new Player("lucas fernando"),
+                new Player("kanibolotskiy"),
+                new Player("sergey krivtsov")
+        );
     }
 
     private static MatchEvent evertonLiverpool() {
@@ -239,6 +274,44 @@ public class ValuesProvider {
         return matchEvent;
     }
 
+    private static MatchEvent bayernMcfc() {
+        Competition competition = twitterDAO.createOrGetCompetition("UEFA Champions League");
+        Team bayern = twitterDAO.createOrGetTeam("bayern monachium");
+        if(bayern.getId() == null) {
+            Set<Player> players = bayernPlayers();
+            Manager manager = new Manager("Guardiola");
+            bayern = new Team(Country.DE, "Bayern Monachium", manager, players, "bayern", "bayern munich", "fcbayern", "fc bayern");
+        }
+        Team mcfc = twitterDAO.createOrGetTeam("manchester city");
+
+        DateTime startDate = new DateTime(2013, 12, 10, 20, 45, 00);
+        MatchEvent matchEvent = new MatchEvent(startDate.toDate(), bayern, mcfc, competition);
+        matchEvent.setAdditionalKeywords(Sets.newHashSet("allianz arena"));
+        return matchEvent;
+    }
+
+    private static Set<Player> bayernPlayers() {
+        return Sets.newHashSet(
+                new Player("neuer"),
+                new Player("rafinha"),
+                new Player("van buyten"),
+                new Player("boateng"),
+                new Player("alaba"),
+                new Player("ribery"),
+                new Player("kroos"),
+                new Player("thiago alcantara"),
+                new Player("gotze", "goetze"),
+                new Player("mandzukic"),
+                new Player("thomas muller"),
+                new Player("dante"),
+                new Player("jan kirchhoff"),
+                new Player("claudio pizarro"),
+                new Player("javi martinez"),
+                new Player("shaqiri"),
+                new Player("tom starke")
+        );
+    }
+
     private static MatchEvent chelseaSouthampton() {
         Competition competition = twitterDAO.createOrGetCompetition("Barclays Premier League");
         Team chelsea = twitterDAO.createOrGetTeam("chelsea");
@@ -248,6 +321,44 @@ public class ValuesProvider {
         MatchEvent matchEvent = new MatchEvent(startDate.toDate(), chelsea, southampton, competition);
         matchEvent.setAdditionalKeywords(Sets.newHashSet("stamford bridge", "michael oliver"));
         return matchEvent;
+    }
+
+    private static MatchEvent chelseaSteaua() {
+        Competition competition = twitterDAO.createOrGetCompetition("UEFA Champions League");
+        Team chelsea = twitterDAO.createOrGetTeam("chelsea");
+        Team steaua = twitterDAO.createOrGetTeam("steaua");
+        if(steaua.getId() == null) {
+            Set<Player> players = steauaPlayers();
+            Manager manager = new Manager("Reghecampf");
+            steaua = new Team(Country.RO, "Steaua Bucuresti", manager, players, "Steaua", "Steaua Bucharest");
+        }
+
+        DateTime startDate = new DateTime(2013, 12, 11, 20, 45, 0);
+        MatchEvent matchEvent = new MatchEvent(startDate.toDate(), chelsea, steaua, competition);
+        matchEvent.setAdditionalKeywords(Sets.newHashSet("stamford bridge"));
+        return matchEvent;
+    }
+
+    private static Set<Player> steauaPlayers() {
+        return Sets.newHashSet(
+                new Player("tatarusanu"),
+                new Player("szukala"),
+                new Player("parvulescu"),
+                new Player("fernando varela"),
+                new Player("gardos"),
+                new Player("prepelita"),
+                new Player("chipciu"),
+                new Player("tanase"),
+                new Player("bourceanu"),
+                new Player("piovaccari"),
+                new Player("stanciu"),
+                new Player("iancu"),
+                new Player("kapetanos"),
+                new Player("rapa"),
+                new Player("tarnovan"),
+                new Player("gradinaru"),
+                new Player("florin nita")
+        );
     }
 
 
@@ -402,6 +513,46 @@ public class ValuesProvider {
                 new Player("david meyler"),
                 new Player("stephen harper"),
                 new Player("Abdoulaye Fayé")
+        );
+    }
+
+    private static MatchEvent napoliArsenal() {
+        Competition competition = twitterDAO.createOrGetCompetition("UEFA Champions League");
+        Team arsenal = twitterDAO.createOrGetTeam("arsenal");
+        Team napoli = twitterDAO.createOrGetTeam("napoli");
+        if (napoli.getId() == null) {
+            Set<Player> players = napoliPlayers();
+            Manager manager = new Manager("Rafael Benitez", "Rafa Benitez");
+            napoli = new Team(Country.IT, "Napoli", manager, players);
+        }
+        DateTime startDate = new DateTime(2013, 12, 11, 20, 45, 0);
+        MatchEvent matchEvent = new MatchEvent(startDate.toDate(), napoli, arsenal, competition);
+        matchEvent.setAdditionalKeywords(Sets.newHashSet("san paolo"));
+        return matchEvent;
+    }
+
+    private static Set<Player> napoliPlayers() {
+        return Sets.newHashSet(
+                new Player("rafael barbosa"),
+                new Player("reveillere"),
+                new Player("albiol"),
+                new Player("federico fernandez"),
+                new Player("dzemali"),
+                new Player("christian maggio"),
+                new Player("inler"),
+                new Player("pandev"),
+                new Player("higuain"),
+                new Player("callejon"),
+                new Player("lorenzo insigne"),
+                new Player("mertens dries"),
+                new Player("behrami"),
+                new Player("armero"),
+                new Player("bruno uvini"),
+                new Player("roberto colombo"),
+                new Player("radosevic"),
+                new Player("pep reina", "pepe reina"),
+                new Player("cannavaro paolo"),
+                new Player("daniel zapata")
         );
     }
 
