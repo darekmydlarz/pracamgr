@@ -336,7 +336,7 @@ public class ValuesProvider {
 			Manager manager = new Manager("Pulis");
 			crystalPalace = new Team(Country.EN, "Crystal Palace", manager, players, "CPFC");
 		}
-		DateTime startDate = new DateTime(2013, 12, 11, 20, 45, 0);
+		DateTime startDate = new DateTime(2013, 12, 14, 16, 0, 0);
 		MatchEvent matchEvent = new MatchEvent(startDate.toDate(), chelsea, crystalPalace, competition);
 		matchEvent.setAdditionalKeywords(Sets.newHashSet("stamford bridge"));
 		return matchEvent;
@@ -692,9 +692,9 @@ public class ValuesProvider {
 			Manager manager = new Manager("Paul Lambert");
 			astonVilla = new Team(Country.EN, "Aston Villa", manager, players, "avfc");
 		}
-		Team manuited = twitterDAO.createOrGetTeam("manchester united");
+		Team manunited = twitterDAO.createOrGetTeam("manchester united");
 		DateTime startDate = new DateTime(2013, 12, 15, 14, 30, 0);
-		MatchEvent matchEvent = new MatchEvent(startDate.toDate(), astonVilla, manuited, competition);
+		MatchEvent matchEvent = new MatchEvent(startDate.toDate(), astonVilla, manunited, competition);
 		matchEvent.setAdditionalKeywords(Sets.newHashSet("villa park", "chris foy"));
 		return matchEvent;
 
