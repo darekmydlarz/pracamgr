@@ -20,7 +20,8 @@ public class Main {
 
     public static void main(String[] args) {
         List<MatchEvent> matchEvents = Arrays.asList(
-            findMatchEvent("aston villa", "manchester united")
+            findMatchEvent("manchester united", "west ham"),
+            findMatchEvent("fulham", "manchester city")
         );
         for(MatchEvent matchEvent : matchEvents) {
             logger.info(matchEvent.getKeywords().size() + ":" + matchEvent.getKeywords());

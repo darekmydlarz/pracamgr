@@ -17,9 +17,9 @@ public class ValuesProvider {
 
     public static void main(String[] args) {
         List<MatchEvent> matchEvents = Lists.newArrayList(
-	        mancityArsenal(),
-		    chelseaCrystalPalace(),
-	        astonVillaManuited()
+                manunitedWestHam(),
+                fulhamMcfc(),
+                arsenalChelsea()
         );
         for (MatchEvent matchEvent : matchEvents) {
             try {
@@ -129,6 +129,16 @@ public class ValuesProvider {
         DateTime startDate = new DateTime(2013, 12, 04, 20, 45, 00);
         MatchEvent matchEvent = new MatchEvent(startDate.toDate(), arsenal, hull, competition);
         matchEvent.setAdditionalKeywords(Sets.newHashSet("andre marriner", "emirates"));
+        return matchEvent;
+    }
+
+    private static MatchEvent arsenalChelsea() {
+        Competition competition = twitterDAO.createOrGetCompetition("Barclays Premier League");
+        Team arsenal = twitterDAO.createOrGetTeam("arsenal");
+        Team chelsea = twitterDAO.createOrGetTeam("chelsea");
+        DateTime startDate = new DateTime(2013, 12, 23, 21, 0, 0);
+        MatchEvent matchEvent = new MatchEvent(startDate.toDate(), arsenal, chelsea, competition);
+        matchEvent.setAdditionalKeywords(Sets.newHashSet("michael dean", "emirates"));
         return matchEvent;
     }
 
@@ -278,6 +288,46 @@ public class ValuesProvider {
         return matchEvent;
     }
 
+
+    private static MatchEvent fulhamMcfc() {
+        Competition competition = twitterDAO.createOrGetCompetition("Barclays Premier League");
+        Team fulham = twitterDAO.createOrGetTeam("fulham");
+        if(fulham.getId() == null) {
+            Set<Player> players = fulhamPlayers();
+            Manager manager = new Manager("Meulensteen");
+            fulham = new Team(Country.EN, "Fulham FC", manager, players, "ffc", "fulhamfc", "fulham");
+        }
+        Team mcfc = twitterDAO.createOrGetTeam("manchester city");
+
+        DateTime startDate = new DateTime(2013, 12, 21, 16, 0, 0);
+        MatchEvent matchEvent = new MatchEvent(startDate.toDate(), fulham, mcfc, competition);
+        matchEvent.setAdditionalKeywords(Sets.newHashSet("kevin friend", "craven cottage"));
+        return matchEvent;
+    }
+
+    private static Set<Player> fulhamPlayers() {
+        return Sets.newHashSet(
+                new Player("stekelenburg"),
+                new Player("senderos"),
+                new Player("riise"),
+                new Player("aaron hughes"),
+                new Player("rieter"),
+                new Player("dejagah"),
+                new Player("steve sidwell"),
+                new Player("scott parker"),
+                new Player("karagounis"),
+                new Player("kacaniklic"),
+                new Player("berbatov"),
+                new Player("kasami"),
+                new Player("darren bent"),
+                new Player("damien duff"),
+                new Player("bryan ruiz"),
+                new Player("david stockdale"),
+                new Player("kieran richardson"),
+                new Player("zverotic")
+        );
+    }
+
     private static MatchEvent bayernMcfc() {
         Competition competition = twitterDAO.createOrGetCompetition("UEFA Champions League");
         Team bayern = twitterDAO.createOrGetTeam("bayern monachium");
@@ -399,6 +449,44 @@ public class ValuesProvider {
                 new Player("tarnovan"),
                 new Player("gradinaru"),
                 new Player("florin nita")
+        );
+    }
+
+    private static MatchEvent manunitedWestHam() {
+        Competition competition = twitterDAO.createOrGetCompetition("Barclays Premier League");
+        Team manunited = twitterDAO.createOrGetTeam("manchester united");
+        Team westham = twitterDAO.createOrGetTeam("west ham");
+        if(westham.getId() == null) {
+            Set<Player> players = westhamPlayers();
+            Manager manager = new Manager("Allardyce");
+            westham = new Team(Country.EN, "West Ham United", manager, players, "wufc", "westham", "west ham");
+        }
+        DateTime startDate = new DateTime(2013, 12, 21, 16, 0, 0);
+        MatchEvent matchEvent = new MatchEvent(startDate.toDate(), manunited, westham, competition);
+        matchEvent.setAdditionalKeywords(Sets.newHashSet("michael jones", "old trafford"));
+        return matchEvent;
+    }
+
+    private static Set<Player> westhamPlayers() {
+        return Sets.newHashSet(
+                new Player("adrian san miguel"),
+                new Player("joey brien"),
+                new Player("george mccartney"),
+                new Player("james collins"),
+                new Player("razvan rat"),
+                new Player("joseph cole"),
+                new Player("alou diarra"),
+                new Player("matthew taylor"),
+                new Player("matthew jarvis"),
+                new Player("jack collison"),
+                new Player("cartlon cole"),
+                new Player("modibo maiga"),
+                new Player("mohamed diame"),
+                new Player("ravel morrison"),
+                new Player("leo chambers"),
+                new Player("guy demel"),
+                new Player("jussi jaaskelainen"),
+                new Player("mark noble")
         );
     }
 
