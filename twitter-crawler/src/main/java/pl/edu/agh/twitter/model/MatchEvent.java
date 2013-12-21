@@ -9,7 +9,8 @@ import java.util.*;
 @Entity
 @Table(schema = "mgr", name = "match_events", uniqueConstraints = @UniqueConstraint(name = "date_home_away", columnNames = {"startDate", "home_team", "away_team"}))
 public class MatchEvent {
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     private Date startDate;
     @OneToOne(cascade = CascadeType.ALL)
@@ -27,7 +28,7 @@ public class MatchEvent {
     public MatchEvent() {
     }
 
-    public MatchEvent(Date startDate, Team homeTeam, Team awayTeam, Competition competition, String ... keywords) {
+    public MatchEvent(Date startDate, Team homeTeam, Team awayTeam, Competition competition, String... keywords) {
         this.startDate = startDate;
         this.homeTeam = homeTeam;
         this.awayTeam = awayTeam;
@@ -92,8 +93,8 @@ public class MatchEvent {
 
     public boolean isKeywordInString(String givenString) {
         String givenLower = givenString.toLowerCase();
-        for(String keyword : getKeywords()) {
-            if(givenLower.contains(keyword.toLowerCase())) {
+        for (String keyword : getKeywords()) {
+            if (givenLower.contains(keyword.toLowerCase())) {
                 return true;
             }
         }
