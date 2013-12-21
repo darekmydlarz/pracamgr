@@ -20,10 +20,27 @@ public class Main {
 
     public static void main(String[] args) {
         List<MatchEvent> matchEvents = Arrays.asList(
-            findMatchEvent("manchester united", "west ham"),
-            findMatchEvent("fulham", "manchester city")
+                // 2013-12-21 16:00:00
+                findMatchEvent("manchester united", "west ham"),
+                findMatchEvent("fulham", "manchester city")
+                // 2013-12-23 21:00:00
+//                findMatchEvent("arsenal", "chelsea")
+                // 2013-12-26 13:45:00
+//                findMatchEvent("hull", "manchester united")
+                // 2013-12-26 16:00:00
+//                findMatchEvent("west ham", "arsenal"),
+//                findMatchEvent("chelsea", "swansea")
+                // 2013-12-26 18:30:00
+//                findMatchEvent("manchester city", "liverpool")
+                // 2013-12-28 16:00:00
+//                findMatchEvent("norwich", "manchester united"),
+//                findMatchEvent("manchester city", "crystal palace")
+                // 2013-12-29 14:30:00
+//                findMatchEvent("newcastle", "arsenal")
+                // 2013-12-29 17:00:00
+//                findMatchEvent("chelsea", "liverpool")
         );
-        for(MatchEvent matchEvent : matchEvents) {
+        for (MatchEvent matchEvent : matchEvents) {
             logger.info(matchEvent.getKeywords().size() + ":" + matchEvent.getKeywords());
         }
         consume(matchEvents);
@@ -53,7 +70,7 @@ public class Main {
 
     private static String[] getKeywords(List<MatchEvent> matchEvents) {
         List<String> keywords = Lists.newArrayList();
-        for(MatchEvent matchEvent : matchEvents) {
+        for (MatchEvent matchEvent : matchEvents) {
             keywords.addAll(matchEvent.getKeywords());
         }
         return Iterables.toArray(keywords, String.class);
