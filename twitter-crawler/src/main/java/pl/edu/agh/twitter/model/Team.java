@@ -100,4 +100,9 @@ public class Team {
         }
         return keywords;
     }
+
+    @Override
+    public String toString() {
+        return name + " (" + country + ")";
+    }
 }

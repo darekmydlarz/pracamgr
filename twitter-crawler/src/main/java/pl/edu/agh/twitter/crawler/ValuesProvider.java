@@ -1,4 +1,4 @@
-package pl.edu.agh.twitter;
+package pl.edu.agh.twitter.crawler;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
@@ -6,6 +6,8 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.exception.ConstraintViolationException;
 import org.joda.time.DateTime;
+import pl.edu.agh.twitter.HibernateUtil;
+import pl.edu.agh.twitter.dao.TwitterDAO;
 import pl.edu.agh.twitter.model.*;
 
 import java.util.List;

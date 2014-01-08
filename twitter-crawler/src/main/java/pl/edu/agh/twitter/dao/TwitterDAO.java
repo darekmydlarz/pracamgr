@@ -1,9 +1,10 @@
-package pl.edu.agh.twitter;
+package pl.edu.agh.twitter.dao;
 
 import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import pl.edu.agh.twitter.HibernateUtil;
 import pl.edu.agh.twitter.model.*;
 import twitter4j.Status;
 import twitter4j.TwitterException;

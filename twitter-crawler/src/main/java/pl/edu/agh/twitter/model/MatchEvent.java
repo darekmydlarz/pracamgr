@@ -1,15 +1,18 @@
 package pl.edu.agh.twitter.model;
 
-import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
 import javax.persistence.*;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
-@Table(schema = "mgr", name = "match_events", uniqueConstraints = @UniqueConstraint(name = "date_home_away", columnNames = {"startDate", "home_team", "away_team"}))
+@Table(schema = "mgr", name = "match_events")
 public class MatchEvent {
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     private Long id;
     private Date startDate;
     @OneToOne(cascade = CascadeType.ALL)
@@ -27,7 +30,7 @@ public class MatchEvent {
     public MatchEvent() {
     }
 
-    public MatchEvent(Date startDate, Team homeTeam, Team awayTeam, Competition competition, String ... keywords) {
+    public MatchEvent(Date startDate, Team homeTeam, Team awayTeam, Competition competition, String... keywords) {
         this.startDate = startDate;
         this.homeTeam = homeTeam;
         this.awayTeam = awayTeam;
@@ -92,11 +95,16 @@ public class MatchEvent {
 
     public boolean isKeywordInString(String givenString) {
         String givenLower = givenString.toLowerCase();
-        for(String keyword : getKeywords()) {
-            if(givenLower.contains(keyword.toLowerCase())) {
+        for (String keyword : getKeywords()) {
+            if (givenLower.contains(keyword.toLowerCase())) {
                 return true;
             }
         }
         return false;
+    }
+
+    @Override
+    public String toString() {
+        return startDate + " - " + homeTeam + " - " + awayTeam + " - " + competition;
     }
 }

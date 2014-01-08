@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
+        http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd"
+             version="1.0">
+    <persistence-unit name="mgr">
+        <class>pl.edu.agh.twitter.model.Tweet</class>
+        <class>pl.edu.agh.twitter.model.UserEntity</class>
+        <class>pl.edu.agh.twitter.model.Competition</class>
+        <class>pl.edu.agh.twitter.model.Manager</class>
+        <class>pl.edu.agh.twitter.model.MatchEvent</class>
+        <class>pl.edu.agh.twitter.model.Player</class>
+        <class>pl.edu.agh.twitter.model.Team</class>
+        <properties>
+            <property name="hibernate.connection.driver_class" value="org.postgresql.Driver"/>
+            <property name="hibernate.connection.url" value="jdbc:postgresql://localhost/postgres"/>
+            <property name="hibernate.connection.username" value="postgres"/>
+            <property name="hibernate.connection.password" value="postgres"/>
+            <property name="hibernate.show_sql" value="false"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="hibernate.ejb.naming_strategy" value="org.hibernate.cfg.ImprovedNamingStrategy"/>
+            <property name="dialect" value="org.hibernate.dialect.PostgreSQL82Dialect" />
+            <property name="hibernate.connection.pool_size" value="10" />
+            <property name="hibernate.jdbc.batch_size" value="100" />
+        </properties>
+    </persistence-unit>
+</persistence>
