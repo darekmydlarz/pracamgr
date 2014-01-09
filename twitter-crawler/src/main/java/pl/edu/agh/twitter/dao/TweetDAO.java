@@ -24,6 +24,15 @@ public class TweetDAO {
         return em.createQuery(query, Tweet.class).setMaxResults(100).getResultList();
     }
 
+    @SuppressWarnings("unchecked")
+    public List<Tweet> getTweets(UserEntity userEntity, MatchEvent matchEvent) {
+        final String query = "FROM Tweet t WHERE t.user = :user AND t.matchEvent = :match";
+        return em.createQuery(query)
+                .setParameter("user", userEntity)
+                .setParameter("match", matchEvent)
+                .getResultList();
+    }
+
     public long getTweetsNumber(UserEntity userEntity, MatchEvent matchEvent) {
         final String query = "SELECT COUNT(t) FROM Tweet t WHERE t.user = :user AND t.matchEvent = :match";
         return ((Number) em.createQuery(query)
