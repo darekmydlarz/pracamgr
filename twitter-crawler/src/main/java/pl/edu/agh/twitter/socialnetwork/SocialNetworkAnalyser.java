@@ -5,16 +5,16 @@ import com.google.common.collect.Sets;
 import de.daslaboratorium.machinelearning.classifier.Classification;
 import de.daslaboratorium.machinelearning.classifier.Classifier;
 import org.apache.commons.lang.StringUtils;
-import pl.edu.agh.twitter.dao.MatchEventDAO;
-import pl.edu.agh.twitter.dao.TeamDAO;
-import pl.edu.agh.twitter.dao.TweetDAO;
-import pl.edu.agh.twitter.dao.UserDAO;
-import pl.edu.agh.twitter.model.MatchEvent;
-import pl.edu.agh.twitter.model.Team;
-import pl.edu.agh.twitter.model.Tweet;
-import pl.edu.agh.twitter.model.UserEntity;
-import pl.edu.agh.twitter.pojo.SourceTargetWeight;
-import pl.edu.agh.twitter.sentiment.SentimentAnalyser;
+import pl.edu.agh.twitter.Startable;
+import pl.edu.agh.twitter.business.matchevent.boundary.MatchEventDAO;
+import pl.edu.agh.twitter.business.team.boundary.TeamDAO;
+import pl.edu.agh.twitter.business.tweet.boundary.TweetDAO;
+import pl.edu.agh.twitter.business.user.boundary.UserDAO;
+import pl.edu.agh.twitter.business.matchevent.entity.MatchEvent;
+import pl.edu.agh.twitter.business.team.entity.Team;
+import pl.edu.agh.twitter.business.tweet.entity.Tweet;
+import pl.edu.agh.twitter.business.user.entity.UserEntity;
+import pl.edu.agh.twitter.sentiment.SentimentClassifier;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -25,7 +25,7 @@ import java.util.Map;
 import java.util.Set;
 
 @Singleton
-public class SocialNetworkAnalyser implements Runnable {
+public class SocialNetworkAnalyser implements Startable {
     private static final DecimalFormat decimalFormat = new DecimalFormat("##.00");
 
     @Inject
@@ -41,21 +41,21 @@ public class SocialNetworkAnalyser implements Runnable {
     private TeamDAO teamDAO;
 
     List<String> teamNames = Arrays.asList(
-//            "manchester united"
-//            "manchester city"
-//            "chelsea"
+            "manchester united",
+            "manchester city",
+            "chelsea",
             "arsenal"
     );
 
-    private final Classifier<String,String> sentimentClassifier = new SentimentAnalyser().sentimentClassifier(10000);
+    private final Classifier<String,String> sentimentClassifier = new SentimentClassifier().sentimentClassifier(10000);
 
-    public void run() {
+    public void start() {
         showSentiment();
     }
 
     private void showSentiment() {
         for (String name : teamNames) {
-            Team team = teamDAO.find(name);
+            Team team = teamDAO.get(name);
             showTopUsers(matchEventDAO.fetchAll(team), 20);
         }
     }
@@ -63,17 +63,14 @@ public class SocialNetworkAnalyser implements Runnable {
     private void getUsersStatistics() {
         Set<UserEntity> allUsers = Sets.newHashSet();
         for (String name : teamNames) {
-            Team team = teamDAO.find(name);
+            Team team = teamDAO.get(name);
             Set<UserEntity> users = getTopUsers(matchEventDAO.fetchAll(team), 40);
             for(UserEntity user : users) {
                 user.addTeam(team);
-//                System.out.println(user.getId() + "\t" + user.getScreenName() + "\t" + team.getName());
             }
             allUsers.addAll(users);
         }
         printUsers(allUsers);
-//        printUsersRepliesCFinder(allUsers);
-//        printUsersReplies(allUsers);
     }
 
     private void printUsersRepliesCFinder(Set<UserEntity> allUsers) {
@@ -111,7 +108,6 @@ public class SocialNetworkAnalyser implements Runnable {
             List<UserEntity> users = userDAO.findTopUsers(match, limit);
             System.out.println(match);
             for (UserEntity userEntity : users) {
-//                long geotaggedNumber = tweetDAO.getGeotaggedNumber(userEntity, match);
                 int positiveTweets = 0, negativeTweets = 0;
                 List<Tweet> tweets = tweetDAO.getTweets(userEntity, match);
                 for(Tweet tweet : tweets) {

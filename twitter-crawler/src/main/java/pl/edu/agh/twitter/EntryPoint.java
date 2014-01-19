@@ -11,8 +11,8 @@ public class EntryPoint {
         weld.shutdown();
     }
 
-    private static void run(Class<? extends Runnable> itemClass, Weld weld) {
-        weld.initialize().instance().select(itemClass).get().run();
+    private static void run(Class<? extends Startable> itemClass, Weld weld) {
+        weld.initialize().instance().select(itemClass).get().start();
     }
 
 }
