@@ -2,7 +2,6 @@ package pl.edu.agh.twitter.business.user.entity;
 
 import com.google.common.collect.Maps;
 import pl.edu.agh.twitter.business.team.entity.Team;
-import twitter4j.User;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -13,7 +12,7 @@ import java.util.Map;
 
 @Entity
 @Table(schema = "mgr", name = "users")
-public class UserEntity {
+public class User {
     @Id
     private Long id;
     private String name;
@@ -35,7 +34,7 @@ public class UserEntity {
     @Transient
     private Map<Team, Long> teamMap = Maps.newHashMap();
 
-    public UserEntity(User user) {
+    public User(twitter4j.User user) {
         id = user.getId();
         name = user.getName();
         screenName = user.getScreenName();
@@ -50,7 +49,7 @@ public class UserEntity {
         lang = user.getLang();
     }
 
-    public UserEntity() {
+    public User() {
     }
 
     public Long getId() {
@@ -184,7 +183,7 @@ public class UserEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        UserEntity that = (UserEntity) o;
+        User that = (User) o;
 
         if (!id.equals(that.id)) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;

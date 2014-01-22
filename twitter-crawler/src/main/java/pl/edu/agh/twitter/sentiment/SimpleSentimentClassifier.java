@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
-public class SentimentClassifier {
+public class SimpleSentimentClassifier {
 
     class ClassifiedWords {
         private List<String> positives = Lists.newArrayList();

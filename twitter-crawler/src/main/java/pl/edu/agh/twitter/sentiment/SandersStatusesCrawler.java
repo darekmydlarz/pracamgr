@@ -1,4 +1,4 @@
-package pl.edu.agh.twitter.crawling.status;
+package pl.edu.agh.twitter.sentiment;
 
 import au.com.bytecode.opencsv.CSVReader;
 import com.google.common.collect.Lists;
@@ -20,9 +20,9 @@ import java.io.InputStreamReader;
 import java.util.List;
 
 @Singleton
-public class StatusesCrawler implements Startable {
+public class SandersStatusesCrawler implements Startable {
     private Twitter twitter = new TwitterFactory().getInstance();
-    private Logger logger = Logger.getLogger(StatusesCrawler.class);
+    private Logger logger = Logger.getLogger(SandersStatusesCrawler.class);
 
     @Inject
     private ClassifiedTweetDAO classifiedTweetDAO;

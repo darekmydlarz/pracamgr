@@ -1,9 +1,8 @@
 package pl.edu.agh.twitter.business.user.boundary;
 
 import pl.edu.agh.twitter.business.matchevent.entity.MatchEvent;
-import pl.edu.agh.twitter.business.user.entity.UserEntity;
+import pl.edu.agh.twitter.business.user.entity.User;
 import twitter4j.TwitterException;
-import twitter4j.User;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -14,37 +13,37 @@ public class UserDAO {
     @Inject
     private EntityManager em;
 
-    public UserEntity createOrGetUser(User user) throws TwitterException {
-        UserEntity userEntity = getUser(user);
+    public User createOrGetUser(twitter4j.User user) throws TwitterException {
+        User userEntity = getUser(user);
         if (userEntity != null)
             return userEntity;
         return persistUser(user);
     }
 
-    private UserEntity persistUser(User user) throws TwitterException {
+    private User persistUser(twitter4j.User user) throws TwitterException {
         final EntityTransaction transaction = em.getTransaction();
-        final UserEntity userEntity = new UserEntity(user);
+        final User userEntity = new User(user);
         em.persist(userEntity);
         transaction.commit();
         return userEntity;
     }
 
-    private UserEntity getUser(User user) {
-        return em.find(UserEntity.class, user.getId());
+    private User getUser(twitter4j.User user) {
+        return em.find(User.class, user.getId());
     }
 
-    public List<UserEntity> findTopUsers(MatchEvent matchEvent, int limit) {
+    public List<User> findTopUsers(MatchEvent matchEvent, int limit) {
         Map<Long, Long> userCountMap = getTopUserMap(matchEvent, limit);
-        final String usersQuery = "FROM UserEntity u WHERE u.id IN :ids";
-        List<UserEntity> userEntities = em.createQuery(usersQuery, UserEntity.class)
+        final String usersQuery = "FROM User u WHERE u.id IN :ids";
+        List<User> userEntities = em.createQuery(usersQuery, User.class)
                 .setParameter("ids", userCountMap.keySet())
                 .getResultList();
-        for(UserEntity user : userEntities) {
+        for(User user : userEntities) {
             user.setTweetsNumber(userCountMap.get(user.getId()));
         }
-        Collections.sort(userEntities, Collections.reverseOrder(new Comparator<UserEntity>() {
+        Collections.sort(userEntities, Collections.reverseOrder(new Comparator<User>() {
             @Override
-            public int compare(UserEntity o1, UserEntity o2) {
+            public int compare(User o1, User o2) {
                 return o1.getTweetsNumber().compareTo(o2.getTweetsNumber());
             }
         }));

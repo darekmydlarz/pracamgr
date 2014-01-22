@@ -2,7 +2,7 @@ package pl.edu.agh.twitter.business.tweet.entity;
 
 import pl.edu.agh.twitter.business.Coordinates;
 import pl.edu.agh.twitter.business.matchevent.entity.MatchEvent;
-import pl.edu.agh.twitter.business.user.entity.UserEntity;
+import pl.edu.agh.twitter.business.user.entity.User;
 import twitter4j.Status;
 
 import javax.persistence.*;
@@ -27,7 +27,7 @@ public class Tweet {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private UserEntity user;
+    private User user;
 
     @ManyToOne
     @JoinColumn(name = "match_event")
@@ -41,7 +41,7 @@ public class Tweet {
     private int favouriteCount;
 
 
-    public Tweet(Status status, UserEntity user, MatchEvent matchEvent) {
+    public Tweet(Status status, User user, MatchEvent matchEvent) {
         this.user = user;
         this.matchEvent = matchEvent;
         coordinates = new Coordinates(status.getGeoLocation());
@@ -98,11 +98,11 @@ public class Tweet {
         this.inReplyToStatusId = inReplyToStatusId;
     }
 
-    public UserEntity getUser() {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(UserEntity user) {
+    public void setUser(User user) {
         this.user = user;
     }
 

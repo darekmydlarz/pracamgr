@@ -2,12 +2,12 @@ package pl.edu.agh.twitter;
 
 
 import org.jboss.weld.environment.se.Weld;
-import pl.edu.agh.twitter.socialnetwork.SocialNetworkAnalyser;
+import pl.edu.agh.twitter.sentiment.Sentiment140Reader;
 
 public class EntryPoint {
     public static void main(String[] args) {
         Weld weld = new Weld();
-        run(SocialNetworkAnalyser.class, weld);
+        run(Sentiment140Reader.class, weld);
         weld.shutdown();
     }
 

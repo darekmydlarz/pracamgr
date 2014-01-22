@@ -13,8 +13,8 @@ import pl.edu.agh.twitter.business.user.boundary.UserDAO;
 import pl.edu.agh.twitter.business.matchevent.entity.MatchEvent;
 import pl.edu.agh.twitter.business.team.entity.Team;
 import pl.edu.agh.twitter.business.tweet.entity.Tweet;
-import pl.edu.agh.twitter.business.user.entity.UserEntity;
-import pl.edu.agh.twitter.sentiment.SentimentClassifier;
+import pl.edu.agh.twitter.business.user.entity.User;
+import pl.edu.agh.twitter.sentiment.SimpleSentimentClassifier;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -47,7 +47,7 @@ public class SocialNetworkAnalyser implements Startable {
             "arsenal"
     );
 
-    private final Classifier<String,String> sentimentClassifier = new SentimentClassifier().sentimentClassifier(10000);
+    private final Classifier<String,String> sentimentClassifier = new SimpleSentimentClassifier().sentimentClassifier(10000);
 
     public void start() {
         showSentiment();
@@ -61,11 +61,11 @@ public class SocialNetworkAnalyser implements Startable {
     }
 
     private void getUsersStatistics() {
-        Set<UserEntity> allUsers = Sets.newHashSet();
+        Set<User> allUsers = Sets.newHashSet();
         for (String name : teamNames) {
             Team team = teamDAO.get(name);
-            Set<UserEntity> users = getTopUsers(matchEventDAO.fetchAll(team), 40);
-            for(UserEntity user : users) {
+            Set<User> users = getTopUsers(matchEventDAO.fetchAll(team), 40);
+            for(User user : users) {
                 user.addTeam(team);
             }
             allUsers.addAll(users);
@@ -73,31 +73,31 @@ public class SocialNetworkAnalyser implements Startable {
         printUsers(allUsers);
     }
 
-    private void printUsersRepliesCFinder(Set<UserEntity> allUsers) {
-        Map<Long, UserEntity> idUserMap = Maps.newHashMap();
-        for(UserEntity user : allUsers) {
+    private void printUsersRepliesCFinder(Set<User> allUsers) {
+        Map<Long, User> idUserMap = Maps.newHashMap();
+        for(User user : allUsers) {
             idUserMap.put(user.getId(), user);
         }
         List<SourceTargetWeight> usersRepliesRelations = tweetDAO.getUsersRepliesRelations(allUsers);
         for(SourceTargetWeight relation : usersRepliesRelations) {
-            UserEntity source = idUserMap.get(relation.getSource());
-            UserEntity target = idUserMap.get(relation.getTarget());
+            User source = idUserMap.get(relation.getSource());
+            User target = idUserMap.get(relation.getTarget());
             System.out.println(source.getScreenName() + "\t" + target.getScreenName() + "\t" + relation.getWeight());
         }
     }
 
-    private void printUsersReplies(Set<UserEntity> allUsers) {
+    private void printUsersReplies(Set<User> allUsers) {
         List<SourceTargetWeight> usersRepliesRelations = tweetDAO.getUsersRepliesRelations(allUsers);
         System.out.println(StringUtils.join(usersRepliesRelations, "\n"));
     }
 
-    private void printUsers(Set<UserEntity> allUsers) {
-        for (UserEntity user : allUsers)
+    private void printUsers(Set<User> allUsers) {
+        for (User user : allUsers)
             System.out.println(user.getId() + "\t" + user.getScreenName() + "\t" + user.getMostOftenTeam().getName());
     }
 
-    private Set<UserEntity> getTopUsers(List<MatchEvent> matchEvents, int limitPerMatch) {
-        Set<UserEntity> users = Sets.newHashSet();
+    private Set<User> getTopUsers(List<MatchEvent> matchEvents, int limitPerMatch) {
+        Set<User> users = Sets.newHashSet();
         for (MatchEvent match : matchEvents)
             users.addAll(userDAO.findTopUsers(match, limitPerMatch));
         return users;
@@ -105,11 +105,11 @@ public class SocialNetworkAnalyser implements Startable {
 
     private void showTopUsers(List<MatchEvent> matchEvents, int limit) {
         for (MatchEvent match : matchEvents) {
-            List<UserEntity> users = userDAO.findTopUsers(match, limit);
+            List<User> users = userDAO.findTopUsers(match, limit);
             System.out.println(match);
-            for (UserEntity userEntity : users) {
+            for (User user : users) {
                 int positiveTweets = 0, negativeTweets = 0;
-                List<Tweet> tweets = tweetDAO.getTweets(userEntity, match);
+                List<Tweet> tweets = tweetDAO.getTweets(user, match);
                 for(Tweet tweet : tweets) {
                     final List<String> text = Arrays.asList(tweet.getText().split("[\\s\\n]"));
                     final Classification<String,String> classification = sentimentClassifier.classify(text);
@@ -120,7 +120,7 @@ public class SocialNetworkAnalyser implements Startable {
                             System.out.println("ERROR: " + classification.getCategory() + "::" + text);
                     }
                 }
-                System.out.println(userEntity + "\t" + positiveTweets + "\t" + negativeTweets);
+                System.out.println(user + "\t" + positiveTweets + "\t" + negativeTweets);
             }
         }
     }

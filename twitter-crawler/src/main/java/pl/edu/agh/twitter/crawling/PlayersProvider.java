@@ -1,4 +1,4 @@
-package pl.edu.agh.twitter.crawling.matchevent;
+package pl.edu.agh.twitter.crawling;
 
 import com.google.common.collect.Sets;
 import pl.edu.agh.twitter.business.player.entity.Player;

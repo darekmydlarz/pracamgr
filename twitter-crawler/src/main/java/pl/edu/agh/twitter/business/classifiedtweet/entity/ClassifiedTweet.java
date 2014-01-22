@@ -1,15 +1,13 @@
 package pl.edu.agh.twitter.business.classifiedtweet.entity;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(schema = "mgr", name = "classified_tweets")
 public class ClassifiedTweet {
     @Id
+    @GeneratedValue
     private long id;
 
     @Column(length = 140)
@@ -24,6 +22,12 @@ public class ClassifiedTweet {
 
     public ClassifiedTweet(long id, String text, String sentiment, String keyword) {
         this.id = id;
+        this.text = text;
+        this.sentiment = sentiment;
+        this.keyword = keyword;
+    }
+
+    public ClassifiedTweet(String text, String sentiment, String keyword) {
         this.text = text;
         this.sentiment = sentiment;
         this.keyword = keyword;
