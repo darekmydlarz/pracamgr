@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
-public class SimpleSentimentClassifier {
+public class WordBasedSentimentClassifierBuilder implements SentimentClassifierBuilder {
 
     class ClassifiedWords {
         private List<String> positives = Lists.newArrayList();
@@ -34,15 +34,12 @@ public class SimpleSentimentClassifier {
                 word = splittedPair[1];
             } else if ("priorpolarity".equals(splittedPair[0])) {
                 String priorPolarity = splittedPair[1];
-                sentiment = Sentiment.valueOf(priorPolarity.substring(0, 3).toUpperCase());
+                sentiment = Sentiment.getInstanceByFullName(priorPolarity);
             }
         }
     }
 
-    enum Sentiment {
-        POS, NEG, NEU, BOT, WEA
-    }
-
+    @Override
     public Classifier<String, String> sentimentClassifier(int capacity) {
         Classifier<String, String> bayes = new BayesClassifier<>();
         bayes.setMemoryCapacity(capacity);
@@ -54,6 +51,11 @@ public class SimpleSentimentClassifier {
             bayes.learn(Sentiment.NEG.name(), classifiedWords.negatives);
         }
         return bayes;
+    }
+
+    @Override
+    public String name() {
+        return "WordBased";
     }
 
     private ClassifiedWords readMpqa() {

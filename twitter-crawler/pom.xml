@@ -21,7 +21,7 @@
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>1.2.1</version>
                 <configuration>
-                    <mainClass>pl.edu.agh.twitter.crawling.matchevent.MatchesCrawler</mainClass>
+                    <mainClass>pl.edu.agh.twitter.crawling.MatchesCrawler</mainClass>
                 </configuration>
             </plugin>
         </plugins>

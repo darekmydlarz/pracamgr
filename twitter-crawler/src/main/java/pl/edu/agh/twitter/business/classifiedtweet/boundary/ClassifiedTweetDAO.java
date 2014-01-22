@@ -6,6 +6,7 @@ import pl.edu.agh.twitter.business.classifiedtweet.entity.ClassifiedTweet;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import java.util.List;
 
 public class ClassifiedTweetDAO {
     private Logger logger = Logger.getLogger(ClassifiedTweetDAO.class);
@@ -20,5 +21,10 @@ public class ClassifiedTweetDAO {
         em.merge(tweet);
         logger.info("PERSISTED: " + tweet);
         transaction.commit();
+    }
+
+    public List<ClassifiedTweet> all() {
+        final String query = "FROM ClassifiedTweet";
+        return em.createQuery(query, ClassifiedTweet.class).getResultList();
     }
 }

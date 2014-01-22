@@ -87,4 +87,33 @@ public class TweetDAO {
                 .setParameter("ids", usersIds)
                 .getResultList();
     }
+
+    public List<Tweet> getWithEmoticons(int offset, int length) {
+        final String query = " FROM Tweet t WHERE (" +
+                " t.text LIKE '%:)%' OR " +
+                " t.text LIKE '%:D%' OR " +
+                " t.text LIKE '%:(%' OR " +
+                " t.text LIKE '%;)%' OR " +
+                " t.text LIKE '%:-)%' OR " +
+                " t.text LIKE '%:P%' OR " +
+                " t.text LIKE '%=)%' OR " +
+                " t.text LIKE '%(:%' OR " +
+                " t.text LIKE '%;-)%' OR " +
+                " (t.text LIKE '%:/%' AND t.text NOT LIKE '%://%') OR " +
+                " t.text LIKE '%XD%' OR " +
+                " t.text LIKE '%=D%' OR " +
+                " t.text LIKE '%:o%' OR " +
+                " t.text LIKE '%=]%' OR " +
+                " t.text LIKE '%;D%' OR " +
+                " t.text LIKE '%:]%' OR " +
+                " t.text LIKE '%:-(%' OR " +
+                " t.text LIKE '%=/%' OR " +
+                " t.text LIKE '%=(%') " +
+                " AND t.text NOT LIKE 'RT%' ";
+
+        return em.createQuery(query, Tweet.class)
+                .setFirstResult(offset)
+                .setMaxResults(length)
+                .getResultList();
+    }
 }
