@@ -1,17 +1,19 @@
-package pl.edu.agh.twitter.sentiment;
+package pl.edu.agh.twitter.sentiment.bayesclassifier;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import de.daslaboratorium.machinelearning.classifier.BayesClassifier;
 import de.daslaboratorium.machinelearning.classifier.Classifier;
 import org.apache.commons.lang.StringUtils;
+import pl.edu.agh.twitter.sentiment.Sentiment;
+import pl.edu.agh.twitter.sentiment.bayesclassifier.BayesClassifierBuilder;
 
 import java.io.*;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
-public class WordBasedSentimentClassifierBuilder implements SentimentClassifierBuilder {
+public class WordBasedBayesClassifierBuilder implements BayesClassifierBuilder {
 
     class ClassifiedWords {
         private List<String> positives = Lists.newArrayList();

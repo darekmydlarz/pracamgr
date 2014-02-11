@@ -1,4 +1,4 @@
-package pl.edu.agh.twitter.sentiment;
+package pl.edu.agh.twitter.sentiment.crawler;
 
 import au.com.bytecode.opencsv.CSVReader;
 import pl.edu.agh.twitter.Startable;
@@ -13,7 +13,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 @Singleton
-public class Sentiment140Reader implements Startable {
+public class Sentiment140Crawler implements Startable {
 
     @Inject
     private ClassifiedTweetDAO classifiedTweetDAO;

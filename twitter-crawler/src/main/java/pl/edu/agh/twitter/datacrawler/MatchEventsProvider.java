@@ -1,4 +1,4 @@
-package pl.edu.agh.twitter.crawling;
+package pl.edu.agh.twitter.datacrawler;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;

@@ -14,7 +14,7 @@ import pl.edu.agh.twitter.business.matchevent.entity.MatchEvent;
 import pl.edu.agh.twitter.business.team.entity.Team;
 import pl.edu.agh.twitter.business.tweet.entity.Tweet;
 import pl.edu.agh.twitter.business.user.entity.User;
-import pl.edu.agh.twitter.sentiment.WordBasedSentimentClassifierBuilder;
+import pl.edu.agh.twitter.sentiment.bayesclassifier.WordBasedBayesClassifierBuilder;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -47,7 +47,7 @@ public class SocialNetworkAnalyser implements Startable {
             "arsenal"
     );
 
-    private final Classifier<String,String> sentimentClassifier = new WordBasedSentimentClassifierBuilder().sentimentClassifier(10000);
+    private final Classifier<String,String> sentimentClassifier = new WordBasedBayesClassifierBuilder().sentimentClassifier(10000);
 
     public void start() {
         showSentiment();

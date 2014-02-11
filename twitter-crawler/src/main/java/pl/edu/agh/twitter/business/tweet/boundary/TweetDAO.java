@@ -116,4 +116,8 @@ public class TweetDAO {
                 .setMaxResults(length)
                 .getResultList();
     }
+
+    public List<Tweet> getAllWithEmoticons() {
+        return getWithEmoticons(0, Integer.MAX_VALUE);
+    }
 }

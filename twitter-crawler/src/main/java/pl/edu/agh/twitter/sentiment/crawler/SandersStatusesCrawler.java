@@ -1,4 +1,4 @@
-package pl.edu.agh.twitter.sentiment;
+package pl.edu.agh.twitter.sentiment.crawler;
 
 import au.com.bytecode.opencsv.CSVReader;
 import com.google.common.collect.Lists;

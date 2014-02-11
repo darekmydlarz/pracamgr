@@ -1,14 +1,16 @@
-package pl.edu.agh.twitter.sentiment;
+package pl.edu.agh.twitter.sentiment.bayesclassifier;
 
 import de.daslaboratorium.machinelearning.classifier.BayesClassifier;
 import de.daslaboratorium.machinelearning.classifier.Classifier;
 import pl.edu.agh.twitter.business.classifiedtweet.boundary.ClassifiedTweetDAO;
 import pl.edu.agh.twitter.business.classifiedtweet.entity.ClassifiedTweet;
+import pl.edu.agh.twitter.sentiment.Sentiment;
+import pl.edu.agh.twitter.sentiment.bayesclassifier.BayesClassifierBuilder;
 
 import javax.inject.Inject;
 import java.util.*;
 
-public class TweetBasedSentimentClassifierBuilder implements SentimentClassifierBuilder {
+public class TweetBasedBayesClassifierBuilder implements BayesClassifierBuilder {
 
     @Inject
     private ClassifiedTweetDAO classifiedTweetDAO;
