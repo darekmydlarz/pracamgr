@@ -1,9 +1,12 @@
 package pl.edu.agh.twitter.sentiment.counterclassifier;
 
+import pl.edu.agh.twitter.business.wordfrequency.CountStrategy;
+import pl.edu.agh.twitter.sentiment.CountingStrategy;
+
 import java.text.Normalizer;
 import java.util.Set;
 
-public class NoiseCleaningTextSplitter implements TextSplitter {
+public class NoiseCleaningTextSplitter implements TextSplitter, CountingStrategy {
     private static final String RETWEET = "^RT @[\\w]+: ";
     private static final String URLS = "(http|https|ftp)\\://([a-zA-Z0-9\\.\\-]+(\\:[a-zA-Z0-9\\.&amp;%\\$\\-]+)*@)*((25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9])\\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[0-9])|localhost|([a-zA-Z0-9\\-]+\\.)*[a-zA-Z0-9\\-]+\\.(com|edu|gov|int|mil|net|org|biz|arpa|info|name|pro|aero|coop|museum|[a-zA-Z]{2}))(\\:[0-9]+)*(/($|[a-zA-Z0-9\\.\\,\\?\\'\\\\\\+&amp;%\\$#\\=~_\\-]+))*";
     private static final String NON_ALPHANUMERIC = "[^\\w]+";
@@ -41,5 +44,10 @@ public class NoiseCleaningTextSplitter implements TextSplitter {
                 .replaceAll(NON_ALPHANUMERIC, " ")
                 .replaceAll(NUMERIC, " ")
                 .trim();
+    }
+
+    @Override
+    public CountStrategy getCountStrategy() {
+        return CountStrategy.NOISE_CLEAN;
     }
 }

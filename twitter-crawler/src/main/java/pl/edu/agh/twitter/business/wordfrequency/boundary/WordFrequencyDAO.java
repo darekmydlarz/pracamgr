@@ -1,6 +1,7 @@
 package pl.edu.agh.twitter.business.wordfrequency.boundary;
 
 import org.apache.log4j.Logger;
+import pl.edu.agh.twitter.business.wordfrequency.CountStrategy;
 import pl.edu.agh.twitter.business.wordfrequency.entity.WordFrequency;
 
 import javax.inject.Inject;
@@ -35,10 +36,26 @@ public class WordFrequencyDAO {
         logger.info(frequencies.size() + " words PERSISTED");
     }
 
+    @Deprecated
     public Map<String, WordFrequency> fetchAll(long minimumFrequency) {
         final String query = "FROM WordFrequency WHERE positive > :min OR negative > :min";
         final Iterator<WordFrequency> iterator = em.createQuery(query, WordFrequency.class)
                 .setParameter("min", minimumFrequency)
+                .getResultList().iterator();
+
+        Map<String, WordFrequency> frequencyMap = new HashMap<>();
+        while(iterator.hasNext()) {
+            WordFrequency wordFrequency = iterator.next();
+            frequencyMap.put(wordFrequency.getWord(), wordFrequency);
+        }
+        return frequencyMap;
+    }
+
+    public Map<String, WordFrequency> fetchAll(long minimumFrequency, CountStrategy countStrategy) {
+        final String query = "FROM WordFrequency WHERE countStrategy = :countStrategy AND (positive > :min OR negative > :min)";
+        final Iterator<WordFrequency> iterator = em.createQuery(query, WordFrequency.class)
+                .setParameter("min", minimumFrequency)
+                .setParameter("countStrategy", countStrategy)
                 .getResultList().iterator();
 
         Map<String, WordFrequency> frequencyMap = new HashMap<>();

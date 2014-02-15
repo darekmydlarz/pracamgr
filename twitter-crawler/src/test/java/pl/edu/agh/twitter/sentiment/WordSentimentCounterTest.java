@@ -2,6 +2,7 @@ package pl.edu.agh.twitter.sentiment;
 
 import org.junit.Assert;
 import org.junit.Test;
+import pl.edu.agh.twitter.sentiment.counterclassifier.RegexTextSplitter;
 import pl.edu.agh.twitter.sentiment.counterclassifier.databuild.WordSentimentCounter;
 
 import java.util.Map;
@@ -10,7 +11,7 @@ public class WordSentimentCounterTest {
 
     @Test
     public void consume() {
-        WordSentimentCounter counter = new WordSentimentCounter();
+        WordSentimentCounter counter = new WordSentimentCounter(new RegexTextSplitter("\\s"));
         String sentence = "I really like you boy! ;)";
 
         counter.consume(sentence);
@@ -20,7 +21,7 @@ public class WordSentimentCounterTest {
 
     @Test
     public void getPositives() {
-        WordSentimentCounter counter = new WordSentimentCounter();
+        WordSentimentCounter counter = new WordSentimentCounter(new RegexTextSplitter("\\s"));
         String sentence = "I really like you boy! ;)";
         String sentence2 = "I dont know what are you talking about ;)";
 

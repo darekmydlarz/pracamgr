@@ -3,6 +3,7 @@ package pl.edu.agh.twitter.sentiment.counterclassifier.classification;
 import pl.edu.agh.twitter.Startable;
 import pl.edu.agh.twitter.business.tweet.boundary.TweetDAO;
 import pl.edu.agh.twitter.business.tweet.entity.Tweet;
+import pl.edu.agh.twitter.business.wordfrequency.CountStrategy;
 import pl.edu.agh.twitter.business.wordfrequency.boundary.WordFrequencyDAO;
 import pl.edu.agh.twitter.business.wordfrequency.entity.WordFrequency;
 import pl.edu.agh.twitter.sentiment.EmoticonClassifier;
@@ -33,11 +34,11 @@ public class WordSentimentClassification implements Startable {
     }
 
     private void performClassification() {
-        final Map<String,WordFrequency> frequencyMap = wordFrequencyDAO.fetchAll(5l);
+        final Map<String, WordFrequency> frequencyMap = wordFrequencyDAO.fetchAll(5l, CountStrategy.NOISE_CLEAN);
         wordSentimentClassifier = new WordSentimentClassifier(frequencyMap, new RegexTextSplitter("\\s"));
         List<Tweet> tweets = tweetDAO.getWithEmoticons(new Random().nextInt(100000), 200);
-        System.out.println("Expected\tActual\tActual %\tText");
-        for(Tweet tweet : tweets) {
+        System.out.println("Expected\tActual\tActual %\tText\tDetails");
+        for (Tweet tweet : tweets) {
             classify(tweet.getText());
         }
     }
@@ -48,10 +49,11 @@ public class WordSentimentClassification implements Startable {
         Sentiment actual = classification.getSentiment();
         double percentage = classification.getSentimentPercentage();
         System.out.println(
-            emoticonSentiment.name() + "\t" +
-            actual.name() + "\t" +
-            decimalFormat.format(percentage) + "\t" +
-            sentence.replaceAll("\n", " ")
+                emoticonSentiment.name() + "\t" +
+                        actual.name() + "\t" +
+                        decimalFormat.format(percentage) + "\t" +
+                        sentence.replaceAll("\n", " ") + "\t" +
+                        classification.detailsMap().values()
         );
     }
 }

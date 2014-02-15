@@ -3,12 +3,18 @@ package pl.edu.agh.twitter.sentiment.counterclassifier.databuild;
 import com.google.common.collect.Maps;
 import pl.edu.agh.twitter.sentiment.EmoticonClassifier;
 import pl.edu.agh.twitter.sentiment.Sentiment;
+import pl.edu.agh.twitter.sentiment.counterclassifier.TextSplitter;
 
 import java.util.*;
 
 public class WordSentimentCounter {
     private Map<String, Integer> positives = Maps.newHashMap();
     private Map<String, Integer> negatives = Maps.newHashMap();
+    private final TextSplitter splitter;
+
+    public WordSentimentCounter(TextSplitter splitter) {
+        this.splitter = splitter;
+    }
 
     public void consume(String sentence) {
         Sentiment sentiment = EmoticonClassifier.getSentimentByEmoticon(sentence);
@@ -19,11 +25,11 @@ public class WordSentimentCounter {
         }
     }
 
-    private void addEntry(String sentence, Map<String, Integer> target) {
-        String[] words = sentence.split("\\s");
+    private void addEntry(String sentence, Map<String, Integer> sentimentCounter) {
+        final String[] words = splitter.split(sentence);
         for (String word : words) {
-            int value = target.containsKey(word) ? target.get(word) : 0;
-            target.put(word, value + 1);
+            int value = sentimentCounter.containsKey(word) ? sentimentCounter.get(word) : 0;
+            sentimentCounter.put(word, value + 1);
         }
     }
 

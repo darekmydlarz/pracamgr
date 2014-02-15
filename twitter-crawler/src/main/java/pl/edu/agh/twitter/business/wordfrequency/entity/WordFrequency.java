@@ -1,5 +1,7 @@
 package pl.edu.agh.twitter.business.wordfrequency.entity;
 
+import pl.edu.agh.twitter.business.wordfrequency.CountStrategy;
+
 import javax.persistence.*;
 
 @Entity
@@ -16,11 +18,15 @@ public class WordFrequency {
 
     private long negative;
 
+    @Enumerated(EnumType.STRING)
+    private CountStrategy countStrategy;
+
     public WordFrequency() {
     }
 
-    public WordFrequency(String word) {
+    public WordFrequency(String word, CountStrategy countStrategy) {
         this.word = word;
+        this.countStrategy = countStrategy;
     }
 
     public void setValue(String sentiment, long value) {
@@ -63,6 +69,14 @@ public class WordFrequency {
         this.negative = negative;
     }
 
+    public CountStrategy getCountStrategy() {
+        return countStrategy;
+    }
+
+    public void setCountStrategy(CountStrategy countStrategy) {
+        this.countStrategy = countStrategy;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -85,5 +99,10 @@ public class WordFrequency {
         result = 31 * result + (int) (positive ^ (positive >>> 32));
         result = 31 * result + (int) (negative ^ (negative >>> 32));
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return word + "=" + positive + "/" + negative;
     }
 }

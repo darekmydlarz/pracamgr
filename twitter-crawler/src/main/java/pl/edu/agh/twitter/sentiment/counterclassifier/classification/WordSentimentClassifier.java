@@ -1,5 +1,6 @@
 package pl.edu.agh.twitter.sentiment.counterclassifier.classification;
 
+import com.google.common.collect.Maps;
 import pl.edu.agh.twitter.business.wordfrequency.entity.WordFrequency;
 import pl.edu.agh.twitter.sentiment.Sentiment;
 import pl.edu.agh.twitter.sentiment.counterclassifier.TextSplitter;
@@ -27,6 +28,7 @@ public class WordSentimentClassifier {
         if(frequencyMap.containsKey(word)) {
             classification.positives += frequencyMap.get(word).getPositive();
             classification.negatives += frequencyMap.get(word).getNegative();
+            classification.putWord(frequencyMap.get(word));
         }
     }
 
@@ -34,17 +36,33 @@ public class WordSentimentClassifier {
         long positives = 0;
         long negatives = 0;
         final String [] text;
+        private Map<String, WordFrequency> detailsMap = Maps.newHashMap();
 
         public Classification(String[] text) {
             this.text = text;
+        }
+
+        private void putWord(WordFrequency wordFrequency) {
+            detailsMap.put(wordFrequency.getWord(), wordFrequency);
         }
 
         public Sentiment getSentiment() {
             return positives > negatives ? Sentiment.POS : positives == negatives ? Sentiment.NEU : Sentiment.NEG;
         }
 
+        public Map<String, WordFrequency> detailsMap() {
+            return detailsMap;
+        }
+
         public double getSentimentPercentage() {
-            return (double) positives / (positives + negatives);
+            switch(getSentiment()) {
+                case POS:
+                    return (double) positives / (positives + negatives);
+                case NEG:
+                    return (double) negatives / (positives + negatives);
+                default:
+                    return 0d;
+            }
         }
 
         @Override

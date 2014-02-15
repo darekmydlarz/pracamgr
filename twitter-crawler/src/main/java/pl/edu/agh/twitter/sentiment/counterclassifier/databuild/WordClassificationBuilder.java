@@ -7,22 +7,27 @@ import pl.edu.agh.twitter.business.tweet.boundary.TweetDAO;
 import pl.edu.agh.twitter.business.tweet.entity.Tweet;
 import pl.edu.agh.twitter.business.wordfrequency.boundary.WordFrequencyDAO;
 import pl.edu.agh.twitter.business.wordfrequency.entity.WordFrequency;
+import pl.edu.agh.twitter.sentiment.counterclassifier.NoiseCleaningTextSplitter;
+import pl.edu.agh.twitter.sentiment.counterclassifier.RegexTextSplitter;
 
 import javax.inject.Inject;
 import java.util.List;
 import java.util.Map;
 
 public class WordClassificationBuilder implements Startable {
+    private static Logger logger = Logger.getLogger(WordClassificationBuilder.class);
+    private final NoiseCleaningTextSplitter textSplitter = new NoiseCleaningTextSplitter(new RegexTextSplitter("\\s"));
     @Inject
     private TweetDAO tweetDAO;
     @Inject
     private WordFrequencyDAO wordFrequencyDAO;
-    private static Logger logger = Logger.getLogger(WordClassificationBuilder.class);
 
     @Override
     public void start() {
+        logger.info("Started!");
         List<Tweet> tweets = tweetDAO.getAllWithEmoticons();
-        WordSentimentCounter classifier = new WordSentimentCounter();
+        logger.info("Found " + tweets.size() + " tweets witch emoticon");
+        WordSentimentCounter classifier = new WordSentimentCounter(textSplitter);
         for (Tweet tweet : tweets) {
             logger.info("consume: " + tweet.getText());
             classifier.consume(tweet.getText());
@@ -34,12 +39,12 @@ public class WordClassificationBuilder implements Startable {
     private Map<String, WordFrequency> mergeEntries(Map<String, Integer> positives, Map<String, Integer> negatives) {
         Map<String, WordFrequency> merged = Maps.newHashMap();
         for(String word : positives.keySet()) {
-            final WordFrequency frequency = new WordFrequency(word);
+            final WordFrequency frequency = new WordFrequency(word, textSplitter.getCountStrategy());
             frequency.setPositive(positives.get(word));
             merged.put(word, frequency);
         }
         for(String word : negatives.keySet()) {
-            final WordFrequency frequency = merged.containsKey(word) ? merged.get(word) : new WordFrequency(word);
+            final WordFrequency frequency = merged.containsKey(word) ? merged.get(word) : new WordFrequency(word, textSplitter.getCountStrategy());
             frequency.setNegative(negatives.get(word));
             merged.put(word, frequency);
         }
