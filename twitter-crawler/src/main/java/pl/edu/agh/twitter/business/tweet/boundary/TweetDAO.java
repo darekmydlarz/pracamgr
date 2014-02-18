@@ -88,6 +88,14 @@ public class TweetDAO {
                 .getResultList();
     }
 
+    public List<Tweet> getWithoutRetweets(int offset, int length) {
+        final String query = "FROM Tweet WHERE text NOT LIKE 'RT%'";
+        return em.createQuery(query, Tweet.class)
+                .setFirstResult(offset)
+                .setMaxResults(length)
+                .getResultList();
+    }
+
     public List<Tweet> getWithEmoticons(int offset, int length) {
         final String query = " FROM Tweet t WHERE (" +
                 " t.text LIKE '%:)%' OR " +

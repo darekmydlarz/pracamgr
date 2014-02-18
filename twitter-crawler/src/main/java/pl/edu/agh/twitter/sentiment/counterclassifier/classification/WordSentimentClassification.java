@@ -34,13 +34,25 @@ public class WordSentimentClassification implements Startable {
     }
 
     private void performClassification() {
-        final Map<String, WordFrequency> frequencyMap = wordFrequencyDAO.fetchAll(5l, CountStrategy.NOISE_CLEAN);
+        final Map<String, WordFrequency> frequencyMap = wordFrequencyDAO.fetchAll(5l, CountStrategy.SIMPLE_SPLIT);
         wordSentimentClassifier = new WordSentimentClassifier(frequencyMap, new RegexTextSplitter("\\s"));
-        List<Tweet> tweets = tweetDAO.getWithEmoticons(new Random().nextInt(100000), 200);
-        System.out.println("Expected\tActual\tActual %\tText\tDetails");
+        List<Tweet> tweets = tweetDAO.getWithoutRetweets(new Random().nextInt(100000), 10);
+        System.out.println("Actual\tActual %\tText\tDetails");
         for (Tweet tweet : tweets) {
-            classify(tweet.getText());
+            classifyByHand(tweet.getText());
         }
+    }
+
+    private void classifyByHand(String sentence) {
+        final WordSentimentClassifier.Classification classification = wordSentimentClassifier.classify(sentence);
+        Sentiment actual = classification.getSentiment();
+        double percentage = classification.getSentimentPercentage();
+        System.out.println(
+                actual.name() + "\t" +
+                        decimalFormat.format(percentage) + "\t\t" +
+                        sentence.replaceAll("\n", " ") + "\t" +
+                        classification.detailsMap().values()
+        );
     }
 
     private void classify(String sentence) {
