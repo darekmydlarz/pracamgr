@@ -1,24 +1,39 @@
-@(tasks: List[Task], taskForm: Form[Task])
+@(matches: List[Match])
 
 @import helper._
 @import helper.twitterBootstrap._
+@import java.text.DateFormat
 
-@main("Todo list!") {
-	<h1>@tasks.size() task(s)</h1>
-	<ul>
-		@for(task <- tasks) {
-			<li>
-				@task.label
-				@form(routes.Application.deleteTask(task.id)) {
-					<input type="submit" value="Delete">
-				}
-			</li>
+@main("Twitter Users Analysis") {
+	<h1><span id="matches-number">@matches.size()</span> match(es)</h1>
+	<form class="form-search">
+		<input type="text" id="searchInput" placeholder="Filter table (you can put many values)" />
+	</form>
+
+	<table id="matches-table" class="table table-hover">
+		<thead>
+			<tr>
+				<th>Start date</th>
+				<th colspan="2">Home Team</th>
+				<th colspan="2">Away Team</th>
+				<th>Competition</th>
+				<th>Tweets</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+		@for(matchEvent <- matches) {
+			<tr>
+				<td>@matchEvent.startDate.format("yyyy-MM-dd HH:mm")</td>
+				<td>@matchEvent.homeTeam</td>
+				<td>@matchEvent.homeTeam.country</td>
+				<td>@matchEvent.awayTeam</td>
+				<td>@matchEvent.awayTeam.country</td>
+				<td>@matchEvent.competition</td>
+				<td class="right">@matchEvent.tweetsNumber</td>
+				<td><a href="@routes.Application.geotagged(matchEvent.id)">More</a></td>
+			</tr>
 		}
-	</ul>
-
-	<h2>Add a new task</h2>
-	@form(routes.Application.newTask()) {
-		@inputText(taskForm("label"))
-		<input type="submit" value="Create">
-	}
+		</tbody>
+	</table>
 }

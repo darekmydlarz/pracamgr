@@ -3,13 +3,13 @@
 # ~~~~
 
 # Home page
-GET         /                     controllers.Application.index()
+GET        /                            controllers.Application.index()
 
 # Tasks
-GET         /tasks                controllers.Application.tasks()
-POST        /tasks                controllers.Application.newTask()
-POST        /tasks/:id/delete     controllers.Application.deleteTask(id: Long)
+GET        /matches                     controllers.Application.matches()
+GET        /tweets/geotagged/:id        controllers.Application.geotagged(id: Long)
+GET        /api/geotagged/:id           controllers.Rest.geotagged(id: Long)
 
 # Map static resources from the /public folder to the /assets URL path
-GET         /assets/*file         controllers.Assets.at(path="/public", file)
-GET         /webjars/*file        controllers.WebJarAssets.at(file)
+GET        /assets/*file                controllers.Assets.at(path="/public", file)
+GET        /webjars/*file               controllers.WebJarAssets.at(file)

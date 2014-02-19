@@ -3,16 +3,17 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <title>@title</title>
     <link rel='shortcut icon' type='image/png' href='@routes.Assets.at("images/favicon.png")'>
     <link rel='stylesheet' href='@routes.WebJarAssets.at(WebJarAssets.locate("bootstrap.min.css"))'>
     <link rel='stylesheet' href='@routes.Assets.at("stylesheets/main.css")'>
-    <script type='text/javascript' src='@routes.WebJarAssets.at(WebJarAssets.locate("jquery.min.js"))'></script>
-    <style>
-    body {
-        margin-top: 50px;
-    }
-    </style>
+	<script type='text/javascript' src='@routes.WebJarAssets.at(WebJarAssets.locate("jquery.min.js"))'></script>
+	<script type='text/javascript' src='@routes.Assets.at("scripts/jquery.tablesorter.min.js")'></script>
+	<script type='text/javascript' src='@routes.Assets.at("scripts/main.js")'></script>
+	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+	<script type='text/javascript' src='@routes.Assets.at("scripts/maps.js")'></script>
+
 </head>
 <body>
     <div class="navbar navbar-fixed-top">

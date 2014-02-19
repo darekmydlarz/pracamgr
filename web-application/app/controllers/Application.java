@@ -1,39 +1,38 @@
 package controllers;
 
-import models.Task;
-import play.data.Form;
+import com.fasterxml.jackson.databind.JsonNode;
+import models.Match;
+import models.Tweet;
 import play.db.jpa.Transactional;
+import play.libs.Json;
+import play.mvc.BodyParser;
 import play.mvc.Controller;
 import play.mvc.Result;
 
-public class Application extends Controller {
-    static Form<Task> taskForm = Form.form(Task.class);
+import java.util.List;
 
+public class Application extends Controller {
     public static Result index() {
-        return redirect(routes.Application.tasks());
+        return redirect(routes.Application.matches());
     }
 
     @Transactional(readOnly = true)
-    public static Result tasks() {
-        return ok(views.html.index.render(Task.all(), taskForm));
+    public static Result matches() {
+        return ok(views.html.index.render(Match.all()));
     }
 
     @Transactional
-    public static Result newTask() {
-        Form<Task> filledForm = taskForm.bindFromRequest();
-        if (filledForm.hasErrors()) {
-            return badRequest(
-                    views.html.index.render(Task.all(), taskForm)
-            );
-        } else {
-            Task.create(filledForm.get());
-            return redirect(routes.Application.tasks());
-        }
+    public static Result countTweetsPerMatch(Long id) {
+        Match match = Match.findById(id);
+        match.tweetsNumber = Tweet.count(match);
+        Match.save(match);
+        return redirect(routes.Application.matches());
     }
 
-    @Transactional
-    public static Result deleteTask(Long id) {
-        Task.delete(id);
-        return redirect(routes.Application.tasks());
+    @Transactional(readOnly = true)
+    public static Result geotagged(long id) {
+        Match match = Match.findById(id);
+        final List<Tweet> geotaggedTweets = Tweet.geotagged(match);
+        return ok(views.html.geotagged.render(geotaggedTweets, match));
     }
 }
