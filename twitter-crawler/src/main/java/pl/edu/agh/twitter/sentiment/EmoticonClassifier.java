@@ -29,25 +29,30 @@ public class EmoticonClassifier {
         emoticonsSentiment.put("=(", Sentiment.NEG);
     }
 
-
+    public static final String NEUTRAL_KEY = "";
 
     public static Sentiment getSentimentByEmoticon(String sentence) {
         Map<String, Integer> emoticonsCounter = new HashMap<>();
         for(String key : emoticonsSentiment.keySet())
             putIfMatched(sentence, emoticonsCounter, key);
-        String mostOftenEmoticon = getMostOftenEmoticon(emoticonsCounter);
-        return emoticonsSentiment.get(mostOftenEmoticon);
+        return getMostOftenSentiment(emoticonsCounter);
     }
 
-    private static String getMostOftenEmoticon(Map<String, Integer> emoticonsCounter) {
-        String mostOftenKey = "";
-        int maxCount = 0;
-        for(String key : emoticonsCounter.keySet())
-            if (emoticonsCounter.get(key) > maxCount) {
-                maxCount = emoticonsCounter.get(key);
-                mostOftenKey = key;
-            }
-        return mostOftenKey;
+    private static Sentiment getMostOftenSentiment(Map<String, Integer> emoticonsCounter) {
+        int positives = 0, negatives = 0;
+        for(String emoticon : emoticonsCounter.keySet()) {
+            final Integer emoticonOccurences = emoticonsCounter.get(emoticon);
+            final Sentiment sentiment = emoticonsSentiment.get(emoticon);
+            if(sentiment == Sentiment.POS)
+                positives += emoticonOccurences;
+            else if(sentiment == Sentiment.NEG)
+                negatives += emoticonOccurences;
+        }
+        if(positives > negatives)
+            return Sentiment.POS;
+        if(negatives > positives)
+            return Sentiment.NEG;
+        return Sentiment.NEU;
     }
 
     private static void putIfMatched(String sentence, Map<String, Integer> emoticonsCounter, String key) {

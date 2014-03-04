@@ -1,10 +1,9 @@
 package pl.edu.agh.twitter.sentiment.counterclassifier;
 
-import org.apache.commons.lang.StringUtils;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class NoiseCleaningTextSplitterTest {
+public class StopListCleanerTest {
 
     @Test
     public void case1() {
@@ -101,9 +100,9 @@ public class NoiseCleaningTextSplitterTest {
     }
 
     private void compareSentences(String[] given, String[] expected) {
-        NoiseCleaningTextSplitter splitter = new NoiseCleaningTextSplitter(new RegexTextSplitter("\\s"));
+        StopListCleaner cleaner = new StopListCleaner();
         for (int i = 0; i < given.length; ++i) {
-            String actual = StringUtils.join(splitter.split(given[i]), " ");
+            String actual = cleaner.clean(given[i]).text;
             System.out.println("given:\n" + given[i]);
             System.out.println("actual:\n" + actual);
             System.out.println("expected:\n" + expected[i]);

@@ -1,32 +1,31 @@
 package pl.edu.agh.twitter.sentiment.counterclassifier.databuild;
 
 import com.google.common.collect.Maps;
-import pl.edu.agh.twitter.sentiment.EmoticonClassifier;
 import pl.edu.agh.twitter.sentiment.Sentiment;
-import pl.edu.agh.twitter.sentiment.counterclassifier.TextSplitter;
+import pl.edu.agh.twitter.sentiment.counterclassifier.TextCleaner;
 
 import java.util.*;
 
 public class WordSentimentCounter {
     private Map<String, Integer> positives = Maps.newHashMap();
     private Map<String, Integer> negatives = Maps.newHashMap();
-    private final TextSplitter splitter;
+    private final TextCleaner cleaner;
 
-    public WordSentimentCounter(TextSplitter splitter) {
-        this.splitter = splitter;
+    public WordSentimentCounter(TextCleaner cleaner) {
+        this.cleaner = cleaner;
     }
 
-    public void consume(String sentence) {
-        Sentiment sentiment = EmoticonClassifier.getSentimentByEmoticon(sentence);
-        if (sentiment == Sentiment.POS) {
-            addEntry(sentence, positives);
-        } else if (sentiment == Sentiment.NEG) {
-            addEntry(sentence, negatives);
-        }
+    public void consume(String text) {
+        TextCleaner.Sentence sentence = cleaner.clean(text);
+        System.out.println(sentence.getSentiment() + " ### " + sentence.getText());
+        if(sentence.getSentiment() == Sentiment.POS)
+            addEntryToMap(text, positives);
+        else if(sentence.getSentiment() == Sentiment.NEG)
+            addEntryToMap(text, negatives);
     }
 
-    private void addEntry(String sentence, Map<String, Integer> sentimentCounter) {
-        final String[] words = splitter.split(sentence);
+    private void addEntryToMap(String sentence, Map<String, Integer> sentimentCounter) {
+        final String[] words = cleaner.clean(sentence).getText().split("\\s");
         for (String word : words) {
             int value = sentimentCounter.containsKey(word) ? sentimentCounter.get(word) : 0;
             sentimentCounter.put(word, value + 1);

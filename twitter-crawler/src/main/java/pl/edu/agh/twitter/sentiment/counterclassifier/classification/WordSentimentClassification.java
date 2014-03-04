@@ -3,12 +3,11 @@ package pl.edu.agh.twitter.sentiment.counterclassifier.classification;
 import pl.edu.agh.twitter.Startable;
 import pl.edu.agh.twitter.business.tweet.boundary.TweetDAO;
 import pl.edu.agh.twitter.business.tweet.entity.Tweet;
-import pl.edu.agh.twitter.business.wordfrequency.CountStrategy;
 import pl.edu.agh.twitter.business.wordfrequency.boundary.WordFrequencyDAO;
 import pl.edu.agh.twitter.business.wordfrequency.entity.WordFrequency;
 import pl.edu.agh.twitter.sentiment.EmoticonClassifier;
 import pl.edu.agh.twitter.sentiment.Sentiment;
-import pl.edu.agh.twitter.sentiment.counterclassifier.RegexTextSplitter;
+import pl.edu.agh.twitter.sentiment.counterclassifier.StopListCleaner;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -20,6 +19,7 @@ import java.util.Random;
 @Singleton
 public class WordSentimentClassification implements Startable {
     private static final DecimalFormat decimalFormat = new DecimalFormat("00.00%");
+    private final StopListCleaner cleaner = new StopListCleaner();
     private WordSentimentClassifier wordSentimentClassifier;
 
     @Inject
@@ -34,8 +34,8 @@ public class WordSentimentClassification implements Startable {
     }
 
     private void performClassification() {
-        final Map<String, WordFrequency> frequencyMap = wordFrequencyDAO.fetchAll(5l, CountStrategy.SIMPLE_SPLIT);
-        wordSentimentClassifier = new WordSentimentClassifier(frequencyMap, new RegexTextSplitter("\\s"));
+        final Map<String, WordFrequency> frequencyMap = wordFrequencyDAO.fetchAll(5l, 0, cleaner.getCountStrategy());
+        wordSentimentClassifier = new WordSentimentClassifier(frequencyMap, cleaner);
         List<Tweet> tweets = tweetDAO.getWithoutRetweets(new Random().nextInt(100000), 10);
         System.out.println("Actual\tActual %\tText\tDetails");
         for (Tweet tweet : tweets) {

@@ -3,22 +3,22 @@ package pl.edu.agh.twitter.sentiment.counterclassifier.classification;
 import com.google.common.collect.Maps;
 import pl.edu.agh.twitter.business.wordfrequency.entity.WordFrequency;
 import pl.edu.agh.twitter.sentiment.Sentiment;
-import pl.edu.agh.twitter.sentiment.counterclassifier.TextSplitter;
+import pl.edu.agh.twitter.sentiment.counterclassifier.TextCleaner;
 
 import java.util.Arrays;
 import java.util.Map;
 
 public class WordSentimentClassifier {
     private final Map<String, WordFrequency> frequencyMap;
-    private final TextSplitter splitter;
+    private final TextCleaner cleaner;
 
-    public WordSentimentClassifier(Map<String, WordFrequency> frequencyMap, TextSplitter splitter) {
+    public WordSentimentClassifier(Map<String, WordFrequency> frequencyMap, TextCleaner cleaner) {
         this.frequencyMap = frequencyMap;
-        this.splitter = splitter;
+        this.cleaner = cleaner;
     }
 
     public Classification classify(String sentence) {
-        Classification classification = new Classification(splitter.split(sentence));
+        Classification classification = new Classification(cleaner.clean(sentence).getText());
         for(String word : classification.text)
             addValuesIfWordFound(classification, word);
         return classification;
@@ -38,8 +38,8 @@ public class WordSentimentClassifier {
         final String [] text;
         private Map<String, WordFrequency> detailsMap = Maps.newHashMap();
 
-        public Classification(String[] text) {
-            this.text = text;
+        public Classification(String text) {
+            this.text = text.split("\\s");
         }
 
         private void putWord(WordFrequency wordFrequency) {

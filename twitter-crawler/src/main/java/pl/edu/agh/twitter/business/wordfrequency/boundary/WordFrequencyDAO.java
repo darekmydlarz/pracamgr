@@ -29,7 +29,7 @@ public class WordFrequencyDAO {
         int i = 0;
         int size = frequencies.size();
         for(WordFrequency wordFrequency : frequencies) {
-            logger.info("PERSIST " + i + "/" + size);
+            logger.info("PERSIST " + ++i + "/" + size);
             em.persist(wordFrequency);
         }
         transaction.commit();
@@ -51,11 +51,15 @@ public class WordFrequencyDAO {
         return frequencyMap;
     }
 
-    public Map<String, WordFrequency> fetchAll(long minimumFrequency, CountStrategy countStrategy) {
-        final String query = "FROM WordFrequency WHERE countStrategy = :countStrategy AND (positive > :min OR negative > :min)";
+    public Map<String, WordFrequency> fetchAll(long minimumFrequency, int wordLength, CountStrategy countStrategy) {
+        final String query = "FROM WordFrequency " +
+                " WHERE countStrategy = :countStrategy AND " +
+                " positive + negative >= :min AND " +
+                " LENGTH(word) >= :wordLength";
         final Iterator<WordFrequency> iterator = em.createQuery(query, WordFrequency.class)
                 .setParameter("min", minimumFrequency)
                 .setParameter("countStrategy", countStrategy)
+                .setParameter("wordLength", wordLength)
                 .getResultList().iterator();
 
         Map<String, WordFrequency> frequencyMap = new HashMap<>();

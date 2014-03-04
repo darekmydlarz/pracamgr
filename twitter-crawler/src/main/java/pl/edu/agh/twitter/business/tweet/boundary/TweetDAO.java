@@ -96,6 +96,37 @@ public class TweetDAO {
                 .getResultList();
     }
 
+    public List<Tweet> getWithEmoticonsAndPattern(int offset, int length, String pattern) {
+        final String query = " FROM Tweet t WHERE (" +
+                " t.text LIKE '%:)%' OR " +
+                " t.text LIKE '%:D%' OR " +
+                " t.text LIKE '%:(%' OR " +
+                " t.text LIKE '%;)%' OR " +
+                " t.text LIKE '%:-)%' OR " +
+                " t.text LIKE '%:P%' OR " +
+                " t.text LIKE '%=)%' OR " +
+                " t.text LIKE '%(:%' OR " +
+                " t.text LIKE '%;-)%' OR " +
+                " (t.text LIKE '%:/%' AND t.text NOT LIKE '%://%') OR " +
+                " t.text LIKE '%XD%' OR " +
+                " t.text LIKE '%=D%' OR " +
+                " t.text LIKE '%:o%' OR " +
+                " t.text LIKE '%=]%' OR " +
+                " t.text LIKE '%;D%' OR " +
+                " t.text LIKE '%:]%' OR " +
+                " t.text LIKE '%:-(%' OR " +
+                " t.text LIKE '%=/%' OR " +
+                " t.text LIKE '%=(%') " +
+                " AND t.text LIKE :pattern" +
+                " AND t.text NOT LIKE 'RT%' ";
+
+        return em.createQuery(query, Tweet.class)
+                .setParameter("pattern", pattern)
+                .setFirstResult(offset)
+                .setMaxResults(length)
+                .getResultList();
+    }
+
     public List<Tweet> getWithEmoticons(int offset, int length) {
         final String query = " FROM Tweet t WHERE (" +
                 " t.text LIKE '%:)%' OR " +
