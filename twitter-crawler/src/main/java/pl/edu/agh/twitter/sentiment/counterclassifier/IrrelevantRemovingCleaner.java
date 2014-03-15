@@ -18,10 +18,9 @@ import java.util.regex.Pattern;
 
 public class IrrelevantRemovingCleaner implements TextCleaner {
     static enum Regex {
-        Urls("(.*)http(s)?\\://.+", 1),
         CitationOnStart("(\"|“)@.+\\: .+(\"|”)(.*)", 3),
         CitationOnEnd("(.*)(\"|“|”)@.+\\: .+", 1),
-        CommentRetweet("(.*)RT(\\.)? (\"|“|”)?@.+\\: .*", 1);
+        CommentRetweet("(.*)rt(\\.)? (\"|“|”)?@.+\\: .*", 1);
 
         private final String regex;
         private final int group;
@@ -31,29 +30,31 @@ public class IrrelevantRemovingCleaner implements TextCleaner {
             this.group = group;
         }
     }
-    private AlphabetSavingCleaner alphabetSavingCleaner = new AlphabetSavingCleaner();
-    private StopListCleaner stopListCleaner = new StopListCleaner();
+    private TextCleaner alphabetSavingCleaner = new AlphabetSavingCleaner();
+    private TextCleaner stopListCleaner = new StopListCleaner();
+    private TextCleaner negationDetectingCleaner = new NegationDetectingCleaner();
 
     @Override
     public Sentence clean(String text) {
         Sentence sentence = new Sentence();
-        sentence.text = StringUtils.join(cleanAndSplit(sentence, text), " ");
+        text = text.toLowerCase();
+        final String[] splitted = cleanAndSplit(sentence, text);
+        sentence.text = StringUtils.join(splitted, " ");
         return sentence;
     }
 
     public String[] cleanAndSplit(Sentence sentence, String text) {
-        text = removeUsersMentions(text);
+        System.out.println("0 == " + text);
         text = applyRemoves(text);
+        System.out.println("1 == " + text);
+        text = negationDetectingCleaner.clean(text).text;
+        System.out.println("2 == " + text);
         sentence.sentiment = EmoticonClassifier.getSentimentByEmoticon(text);
         text = alphabetSavingCleaner.clean(text).text;
+        System.out.println("3 == " + text);
         text = stopListCleaner.clean(text).text;
+        System.out.println("4 == " + text);
         return removeWhitespaces(text).split("\\s+");
-    }
-
-    private String removeUsersMentions(String text) {
-        final String mentions = "(\\b|^)@\\w+(\\b|$)";
-        text = text.replaceAll(mentions, " ");
-        return text;
     }
 
     private String stemWord(IStemmer stemmer, String word) {

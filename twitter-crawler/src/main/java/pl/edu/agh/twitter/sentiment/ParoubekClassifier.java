@@ -75,37 +75,37 @@ public class ParoubekClassifier implements Startable {
         printResults(paroubekSentences);
     }
 
-    private void evaluateClassifier(List<ParoubekSentence> paroubekSentences) {
-        int minLengthRightBoundary = 3,       // 0..3
-            minFrequencyRightBoundary = 10;  // 0..100
-        double [][] accuracy = new double[minLengthRightBoundary + 1][minFrequencyRightBoundary + 1];
-        for(int i = 0; i <= minLengthRightBoundary; ++i) {
-            for(int j = 0; j <= minFrequencyRightBoundary; ++j) {
-                accuracy[i][j] = countAccuracy(i, j, paroubekSentences);
-            }
-        }
-        System.out.println(Arrays.deepToString(accuracy));
-    }
-
-    private double countAccuracy(int wordLength, int frequency, List<ParoubekSentence> paroubekSentences) {
-        Map<String, WordFrequency> frequencyMap = wordFrequencyDAO.fetchAll(frequency, wordLength, countStrategy);
-        computeValences(paroubekSentences, frequencyMap);
-        final Double valenceAverage = valenceAverage(paroubekSentences);
-        int classifiedSentences = 0, correctClassifications = 0;
-        for(ParoubekSentence paroubekSentence : paroubekSentences) {
-            final Sentiment sentenceSentiment = paroubekSentence.getSentiment(valenceAverage);
-            if(sentenceSentiment != Sentiment.NEU) {
-                TextCleaner.Sentence cleanedSentence = irrelevantRemover.clean(paroubekSentence.text);
-                classifiedSentences++;
-                if(cleanedSentence.getSentiment() == sentenceSentiment) {
-                    correctClassifications++;
-                }
-            }
-        }
-        System.out.println("DM1;wordLength=" + wordLength + ";wordFreq=" + frequency + ";frequencyMapSize=" +
-                frequencyMap.size() + ";correct=" + correctClassifications + ";all=" +classifiedSentences);
-        return correctClassifications * 100.0 / classifiedSentences;
-    }
+//    private void evaluateClassifier(List<ParoubekSentence> paroubekSentences) {
+//        int minLengthRightBoundary = 3,       // 0..3
+//            minFrequencyRightBoundary = 10;  // 0..100
+//        double [][] accuracy = new double[minLengthRightBoundary + 1][minFrequencyRightBoundary + 1];
+//        for(int i = 0; i <= minLengthRightBoundary; ++i) {
+//            for(int j = 0; j <= minFrequencyRightBoundary; ++j) {
+//                accuracy[i][j] = countAccuracy(i, j, paroubekSentences);
+//            }
+//        }
+//        System.out.println(Arrays.deepToString(accuracy));
+//    }
+//
+//    private double countAccuracy(int wordLength, int frequency, List<ParoubekSentence> paroubekSentences) {
+//        Map<String, WordFrequency> frequencyMap = wordFrequencyDAO.fetchAll(frequency, wordLength, countStrategy);
+//        computeValences(paroubekSentences, frequencyMap);
+//        final Double valenceAverage = valenceAverage(paroubekSentences);
+//        int classifiedSentences = 0, correctClassifications = 0;
+//        for(ParoubekSentence paroubekSentence : paroubekSentences) {
+//            final Sentiment sentenceSentiment = paroubekSentence.getSentiment(valenceAverage);
+//            if(sentenceSentiment != Sentiment.NEU) {
+//                TextCleaner.Sentence cleanedSentence = irrelevantRemover.clean(paroubekSentence.text);
+//                classifiedSentences++;
+//                if(cleanedSentence.getSentiment() == sentenceSentiment) {
+//                    correctClassifications++;
+//                }
+//            }
+//        }
+//        System.out.println("DM1;wordLength=" + wordLength + ";wordFreq=" + frequency + ";frequencyMapSize=" +
+//                frequencyMap.size() + ";correct=" + correctClassifications + ";all=" +classifiedSentences);
+//        return correctClassifications * 100.0 / classifiedSentences;
+//    }
 
     private void printResults(Collection<ParoubekSentence> paroubekSentences) {
         final Double valenceAverage = valenceAverage(paroubekSentences);
