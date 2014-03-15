@@ -44,16 +44,11 @@ public class IrrelevantRemovingCleaner implements TextCleaner {
     }
 
     public String[] cleanAndSplit(Sentence sentence, String text) {
-        System.out.println("0 == " + text);
         text = applyRemoves(text);
-        System.out.println("1 == " + text);
-        text = negationDetectingCleaner.clean(text).text;
-        System.out.println("2 == " + text);
         sentence.sentiment = EmoticonClassifier.getSentimentByEmoticon(text);
+        text = negationDetectingCleaner.clean(text).text;
         text = alphabetSavingCleaner.clean(text).text;
-        System.out.println("3 == " + text);
         text = stopListCleaner.clean(text).text;
-        System.out.println("4 == " + text);
         return removeWhitespaces(text).split("\\s+");
     }
 
@@ -95,7 +90,7 @@ public class IrrelevantRemovingCleaner implements TextCleaner {
 
     @Override
     public CountStrategy getCountStrategy() {
-        return CountStrategy.LEARNING_CLEANER;
+        return CountStrategy.NEG_LEARN_CLEANER;
     }
 
     private String applyRemoves(String text) {

@@ -21,7 +21,7 @@ public class NegationDetectingCleaner implements TextCleaner {
     };
     private static final String PUNCTUATION = "[,.;:!?-]";
     private static final String NEGATIONS = ".*\\b(" + StringUtils.join(NEG_WORDS, "|") + ")\\b(.*)";
-    public static final String P_SPACE = "\\p{Space}";
+    public static final String P_SPACE = "\\p{Space}+";
     public static final String NOT = "NOT_";
 
     @Override
