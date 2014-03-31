@@ -37,6 +37,10 @@ public class WordFrequency {
         }
     }
 
+    public Double getValence() {
+        return Math.log10((positive + 1.0) / (negative + 1.0));
+    }
+
     public long getId() {
         return id;
     }

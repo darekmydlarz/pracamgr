@@ -5,9 +5,10 @@ import pl.edu.agh.twitter.business.wordfrequency.CountStrategy;
 import java.text.Normalizer;
 
 public class AlphabetSavingCleaner implements TextCleaner {
-    public static final String NON_APLHABET = "[^\\w\\s]+";
+    public static final String NON_APLHABET = "[^\\w\\s_]+";
+    public static final String SINGLE_UNDERSCORE = "\\b_\\b";
     public static final String NUMERIC = "\\b\\d+\\b";
-    public static final String POSSESIVES = "('s|_)";
+    public static final String POSSESIVES = "'s";
     public static final String NEGATIONS = "n't";
 
     @Override
@@ -15,6 +16,7 @@ public class AlphabetSavingCleaner implements TextCleaner {
         Sentence sentence = new Sentence();
         text = text.replaceAll(POSSESIVES, "");
         text = text.replaceAll(NEGATIONS, "nt");
+        text = text.replaceAll(SINGLE_UNDERSCORE, "");
         text = normalizeAlphabet(text);
         text = removeWhitespaces(text);
         sentence.text = text;

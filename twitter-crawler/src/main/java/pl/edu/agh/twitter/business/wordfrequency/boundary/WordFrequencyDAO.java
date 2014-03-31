@@ -54,11 +54,14 @@ public class WordFrequencyDAO {
     public Map<String, WordFrequency> fetchAll(long minimumFrequency, int wordLength, CountStrategy countStrategy) {
         final String query = "FROM WordFrequency " +
                 " WHERE countStrategy = :countStrategy AND " +
-                " positive + negative >= :min AND " +
-                " LENGTH(word) >= :wordLength";
+                " positive + negative >= :min AND (" +
+                " (word LIKE 'not_%' AND LENGTH(word) >= :notWordLength) OR " +
+                " (word not LIKE 'not_%' AND LENGTH(word) >= :wordLength)" +
+                ")";
         final Iterator<WordFrequency> iterator = em.createQuery(query, WordFrequency.class)
                 .setParameter("min", minimumFrequency)
                 .setParameter("countStrategy", countStrategy)
+                .setParameter("notWordLength", wordLength + 4)
                 .setParameter("wordLength", wordLength)
                 .getResultList().iterator();
 

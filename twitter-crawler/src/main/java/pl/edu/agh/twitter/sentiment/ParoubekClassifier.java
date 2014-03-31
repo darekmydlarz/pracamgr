@@ -18,12 +18,13 @@ import java.util.*;
 
 @Singleton
 public class ParoubekClassifier implements Startable {
-    private static final DecimalFormat df = new DecimalFormat("00.00");
+    private static final DecimalFormat decimalformat = new DecimalFormat("00.0000");
+    private static final DecimalFormat percentageformat = new DecimalFormat("00.00%");
     public static final int TRAIN_LENGTH = 82940;
     public static final int EMOTED_LENGTH = 103676;
     public static final int TWEETS_NUMBER = 100;
     public static final int MINIMUM_FREQUENCY = 50;
-    public static final int WORD_LENGTH = 3;
+    public static final int MIN_WORD_LENGTH = 3;
     private final TextCleaner irrelevantRemover = new IrrelevantRemovingCleaner();
     private final CountStrategy countStrategy = irrelevantRemover.getCountStrategy();
 
@@ -64,70 +65,91 @@ public class ParoubekClassifier implements Startable {
 
     @Override
     public void start() {
-        List<ParoubekSentence> paroubekSentences = fetchTweetsAndCreateSentences();
-//        evaluateClassifier(paroubekSentences);
-        simpleGetAndPrint(paroubekSentences);
+        List<ParoubekSentence> sentences = fetchTweetsAndCreateSentences();
+//        simpleGetAndPrint(sentences);
+        findBestParameters(sentences);
+    }
+
+    private void findBestParameters(List<ParoubekSentence> sentences) {
+        double[][] correctnesses = new double[11][101];
+        for(int minWordLength = 0; minWordLength <= 10; ++minWordLength) {
+            for(int minFrequenecy = 0; minFrequenecy <= 100; ++minFrequenecy) {
+                final Double correctness = fetchWordsCountAvgValenceAndCorrectness(sentences, minFrequenecy, minWordLength);
+                correctnesses[minWordLength][minFrequenecy] =
+                        correctness;
+                System.out.println("DM1/L" + minWordLength + "/F" + minFrequenecy + "\t/C == " + correctness);
+            }
+        }
+
+        for(int minFrequency = 0; minFrequency <= 100; ++minFrequency) {
+            for(int minWordLength = 0; minWordLength <= 10; ++minWordLength) {
+                System.out.print(correctnesses[minWordLength][minFrequency] + "\t");
+            }
+            System.out.println();
+        }
+    }
+
+    private Double fetchWordsCountAvgValenceAndCorrectness(List<ParoubekSentence> sentences, int minFrequency, int minWordLength) {
+        Map<String, WordFrequency> frequencyMap = wordFrequencyDAO.fetchAll(minFrequency, minWordLength, countStrategy);
+        computeValences(sentences, frequencyMap);
+        final Double averageValence = computeAverageValence(frequencyMap.values());
+//        printResults(paroubekSentences, averageValence);
+        return countCorrectness(sentences, averageValence);
     }
 
     private void simpleGetAndPrint(List<ParoubekSentence> paroubekSentences) {
-        Map<String, WordFrequency> frequencyMap = wordFrequencyDAO.fetchAll(MINIMUM_FREQUENCY, WORD_LENGTH, countStrategy);
-        computeValences(paroubekSentences, frequencyMap);
-        printResults(paroubekSentences);
+        fetchWordsCountAvgValenceAndCorrectness(paroubekSentences, MINIMUM_FREQUENCY, MIN_WORD_LENGTH);
     }
 
-    private void evaluateClassifier(List<ParoubekSentence> paroubekSentences) {
-        int minLengthRightBoundary = 3,       // 0..3
-            minFrequencyRightBoundary = 10;  // 0..100
-        double [][] accuracy = new double[minLengthRightBoundary + 1][minFrequencyRightBoundary + 1];
-        for(int i = 0; i <= minLengthRightBoundary; ++i) {
-            for(int j = 0; j <= minFrequencyRightBoundary; ++j) {
-                accuracy[i][j] = countAccuracy(i, j, paroubekSentences);
+    private Double countCorrectness(List<ParoubekSentence> sentences, Double averageValence) {
+        Integer corrects = 0;
+        Integer classified = 0;
+        for(ParoubekSentence sentence : sentences) {
+            Sentiment expected = EmoticonClassifier.getSentimentByEmoticon(sentence.text);
+            Sentiment actual = sentence.getSentiment(averageValence);
+            if(actual == expected) {
+                corrects += 1;
+                classified += 1;
+            } else if(actual != Sentiment.NEU) {
+                classified += 1;
             }
         }
-        System.out.println(Arrays.deepToString(accuracy));
+        return corrects * 1.0 / classified;
     }
 
-    private double countAccuracy(int wordLength, int frequency, List<ParoubekSentence> paroubekSentences) {
-        Map<String, WordFrequency> frequencyMap = wordFrequencyDAO.fetchAll(frequency, wordLength, countStrategy);
-        computeValences(paroubekSentences, frequencyMap);
-        final Double valenceAverage = valenceAverage(paroubekSentences);
-        int classifiedSentences = 0, correctClassifications = 0;
-        for(ParoubekSentence paroubekSentence : paroubekSentences) {
-            final Sentiment sentenceSentiment = paroubekSentence.getSentiment(valenceAverage);
-            if(sentenceSentiment != Sentiment.NEU) {
-                TextCleaner.Sentence cleanedSentence = irrelevantRemover.clean(paroubekSentence.text);
-                classifiedSentences++;
-                if(cleanedSentence.getSentiment() == sentenceSentiment) {
-                    correctClassifications++;
-                }
-            }
+    private Double computeAverageValence(Collection<WordFrequency> values) {
+        if(values.size() == 0)
+            return 0.0;
+        Double sum = 0.0;
+        for(WordFrequency wordFrequency : values) {
+            sum += wordFrequency.getValence();
         }
-        System.out.println("DM1;wordLength=" + wordLength + ";wordFreq=" + frequency + ";frequencyMapSize=" +
-                frequencyMap.size() + ";correct=" + correctClassifications + ";all=" +classifiedSentences);
-        return correctClassifications * 100.0 / classifiedSentences;
+        return sum / values.size();
     }
 
-    private void printResults(Collection<ParoubekSentence> paroubekSentences) {
-        final Double valenceAverage = valenceAverage(paroubekSentences);
+    private void printResults(Collection<ParoubekSentence> paroubekSentences, Double averageValence) {
         System.out.println("Average\tValence\tExpected\tSentim.\tSentence\tWords");
         for(ParoubekSentence paroubekSentence : paroubekSentences) {
-            final String valence = Double.isNaN(paroubekSentence.valence()) ? "?" : df.format(paroubekSentence.valence());
+            final String valence = Double.isNaN(paroubekSentence.valence()) ? "?" : decimalformat.format(paroubekSentence.valence());
             Sentiment expected = EmoticonClassifier.getSentimentByEmoticon(paroubekSentence.text);
             System.out.println(
-                    df.format(valenceAverage) + "\t"+
-                    valence + "\t" +
-                    expected + "\t" +
-                    paroubekSentence.getSentiment(valenceAverage) + "\t" +
-                    paroubekSentence.text.replaceAll("\\n", " ") + "\t" +
-                    paroubekSentence.wordValences
+                    decimalformat.format(averageValence) + "\t" +
+                            valence + "\t" +
+                            expected + "\t" +
+                            paroubekSentence.getSentiment(averageValence) + "\t" +
+                            paroubekSentence.text.replaceAll("\\n", " ") + "\t" +
+                            paroubekSentence.wordValences
             );
         }
     }
 
     private List<ParoubekSentence> fetchTweetsAndCreateSentences() {
-        final int offset = offset();
-        System.out.println("Dario1.0 == " + offset + " :: " + TWEETS_NUMBER + " :: " + EMOTED_LENGTH + " :: " + TRAIN_LENGTH);
-        final List<Tweet> tweets = tweetDAO.getWithEmoticons(offset, TWEETS_NUMBER);
+        // get some
+//        final int offset = offset();
+//        System.out.println("Dario1.0 == " + offset + " :: " + TWEETS_NUMBER + " :: " + EMOTED_LENGTH + " :: " + TRAIN_LENGTH);
+//        final List<Tweet> tweets = tweetDAO.getWithEmoticons(offset, TWEETS_NUMBER);
+        // get all
+        final List<Tweet> tweets = tweetDAO.getWithEmoticons(TRAIN_LENGTH + 1, EMOTED_LENGTH - TRAIN_LENGTH);
         List<ParoubekSentence> paroubekSentences = Lists.newArrayList();
         for(Tweet t : tweets)
             paroubekSentences.add(new ParoubekSentence(t.getText()));
@@ -148,25 +170,10 @@ public class ParoubekClassifier implements Startable {
 
     private void computeSentenceValence(ParoubekSentence paroubekSentence, Map<String, WordFrequency> frequencyMap) {
         for(String word : paroubekSentence.text.split("\\s")) {
-            if(frequencyMap.containsKey(word))
-                paroubekSentence.wordValences.put(word, computeWordValence(word, frequencyMap));
+            if(frequencyMap.containsKey(word)) {
+                final WordFrequency wordFrequency = frequencyMap.get(word);
+                paroubekSentence.wordValences.put(word, wordFrequency.getValence());
+            }
         }
-    }
-
-    private double computeWordValence(String word, Map<String, WordFrequency> frequencyMap) {
-        if(!frequencyMap.containsKey(word))
-            throw new IllegalStateException("FrequencyMap does not contain word: " + word);
-        final WordFrequency wordFrequency = frequencyMap.get(word);
-        return Math.log10(wordFrequency.getPositive() + 1.0 / wordFrequency.getNegative() + 1.0);
-    }
-
-    private Double valenceAverage(Collection<ParoubekSentence> paroubekSentences) {
-        Double valencesSum = 0.0;
-        for(ParoubekSentence paroubekSentence : paroubekSentences) {
-            final Double sentenceValence = paroubekSentence.valence();
-            if(!Double.isNaN(sentenceValence))
-                valencesSum += sentenceValence;
-        }
-        return valencesSum / paroubekSentences.size();
     }
 }

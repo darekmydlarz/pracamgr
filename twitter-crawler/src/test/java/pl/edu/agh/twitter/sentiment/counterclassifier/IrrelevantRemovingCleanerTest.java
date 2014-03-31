@@ -32,35 +32,39 @@ public class IrrelevantRemovingCleanerTest {
                 "Lol, I'm not even watching RT @MkTebza: TF?are u sure? Pls check SS3 RT @Bucs_BaBey: Man city (0) Ars (2) :) RT @MkTebza: Score??? Mancity v",
                 "@bob959 I soooo agree!It seems not to be #Arsenal# day :-( :-( :-(!",
                 "BENDTNER!!! ARE YOU FUCKING SERIOUS!! Even though im not arsenal fan :o",
-                "STEVEN GERRARD RT “@TooSomali: “@Capiii_: Now that's my captain” So you know :) aw, thanks.”"
+                "STEVEN GERRARD RT “@TooSomali: “@Capiii_: Now that's my captain” So you know :) aw, thanks.”",
+                "Such a Disney buff. Just found out about the new Alice in Wonderland movie. Official trailer: http://bit.ly/131Js0 I love the Cheshire Cat.",
+                "Haha, you gotta agree, no one gets booed like Manchester United :D #ZeDevilza"
         };
 
         String[] expected = {
                 "",
                 "Stay woke brah make alright",
-                "disappointing",
+                "not_disappointing",
                 "false time ARSENDAL",
-                "match time busy baby sitting",
+                "match time not_busy not_baby not_sitting",
                 "WOI diem leverpool tu",
                 "",
                 "yeah",
                 "",
                 "",
-                "didnt respect aaronramsey bute gentleman celebrate goal",
+                "didnt not_respect bute gentleman not_celebrate not_goal",
                 "LOOL Olivier dont",
                 "Lmao model",
                 "Lol",
-                "hollyrowena play TBP tour hope closest place xd",
+                "play TBP tour hope closest place xd",
                 "",
                 "LOL",
                 "",
                 "Una start",
                 "Lorl fans",
-                "won game constraint opportunity victory",
-                "Lol watching",
-                "soooo agree day",
-                "FUCKING im fan",
-                ""
+                "won game not_constraint not_opportunity not_victory",
+                "Lol not_watching",
+                "soooo agree not_day",
+                "FUCKING im not_fan",
+                "",
+                "disney buff alice wonderland movie official trailer love cheshire cat",
+                "haha gotta agree not_booed"
         };
         compareSentences(given, expected);
     }

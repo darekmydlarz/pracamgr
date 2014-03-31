@@ -1,45 +1,87 @@
-\documentclass[pdflatex,11pt,hidelinks]{aghdpl}
+\documentclass[pdflatex,11pt]{aghdpl}
 % \documentclass{aghdpl}               % przy kompilacji programem latex
 % \documentclass[pdflatex,en]{aghdpl}  % praca w języku angielskim
-% \usepackage[polish]{babel}
-\usepackage[MeX]{polski} 
+\usepackage[polish]{babel}
 \usepackage[utf8]{inputenc}
-\usepackage{url}
-\usepackage{hyperref}  % makes refs clickable	% makes links normal look-a-like
-\urlstyle{same}			% prints URLs in normal font (instead of monospaced)
+\usepackage{hyperref} 
+\usepackage{amsmath}
+\usepackage[toc,page]{appendix}
+\hypersetup{%
+    pdfborder = {0 0 0}
+}
 
 % dodatkowe pakiety
 \usepackage{enumerate}
 \usepackage{listings}
 \lstloadlanguages{TeX}
 
+\lstset{
+  literate={ą}{{\k{a}}}1
+           {ć}{{\'c}}1
+           {ę}{{\k{e}}}1
+           {ó}{{\'o}}1
+           {ń}{{\'n}}1
+           {ł}{{\l{}}}1
+           {ś}{{\'s}}1
+           {ź}{{\'z}}1
+           {ż}{{\.z}}1
+           {Ą}{{\k{A}}}1
+           {Ć}{{\'C}}1
+           {Ę}{{\k{E}}}1
+           {Ó}{{\'O}}1
+           {Ń}{{\'N}}1
+           {Ł}{{\L{}}}1
+           {Ś}{{\'S}}1
+           {Ź}{{\'Z}}1
+           {Ż}{{\.Z}}1
+}
+
 %---------------------------------------------------------------------------
 
 \author{Dariusz Mydlarz}
 \shortauthor{D. Mydlarz}
 
-\titlePL{Możliwości powiązania danych geolokacyjnych i~analizy sentymentu w analizie zachowań użytkowników w wybranych 
-portalach społecznościowych.}
-\shorttitlePL{Geolokalizacja i sentyment, a użytkownicy portali społecznościowych}
+\titlePL{
+	Możliwości powiązania\linebreak
+	danych geolokacyjnych i~analizy sentymentu\linebreak
+	w analizie zachowań użytkowników\linebreak
+	w wybranych portalach społecznościowych
+}
+\shorttitlePL{Analiza zachowań użytkowników w wybranych portalach społecznościowych}
 
-
-\thesistypePL{Praca Dyplomowa Magisterska}
+\thesistypePL{Praca magisterska}
 \supervisorPL{dr inż. Anna Zygmunt}
 \date{2014}
 \facultyPL{Wydział Informatyki, Elektroniki i Telekomunikacji}
 
+\departmentPL{Katedra Informatyki}
+\majorPL{Informatyka}
+
+\setlength{\cftsecnumwidth}{10mm}
+
 %---------------------------------------------------------------------------
 \begin{document}
+
 \titlepages
-\include{abstract}
+
+%\include{abstract}
+
+\tableofcontents
+
 \clearpage
-\tableofcontents \clearpage
+
+%\listoffigures 
+
+%\listoftables
+
+\clearpage
+
 %---------------------------------------------------------------------------
-\include{wprowadzenie}
-\include{sentyment}
-\nocite{TwitterDataAnalytics2013,TextBlobDocs,EmoticonAnalysisTwitter,
-	EmoticonsInSentimentTwente,JavaNaiveBayesClassifier,MPQASubjectivyLexicon,
-	BingLiuSentiment}
-\bibliography{bibliografia}
+\include{wstep}
+\nocite{TwitterDataAnalytics2013,EmoticonAnalysisTwitter,
+	EmoticonsInSentimentTwente}
+	
+\bibliographystyle{plain}
+\bibliography{*}
 %---------------------------------------------------------------------------
 \end{document}

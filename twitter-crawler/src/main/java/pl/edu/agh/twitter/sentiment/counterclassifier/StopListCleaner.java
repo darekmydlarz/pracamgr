@@ -18,6 +18,7 @@ public class StopListCleaner implements TextCleaner {
         text = text.toLowerCase();
         for(String word : words) {
             text = text.replaceAll("\\b" + word.toLowerCase() + "\\b", "");
+            text = text.replaceAll("\\bnot_" + word.toLowerCase() + "\\b", "");
         }
         return text.trim().replaceAll("\\n+", " ");
     }
