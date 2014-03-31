@@ -1,11 +1,8 @@
 package controllers;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import models.Match;
 import models.Tweet;
 import play.db.jpa.Transactional;
-import play.libs.Json;
-import play.mvc.BodyParser;
 import play.mvc.Controller;
 import play.mvc.Result;
 

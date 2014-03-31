@@ -59,4 +59,10 @@ public class Tweet implements Serializable {
                 .setMaxResults(100)
                 .getResultList();
     }
+
+    public static Tweet find(Long id) {
+        return JPA.em().createQuery("FROM Tweet WHERE id = :id", Tweet.class)
+                .setParameter("id", id)
+                .getSingleResult();
+    }
 }

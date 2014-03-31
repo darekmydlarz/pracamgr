@@ -5,11 +5,5 @@
 @import java.text.DateFormat
 
 @main(matchEvent.toString) {
-	<div id="map-canvas"></div>
-
-	<script type='text/javascript'>
-	@for(tweet <- tweets) {
-		addMarker(new google.maps.LatLng(@tweet.coordinates.latitude, @tweet.coordinates.longitude));
-	}
-	</script>
+	<div id="map-canvas" data-id="@matchEvent.id"></div>
 }
