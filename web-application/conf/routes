@@ -8,8 +8,8 @@ GET        /                            controllers.Application.index()
 # Tasks
 GET        /matches                     controllers.Application.matches()
 GET        /tweets/geotagged/:id        controllers.Application.geotagged(id: Long)
-GET        /api/geotagged/:id           controllers.Rest.geotagged(id: Long)
-GET        /api/tweet/:id               controllers.Rest.tweet(id: Long)
+GET        /api/tweets/geotagged/:id    controllers.Rest.geotagged(id: Long)
+GET        /api/tweets/:id              controllers.Rest.tweet(id: Long)
 
 
 # Map static resources from the /public folder to the /assets URL path

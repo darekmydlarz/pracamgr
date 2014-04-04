@@ -1,5 +1,6 @@
 package models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import play.db.jpa.JPA;
 
 import javax.persistence.*;
@@ -10,6 +11,7 @@ import java.util.List;
 @Entity
 @Table(schema = "mgr", name = "match_events")
 public class Match {
+    @JsonIgnore
     @Id
     public Long id;
     public Date startDate;
@@ -17,6 +19,7 @@ public class Match {
     public Team homeTeam;
     @OneToOne(cascade = CascadeType.ALL)
     public Team awayTeam;
+    @JsonIgnore
     @OneToOne(cascade = CascadeType.ALL)
     public Competition competition;
 

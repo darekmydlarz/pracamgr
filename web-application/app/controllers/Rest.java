@@ -26,6 +26,6 @@ public class Rest extends Controller {
     public static Result tweet(Long id) {
         final Tweet tweet = Tweet.find(id);
         final JsonNode jsonNode = Json.toJson(tweet);
-        return ok(jsonNode);
+        return ok(jsonNode).as("application/json");
     }
 }
