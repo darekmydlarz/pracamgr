@@ -4,6 +4,14 @@ $(document).ready(function () {
     $(document).on("keyup", "#searchInput", function (e) {
         tableFilter.apply($(e.target).val().trim());
     });
+
+    $(document).on("change", "#heatmap", function(e) {
+        heatMap.toggle();
+    })
+
+    $(document).on("change", "#clustermap", function(e) {
+        clusterMap.toggle();
+    })
 });
 
 var tableFilter = {

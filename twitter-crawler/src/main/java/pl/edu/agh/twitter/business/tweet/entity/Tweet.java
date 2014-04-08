@@ -145,4 +145,13 @@ public class Tweet {
     public void setMatchEvent(MatchEvent matchEvent) {
         this.matchEvent = matchEvent;
     }
+
+    @Override
+    public String toString() {
+        return "Tweet{" +
+                "id=" + id +
+                ", user=" + user +
+                ", text='" + text + '\'' +
+                '}';
+    }
 }

@@ -22,9 +22,7 @@ public class TemporaryTask implements Startable {
 
     @Override
     public void start() {
-        System.out.println("Dario1.0");
         final int size = tweetDAO.getAllWithEmoticons().size();
-        System.out.println("Dario1.1 == " + size);
     }
 
     private void jwiDictionary() {

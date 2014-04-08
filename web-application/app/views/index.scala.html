@@ -5,7 +5,7 @@
 @import java.text.DateFormat
 
 @main("Twitter Users Analysis") {
-	<h1><span id="matches-number">@matches.size()</span> match(es)</h1>
+	<h1 style="margin-top: 45px;"><span id="matches-number">@matches.size()</span> match(es)</h1>
 	<form class="form-search">
 		<input type="text" id="searchInput" placeholder="Filter table (you can put many values)" />
 	</form>
@@ -31,7 +31,7 @@
 				<td>@matchEvent.awayTeam.country</td>
 				<td>@matchEvent.competition</td>
 				<td class="right">@matchEvent.tweetsNumber</td>
-				<td><a href="@routes.Application.geotagged(matchEvent.id)">More</a></td>
+				<td><a href="@routes.Application.details(matchEvent.id)">More</a></td>
 			</tr>
 		}
 		</tbody>

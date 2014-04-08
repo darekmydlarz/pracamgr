@@ -56,6 +56,14 @@ public class TweetDAO {
                 .getResultList();
     }
 
+    public List<Tweet> getTweetsLimitOffset(int limit, int offset) {
+        final String query = "FROM Tweet t";
+        return em.createQuery(query, Tweet.class)
+                .setFirstResult(offset)
+                .setMaxResults(limit)
+                .getResultList();
+    }
+
     public long getTweetsNumber(User user, MatchEvent matchEvent) {
         final String query = "SELECT COUNT(t) FROM Tweet t WHERE t.user = :user AND t.matchEvent = :match";
         return ((Number) em.createQuery(query)
@@ -72,7 +80,14 @@ public class TweetDAO {
                 .setParameter("user", user)
                 .setParameter("match", matchEvent)
                 .getSingleResult()
-                ).longValue();
+        ).longValue();
+    }
+
+    public List<Tweet> getGeotagged() {
+        final String query = "FROM Tweet t WHERE t.coordinates.latitude IS NOT NULL AND " +
+                " t.coordinates.latitude != 0 ";
+                // " AND t.id NOT IN (SELECT g.tweetId FROM Geodata g) ";
+        return em.createQuery(query, Tweet.class).getResultList();
     }
 
     @SuppressWarnings("unchecked")

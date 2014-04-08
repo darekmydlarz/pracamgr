@@ -1,0 +1,22 @@
+@(tweets: List[Tweet], matchEvent: Match)
+
+@import helper._
+@import helper.twitterBootstrap._
+@import java.text.DateFormat
+
+@main(matchEvent.toString) {
+	<div id="map-canvas" data-id="@matchEvent.id"></div>
+	<div id="options">
+		<h2>Options</h2>
+		<form id="details-options">
+			<div class="option">
+				<input type="checkbox" value="heatmap" id="heatmap" />
+				<label for="heatmap">HeatMap</label>
+			</div>
+			<div class="option">
+				<input type="checkbox" value="clustermap" id="clustermap" />
+				<label for="clustermap">ClusterMap</label>
+			</div>
+		</form>
+	</div>
+}

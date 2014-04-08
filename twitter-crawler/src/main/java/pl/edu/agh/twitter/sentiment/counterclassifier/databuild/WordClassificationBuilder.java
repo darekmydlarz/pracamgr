@@ -7,7 +7,6 @@ import pl.edu.agh.twitter.business.tweet.boundary.TweetDAO;
 import pl.edu.agh.twitter.business.tweet.entity.Tweet;
 import pl.edu.agh.twitter.business.wordfrequency.boundary.WordFrequencyDAO;
 import pl.edu.agh.twitter.business.wordfrequency.entity.WordFrequency;
-import pl.edu.agh.twitter.sentiment.ParoubekClassifier;
 import pl.edu.agh.twitter.sentiment.counterclassifier.IrrelevantRemovingCleaner;
 import pl.edu.agh.twitter.sentiment.counterclassifier.TextCleaner;
 
@@ -29,7 +28,9 @@ public class WordClassificationBuilder implements Startable {
     public void start() {
         logger.info("Started!");
         // I'm learning with 80% of tweets with emots (0 - 82940 rownum())
-        List<Tweet> tweets = tweetDAO.getWithEmoticons(OFFSET, ParoubekClassifier.TRAIN_LENGTH);
+//        List<Tweet> tweets = tweetDAO.getWithEmoticons(OFFSET, ParoubekClassifier.TRAIN_LENGTH);
+        // I'm learning with 100% of tweets with emots
+        List<Tweet> tweets = tweetDAO.getAllWithEmoticons();
         logger.info("Found " + tweets.size() + " tweets witch emoticon");
         WordSentimentCounter classifier = new WordSentimentCounter(irrelevantRemover);
         for (Tweet tweet : tweets) {

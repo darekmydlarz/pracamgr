@@ -67,7 +67,12 @@ public class ParoubekClassifier implements Startable {
     public void start() {
         List<ParoubekSentence> sentences = fetchTweetsAndCreateSentences();
 //        simpleGetAndPrint(sentences);
-        findBestParameters(sentences);
+//        findBestParameters(sentences);
+        persistSentiment(sentences);
+    }
+
+    private void persistSentiment(List<ParoubekSentence> sentences) {
+
     }
 
     private void findBestParameters(List<ParoubekSentence> sentences) {
@@ -144,11 +149,6 @@ public class ParoubekClassifier implements Startable {
     }
 
     private List<ParoubekSentence> fetchTweetsAndCreateSentences() {
-        // get some
-//        final int offset = offset();
-//        System.out.println("Dario1.0 == " + offset + " :: " + TWEETS_NUMBER + " :: " + EMOTED_LENGTH + " :: " + TRAIN_LENGTH);
-//        final List<Tweet> tweets = tweetDAO.getWithEmoticons(offset, TWEETS_NUMBER);
-        // get all
         final List<Tweet> tweets = tweetDAO.getWithEmoticons(TRAIN_LENGTH + 1, EMOTED_LENGTH - TRAIN_LENGTH);
         List<ParoubekSentence> paroubekSentences = Lists.newArrayList();
         for(Tweet t : tweets)

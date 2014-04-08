@@ -6,13 +6,18 @@ import javax.persistence.Embeddable;
 
 @Embeddable
 public class Coordinates {
-	private Double longitude;
 	private Double latitude;
+	private Double longitude;
 
 	public Coordinates() {
 	}
 
-	public Coordinates(GeoLocation geoLocation) {
+    public Coordinates(Double latitude, Double longitude) {
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
+
+    public Coordinates(GeoLocation geoLocation) {
 		if (geoLocation != null) {
 			longitude = geoLocation.getLongitude();
 			latitude = geoLocation.getLatitude();
@@ -35,4 +40,11 @@ public class Coordinates {
 		this.latitude = latitude;
 	}
 
+    @Override
+    public String toString() {
+        return "Coordinates{" +
+                "latitude=" + latitude +
+                ", longitude=" + longitude +
+                '}';
+    }
 }
