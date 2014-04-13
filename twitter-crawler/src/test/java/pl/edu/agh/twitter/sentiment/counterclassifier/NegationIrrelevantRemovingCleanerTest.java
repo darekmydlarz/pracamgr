@@ -3,7 +3,7 @@ package pl.edu.agh.twitter.sentiment.counterclassifier;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class IrrelevantRemovingCleanerTest {
+public class NegationIrrelevantRemovingCleanerTest {
     @Test
     public void testClean() throws Exception {
 
@@ -70,7 +70,7 @@ public class IrrelevantRemovingCleanerTest {
     }
 
     private void compareSentences(String[] given, String[] expected) {
-        TextCleaner cleaner = new IrrelevantRemovingCleaner();
+        TextCleaner cleaner = new NegationIrrelevantRemovingCleaner();
         for (int i = 0; i < given.length; ++i) {
             String actual = cleaner.clean(given[i]).text;
             System.out.println("given:\n" + given[i]);

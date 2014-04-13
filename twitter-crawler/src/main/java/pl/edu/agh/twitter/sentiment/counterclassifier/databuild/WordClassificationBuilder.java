@@ -7,7 +7,7 @@ import pl.edu.agh.twitter.business.tweet.boundary.TweetDAO;
 import pl.edu.agh.twitter.business.tweet.entity.Tweet;
 import pl.edu.agh.twitter.business.wordfrequency.boundary.WordFrequencyDAO;
 import pl.edu.agh.twitter.business.wordfrequency.entity.WordFrequency;
-import pl.edu.agh.twitter.sentiment.counterclassifier.IrrelevantRemovingCleaner;
+import pl.edu.agh.twitter.sentiment.counterclassifier.NegationIrrelevantRemovingCleaner;
 import pl.edu.agh.twitter.sentiment.counterclassifier.TextCleaner;
 
 import javax.inject.Inject;
@@ -17,7 +17,7 @@ import java.util.Map;
 public class WordClassificationBuilder implements Startable {
     public static final int OFFSET = 0;
     private static Logger logger = Logger.getLogger(WordClassificationBuilder.class);
-    private final TextCleaner irrelevantRemover = new IrrelevantRemovingCleaner();
+    private final TextCleaner irrelevantRemover = new NegationIrrelevantRemovingCleaner();
 
     @Inject
     private TweetDAO tweetDAO;

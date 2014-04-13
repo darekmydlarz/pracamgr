@@ -57,7 +57,7 @@ public class TweetDAO {
     }
 
     public List<Tweet> getTweetsLimitOffset(int limit, int offset) {
-        final String query = "FROM Tweet t";
+        final String query = "FROM Tweet t ORDER BY t.id";
         return em.createQuery(query, Tweet.class)
                 .setFirstResult(offset)
                 .setMaxResults(limit)

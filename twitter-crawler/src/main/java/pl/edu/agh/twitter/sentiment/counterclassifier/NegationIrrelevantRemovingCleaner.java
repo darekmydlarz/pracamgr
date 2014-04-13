@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class IrrelevantRemovingCleaner implements TextCleaner {
+public class NegationIrrelevantRemovingCleaner implements TextCleaner {
     static enum Regex {
         CitationOnStart("(\"|“)@.+\\: .+(\"|”)(.*)", 3),
         CitationOnEnd("(.*)(\"|“|”)@.+\\: .+", 1),
@@ -82,15 +82,10 @@ public class IrrelevantRemovingCleaner implements TextCleaner {
     private String stemSentence(String text, IStemmer stemmer) {
         final String[] splitted = text.split("\\s+");
         List<String> result = Lists.newArrayList();
-        for(String word : splitted) {
+        for (String word : splitted) {
             result.add(stemWord(stemmer, word));
         }
         return StringUtils.join(result, " ");
-    }
-
-    @Override
-    public CountStrategy getCountStrategy() {
-        return CountStrategy.NEG_LEARN_CLEANER;
     }
 
     private String applyRemoves(String text) {
@@ -111,5 +106,11 @@ public class IrrelevantRemovingCleaner implements TextCleaner {
 
     public static String removeWhitespaces(String text) {
         return text.replaceAll("\\n+", " ").replaceAll("\\s+", " ").trim();
+    }
+
+
+    @Override
+    public CountStrategy getCountStrategy() {
+        return CountStrategy.NEG_LEARN_CLEANER;
     }
 }

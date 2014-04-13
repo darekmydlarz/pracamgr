@@ -8,7 +8,7 @@ import pl.edu.agh.twitter.business.tweet.entity.Tweet;
 import pl.edu.agh.twitter.business.wordfrequency.CountStrategy;
 import pl.edu.agh.twitter.business.wordfrequency.boundary.WordFrequencyDAO;
 import pl.edu.agh.twitter.business.wordfrequency.entity.WordFrequency;
-import pl.edu.agh.twitter.sentiment.counterclassifier.IrrelevantRemovingCleaner;
+import pl.edu.agh.twitter.sentiment.counterclassifier.NegationIrrelevantRemovingCleaner;
 import pl.edu.agh.twitter.sentiment.counterclassifier.TextCleaner;
 
 import javax.inject.Inject;
@@ -25,8 +25,8 @@ public class ParoubekClassifier implements Startable {
     public static final int TWEETS_NUMBER = 100;
     public static final int MINIMUM_FREQUENCY = 50;
     public static final int MIN_WORD_LENGTH = 3;
-    private final TextCleaner irrelevantRemover = new IrrelevantRemovingCleaner();
-    private final CountStrategy countStrategy = irrelevantRemover.getCountStrategy();
+    private final TextCleaner textCleaner = new NegationIrrelevantRemovingCleaner();
+    private final CountStrategy countStrategy = textCleaner.getCountStrategy();
 
     static class ParoubekSentence {
         final String text;
