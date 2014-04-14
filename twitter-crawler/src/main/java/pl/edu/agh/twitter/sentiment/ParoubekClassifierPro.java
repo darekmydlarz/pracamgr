@@ -94,7 +94,8 @@ public class ParoubekClassifierPro implements Startable {
     public void start() {
         logger.info("Started...");
 //        int offset = 0;
-        int offset = 1_065_000;
+
+        int offset = 4_327_000;
         final int limit = 1_000;
         while(offset + limit < TWEETS_NUMBER) {
             logger.info("In progress...\t" + offset + "/" + TWEETS_NUMBER);
