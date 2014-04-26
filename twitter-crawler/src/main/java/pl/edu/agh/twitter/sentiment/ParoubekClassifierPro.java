@@ -95,8 +95,8 @@ public class ParoubekClassifierPro implements Startable {
         logger.info("Started...");
 //        int offset = 0;
 
-        int offset = 4_327_000;
-        final int limit = 1_000;
+        int offset = 7_773_000;
+        final int limit = 105;
         while(offset + limit < TWEETS_NUMBER) {
             logger.info("In progress...\t" + offset + "/" + TWEETS_NUMBER);
             final List<Tweet> tweets = tweetDAO.getTweetsLimitOffset(limit, offset);

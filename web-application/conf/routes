@@ -9,6 +9,7 @@ GET        /                            controllers.Application.index()
 GET        /details/:id                 controllers.Application.details(id: Long)
 GET        /api/tweets/geotagged/:id    controllers.Rest.geotagged(id: Long)
 GET        /api/tweets/tweet/:id              controllers.Rest.tweet(id: Long)
+GET        /api/tweets/match/:matchId/:sentiment              controllers.Rest.topSentiment(matchId: Long, sentiment: String)
 
 
 # Map static resources from the /public folder to the /assets URL path

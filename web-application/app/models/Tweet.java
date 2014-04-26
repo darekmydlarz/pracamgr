@@ -49,6 +49,10 @@ public class Tweet implements Serializable {
     @Embedded
     public Coordinates coordinates;
 
+    @OneToOne
+    @JoinColumn(name = "id")
+    public ParoubekTweet paroubekTweet;
+
     public static Long count(Match match) {
         final String query = "SELECT COUNT(t) FROM Tweet t WHERE matchEvent = :match";
         return (Long) JPA.em().createQuery(query)
@@ -68,5 +72,36 @@ public class Tweet implements Serializable {
         return JPA.em().createQuery("FROM Tweet WHERE id = :id", Tweet.class)
                 .setParameter("id", id)
                 .getSingleResult();
+    }
+
+    public static List<Tweet> topWithSentiment(Match match, Sentiment sentiment, int limit) {
+        if(sentiment == Sentiment.POS)
+            return topPositive(match, limit);
+        return topNegative(match, limit);
+    }
+
+    private static List<Tweet> topNegative(Match match, int limit) {
+        final String query = "FROM Tweet t " +
+                "WHERE matchEvent = :match " +
+                "  AND t.paroubekTweet.valence < :avgValence " +
+                "ORDER BY t.paroubekTweet.valence ASC";
+        return JPA.em().createQuery(query, Tweet.class)
+                .setParameter("match", match)
+                .setParameter("avgValence", Sentiment.AVERAGE_VALENCE)
+                .setMaxResults(limit)
+                .getResultList();
+    }
+
+    private static List<Tweet> topPositive(Match match, int limit) {
+        final String query = "FROM Tweet t " +
+                "WHERE matchEvent = :match " +
+                "  AND t.paroubekTweet.valence >= :avgValence " +
+                "  AND t.paroubekTweet.valence != 'NaN' " +
+                "ORDER BY t.paroubekTweet.valence DESC";
+        return JPA.em().createQuery(query, Tweet.class)
+                .setParameter("match", match)
+                .setParameter("avgValence", Sentiment.AVERAGE_VALENCE)
+                .setMaxResults(limit)
+                .getResultList();
     }
 }

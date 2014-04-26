@@ -6,17 +6,60 @@
 
 @main(matchEvent.toString) {
 	<div id="map-canvas" data-id="@matchEvent.id"></div>
-	<div id="options">
-		<h2>Options</h2>
-		<form id="details-options">
-			<div class="option">
-				<input type="checkbox" value="heatmap" id="heatmap" />
-				<label for="heatmap">HeatMap</label>
+
+
+	<div class="container">
+		<div id="options">
+			<h2>Options</h2>
+			<form id="details-options">
+				<div class="option">
+					<input type="checkbox" value="heatmap" id="heatmap" />
+					<label for="heatmap">HeatMap</label>
+				</div>
+				<div class="option">
+					<input type="checkbox" value="clustermap" id="clustermap" />
+					<label for="clustermap">ClusterMap</label>
+				</div>
+			</form>
+		</div>
+
+
+		<ul class="nav nav-tabs pending" id="myTab">
+			<li class="active"><a href="#positives">Top Positives</a></li>
+			<li><a href="#negatives">Top Negatives</a></li>
+		</ul>
+
+		<div class="tab-content">
+			<div class="tab-pane active" id="positives">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>User</th>
+							<th>Time</th>
+							<th>Text</th>
+							<th>Valence</th>
+						</tr>
+					</thead>
+					<tbody>
+
+					</tbody>
+				</table>
 			</div>
-			<div class="option">
-				<input type="checkbox" value="clustermap" id="clustermap" />
-				<label for="clustermap">ClusterMap</label>
+			<div class="tab-pane" id="negatives">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>User</th>
+							<th>Time</th>
+							<th>Text</th>
+							<th>Valence</th>
+						</tr>
+					</thead>
+					<tbody>
+
+					</tbody>
+				</table>
 			</div>
-		</form>
+		</div>
 	</div>
 }

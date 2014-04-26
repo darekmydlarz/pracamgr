@@ -12,6 +12,39 @@ $(document).ready(function () {
     $(document).on("change", "#clustermap", function(e) {
         clusterMap.toggle();
     })
+
+
+    $('#myTab').find('a').click(function (e) {
+        e.preventDefault();
+        $(this).tab('show');
+    })
+
+
+    var matchId = $("#map-canvas").data("id");
+    if(matchId) {
+        $.getJSON("http://localhost:9000/api/tweets/match/" + matchId + "/pos", function (data) {
+            processData(data, $('#positives table'));
+        });
+        $.getJSON("http://localhost:9000/api/tweets/match/" + matchId + "/neg", function (data) {
+            processData(data, $('#negatives table'));
+        });
+        function processData(data, $table) {
+            var trHTML = '';
+            $.each(data, function (i, item) {
+                trHTML += '<tr>' +
+                    '<td>' + item.user.screenName + '</td>' +
+                    '<td>' + new Date(item.createdAt).toLocaleTimeString('pl-PL') + '</td>' +
+                    '<td>' + item.text + '</td>' +
+                    '<td>' + item.paroubekTweet.valence + '</td>' +
+                    '</tr>';
+            });
+            $table.children('tbody').append(trHTML);
+            $table.addClass('table-scroll');
+            $table.show();
+            $('#myTab').removeClass('pending');
+        }
+    }
+
 });
 
 var tableFilter = {
