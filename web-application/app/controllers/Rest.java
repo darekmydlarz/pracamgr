@@ -3,6 +3,7 @@ package controllers;
 import com.fasterxml.jackson.databind.JsonNode;
 import models.Match;
 import models.Sentiment;
+import models.SentimentInTime;
 import models.Tweet;
 import play.db.jpa.Transactional;
 import play.libs.Json;
@@ -37,6 +38,14 @@ public class Rest extends Controller {
         final Sentiment sentiment = Sentiment.valueOf(sentimentName.toUpperCase());
         final List<Tweet> tweets = Tweet.topWithSentiment(match, sentiment, 500);
         final JsonNode jsonNode = Json.toJson(tweets);
+        return ok(jsonNode).as("application/json");
+    }
+
+    @BodyParser.Of(BodyParser.Json.class)
+    @Transactional(readOnly = true)
+    public static Result sentimentInTime(Long matchId) {
+        final List<SentimentInTime> sentimentInTimeList = Tweet.getSentimentInTime(matchId);
+        final JsonNode jsonNode = Json.toJson(sentimentInTimeList);
         return ok(jsonNode).as("application/json");
     }
 }

@@ -3,10 +3,12 @@ package models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+import com.google.common.collect.Lists;
 import play.db.jpa.JPA;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 
@@ -104,4 +106,30 @@ public class Tweet implements Serializable {
                 .setMaxResults(limit)
                 .getResultList();
     }
+
+    @SuppressWarnings("unchecked")
+    public static List<SentimentInTime> getSentimentInTime(Long matchId) {
+        final String query = " 	SELECT to_char(created_at, 'yyyy-MM-dd HH24:MI') as time,  " +
+                " 	  count(nullif(valence > 0.4786984978198536, false)) as positives, " +
+                " 	  count(nullif(valence <= 0.4786984978198536, false)) as negatives " +
+                " 	FROM mgr.paroubek_tweets a JOIN mgr.tweets b ON a.tweet_id = b.id AND b.match_event = :matchId " +
+                " 	WHERE valence != 'NaN' " +
+                " 	GROUP BY time " +
+                " 	ORDER BY time ";
+
+        final List<Object[]> rows = (List<Object[]>) JPA.em().createNativeQuery(query)
+                .setParameter("matchId", matchId)
+                .getResultList();
+
+        final List<SentimentInTime> resultList = Lists.newArrayList();
+        for (Object[] row : rows) {
+            final String dateTime = (String) row[0];
+            final BigInteger positives = (BigInteger) row[1];
+            final BigInteger negatives = (BigInteger) row[2];
+            SentimentInTime sit = new SentimentInTime(dateTime, positives.intValue(), negatives.intValue());
+            resultList.add(sit);
+        }
+        return resultList;
+    }
+
 }

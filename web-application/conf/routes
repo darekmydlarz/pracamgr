@@ -3,15 +3,16 @@
 # ~~~~
 
 # Home page
-GET        /                            controllers.Application.index()
+GET        /                                            controllers.Application.index()
 
 # Tasks
-GET        /details/:id                 controllers.Application.details(id: Long)
-GET        /api/tweets/geotagged/:id    controllers.Rest.geotagged(id: Long)
-GET        /api/tweets/tweet/:id              controllers.Rest.tweet(id: Long)
-GET        /api/tweets/match/:matchId/:sentiment              controllers.Rest.topSentiment(matchId: Long, sentiment: String)
+GET        /details/:id                                 controllers.Application.details(id: Long)
+GET        /api/tweets/geotagged/:id                    controllers.Rest.geotagged(id: Long)
+GET        /api/tweets/tweet/:id                        controllers.Rest.tweet(id: Long)
+GET        /api/tweets/match/:matchId/:sentiment        controllers.Rest.topSentiment(matchId: Long, sentiment: String)
+GET        /api/tweets/sentiment/:matchId               controllers.Rest.sentimentInTime(matchId: Long)
 
 
 # Map static resources from the /public folder to the /assets URL path
-GET        /assets/*file                controllers.Assets.at(path="/public", file)
-GET        /webjars/*file               controllers.WebJarAssets.at(file)
+GET        /assets/*file                                controllers.Assets.at(path="/public", file)
+GET        /webjars/*file                               controllers.WebJarAssets.at(file)
