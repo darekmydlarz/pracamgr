@@ -5,23 +5,25 @@ $(document).ready(function () {
         tableFilter.apply($(e.target).val().trim());
     });
 
-    $(document).on("change", "#heatmap", function(e) {
+    $(document).on("change", "#heatmap", function (e) {
         heatMap.toggle();
-    })
+    });
 
-    $(document).on("change", "#clustermap", function(e) {
+    $(document).on("change", "#clustermap", function (e) {
         clusterMap.toggle();
-    })
+    });
 
 
     $('#myTab').find('a').click(function (e) {
         e.preventDefault();
         $(this).tab('show');
-    })
+    });
+    loadTopPositiveNegative();
+});
 
-
+function loadTopPositiveNegative() {
     var matchId = $("#map-canvas").data("id");
-    if(matchId) {
+    if (matchId) {
         $.getJSON("http://localhost:9000/api/tweets/match/" + matchId + "/pos", function (data) {
             processData(data, $('#positives table'));
         });
@@ -44,8 +46,7 @@ $(document).ready(function () {
             $('#myTab').removeClass('pending');
         }
     }
-
-});
+}
 
 var tableFilter = {
     text: "",
