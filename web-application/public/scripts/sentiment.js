@@ -4,7 +4,8 @@ google.setOnLoadCallback(drawChart);
 var sentimentInTime;
 
 function drawChart() {
-    $.getJSON("http://localhost:9000/api/tweets/sentiment/725", function (data) {
+    var matchId = $("#map-canvas").data("id");
+    $.getJSON("http://localhost:9000/api/tweets/sentiment/" + matchId, function (data) {
         sentimentInTime = data;
         redrawChart();
     });
@@ -38,6 +39,6 @@ function redrawChart() {
     var lineChart = new google.visualization.AreaChart(document.getElementById('linechart'));
     lineChart.draw(lineChartData, {
         title: "Sentiment in time",
-        vAxis: {format:'#,###%'}
+        vAxis: {format:'#,###%', maxValue: 1, minValue: 0, gridlines: {count: 11}},
     });
 }
