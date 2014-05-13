@@ -18,6 +18,12 @@ $(document).ready(function () {
         e.preventDefault();
         $(this).tab('show');
     });
+
+    $("#measures").find('a').click(function (e) {
+        e.preventDefault();
+        $(this).tab('show');
+    });
+
     loadTopPositiveNegative();
 });
 

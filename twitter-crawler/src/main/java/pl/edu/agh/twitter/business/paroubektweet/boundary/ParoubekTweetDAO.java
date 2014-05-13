@@ -32,4 +32,12 @@ public class ParoubekTweetDAO {
         }
         transaction.commit();
     }
+
+    public List<ParoubekTweet> find(Long userId, Long matchEventId) {
+        final String query = "FROM ParoubekTweet pt WHERE pt.tweet.user.id = :userId AND pt.tweet.matchEvent.id = :matchEventId";
+        return em.createQuery(query, ParoubekTweet.class)
+                .setParameter("userId", userId)
+                .setParameter("matchEventId", matchEventId)
+                .getResultList();
+    }
 }

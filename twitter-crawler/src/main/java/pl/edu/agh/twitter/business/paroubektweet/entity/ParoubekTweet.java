@@ -1,14 +1,22 @@
 package pl.edu.agh.twitter.business.paroubektweet.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
+import pl.edu.agh.twitter.business.tweet.entity.Tweet;
+
+import javax.persistence.*;
 
 @Entity
 @Table(schema = "mgr", name = "paroubek_tweets")
 public class ParoubekTweet {
     @Id
     private Long tweetId;
+
+    @OneToOne
+    @JoinColumn(name = "tweetId", referencedColumnName = "id", insertable = false, updatable = false)
+    @NotFound(action = NotFoundAction.IGNORE)
+    private Tweet tweet;
+
     private String text;
     private Double valence;
 
@@ -43,5 +51,22 @@ public class ParoubekTweet {
 
     public void setValence(Double valence) {
         this.valence = valence;
+    }
+
+    public Tweet getTweet() {
+        return tweet;
+    }
+
+    public void setTweet(Tweet tweet) {
+        this.tweet = tweet;
+    }
+
+    @Override
+    public String toString() {
+        return "ParoubekTweet{" +
+                "tweetId=" + tweetId +
+                ", text='" + text + '\'' +
+                ", valence=" + valence +
+                '}';
     }
 }

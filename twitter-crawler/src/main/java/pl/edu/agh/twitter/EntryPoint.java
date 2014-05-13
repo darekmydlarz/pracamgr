@@ -2,11 +2,10 @@ package pl.edu.agh.twitter;
 
 
 import org.jboss.weld.environment.se.Weld;
-import pl.edu.agh.twitter.sentiment.ParoubekClassifierPro;
+import pl.edu.agh.twitter.business.UserMatchSentimentCounter;
 
 public class EntryPoint {
-//    private final static Class<? extends Startable> startable = GeoReversing.class;
-    private final static Class<? extends Startable> startable = ParoubekClassifierPro.class;
+    private final static Class<? extends Startable> startable = UserMatchSentimentCounter.class;
 
     public static void main(String[] args) {
         Weld weld = new Weld();

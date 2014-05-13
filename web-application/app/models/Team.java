@@ -1,6 +1,7 @@
 package models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import play.db.jpa.JPA;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -36,5 +37,12 @@ public class Team {
     @Override
     public String toString() {
         return name;
+    }
+
+    public static Team find(String name) {
+        final String query = "FROM Team t WHERE Lower(t.name) LIKE :name";
+        return JPA.em().createQuery(query, Team.class)
+                .setParameter("name", "%" + name.toLowerCase().replaceAll("-", " ") + "%")
+                .getSingleResult();
     }
 }

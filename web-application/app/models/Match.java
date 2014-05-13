@@ -25,6 +25,8 @@ public class Match {
 
     public Long tweetsNumber;
 
+    public String info;
+
     public static List<Match> all() {
         return JPA.em().createQuery("FROM Match ORDER BY startDate DESC", Match.class).getResultList();
     }
@@ -35,6 +37,15 @@ public class Match {
 
     public static Match findById(Long id) {
         return JPA.em().find(Match.class, id);
+    }
+
+    public static List<Match> find(Team team) {
+        final String query = "FROM Match " +
+                " WHERE homeTeam = :team OR awayTeam = :team " +
+                " ORDER BY startDate ";
+        return JPA.em().createQuery(query, Match.class)
+                .setParameter("team", team)
+                .getResultList();
     }
 
     @Override

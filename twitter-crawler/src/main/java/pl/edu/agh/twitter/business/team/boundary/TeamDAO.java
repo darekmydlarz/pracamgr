@@ -23,12 +23,10 @@ public class TeamDAO {
     }
 
     public Team get(String name) {
-        final EntityTransaction transaction = em.getTransaction();
         final String query = "FROM Team WHERE lower(name) LIKE :name";
-        List<Team> competitionList = em.createQuery(query, Team.class)
+        List<Team> teams = em.createQuery(query, Team.class)
                 .setParameter("name", "%" + name.toLowerCase() + "%")
                 .getResultList();
-        transaction.commit();
-        return competitionList.isEmpty() ? null : competitionList.get(0);
+        return teams.isEmpty() ? null : teams.get(0);
     }
 }

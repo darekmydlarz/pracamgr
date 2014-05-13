@@ -1,69 +1,93 @@
-@(tweets: List[Tweet], matchEvent: Match)
+@(tweets: List[Tweet], matchEvent: Match, measures: List[String])
 
-@import helper._
-@import helper.twitterBootstrap._
-@import java.text.DateFormat
-
-@main(matchEvent.toString) {
-	<div id="map-canvas" data-id="@matchEvent.id"></div>
+	@main(matchEvent.toString) {
+		<div id="map-canvas" data-id="@matchEvent.id"></div>
 
 
-	<div class="container">
-		<div id="options">
-			<h2>Options</h2>
-			<form id="details-options">
-				<div class="option">
-					<input type="checkbox" value="heatmap" id="heatmap" />
-					<label for="heatmap">HeatMap</label>
-				</div>
-				<div class="option">
-					<input type="checkbox" value="clustermap" id="clustermap" />
-					<label for="clustermap">ClusterMap</label>
-				</div>
-			</form>
-		</div>
-
-
-		<ul class="nav nav-tabs pending" id="myTab">
-			<li class="active"><a href="#positives">Top Positives</a></li>
-			<li><a href="#negatives">Top Negatives</a></li>
-		</ul>
-
-		<div class="tab-content">
-			<div class="tab-pane active" id="positives">
-				<table class="table table-hover">
-					<thead>
-						<tr>
-							<th>User</th>
-							<th>Time</th>
-							<th>Text</th>
-							<th>Valence</th>
-						</tr>
-					</thead>
-					<tbody>
-
-					</tbody>
-				</table>
+		<div class="container">
+			<div id="options">
+				<h2>Options</h2>
+				<form id="details-options">
+					<div class="option">
+						<input type="checkbox" value="heatmap" id="heatmap" />
+						<label for="heatmap">HeatMap</label>
+					</div>
+					<div class="option">
+						<input type="checkbox" value="clustermap" id="clustermap" />
+						<label for="clustermap">ClusterMap</label>
+					</div>
+				</form>
 			</div>
-			<div class="tab-pane" id="negatives">
-				<table class="table table-hover">
-					<thead>
-						<tr>
-							<th>User</th>
-							<th>Time</th>
-							<th>Text</th>
-							<th>Valence</th>
-						</tr>
-					</thead>
-					<tbody>
 
-					</tbody>
-				</table>
+
+			<ul class="nav nav-tabs pending" id="myTab">
+				<li class="active"><a href="#positives">Top Positives</a></li>
+				<li><a href="#negatives">Top Negatives</a></li>
+			</ul>
+
+			<div class="tab-content">
+				<div class="tab-pane active" id="positives">
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th>User</th>
+								<th>Time</th>
+								<th>Text</th>
+								<th>Valence</th>
+							</tr>
+						</thead>
+						<tbody>
+
+						</tbody>
+					</table>
+				</div>
+				<div class="tab-pane" id="negatives">
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th>User</th>
+								<th>Time</th>
+								<th>Text</th>
+								<th>Valence</th>
+							</tr>
+						</thead>
+						<tbody>
+
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+			<h3>Sentiment</h3>
+			<div id="piechart" style="width : 900px ; height : 500px ;"></div>
+			<div id="linechart" style="width : 900px ; height : 500px ;"></div>
+
+			<h3>Match info</h3>
+			<pre>
+			@matchEvent.info
+			</pre>
+
+
+			<ul class="nav nav-tabs" id="measures">
+					@for(measure <- measures) {
+						<li class="@{if(measures.indexOf(measure) == 0) "active" else  ""}"><a href="#@measure">@measure</a></li>
+					}
+			</ul>
+
+			<div class="tab-content">
+				@for(measure <- measures) {
+					<div class="tab-pane @{if(measures.indexOf(measure) == 0) "active" else  ""}" id="@measure">
+						<table class="table table-hover">
+							<thead><tr>
+								<th>User Id</th>
+								<th>Screen name</th>
+								<th>Value</th>
+								<th>Positivness</th></tr>
+							</thead>
+							<tbody></tbody>
+						</table>
+					</div>
+				}
 			</div>
 		</div>
-
-		<h3>Sentiment</h3>
-		<div id="piechart" style="width: 900px; height: 500px;"></div>
-		<div id="linechart" style="width: 900px; height: 500px;"></div>
-	</div>
-}
+	}

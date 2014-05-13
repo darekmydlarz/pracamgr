@@ -36,9 +36,9 @@ function redrawChart() {
     });
 
     var lineChartData = google.visualization.arrayToDataTable(linechartDataArray);
-    var lineChart = new google.visualization.AreaChart(document.getElementById('linechart'));
+    lineChart = new google.visualization.AreaChart(document.getElementById('linechart'));
     lineChart.draw(lineChartData, {
         title: "Sentiment in time",
-        vAxis: {format:'#,###%', maxValue: 1, minValue: 0, gridlines: {count: 11}},
+        vAxis: {format:'#,###%', maxValue: 1, minValue: 0, gridlines: {count: 11}}
     });
 }

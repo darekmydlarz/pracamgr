@@ -1,0 +1,15 @@
+@(team: Team, matches: List[Match])
+
+@main(team.toString) {
+	<div class="container">
+	<ol id="team-list">
+	@for(matchEvent <- matches) {
+		<li data-id="@matchEvent.id" data-date="@matchEvent.startDate">@matchEvent</li>
+	}
+	</ol>
+
+
+		<div id="chart_div" style="width: 940px; height: 600px;"></div>
+	</div>
+
+}

@@ -5,6 +5,7 @@ import pl.edu.agh.twitter.business.competition.entity.Competition;
 import pl.edu.agh.twitter.business.team.entity.Team;
 
 import javax.persistence.*;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashSet;
@@ -107,6 +108,7 @@ public class MatchEvent {
 
     @Override
     public String toString() {
-        return startDate + " - " + homeTeam + " - " + awayTeam + " - " + competition;
+        String startDateFormatted = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(startDate);
+        return startDateFormatted + " - " + homeTeam + " - " + awayTeam + " - " + competition;
     }
 }
