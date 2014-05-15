@@ -4,12 +4,68 @@
 	<div class="container">
 	<ol id="team-list">
 	@for(matchEvent <- matches) {
-		<li data-id="@matchEvent.id" data-date="@matchEvent.startDate">@matchEvent</li>
+		<li data-id="@matchEvent.id" data-date="@matchEvent.startDate">
+			<a href="@routes.Application.details(matchEvent.id)">@matchEvent</a>
+		</li>
 	}
 	</ol>
+		<div id="in_degrees_chart" style="width: 940px; height: 600px;"></div>
+<pre>
+inDegree
+	Liczba uzytkownikow, ktora tweetowala do danego wezla
+	How many nodes tweeted to this node
+weightedInDegree
+	Ile tweetow zostalo wyslanych do tego wezla
+	How many tweets was posted to this node
+</pre>
+		<div id="out_degrees_chart" style="width: 940px; height: 600px;"></div>
+<pre>
+outDegree
+	Liczba uzytkownikow, do ktorych tweetowal dany wezel
+	To how many nodes this node tweeted
+weightedOutDegree
+	Ile tweetow zostalo wyslanych przez ten wezel
+	How many tweets was posted by this node
+</pre>
+		<div id="distances_chart" style="width: 940px; height: 600px;"></div>
+<pre>
+betweenness
+	Jak czesto wezel pojawia sie w najkrotszych sciezkach sieci
+	How often a node appears on shortest path of network
+closeness
+	Srednia odleglosc wezla do innych wezlow w sieci
+	Average distance from a given starting node to all other nodes in the network
+eccentricity
+	Odleglosc wezla od najdalszego mu wezla w sieci
+	Distance from a given starting node to the farthest node from it in the network
+</pre>
 
 
-		<div id="chart_div" style="width: 940px; height: 600px;"></div>
+		<div id="neighborhood_chart" style="width: 940px; height: 600px;"></div>
+<pre>
+clustering
+	Wskazuje jak bardzo wezly sa powiazane w swym sasiedztwie
+	Indicates how nodes are embedded in their neighborhood
+eigenvector
+	Miara waznosci wezla w sieci oparta na jego polaczeniach
+	A measure of node importance in a network based on a node's connections
+</pre>
+		<div id="authority_chart" style="width: 940px; height: 600px;"></div>
+
+<pre>
+authority
+	Jak cenna informacja jest przechowywana w danym wezle
+	How valuable information stored at that node is
+hub
+	Mierzy jakosc polaczen wezla
+	Measure the quality of the nodes link
+</pre>
+
+
+
+
+
+
 	</div>
 
 }

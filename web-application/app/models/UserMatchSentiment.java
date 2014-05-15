@@ -37,7 +37,7 @@ public class UserMatchSentiment implements Serializable {
                 " ORDER BY meg." + column + " DESC";
         return JPA.em().createQuery(query, UserMatchSentiment.class)
                 .setParameter("matchId", matchId)
-                .setMaxResults(5)
+                .setMaxResults(10)
                 .getResultList();
     }
 }
