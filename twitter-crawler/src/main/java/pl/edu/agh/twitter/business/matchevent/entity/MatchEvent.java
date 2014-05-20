@@ -30,6 +30,8 @@ public class MatchEvent {
     @Column(name = "keyword")
     private Set<String> additionalKeywords = new HashSet<String>();
 
+    private Long geotagged;
+
     public MatchEvent() {
     }
 
@@ -87,6 +89,14 @@ public class MatchEvent {
 
     public void setAdditionalKeywords(Set<String> additionalKeywords) {
         this.additionalKeywords = additionalKeywords;
+    }
+
+    public Long getGeotagged() {
+        return geotagged;
+    }
+
+    public void setGeotagged(Long geotagged) {
+        this.geotagged = geotagged;
     }
 
     public Set<String> getKeywords() {

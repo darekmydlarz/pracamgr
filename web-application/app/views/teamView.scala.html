@@ -1,15 +1,33 @@
 @(team: Team, matches: List[Match])
 
 @main(team.toString) {
+
 	<div class="container">
-	<ol id="team-list">
-	@for(matchEvent <- matches) {
-		<li data-id="@matchEvent.id" data-date="@matchEvent.startDate">
-			<a href="@routes.Application.details(matchEvent.id)">@matchEvent</a>
-		</li>
-	}
-	</ol>
-		<div id="in_degrees_chart" style="width: 940px; height: 600px;"></div>
+
+		<table id="matches" class="table table-striped">
+			<thead>
+				<tr>
+					<th>Date</th>
+					<th>Home</th>
+					<th>Away</th>
+					<th>Result</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+			@for(matchEvent <- matches) {
+				<tr data-id="@matchEvent.id" data-date="@matchEvent.startDate">
+					<td>@matchEvent.startDate.format("yyyy-MM-dd HH:mm")</td>
+					<td>@String.format("%,d", matchEvent.tweetsNumber)</td>
+					<td>@matchEvent.homeTeam</td>
+					<td>@matchEvent.awayTeam</td>
+					<td>@matchEvent.info.substring(39, 90)</td>
+					<td><a href="@routes.Application.details(matchEvent.id)">details</a></td>
+				</tr>
+			}
+			</tbody>
+		</table>
+		<div id="in_degrees_chart" class="chart"></div>
 <pre>
 inDegree
 	Liczba uzytkownikow, ktora tweetowala do danego wezla
@@ -18,7 +36,7 @@ weightedInDegree
 	Ile tweetow zostalo wyslanych do tego wezla
 	How many tweets was posted to this node
 </pre>
-		<div id="out_degrees_chart" style="width: 940px; height: 600px;"></div>
+		<div id="out_degrees_chart" class="chart"></div>
 <pre>
 outDegree
 	Liczba uzytkownikow, do ktorych tweetowal dany wezel
@@ -27,7 +45,7 @@ weightedOutDegree
 	Ile tweetow zostalo wyslanych przez ten wezel
 	How many tweets was posted by this node
 </pre>
-		<div id="distances_chart" style="width: 940px; height: 600px;"></div>
+		<div id="distances_chart" class="chart"></div>
 <pre>
 betweenness
 	Jak czesto wezel pojawia sie w najkrotszych sciezkach sieci
@@ -41,7 +59,7 @@ eccentricity
 </pre>
 
 
-		<div id="neighborhood_chart" style="width: 940px; height: 600px;"></div>
+		<div id="neighborhood_chart" class="chart"></div>
 <pre>
 clustering
 	Wskazuje jak bardzo wezly sa powiazane w swym sasiedztwie
@@ -50,7 +68,7 @@ eigenvector
 	Miara waznosci wezla w sieci oparta na jego polaczeniach
 	A measure of node importance in a network based on a node's connections
 </pre>
-		<div id="authority_chart" style="width: 940px; height: 600px;"></div>
+		<div id="authority_chart" class="chart"></div>
 
 <pre>
 authority
@@ -60,10 +78,6 @@ hub
 	Mierzy jakosc polaczen wezla
 	Measure the quality of the nodes link
 </pre>
-
-
-
-
 
 
 	</div>

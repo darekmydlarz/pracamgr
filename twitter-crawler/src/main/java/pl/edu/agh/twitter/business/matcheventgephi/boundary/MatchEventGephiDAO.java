@@ -38,4 +38,11 @@ public class MatchEventGephiDAO {
         final String query = "FROM MatchEventGephi";
         return em.createQuery(query, MatchEventGephi.class).getResultList();
     }
+
+    public List<MatchEventGephi> allForMatch(Long matchEventId) {
+        final String query = "FROM MatchEventGephi meg WHERE meg.matchEventId = :matchEventId";
+        return em.createQuery(query, MatchEventGephi.class)
+                .setParameter("matchEventId", matchEventId)
+                .getResultList();
+    }
 }

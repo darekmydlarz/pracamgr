@@ -1,5 +1,6 @@
 body {
   margin-top: 40px;
+  margin-bottom: 40px;
 }
 
 .center {
@@ -22,7 +23,7 @@ body {
   opacity: 0.5;
 }
 
-.table-scroll {
+.tab-pane {
   display: block;
   height: 400px;
   overflow-y: scroll;
@@ -33,6 +34,13 @@ body {
 }
 
 #map-canvas {
+  height: 500px;
+  width: 100%;
+  margin: 0px;
+  padding: 0px;
+}
+
+#cartomap {
   height: 500px;
   width: 100%;
   margin: 0px;
@@ -60,4 +68,14 @@ body {
   background-image: url('/assets/images/green.png');
   background-size: 0;
   background-repeat: no-repeat;
+}
+
+.chart {
+  width: 940px;
+  height: 600px;
+}
+
+.tab-pane .chart {
+  width: 900px;
+  height: 400px;
 }

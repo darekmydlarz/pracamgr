@@ -1,39 +1,12 @@
-@(matches: List[Match])
-
-@import helper._
-@import helper.twitterBootstrap._
-@import java.text.DateFormat
-
 @main("Twitter Users Analysis") {
-	<h1 style="margin-top: 45px;"><span id="matches-number">@matches.size()</span> match(es)</h1>
-	<form class="form-search">
-		<input type="text" id="searchInput" placeholder="Filter table (you can put many values)" />
-	</form>
-
-	<table id="matches-table" class="table table-hover">
-		<thead>
-			<tr>
-				<th>Start date</th>
-				<th colspan="2">Home Team</th>
-				<th colspan="2">Away Team</th>
-				<th>Competition</th>
-				<th>Tweets</th>
-				<th>Actions</th>
-			</tr>
-		</thead>
-		<tbody>
-		@for(matchEvent <- matches) {
-			<tr>
-				<td>@matchEvent.startDate.format("yyyy-MM-dd HH:mm")</td>
-				<td>@matchEvent.homeTeam</td>
-				<td>@matchEvent.homeTeam.country</td>
-				<td>@matchEvent.awayTeam</td>
-				<td>@matchEvent.awayTeam.country</td>
-				<td>@matchEvent.competition</td>
-				<td class="right">@matchEvent.tweetsNumber</td>
-				<td><a href="@routes.Application.details(matchEvent.id)">More</a></td>
-			</tr>
-		}
-		</tbody>
-	</table>
+	<div class="row">
+		<div class="col-xs-12">
+			<ul>
+				<li><a href="@routes.Application.team("arsenal")">Arsenal Londyn</a></li>
+				<li><a href="@routes.Application.team("chelsea")">Chelsea Londyn</a></li>
+				<li><a href="@routes.Application.team("manchester-united")">Manchester United</a></li>
+				<li><a href="@routes.Application.team("manchester-city")">Manchester City</a></li>
+			</ul>
+		</div>
+	</div>
 }

@@ -6,6 +6,9 @@ import edu.mit.jwi.item.IIndexWord;
 import edu.mit.jwi.item.POS;
 import edu.mit.jwi.morph.IStemmer;
 import edu.mit.jwi.morph.WordnetStemmer;
+import org.apache.log4j.Logger;
+import pl.edu.agh.twitter.business.matchevent.boundary.MatchEventDAO;
+import pl.edu.agh.twitter.business.matchevent.entity.MatchEvent;
 import pl.edu.agh.twitter.business.tweet.boundary.TweetDAO;
 import pl.edu.agh.twitter.business.tweet.entity.Tweet;
 import pl.edu.agh.twitter.sentiment.EmoticonClassifier;
@@ -17,11 +20,29 @@ import java.util.List;
 
 @Singleton
 public class TemporaryTask implements Startable {
+    Logger logger = Logger.getLogger(getClass());
     @Inject
     TweetDAO tweetDAO;
 
+    @Inject
+    MatchEventDAO matchEventDAO;
+
     @Override
     public void start() {
+        countGeotaggedData();
+    }
+
+    private void countGeotaggedData() {
+        final List<MatchEvent> matchEvents = matchEventDAO.fetchAll();
+        for(MatchEvent me : matchEvents) {
+            final Long geotagged = tweetDAO.countGeotagged(me);
+            me.setGeotagged(geotagged);
+            matchEventDAO.merge(me);
+            logger.info(me + " PERSISTED");
+        }
+    }
+
+    private void getAllWithEmoticons() {
         final int size = tweetDAO.getAllWithEmoticons().size();
     }
 

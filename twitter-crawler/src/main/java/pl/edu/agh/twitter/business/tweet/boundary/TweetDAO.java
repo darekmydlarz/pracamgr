@@ -28,6 +28,14 @@ public class TweetDAO {
     @Inject
     private UserDAO userDAO;
 
+    public Long countGeotagged(MatchEvent me) {
+        final EntityTransaction transaction = em.getTransaction();
+        final String query = "SELECT count(*) FROM Tweet t WHERE matchEvent = :me AND coordinates.latitude IS NOT NULL";
+        return ((Number) em.createQuery(query)
+                .setParameter("me", me)
+                .getSingleResult()).longValue();
+    }
+
     public void parseAndPersist(MatchEvent matchEvent, Status status) {
         try {
             final User user = userDAO.createOrGetUser(status.getUser());

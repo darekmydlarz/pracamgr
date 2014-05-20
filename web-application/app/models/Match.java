@@ -25,6 +25,8 @@ public class Match {
 
     public Long tweetsNumber;
 
+    public Long geotagged;
+
     public String info;
 
     public static List<Match> all() {

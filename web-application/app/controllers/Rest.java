@@ -48,9 +48,45 @@ public class Rest extends Controller {
 
     @BodyParser.Of(BodyParser.Json.class)
     @Transactional(readOnly = true)
-    public static Result test(Long matchId, String column) {
-        final List<UserMatchSentiment> some = UserMatchSentiment.findTop(matchId, column);
-        JsonNode jsonNode = Json.toJson(some);
+    public static Result usersSentiment(Long matchId, String column) {
+        final List<UserMatchSentiment> resultList = UserMatchSentiment.findTop(matchId, column);
+        JsonNode jsonNode = Json.toJson(resultList);
+        return ok(jsonNode).as("application/json");
+    }
+
+    @BodyParser.Of(BodyParser.Json.class)
+    @Transactional(readOnly = true)
+    public static Result topCountries(Long matchId) {
+        Match match = Match.findById(matchId);
+        final List<Geodata> resultList = Geodata.topCountries(match);
+        JsonNode jsonNode = Json.toJson(resultList);
+        return ok(jsonNode).as("application/json");
+    }
+
+    @BodyParser.Of(BodyParser.Json.class)
+    @Transactional(readOnly = true)
+    public static Result topStates(long matchId) {
+        Match match = Match.findById(matchId);
+        final List<Geodata> resultList = Geodata.topState(match);
+        JsonNode jsonNode = Json.toJson(resultList);
+        return ok(jsonNode).as("application/json");
+    }
+
+    @BodyParser.Of(BodyParser.Json.class)
+    @Transactional(readOnly = true)
+    public static Result topCounties(long matchId) {
+        Match match = Match.findById(matchId);
+        final List<Geodata> resultList = Geodata.topCounty(match);
+        JsonNode jsonNode = Json.toJson(resultList);
+        return ok(jsonNode).as("application/json");
+    }
+
+    @BodyParser.Of(BodyParser.Json.class)
+    @Transactional(readOnly = true)
+    public static Result topCities(long matchId) {
+        Match match = Match.findById(matchId);
+        final List<Geodata> resultList = Geodata.topCity(match);
+        JsonNode jsonNode = Json.toJson(resultList);
         return ok(jsonNode).as("application/json");
     }
 }

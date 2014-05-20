@@ -27,6 +27,8 @@ public class MatchEventDAO {
 
     public void merge(MatchEvent matchEvent) {
         final EntityTransaction transaction = em.getTransaction();
+        if(!transaction.isActive())
+            transaction.begin();
         em.merge(matchEvent);
         transaction.commit();
     }

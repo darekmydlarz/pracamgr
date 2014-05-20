@@ -24,6 +24,10 @@ $(document).ready(function () {
         $(this).tab('show');
     });
 
+    $("#geodataList").find('a').click(function (e) {
+        e.preventDefault();
+        $(this).tab('show');
+    });
     loadTopPositiveNegative();
 });
 

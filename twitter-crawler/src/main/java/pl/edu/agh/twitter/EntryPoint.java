@@ -2,10 +2,9 @@ package pl.edu.agh.twitter;
 
 
 import org.jboss.weld.environment.se.Weld;
-import pl.edu.agh.twitter.business.UserMatchSentimentCounter;
 
 public class EntryPoint {
-    private final static Class<? extends Startable> startable = UserMatchSentimentCounter.class;
+    private final static Class<? extends Startable> startable = TemporaryTask.class;
 
     public static void main(String[] args) {
         Weld weld = new Weld();

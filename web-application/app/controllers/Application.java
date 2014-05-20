@@ -17,7 +17,7 @@ public class Application extends Controller {
 
     @Transactional(readOnly = true)
     public static Result index() {
-        return ok(index.render(Match.all()));
+        return ok(index.render());
     }
 
     @Transactional(readOnly = true)
@@ -32,5 +32,11 @@ public class Application extends Controller {
         Team team = Team.find(name);
         List<Match> matches = Match.find(team);
         return ok(teamView.render(team, matches));
+    }
+
+    @Transactional(readOnly = true)
+    public static Result geodata(long matchId) {
+        Match match = Match.findById(matchId);
+        return ok(geodata.render(match));
     }
 }

@@ -12,6 +12,7 @@ import pl.edu.agh.twitter.business.usergroup.entity.UserGroup;
 
 import javax.inject.Inject;
 import java.io.*;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.List;
 import java.util.Map;
@@ -44,9 +45,15 @@ public class GephiImporter implements Startable {
 
     @Override
     public void start() {
-        final File[] files = getGephiFiles();
-        for (File f : files) {
-            importMatchEventsGephi(f, getMatchEventIdFromFile(f));
+//        final File[] files = getGephiFiles();
+//        for (File f : files) {
+//            importMatchEventsGephi(f, getMatchEventIdFromFile(f));
+//        }
+        try {
+            File f = new File(getClass().getClassLoader().getResource("gephi/249-manunited-westham.csv").toURI());
+            importMatchEventsGephi(f, 249l);
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
         }
     }
 
@@ -66,8 +73,6 @@ public class GephiImporter implements Startable {
         }
     }
 
-    @Deprecated
-    // user invalid
     private void importMatchEventsGephi(File file, Long matchEventId) {
         try {
             List<MatchEventGephi> items = Lists.newArrayList();
@@ -90,7 +95,7 @@ public class GephiImporter implements Startable {
                 meg.setMatchEventId(matchEventId);
                 meg.setModularityClass(Long.valueOf(row[headers.get("Modularity Class")]));
                 meg.setOutDegree(Long.valueOf(row[headers.get("Out-Degree")]));
-//                meg.setUser(Long.valueOf(row[headers.get("Id")]));
+                meg.setUserId(Long.valueOf(row[headers.get("Id")]));
                 meg.setWeightedDegree(Double.valueOf(row[headers.get("Weighted Degree")]));
                 meg.setWeightedInDegree(Double.valueOf(row[headers.get("Weighted In-Degree")]));
                 meg.setWeightedOutDegree(Double.valueOf(row[headers.get("Weighted Out-Degree")]));

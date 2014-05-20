@@ -28,7 +28,7 @@ public class UserMatchSentimentCounter implements Startable {
 
     @Override
     public void start() {
-        final List<MatchEventGephi> all = matchEventGephiDAO.all();
+        final List<MatchEventGephi> all = matchEventGephiDAO.allForMatch(249l);
         int size = all.size();
         int counter = 1;
         List<UserMatchSentiment> items = Lists.newArrayList();

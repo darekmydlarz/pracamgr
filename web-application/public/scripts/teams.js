@@ -24,7 +24,7 @@ google.load("visualization", "1", {packages:["corechart"]});
 google.setOnLoadCallback(execute);
 
 function execute() {
-    var matches = $("#team-list").find('li');
+    var matches = $("#matches").find("tbody").find('tr');
     processedSize = matches.length * measures.length;
     var processedCounter = 0;
     matches.each(function (matchIndex) {
