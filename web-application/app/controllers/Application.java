@@ -29,7 +29,7 @@ public class Application extends Controller {
 
     @Transactional(readOnly = true)
     public static Result team(String name) {
-        Team team = Team.find(name);
+        Team team = Team.findByName(name);
         List<Match> matches = Match.find(team);
         return ok(teamView.render(team, matches));
     }

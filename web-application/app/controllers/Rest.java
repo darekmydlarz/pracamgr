@@ -1,6 +1,7 @@
 package controllers;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.google.common.collect.Lists;
 import models.*;
 import play.db.jpa.Transactional;
 import play.libs.Json;
@@ -88,5 +89,27 @@ public class Rest extends Controller {
         final List<Geodata> resultList = Geodata.topCity(match);
         JsonNode jsonNode = Json.toJson(resultList);
         return ok(jsonNode).as("application/json");
+    }
+
+    @BodyParser.Of(BodyParser.Json.class)
+    @Transactional(readOnly = true)
+    public static Result matchCliques(long matchId) {
+        final List<CliquesMatch> cliquesMatches = CliquesMatch.findForMatch(matchId);
+        final JsonNode jsonNode = Json.toJson(cliquesMatches);
+        return ok(jsonNode).as("application/json");
+    }
+
+
+    @BodyParser.Of(BodyParser.Json.class)
+    @Transactional(readOnly = true)
+    public static Result teamMatchStats(long teamId) {
+        Team team = Team.findById(teamId);
+        List<Match> matches = Match.find(team);
+        List<MatchStats> matchStats = Lists.newArrayList();
+        for(Match m : matches) {
+            matchStats.add(MatchStats.findByMatchId(m.id, true));
+            matchStats.add(MatchStats.findByMatchId(m.id, false));
+        }
+        return ok(Json.toJson(matchStats)).as("application/json");
     }
 }

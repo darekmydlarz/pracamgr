@@ -7,6 +7,7 @@ import javax.persistence.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(schema = "mgr", name = "match_events")
@@ -28,6 +29,9 @@ public class Match {
     public Long geotagged;
 
     public String info;
+
+    @OneToMany(mappedBy = "match")
+    public Set<CliquesMatch> cliques;
 
     public static List<Match> all() {
         return JPA.em().createQuery("FROM Match ORDER BY startDate DESC", Match.class).getResultList();

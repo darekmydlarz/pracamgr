@@ -2,7 +2,10 @@ package pl.edu.agh.twitter.business.tweet.boundary;
 
 
 import ch.lambdaj.Lambda;
+import com.google.common.collect.Lists;
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
+import pl.edu.agh.twitter.business.Relationship;
 import pl.edu.agh.twitter.business.matchevent.entity.MatchEvent;
 import pl.edu.agh.twitter.business.tweet.entity.Tweet;
 import pl.edu.agh.twitter.business.user.boundary.UserDAO;
@@ -15,6 +18,7 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 
 import static ch.lambdaj.Lambda.on;
@@ -181,5 +185,84 @@ public class TweetDAO {
 
     public List<Tweet> getAllWithEmoticons() {
         return getWithEmoticons(0, Integer.MAX_VALUE);
+    }
+
+
+
+    public List<Relationship> getRelationships(MatchEvent matchEvent) {
+        final String query = " SELECT " +
+                "   u1.screen_name as author, " +
+                "   u2.screen_name as receiver, " +
+                "   count(*) as weight " +
+                " FROM " +
+                "   mgr.tweets t JOIN " +
+                "   mgr.users u1 ON t.user_id = u1.id JOIN " +
+                "   mgr.users u2 ON t.in_reply_to_user_id = u2.id " +
+                " WHERE " +
+                "   in_reply_to_user_id != -1 AND " +
+                "   match_event = :matchId " +
+                " GROUP BY " +
+                "   u1.screen_name, " +
+                "   u2.screen_name " +
+                " HAVING count(*) >= 3 " +
+                " ORDER BY count(*) DESC   ";
+
+        @SuppressWarnings("unchecked")
+        Iterator<Object[]> rowsIterator = em.createNativeQuery(query)
+                .setParameter("matchId", matchEvent.getId())
+                .getResultList().iterator();
+
+        List<Relationship> relationshipList = Lists.newArrayList();
+        while(rowsIterator.hasNext()) {
+            Object[] row = rowsIterator.next();
+            Relationship relationship = new Relationship((String) row[0], (String) row[1], ((Number) row[2]).intValue());
+            relationshipList.add(relationship);
+        }
+
+        return relationshipList;
+    }
+
+
+
+    public List<Relationship> getRelationships(List<MatchEvent> matchEvents) {
+        final String query = " SELECT " +
+                "   u1.screen_name as author, " +
+                "   u2.screen_name as receiver, " +
+                "   count(*) as weight " +
+                " FROM " +
+                "   mgr.tweets t JOIN " +
+                "   mgr.users u1 ON t.user_id = u1.id JOIN " +
+                "   mgr.users u2 ON t.in_reply_to_user_id = u2.id " +
+                " WHERE " +
+                "   in_reply_to_user_id != -1 AND " +
+                "   match_event IN  " + matchesIds(matchEvents.iterator()) +
+                " GROUP BY " +
+                "   u1.screen_name, " +
+                "   u2.screen_name " +
+                " HAVING count(*) >= 3 " +
+                " ORDER BY count(*) DESC   ";
+
+        System.out.println(query);
+
+        @SuppressWarnings("unchecked")
+        Iterator<Object[]> rowsIterator = em.createNativeQuery(query)
+                .getResultList().iterator();
+
+        List<Relationship> relationshipList = Lists.newArrayList();
+        while(rowsIterator.hasNext()) {
+            Object[] row = rowsIterator.next();
+            Relationship relationship = new Relationship((String) row[0], (String) row[1], ((Number) row[2]).intValue());
+            relationshipList.add(relationship);
+        }
+
+        return relationshipList;
+    }
+
+    private String matchesIds(Iterator<MatchEvent> it) {
+        List<Long> ids = Lists.newArrayList();
+        while(it.hasNext()) {
+            ids.add(it.next().getId());
+        }
+        return "(" + StringUtils.join(ids, ",") + ")";
     }
 }

@@ -9,6 +9,7 @@ import javax.persistence.*;
 @Entity
 @Table(schema = "mgr", name = "paroubek_tweets")
 public class ParoubekTweet {
+    public static final double VALENCE_AVG = 0.4786984978198536;
     @Id
     private Long tweetId;
 
@@ -59,6 +60,10 @@ public class ParoubekTweet {
 
     public void setTweet(Tweet tweet) {
         this.tweet = tweet;
+    }
+
+    public boolean isPositive() {
+        return valence > VALENCE_AVG;
     }
 
     @Override

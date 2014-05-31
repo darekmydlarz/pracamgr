@@ -39,10 +39,17 @@ public class Team {
         return name;
     }
 
-    public static Team find(String name) {
+    public static Team findByName(String name) {
         final String query = "FROM Team t WHERE Lower(t.name) LIKE :name";
         return JPA.em().createQuery(query, Team.class)
                 .setParameter("name", "%" + name.toLowerCase().replaceAll("-", " ") + "%")
+                .getSingleResult();
+    }
+
+    public static Team findById(long id) {
+        final String query = "FROM Team t WHERE id = :id";
+        return JPA.em().createQuery(query, Team.class)
+                .setParameter("id", id)
                 .getSingleResult();
     }
 }

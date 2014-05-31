@@ -1,5 +1,7 @@
 package pl.edu.agh.twitter.business.tweet.entity;
 
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 import pl.edu.agh.twitter.business.Coordinates;
 import pl.edu.agh.twitter.business.matchevent.entity.MatchEvent;
 import pl.edu.agh.twitter.business.user.entity.User;
@@ -28,6 +30,11 @@ public class Tweet {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "inReplyToUserId", insertable = false, updatable = false)
+    @NotFound(action = NotFoundAction.IGNORE)
+    private User targetUser;
 
     @ManyToOne
     @JoinColumn(name = "match_event")
@@ -144,6 +151,14 @@ public class Tweet {
 
     public void setMatchEvent(MatchEvent matchEvent) {
         this.matchEvent = matchEvent;
+    }
+
+    public User getTargetUser() {
+        return targetUser;
+    }
+
+    public void setTargetUser(User targetUser) {
+        this.targetUser = targetUser;
     }
 
     @Override

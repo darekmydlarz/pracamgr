@@ -48,7 +48,7 @@ public class UserMatchSentimentCounter implements Startable {
         final List<ParoubekTweet> tweets = paroubekTweetDAO.find(ums.getUserId(), ums.getMatchEventId());
         long positives = 0, negatives = 0;
         for(ParoubekTweet tweet : tweets) {
-            if(tweet.getValence() > VALENCE_AVG) {
+            if(tweet.isPositive()) {
                 positives++;
             } else {
                 negatives++;

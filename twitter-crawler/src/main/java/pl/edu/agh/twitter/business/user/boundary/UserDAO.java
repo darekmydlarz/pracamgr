@@ -69,4 +69,11 @@ public class UserDAO {
         }
         return userCountMap;
     }
+
+    public User findByScreenName(String screenName) {
+        final String query = "FROM User WHERE screenName = :screenName";
+        return em.createQuery(query, User.class)
+                .setParameter("screenName", screenName)
+                .getSingleResult();
+    }
 }
