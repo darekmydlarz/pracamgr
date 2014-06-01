@@ -1,3 +1,9 @@
+Number.prototype.format = function () {
+    return this.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1 ");
+};
+Boolean.prototype.format = function () {
+    return this.toString();
+};
 $(document).ready(function () {
     $("#matches-table").tablesorter();
 
@@ -29,39 +35,111 @@ $(document).ready(function () {
         $(this).tab('show');
     });
     loadTopPositiveNegative();
-    cliques();
+    matchCliques();
     matchStats();
+    teamCliques();
+    cliquesUsersInfo();
 });
+
+function cliquesUsersInfo() {
+    var teamId = $("#match-stats").data("team");
+    if (teamId) {
+        $.getJSON('http://localhost:9000/api/teams/' + teamId + '/cliquesUsers', function (data) {
+            var info = '';
+            $.each(data, function (i, user) {
+                cliquesUsersTable(user.user, user.occurences);
+                info += user.occurences + " x " + user.user.screenName + ' (' + user.positivness.toFixed(2) + '%), '
+            });
+            $('#cliquesUsers').html('<b>Most common users:</b> ' + info);
+        });
+    }
+
+}
+function cliquesUsersTable(user, occurences) {
+    $.getJSON('http://localhost:9000/api/users/' + user.id + '/cliques', function (data) {
+        var trHTML = '';
+        var sentimentSum = 0;
+        var size = Object.keys(data).length;
+        for(var i = 0; i < size; ++i) {
+            var item = data[i];
+            sentimentSum += item.positivness;
+            trHTML += '<tr><td>';
+            $.each(item.users, function (j, user) {
+                trHTML += user.user.screenName + ' (' + user.positivness.toFixed(2) + ' %), ';
+            });
+            trHTML += '</td>' +
+                '<td class="right percentageBg" style="background-size: ' + item.positivness + '% 100% ">' + item.positivness.toFixed(2) + ' %</td>' +
+                '</tr>';
+        }
+        var avgSentiment = sentimentSum / size;
+        trHTML = '<tr><td><b>' + occurences + ' x ' + user.screenName + '</b></td>' +
+            '<td class="right percentageBg" style="background-size: ' + avgSentiment + '% 100% "><b>' + avgSentiment.toFixed(2) + '%</b></td></tr>' + trHTML;
+        $('#users-cliques').find('tbody').append(trHTML);
+    });
+}
+
+
+function teamCliques() {
+    var teamId = $("#match-stats").data("team");
+    if (teamId) {
+        $.getJSON('http://localhost:9000/api/teams/' + teamId + '/cliques', function (data) {
+            var trHTML = '';
+            $.each(data, function (i, item) {
+                trHTML += '<tr>' +
+                    '<td>';
+                $.each(item.users, function (j, user) {
+                    trHTML += user.user.screenName + ' (' + user.positivness.toFixed(2) + ' %), ';
+                });
+                trHTML += '</td>' +
+                    '<td class="right percentageBg" style="background-size: ' + item.positivness + '% 100% ">' + item.positivness.toFixed(2) + ' %</td>' +
+                    '</tr>';
+            });
+            $('#team-cliques').find('tbody').append(trHTML);
+        });
+    }
+}
 
 
 function matchStats() {
     var stats = ['includeRT', 'tweets', 'users', 'positives', 'neutrals', 'negatives', 'geolocated', 'replies', 'retweets'];
     var teamId = $("#match-stats").data("team");
-    if(teamId) {
+    if (teamId) {
+        var teamName = $('#titleLink').data('title');
         $.getJSON("http://localhost:9000/api/team/" + teamId + "/stats", function (data) {
+            var dataSize = Object.keys(data).length;
             // append headers
             var thHTML = '';
-            $.each(data, function(i, matchStats) {
-                var m = matchStats.match;
-                thHTML += '<th>' + m.homeTeam.name + ' - ' + m.awayTeam.name + '</th>';
-            });
+            for (var i = 0; i + 1 < dataSize; i += 2) {
+                var opponentTeam = opponent(teamName, data[i].match);
+                thHTML += '<th colspan="2">' + opponentTeam + '</th>';
+            }
             var $match = $('#match-stats');
             $match.find('thead tr').append(thHTML);
+
             // append values
-           for(key in stats) {
-               var trHTML = '<tr>';
-               for(i in data) {
-                   trHTML += '<td class="pull-right">' + data[i][stats[key]] + '</td>';
-               }
-               trHTML += '</tr>';
-               $match.find('tbody').append(trHTML);
-           }
+            for (var j = 0; j < stats.length; ++j) {
+                var key = stats[j];
+                var trHTML = '<tr>';
+                trHTML += '<td class="right">' + key + '</td>';
+                for (i = 0; i < dataSize; i++) {
+                    var value = data[i][key].format();
+                    trHTML += '<td class="right">' + value + '</td>';
+                }
+                trHTML += '</tr>';
+                $match.find('tbody').append(trHTML);
+            }
         });
+    }
+
+    function opponent(team, matchEvent) {
+        if (matchEvent.homeTeam.name === team)
+            return matchEvent.awayTeam.name + " (A)";
+        return matchEvent.homeTeam.name + " (H)";
     }
 
 }
 
-function cliques() {
+function matchCliques() {
     var matchId = $("#map-canvas").data("id");
     if (matchId) {
         $.getJSON("http://localhost:9000/api/cliques/matches/" + matchId, function (data) {
@@ -73,7 +151,7 @@ function cliques() {
                     trHTML += user.user.screenName + ' (' + user.positivness.toFixed(2) + ' %), ';
                 });
                 trHTML += '</td>' +
-                    '<td class="align-right">' + item.positivness.toFixed(2) + ' %</td>' +
+                    '<td class="right percentageBg" style="background-size: ' + item.positivness + '% 100% ">' + item.positivness.toFixed(2) + ' %</td>' +
                     '</tr>';
             });
             $('#tab-cliques').find('table tbody').append(trHTML);

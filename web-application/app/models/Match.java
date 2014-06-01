@@ -30,6 +30,10 @@ public class Match {
 
     public String info;
 
+    public String goalResult;
+
+    public String infoResult;
+
     @OneToMany(mappedBy = "match")
     public Set<CliquesMatch> cliques;
 

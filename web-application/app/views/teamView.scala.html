@@ -2,9 +2,10 @@
 
 @main(team.toString) {
 
-	<div class="container">
+	<div class="container-fluid">
 
-		<table id="match-stats" data-team="@team.id">
+		<h2>Matches stats</h2>
+		<table id="match-stats" data-team="@team.id" class="table table-bordered table-hover">
 			<thead>
 				<tr>
 					<th>Key</th>
@@ -15,7 +16,8 @@
 			</tbody>
 		</table>
 
-		<table id="matches" class="table table-striped">
+		<h2>Matches list</h2>
+		<table id="matches" class="table table-bordered table-hover">
 			<thead>
 				<tr>
 					<th>Date</th>
@@ -35,12 +37,39 @@
 					<td>@matchEvent.cliques.size()</td>
 					<td>@matchEvent.homeTeam</td>
 					<td>@matchEvent.awayTeam</td>
-					<td>@matchEvent.info.substring(39, 90)</td>
+					<td>@matchEvent.goalResult @matchEvent.infoResult</td>
 					<td><a href="@routes.Application.details(matchEvent.id)">details</a></td>
 				</tr>
 			}
 			</tbody>
 		</table>
+
+		<h2>Cliques</h2>
+		<p id="cliquesUsers"></p>
+		<table id="users-cliques" class="table table-bordered table-hover">
+			<thead>
+				<tr>
+					<th>Users</th>
+					<th>Overall</th>
+				</tr>
+			</thead>
+			<tbody>
+
+			</tbody>
+		</table>
+		<table id="team-cliques" class="table table-bordered table-hover">
+			<thead>
+				<tr>
+					<th>Users</th>
+					<th>Overall</th>
+				</tr>
+			</thead>
+			<tbody>
+
+			</tbody>
+		</table>
+
+		<h2>Charts</h2>
 		<div id="in_degrees_chart" class="chart"></div>
 <pre>
 inDegree

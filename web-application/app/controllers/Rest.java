@@ -9,7 +9,10 @@ import play.mvc.BodyParser;
 import play.mvc.Controller;
 import play.mvc.Result;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 
 public class Rest extends Controller {
 
@@ -111,5 +114,34 @@ public class Rest extends Controller {
             matchStats.add(MatchStats.findByMatchId(m.id, false));
         }
         return ok(Json.toJson(matchStats)).as("application/json");
+    }
+
+    @BodyParser.Of(BodyParser.Json.class)
+    @Transactional(readOnly = true)
+    public static Result teamCliques(long teamId) {
+        final List<CliquesTeam> result = CliquesTeam.findForTeam(teamId);
+        Collections.sort(result, Collections.reverseOrder(new Comparator<CliquesTeam>() {
+            @Override
+            public int compare(CliquesTeam o1, CliquesTeam o2) {
+                return Double.compare(o1.positivness, o2.positivness);
+            }
+        }));
+        return ok(Json.toJson(result)).as("application/json");
+    }
+
+    @BodyParser.Of(BodyParser.Json.class)
+    @Transactional(readOnly = true)
+    public static Result teamCliquesUsers(long teamId) {
+        final List<CliquesTeam> cliquesTeam = CliquesTeam.findForTeam(teamId);
+        final Set<CliquesTeamUser> result = CliquesTeamUser.findForTeam(cliquesTeam);
+        return ok(Json.toJson(result)).as("application/json");
+    }
+
+    @BodyParser.Of(BodyParser.Json.class)
+    @Transactional(readOnly = true)
+    public static Result teamCliquesForUser(long userId) {
+        final List<CliquesTeamUser> userCliques = CliquesTeamUser.findForUser(userId);
+        final List<CliquesTeam> teamList = CliquesTeam.findForUser(userCliques);
+        return ok(Json.toJson(teamList)).as("application/json");
     }
 }
