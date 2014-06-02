@@ -35,7 +35,6 @@ public class CliquesTeam {
     public static List<CliquesTeam> findForUser(List<CliquesTeamUser> users) {
         final String query = "FROM CliquesTeam c WHERE c.id IN :cliquesIds";
         final List<Long> cliquesIds = getCliquesIds(users);
-        System.out.println("Dario1.0 == " + cliquesIds);
         return JPA.em().createQuery(query, CliquesTeam.class)
                 .setParameter("cliquesIds", cliquesIds)
                 .getResultList();

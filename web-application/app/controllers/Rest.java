@@ -110,7 +110,6 @@ public class Rest extends Controller {
         List<Match> matches = Match.find(team);
         List<MatchStats> matchStats = Lists.newArrayList();
         for(Match m : matches) {
-            matchStats.add(MatchStats.findByMatchId(m.id, true));
             matchStats.add(MatchStats.findByMatchId(m.id, false));
         }
         return ok(Json.toJson(matchStats)).as("application/json");
@@ -143,5 +142,12 @@ public class Rest extends Controller {
         final List<CliquesTeamUser> userCliques = CliquesTeamUser.findForUser(userId);
         final List<CliquesTeam> teamList = CliquesTeam.findForUser(userCliques);
         return ok(Json.toJson(teamList)).as("application/json");
+    }
+
+    @BodyParser.Of(BodyParser.Json.class)
+    @Transactional(readOnly = true)
+    public static Result sentimentUserOccurences(long teamId) {
+        final List<UserOccurencesSentimentDTO> aggregatedForTeam = UserTeamStats.getAggregatedForTeam(teamId);
+        return ok(Json.toJson(aggregatedForTeam)).as("application/json");
     }
 }

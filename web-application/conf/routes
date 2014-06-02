@@ -28,6 +28,7 @@ GET        /api/teams/:teamId/cliquesUsers              controllers.Rest.teamCli
 GET        /api/users/:userId/cliques                   controllers.Rest.teamCliquesForUser(userId: Long)
 # match stats
 GET        /api/team/:teamId/stats                      controllers.Rest.teamMatchStats(teamId: Long)
+GET        /api/team/:teamId/sentimentPerOccurences     controllers.Rest.sentimentUserOccurences(teamId: Long)
 
 
 # Map static resources from the /public folder to the /assets URL path

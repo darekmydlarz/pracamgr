@@ -39,7 +39,30 @@ $(document).ready(function () {
     matchStats();
     teamCliques();
     cliquesUsersInfo();
+
+    usersInMatches();
+
+
+    google.load("visualization", "1", {packages:["corechart"]});
+    google.setOnLoadCallback(charts);
 });
+
+
+function usersInMatches() {
+    var teamId = $("#match-stats").data("team");
+    if (teamId) {
+        $.getJSON('http://localhost:9000/api/team/' + teamId + '/sentimentPerOccurences', function (data) {
+            var trHTML = '';
+            $.each(data, function(i, item) {
+                trHTML += '<tr>';
+                trHTML += '<td>' + item.matches + '</td><td class="right">'+item.users.format()+'</td>';
+                trHTML += '</tr>';
+            });
+            $('#users-in-matches').find('tbody').append(trHTML);
+        });
+    }
+}
+
 
 function cliquesUsersInfo() {
     var teamId = $("#match-stats").data("team");
@@ -101,7 +124,7 @@ function teamCliques() {
 
 
 function matchStats() {
-    var stats = ['includeRT', 'tweets', 'users', 'positives', 'neutrals', 'negatives', 'geolocated', 'replies', 'retweets'];
+    var stats = ['tweets', 'users', 'positives', 'neutrals', 'negatives', 'geolocated', 'replies'];
     var teamId = $("#match-stats").data("team");
     if (teamId) {
         var teamName = $('#titleLink').data('title');
@@ -109,7 +132,7 @@ function matchStats() {
             var dataSize = Object.keys(data).length;
             // append headers
             var thHTML = '';
-            for (var i = 0; i + 1 < dataSize; i += 2) {
+            for (var i = 0; i < dataSize; i++) {
                 var opponentTeam = opponent(teamName, data[i].match);
                 thHTML += '<th colspan="2">' + opponentTeam + '</th>';
             }
@@ -122,22 +145,94 @@ function matchStats() {
                 var trHTML = '<tr>';
                 trHTML += '<td class="right">' + key + '</td>';
                 for (i = 0; i < dataSize; i++) {
-                    var value = data[i][key].format();
-                    trHTML += '<td class="right">' + value + '</td>';
+                    var item = data[i];
+                    var value = item[key];
+                    var percentage = 100 * value / item['tweets']
+                    trHTML += '<td class="right">' + value.format() + '</td>';
+                    trHTML += '<td class="right">' + percentage.toFixed(2) + '%</td>';
                 }
                 trHTML += '</tr>';
                 $match.find('tbody').append(trHTML);
             }
         });
     }
+}
 
-    function opponent(team, matchEvent) {
-        if (matchEvent.homeTeam.name === team)
-            return matchEvent.awayTeam.name + " (A)";
-        return matchEvent.homeTeam.name + " (H)";
+function opponent(team, matchEvent) {
+    if (matchEvent.homeTeam.name === team)
+        return matchEvent.awayTeam.name + " (H)";
+    return matchEvent.homeTeam.name + " (A)";
+}
+
+function charts() {
+    matchStatsChart();
+    usersInMatchesChart();
+    function usersInMatchesChart() {
+        var teamId = $("#match-stats").data("team");
+        if (teamId) {
+            $.getJSON("http://localhost:9000/api/team/" + teamId + "/sentimentPerOccurences", function (data) {
+                var chartData = [["# of matches", "# of users"]];
+                $.each(data, function(i, item) {
+                    var row = [item.matches, item.users];
+                    chartData.push(row);
+                });
+                var options = {
+                    title: '# of matches ',
+                    pointSize: 5,
+                    width: 800,
+                    height: 400
+                };
+                var googleData = google.visualization.arrayToDataTable(chartData);
+                var chart = new google.visualization.LineChart(document.getElementById('users-in-matches-chart'));
+                chart.draw(googleData, options);
+            });
+        }
+
     }
 
+    function matchStatsChart() {
+        var stats = ['tweets', 'users', 'positives', 'neutrals', 'negatives', 'geolocated', 'replies'];
+        var teamId = $("#match-stats").data("team");
+        if (teamId) {
+            var teamName = $('#titleLink').data('title');
+            $.getJSON("http://localhost:9000/api/team/" + teamId + "/stats", function (data) {
+                var chartData = [['event'].concat(stats)];
+                var percentageData = [['event'].concat(stats)];
+                var dataSize = Object.keys(data).length;
+
+                for (var i = 0; i + 1 < dataSize; ++i) {
+                    var item = data[i];
+                    if (!item.includeRT) {
+                        var row = [];
+                        var percentageRow = [];
+                        row.push(opponent(teamName, item.match) + ", " + item.match.goalResult + " " + item.match.infoResult);
+                        percentageRow.push(opponent(teamName, item.match) + ", " + item.match.goalResult + " " + item.match.infoResult);
+                        for (var j = 0; j < stats.length; ++j) {
+                            var key = stats[j];
+                            row.push(item[key]);
+                            percentageRow.push(100 * item[key] / item['tweets']);
+                        }
+                        chartData.push(row);
+                        percentageData.push(percentageRow);
+                    }
+                }
+                var options = {
+                    title: 'Match stats',
+                    pointSize: 5,
+                    width: 800,
+                    height: 400
+                };
+                var googleData = google.visualization.arrayToDataTable(chartData);
+                var percentageGoogleData = google.visualization.arrayToDataTable(percentageData);
+                var chart = new google.visualization.LineChart(document.getElementById('match-stats-chart'));
+                var percentageChart = new google.visualization.LineChart(document.getElementById('match-stats-chart-percentage'));
+                chart.draw(googleData, options);
+                percentageChart.draw(percentageGoogleData, options);
+            });
+        }
+    }
 }
+
 
 function matchCliques() {
     var matchId = $("#map-canvas").data("id");
