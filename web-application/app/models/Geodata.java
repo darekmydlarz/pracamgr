@@ -21,6 +21,8 @@ public class Geodata implements Serializable {
     @Transient
     public long positives;
     @Transient
+    public long negatives;
+    @Transient
     public long count;
     @Transient
     public double percentage;
@@ -29,6 +31,38 @@ public class Geodata implements Serializable {
 
     public static List<Geodata> topCountries(Match match) {
         return topColumn(match, "country");
+    }
+
+    public static List<Geodata> topGeodata(Match match, String column) {
+        final String query = " SELECT * FROM ( " +
+                "   SELECT " +
+                "     g."+column+", " +
+                "     COUNT(CASE WHEN sentiment = 'POS' THEN 1 " +
+                "           ELSE NULL END) positives, " +
+                "     COUNT(CASE WHEN sentiment = 'NEG' THEN 1 " +
+                "           ELSE NULL END) negatives " +
+                "   FROM mgr.paroubek_tweets_sentiment pts " +
+                "     JOIN mgr.geodata g ON pts.tweet_id = g.tweet_id " +
+                "   WHERE pts.match_event = :matchId " +
+                "     AND "+column+" IS NOT NULL " +
+                "   GROUP BY "+column+" " +
+                " ) a " +
+                " ORDER BY positives + negatives DESC ";
+        final Iterator<Object[]> iterator = JPA.em().createNativeQuery(query)
+                .setParameter("matchId", match.id)
+                .setMaxResults(3)
+                .getResultList().iterator();
+        final List<Geodata> geodataList = Lists.newArrayList();
+        while(iterator.hasNext()) {
+            Object[] row = iterator.next();
+            Geodata geodata = new Geodata();
+            geodata.teritory = (String) row[0];
+            geodata.positives = ((Number) row[1]).longValue();
+            geodata.negatives = ((Number) row[2]).longValue();
+            geodata.percentage = geodata.positives * 100.0 / (geodata.positives + geodata.negatives);
+            geodataList.add(geodata);
+        }
+        return geodataList;
     }
 
     private static List<Geodata> topColumn(Match match, String column) {
@@ -51,7 +85,7 @@ public class Geodata implements Serializable {
                 " ORDER BY count(*) DESC  ";
         final Iterator<Object[]> iterator = JPA.em().createNativeQuery(query)
                 .setParameter("matchId", match.id)
-                .setMaxResults(30)
+                .setMaxResults(10)
                 .getResultList().iterator();
         final List<Geodata> geodataList = Lists.newArrayList();
         while(iterator.hasNext()) {

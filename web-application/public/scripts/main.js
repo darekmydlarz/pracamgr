@@ -164,9 +164,56 @@ function opponent(team, matchEvent) {
     return matchEvent.homeTeam.name + " (A)";
 }
 
+function geodataChart() {
+    columnChart('country');
+    columnChart('city');
+    columnChart('state');
+    columnChart('county');
+    function columnChart(column) {
+        var teamId = $("#match-stats").data("team");
+        if (teamId) {
+            $.getJSON('http://localhost:9000/api/teams/' + teamId + '/geodata/' + column, function (data) {
+                var countriesPercentage = {};
+                $.each(data, function (key, values) {
+                    var event = key;
+                    $.each(values, function (i, item) {
+                        countriesPercentage[item.teritory] = countriesPercentage[item.teritory] || [];
+                        countriesPercentage[item.teritory][event] = item.percentage;
+                    });
+                });
+
+
+                var headers = ['event'];
+                $.each(countriesPercentage, function (key, value) {
+                    headers.push(key);
+                });
+                var chartData = [headers];
+                console.log(headers);
+                $.each(data, function (key, values) {
+                    var row = [key];
+                    for (var i = 1; i < headers.length; ++i) {
+                        row.push(countriesPercentage[headers[i]][key]);
+                    }
+                    chartData.push(row);
+                })
+                var options = {
+                    title: column,
+                    pointSize: 5,
+                    width: 800,
+                    height: 400
+                };
+                var googleData = google.visualization.arrayToDataTable(chartData);
+                var chart = new google.visualization.LineChart(document.getElementById(column + '-chart'));
+                chart.draw(googleData, options);
+            });
+        }
+    }
+}
+
 function charts() {
     matchStatsChart();
     usersInMatchesChart();
+    geodataChart();
     function usersInMatchesChart() {
         var teamId = $("#match-stats").data("team");
         if (teamId) {

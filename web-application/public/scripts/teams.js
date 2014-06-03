@@ -33,6 +33,9 @@ function execute() {
         var index = dataRows.push({"date": matchDate}) - 1;
         $.each(measures, function (i, measure) {
             $.getJSON("http://localhost:9000/api/users/sentiment/" + matchId + "," + measure, function (data) {
+                var opponentName = opponent($('#titleLink').data('title'), data[0].matchEvent) + ", "
+                    + data[0].matchEvent.goalResult + " " + data[0].matchEvent.infoResult;
+                dataRows[index]["date"] = opponentName;
                 var sentimentSum = 0;
                 $.each(data, function (i, item) {
                     var itemSentiment = item.positives / (item.positives + item.negatives);
@@ -48,6 +51,12 @@ function execute() {
     });
 }
 
+function opponent(team, matchEvent) {
+    if (matchEvent.homeTeam.name === team)
+        return matchEvent.awayTeam.name + " (H)";
+    return matchEvent.homeTeam.name + " (A)";
+}
+
 function drawInDegreesChart() {
     var chartData = [
         [date, inDegree, weightedInDegree]
@@ -61,7 +70,6 @@ function drawInDegreesChart() {
         ];
         chartData.push(chartRow);
     }
-
     var chartDataTable = google.visualization.arrayToDataTable(chartData);
     var chart = new google.visualization.LineChart(document.getElementById('in_degrees_chart'));
     chartOptions.title = 'Sentiment for top 10 users with highest in degrees values';

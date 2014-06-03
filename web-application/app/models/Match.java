@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import play.db.jpa.JPA;
 
 import javax.persistence.*;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -60,6 +59,7 @@ public class Match {
 
     @Override
     public String toString() {
-        return homeTeam + " vs. " + awayTeam  + " (" + new SimpleDateFormat("yyyy-MM-dd HH:mm").format(startDate) + ")";
+//        return homeTeam + " vs. " + awayTeam  + " (" + new SimpleDateFormat("yyyy-MM-dd HH:mm").format(startDate) + ")";
+        return homeTeam + " vs. " + awayTeam  + " (" + goalResult + " " + infoResult + ")";
     }
 }

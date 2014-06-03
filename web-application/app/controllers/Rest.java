@@ -2,6 +2,7 @@ package controllers;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import models.*;
 import play.db.jpa.Transactional;
 import play.libs.Json;
@@ -9,10 +10,7 @@ import play.mvc.BodyParser;
 import play.mvc.Controller;
 import play.mvc.Result;
 
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class Rest extends Controller {
 
@@ -149,5 +147,24 @@ public class Rest extends Controller {
     public static Result sentimentUserOccurences(long teamId) {
         final List<UserOccurencesSentimentDTO> aggregatedForTeam = UserTeamStats.getAggregatedForTeam(teamId);
         return ok(Json.toJson(aggregatedForTeam)).as("application/json");
+    }
+
+    @BodyParser.Of(BodyParser.Json.class)
+    @Transactional(readOnly = true)
+    public static Result topGeodata(Long teamId, String column) {
+        Team team = Team.findById(teamId);
+        List<Match> matches = Match.find(team);
+        final Map<Match, List<Geodata>> resultMap = Maps.newTreeMap(new Comparator<Match>() {
+            @Override
+            public int compare(Match o1, Match o2) {
+                return o1.startDate.compareTo(o2.startDate);
+            }
+        });
+        for(Match match : matches) {
+            final List<Geodata> geodataList = Geodata.topGeodata(match, column);
+            resultMap.put(match, geodataList);
+        }
+        JsonNode jsonNode = Json.toJson(resultMap);
+        return ok(jsonNode).as("application/json");
     }
 }

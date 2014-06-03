@@ -3,34 +3,35 @@
 # ~~~~
 
 # Home page
-GET        /                                            controllers.Application.index()
+GET        /                                               controllers.Application.index()
 
 #
-GET        /details/:id                                 controllers.Application.details(id: Long)
-GET        /teams/:name                                 controllers.Application.team(name: String)
-GET        /geodata/:id                                 controllers.Application.geodata(id: Long)
+GET        /details/:id                                    controllers.Application.details(id: Long)
+GET        /teams/:name                                    controllers.Application.team(name: String)
+GET        /geodata/:id                                    controllers.Application.geodata(id: Long)
 
 # API
-GET        /api/tweets/geotagged/:id                    controllers.Rest.geotagged(id: Long)
-GET        /api/tweets/tweet/:id                        controllers.Rest.tweet(id: Long)
-GET        /api/tweets/match/:matchId/:sentiment        controllers.Rest.topSentiment(matchId: Long, sentiment: String)
-GET        /api/tweets/sentiment/:matchId               controllers.Rest.sentimentInTime(matchId: Long)
-GET        /api/users/sentiment/:matchId,:column        controllers.Rest.usersSentiment(matchId: Long, column: String)
+GET        /api/tweets/geotagged/:id                       controllers.Rest.geotagged(id: Long)
+GET        /api/tweets/tweet/:id                           controllers.Rest.tweet(id: Long)
+GET        /api/tweets/match/:matchId/:sentiment           controllers.Rest.topSentiment(matchId: Long, sentiment: String)
+GET        /api/tweets/sentiment/:matchId                  controllers.Rest.sentimentInTime(matchId: Long)
+GET        /api/users/sentiment/:matchId,:column           controllers.Rest.usersSentiment(matchId: Long, column: String)
 # geodata
-GET        /api/geodata/countries/:matchId              controllers.Rest.topCountries(matchId: Long)
-GET        /api/geodata/states/:matchId                 controllers.Rest.topStates(matchId: Long)
-GET        /api/geodata/counties/:matchId               controllers.Rest.topCounties(matchId: Long)
-GET        /api/geodata/cities/:matchId                 controllers.Rest.topCities(matchId: Long)
+GET        /api/geodata/countries/:matchId                 controllers.Rest.topCountries(matchId: Long)
+GET        /api/geodata/states/:matchId                    controllers.Rest.topStates(matchId: Long)
+GET        /api/geodata/counties/:matchId                  controllers.Rest.topCounties(matchId: Long)
+GET        /api/geodata/cities/:matchId                    controllers.Rest.topCities(matchId: Long)
+GET        /api/teams/:teamId/geodata/:column              controllers.Rest.topGeodata(teamId: Long, column: String)
 # cliques
-GET        /api/cliques/matches/:matchId                controllers.Rest.matchCliques(matchId: Long)
-GET        /api/teams/:teamId/cliques                   controllers.Rest.teamCliques(teamId: Long)
-GET        /api/teams/:teamId/cliquesUsers              controllers.Rest.teamCliquesUsers(teamId: Long)
-GET        /api/users/:userId/cliques                   controllers.Rest.teamCliquesForUser(userId: Long)
+GET        /api/cliques/matches/:matchId                   controllers.Rest.matchCliques(matchId: Long)
+GET        /api/teams/:teamId/cliques                      controllers.Rest.teamCliques(teamId: Long)
+GET        /api/teams/:teamId/cliquesUsers                 controllers.Rest.teamCliquesUsers(teamId: Long)
+GET        /api/users/:userId/cliques                      controllers.Rest.teamCliquesForUser(userId: Long)
 # match stats
-GET        /api/team/:teamId/stats                      controllers.Rest.teamMatchStats(teamId: Long)
-GET        /api/team/:teamId/sentimentPerOccurences     controllers.Rest.sentimentUserOccurences(teamId: Long)
+GET        /api/team/:teamId/stats                         controllers.Rest.teamMatchStats(teamId: Long)
+GET        /api/team/:teamId/sentimentPerOccurences        controllers.Rest.sentimentUserOccurences(teamId: Long)
 
 
 # Map static resources from the /public folder to the /assets URL path
-GET        /assets/*file                                controllers.Assets.at(path="/public", file)
-GET        /webjars/*file                               controllers.WebJarAssets.at(file)
+GET        /assets/*file                                   controllers.Assets.at(path="/public", file)
+GET        /webjars/*file                                  controllers.WebJarAssets.at(file)
