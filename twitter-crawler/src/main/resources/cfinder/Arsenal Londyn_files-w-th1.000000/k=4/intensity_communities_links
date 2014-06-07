@@ -1,0 +1,22 @@
+# The links inside the intensity communities at k=4
+# from D:\Dropbox\Studia\magisterka\cfinder\Arsenal Londyn
+# at no lower link weight threshold,
+# and at no upper link weight threshold.
+# A lower link weight intensity threshold of 1.000000 was set.
+# Links were treated as undirected.
+# No time limit was set for the clique search.
+
+0:
+LeroyAFC KagAyowa
+LeroyAFC Lewbob91
+LeroyAFC MrMeeds
+KagAyowa Lewbob91
+KagAyowa MrMeeds
+Lewbob91 MrMeeds
+1:
+LeroyAFC Lewbob91
+LeroyAFC _VSimmons
+LeroyAFC DavidKD
+Lewbob91 _VSimmons
+Lewbob91 DavidKD
+_VSimmons DavidKD

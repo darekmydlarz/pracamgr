@@ -1,0 +1,60 @@
+# The links inside the intensity communities at k=3
+# from D:\Dropbox\Studia\magisterka\cfinder\Manchester United
+# at no lower link weight threshold,
+# and at no upper link weight threshold.
+# A lower link weight intensity threshold of 1.000000 was set.
+# Links were treated as undirected.
+# No time limit was set for the clique search.
+
+0:
+ManUtd FAHIIM_LDN
+ManUtd __AlFIE_AFC_1
+FAHIIM_LDN __AlFIE_AFC_1
+1:
+MartianSun SamLui17
+MartianSun FearDJ_MUFC
+SamLui17 FearDJ_MUFC
+2:
+_Moussa19 __Salihu
+_Moussa19 ahmadibrahim442
+__Salihu ahmadibrahim442
+3:
+CoughlanGary IanMulcahy86
+CoughlanGary caseysean51
+IanMulcahy86 caseysean51
+4:
+JoeKelleher1 Red_Devil_Marv
+JoeKelleher1 cridheone
+Red_Devil_Marv cridheone
+donovanemile Red_Devil_Marv
+donovanemile cridhe_
+Red_Devil_Marv cridhe_
+donovanemile Red_Devil_Marv
+donovanemile WitchMysticia
+Red_Devil_Marv WitchMysticia
+donovanemile Red_Devil_Marv
+donovanemile cridheone
+Red_Devil_Marv cridheone
+5:
+EddieTrulyReds Mike25MUFC
+EddieTrulyReds stupidiot7
+Mike25MUFC stupidiot7
+6:
+Ralphie_Jr Mike_Nkansah
+Ralphie_Jr lukumanu_
+Mike_Nkansah lukumanu_
+Ralphie_Jr kofi_233
+Ralphie_Jr Mike_Nkansah
+kofi_233 Mike_Nkansah
+7:
+JABDUL_ JSwanzy61
+JABDUL_ Jake__Moss
+JSwanzy61 Jake__Moss
+8:
+KeshwarD chaitanya91
+KeshwarD rashdeep89
+chaitanya91 rashdeep89
+9:
+biyione Kennagq
+biyione edkhineT
+Kennagq edkhineT

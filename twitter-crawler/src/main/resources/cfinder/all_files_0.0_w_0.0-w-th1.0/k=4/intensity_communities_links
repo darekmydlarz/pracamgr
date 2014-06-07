@@ -1,0 +1,105 @@
+# The links inside the intensity communities at k=4
+# from f:\CFinder-2.0.6--1448\C:\Users\Dariusz\Desktop\cfinder-weightmin-3.csv
+# at no lower link weight threshold,
+# and at no upper link weight threshold.
+# A lower link weight intensity threshold of 1.000000 was set.
+# Links were treated as undirected.
+# No time limit was set for the clique search.
+
+0:
+LeroyAFC _VSimmons
+LeroyAFC KagAyowa
+LeroyAFC Lewbob91
+_VSimmons KagAyowa
+_VSimmons Lewbob91
+KagAyowa Lewbob91
+LeroyAFC _VSimmons
+LeroyAFC Lewbob91
+LeroyAFC DavidKD
+_VSimmons Lewbob91
+_VSimmons DavidKD
+Lewbob91 DavidKD
+LeroyAFC _VSimmons
+LeroyAFC DavidKD
+LeroyAFC LongLiveOl
+_VSimmons DavidKD
+_VSimmons LongLiveOl
+DavidKD LongLiveOl
+LeroyAFC MrMeeds
+LeroyAFC KagAyowa
+LeroyAFC Lewbob91
+MrMeeds KagAyowa
+MrMeeds Lewbob91
+KagAyowa Lewbob91
+LeroyAFC uncletempz
+LeroyAFC DavidKD
+LeroyAFC LongLiveOl
+uncletempz DavidKD
+uncletempz LongLiveOl
+DavidKD LongLiveOl
+_VSimmons BassBraga
+_VSimmons KagAyowa
+_VSimmons Lewbob91
+BassBraga KagAyowa
+BassBraga Lewbob91
+KagAyowa Lewbob91
+1:
+21ArsenalFC Alex23860045
+21ArsenalFC Ay_Gunner
+21ArsenalFC Wrighty_8
+Alex23860045 Ay_Gunner
+Alex23860045 Wrighty_8
+Ay_Gunner Wrighty_8
+21ArsenalFC Ay_Gunner
+21ArsenalFC DezilDez
+21ArsenalFC Wrighty_8
+Ay_Gunner DezilDez
+Ay_Gunner Wrighty_8
+DezilDez Wrighty_8
+Alex23860045 Ay_Gunner
+Alex23860045 Wrighty_8
+Alex23860045 GoonerCheema
+Ay_Gunner Wrighty_8
+Ay_Gunner GoonerCheema
+Wrighty_8 GoonerCheema
+2:
+Alqaseem_ Madaraa5
+Alqaseem_ _Moussa19
+Alqaseem_ ahmadibrahim442
+Madaraa5 _Moussa19
+Madaraa5 ahmadibrahim442
+_Moussa19 ahmadibrahim442
+Alqaseem_ _Moussa19
+Alqaseem_ ahmadibrahim442
+Alqaseem_ alanadamu
+_Moussa19 ahmadibrahim442
+_Moussa19 alanadamu
+ahmadibrahim442 alanadamu
+3:
+SuntiCarZola frempongpls
+SuntiCarZola RamboPls
+SuntiCarZola gideun_zulalem
+frempongpls RamboPls
+frempongpls gideun_zulalem
+RamboPls gideun_zulalem
+4:
+theconvincerr Daibi_F
+theconvincerr akinkumy
+theconvincerr zizzlyfrizzly
+Daibi_F akinkumy
+Daibi_F zizzlyfrizzly
+akinkumy zizzlyfrizzly
+5:
+MauriceKilbride nickdevonport
+MauriceKilbride HayleyRidal
+MauriceKilbride JamesNeaveEA
+nickdevonport HayleyRidal
+nickdevonport JamesNeaveEA
+HayleyRidal JamesNeaveEA
+6:
+Ralphie_Jr kofi_233
+Ralphie_Jr Qwe_djo
+Ralphie_Jr Mike_Nkansah
+kofi_233 Qwe_djo
+kofi_233 Mike_Nkansah
+Qwe_djo Mike_Nkansah

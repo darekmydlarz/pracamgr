@@ -1,0 +1,183 @@
+\chapter{Opis systemu}
+\label{chap:opisSystemu}
+\section{Portale społecznościowe}
+Portale społecznościowe to serwisy internetowe, których działanie oparte jest na
+interakcjach pomiędzy ich użytkownikami. Najczęściej użytkownicy tych usług mogą
+tworzyć grupy znajomych i dzielić się informacjami między sobą. Portale
+społecznościowe ułatwiają komunikację między ludźmi z wielu zakątków świata
+gromadząc ich w jednej usłudze. Przy ich pomocy odnalezienie się osób, które
+znają tylko swoje podstawowe dane, staje się prostym zadaniem.
+
+Do jednych z najpopularniejszych tego typu serwisów należą Facebook
+(niekwestionowany lider) -- z ponad 1 miliardem aktywnych
+użytkowników\footnote{http://techcrunch.com/2013/07/24/facebook-growth-2/},
+Twitter -- 250 mln aktywnych
+użytkowników\footnote{http://techcrunch.com/2014/04/29/twitter-beats-in-q1-with-250m-in-revenue-and-picks-up-14m-new-monthly-active-users/},
+LinkedIn -- 260 mln\footnote{Hempel, Jessi (July 1, 2013). "LinkedIn: How It's
+Changing Business". Fortune. pp. 69–74.} czy Google+ z 300
+mln\footnote{http://marketingland.com/google-hits-300-million-active-monthly-in-stream-users-540-million-across-google-63354}
+. O ile niektóre serwisy nie są nastawione na żaden specyficzny rodzaj
+aktywności swoich użytkowników (jak najwięksi gracze: Facebook, Twitter czy
+Google+), o tyle część z nich ukierunkowuje się na wyspecjalizowanych odbiorców,
+oferując przy tym specjalne usługi. Do ich grona można zaliczyć między innymi
+serwisy LinkedIn (profile zawodowe użytkowników -- ułatwianie poszukiwania
+pracy, rozwoju zawodowego), Endomondo (serwis dla sportowców, posiadający
+aplikację mobilną do mierzenia swoich wyników), Flickr (skupiający społeczność
+fotografów prezentujących swoje dzieła), Last.fm (dla muzyków i osób
+interesujących się muzyką) i wiele, wiele innych wyspecjalizowanych serwisów.
+
+Liczba użytkowników portali społecznościowych stale rośnie. Pokolenie, które
+urodziło się w dobie powszechnego internetu korzysta z niego w swobodny sposób,
+dzieląc się swoimi przemyśleniami, zdjęciami czy emocjami. W związku z tym, że
+co raz więcej osób udziela się w tego typu serwisach stają się one ważnym
+przedmiotem badań dla naukowców. Nigdy wcześniej odkrywanie zachowań
+społeczności ludzkich nie było tak proste. Już nie ma potrzeby przeprowadzania
+ankiet bezpośrednich pytając o zachowania czy relacje z innymi, a wystarczy
+dostęp do danych z serwisów społecznościowych, aby móc zauważyć ciekawe rzeczy z
+punktu widzenia socjologii.
+
+Na ich podstawie można dowiedzieć się jak zachowują się ludzie, w jakie grupy
+się łączą i dlaczego -- np.
+wspólne pasje, zainteresowania, tematy bieżące (ślub, studia, wydarzenia na
+świecie), jaki jest czas egzystencji takich grup, jak one ewoluują i dlaczego i
+jaki ma to związek z życiem codziennym ich członków, czy wydarzeniami na
+świecie. Niektóre grupy są gęstsze i bardziej trwałe (np. kibice danej drużyny
+sportowej), a inne luźne i szybko wymierające (np. grupa komentatorów jakiegoś
+pojedynczego wydarzenia na świecie). Przy pomocy mediów społecznościowych
+możliwe jest zauważenie pewnych charakterystycznych zachowań odpowiednich grup,
+co może prowadzić do prób zaspokojenia ich potrzeb, poprzez serwowanie np.
+bardziej dopasowanych reklam, czy nawet działania bardziej konkretne -- jak np.
+wprowadzenie jakiegoś produktu na dany rynek, w którym nie jest on dostępny, a
+jest nim w tym miejscu duże zainteresowanie. Oprócz tych pozornie błahych
+zastosowań, portale społecznościowe mogą mieć dużo większą moc. Na przykład
+podczas zamieszek w Turcji w 2013 roku ludność tego kraju intensywnie
+wykorzystywała Twittera do informowania o wydarzeniach, czy umawiania się na
+zebrania, demonstracje, i tym podobne -- co de facto doprowadziło do zablokowania
+tego serwisu w tym kraju. Usługi te mogą mieć więc także swój duży udział w
+przemianach politycznych świata i dlatego warto się nimi interesować i je badać.
+
+\subsection{W jaki sposób można badać portale społecznościowe}
+Aby móc badać zachowania użytkowników portali społecznościowych na samym
+początku niezbędne jest posiadać dane z tychże usług. Najpopularniejszą formą
+ich zdobywania jest skorzystanie z publicznego API\footnote{API -- Application
+Programming Interface -- interfejs programowania aplikacji, ściśle określony
+zestaw reguł w jaki programy komunikują się miedzy sobą
+(http://pl.wikipedia.org/wiki/Application\_Programming\_Interface)} serwisów
+społecznościowych. W większości przypadków udostępniane dane są limitowane. Na
+przykład Twitter i Facebook wymagają wygenerowania unikalnego klucza dla każdej
+aplikacji klienckiej i na tej podstawie część danych jest dostępna do pobrania.
+Innym sposobem dostępu do danych, jest napisanie programu, który jest crawlerem
+(czyli programem służącym do analizowania struktury dokumentów HTML
+stron/serwisów internetowych) zbierającym dane na temat wybranego serwisu. Dużym
+minusem tego rozwiązania jest to, że jego zaprogramowanie jest większym
+wyzwaniem dla programisty, a także fakt, iż nie jest on odporny na zmiany
+wyglądu stron internetowych i musi być w związku z tym często poprawiany.
+Dodatkowo, w wielu przypadkach ma on dostęp do mniejszej ilości danych, niż ma
+to miejsce w przypadku korzystania z oficjalnych API. Istnieje jeszcze jeden
+sposób pozyskiwania takich danych -- można je po prostu kupić. Ich sprzedażą
+zajmują się wyspecjalizowane serwisy, często mające umowę z portalami
+społecznościowymi (przykładem takiej usługi jest GNIP).
+
+Posiadając już odpowiednie dane można przejść do ich analizy. Można ją
+przeprowadzić korzystając z ogólnie dostępnych programów (np. Gephi, CFinder) a
+także samodzielnie pisząc własne algorytmy i narzędzia służące do wyszukiwania i
+przetwarzania interesujących informacji.
+
+\subsection{Zastosowanie sentymentu i geolokacji w analizie
+zachowań użytkowników portali społecznościowych}
+
+Dotychczasowe badania nad zachowaniami użytkowników portali społecznościowcych
+ukierunkowane są na analizę relacji między nimi - pokazują, kto jest autorytetem
+w danej grupie, kto skupia na sobie największą liczbę osób, przez kogo
+informacje mogą najłatwiej i najszybciej dotrzeć do reszty.
+
+W niniejszej pracy dodatkowo została przeprowadzona analiza sentymentu. Dzięki
+niej można w lepszy sposób ocenić czy i dlaczego tworzą się konkretne grupy
+użytkowników - często osoby prezentujące ten sam wydźwięk wypowiedzi komunikują
+się między sobą.
+
+Wzbogacenie takiego modelu o informacje o geolokacji również staje się źródłem
+kolejnych wniosków - ludzie z jednego miejsca na Ziemii mogą wypowiadać się na
+dany temat w zupełnie inny sposób, niż pozostali. Połączenie ze sobą tych trzech
+obszarów badań pozwala uchwycić lepszy obraz danej sytuacji i wyciągnąć lepsze
+wnioski, bardziej poprawne oraz mniej podatne na błędy.
+
+\newpage \section{Budowa systemu}
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=120mm]{img/budowa-systemu.png}
+\caption{Gruboziarnisty model systemu}
+\label{image:model-systemu}
+\end{figure}
+- gruboziarnisty schemat systemu
+
+- opis modelu
+
+\subsection{Opis modułów systemu}
+[z uwzględnieniem novum]
+
+- twitter listener (słowa kluczowe)
+
+- sentiment classifier (paroubek, dokładnie, dlaczego takie podejście)
+
+- geodata visualizer (google maps, open street maps, cartodb)
+
+- network analyser (gephi, cfinder) - omówić wykorzystanie
+
+- novum: połączenie tych trzech obszarów w jeden
+
+\subsection{Narzędzia użyte do budowy systemu}
+- PostgreSQL
+
+- Maven
+
+- Git
+
+- Java (Crawler - Twitter4j, Classifier, Geodata - REST API)
+
+- IntelliJ IDEA
+
+- pgAdmin III
+
+- Play Framework
+
+- Google Charts / JavaScript
+
+- Google Maps, Open Street Maps, CartoDB Maps 
+
+
+\newpage \section{[Dyskusja wyboru rozwiązania]}
+- Twitter -- publiczne wypowiedzi, nastawaiony na komentowanie wydarzeń na żywo,
+wspiera geolokalizację
+
+- Paroubek Sentiment Classifier -- krótkie wypowiedzi, świetnie się do nich
+nadaje (porównać do innych rozwiązań, dlaczego nie gotowy słownik,
+dlaczego nie Naive Bayes), jak zastosowano negację, co ze słowami kluczowymi,
+zastosowanie emotikon
+
+- Gephi - otwarty, posiada wiele algorytmów
+
+- CFinder - ułatwia szukanie grup
+
+- Google Charts / Maps - wygodne, dobre API do do wykresów i map
+
+- Open Street Map - otwarty projekt, API do wyciągania informacji o miejscu
+na podstawie współrzędnych geograficznych
+
+- moje rozwiązanie jest interesujące ponieważ łączy 
+trzy ciekawe obszary w jeden, dotąd nie łączone
+
+\subsection{Ograniczenia, porównania z innymi podobnymi systemami, złożoność}
+- nie każdy ma Twittera -- badanie obarczone jest pewnym błędem,
+jeśli chciałoby się jego wyniki przypisać całej społeczności
+
+- niewiele osób włącza geolokalizację (domyślnie wyłączona)
+
+- badanie języka jest bardzo trudne (ironia, ukryte żarty, spam, slang, 
+szybko zmienijący się zasób słów, okresowa moda na różne określenia, 
+skróty, błędy typograficzne, ortograficzne, słowa z obcych języków)
+
+
+- klasyfikator sentymentu mimo usunięcia słów kluczowych ściśle związany
+ze zbiorem uczącym i charakterystyką Twittera - tj. krótkich wypowiedzi 
+(do dłuższych recenzji książek, produktów nie spełniłby swojego zadania)
