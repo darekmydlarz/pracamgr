@@ -71,9 +71,11 @@ public class UserDAO {
     }
 
     public User findByScreenName(String screenName) {
-        final String query = "FROM User WHERE screenName = :screenName";
-        return em.createQuery(query, User.class)
+        final List<User> users = em.createNamedQuery(User.FIND_BY_SCREEN_NAME, User.class)
                 .setParameter("screenName", screenName)
-                .getSingleResult();
+                .getResultList();
+        if(users.isEmpty())
+            return null;
+        return users.get(0);
     }
 }

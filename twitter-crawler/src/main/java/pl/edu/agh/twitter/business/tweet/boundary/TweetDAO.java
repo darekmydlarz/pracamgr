@@ -32,6 +32,14 @@ public class TweetDAO {
     @Inject
     private UserDAO userDAO;
 
+    public List<Tweet> findAll(int offset, int limit) {
+        final String query = "FROM Tweet t WHERE t.matchEvent IS NOT NULL";
+        return em.createQuery(query, Tweet.class)
+                .setFirstResult(offset)
+                .setMaxResults(limit)
+                .getResultList();
+    }
+
     public Long countGeotagged(MatchEvent me) {
         final EntityTransaction transaction = em.getTransaction();
         final String query = "SELECT count(*) FROM Tweet t WHERE matchEvent = :me AND coordinates.latitude IS NOT NULL";

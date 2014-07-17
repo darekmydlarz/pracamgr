@@ -1,0 +1,564 @@
+\chapter{Przegląd badań}
+\begin{comment}
+- dużo literatury, przegląd wiedzy dostępnej na dany temat
+- sieci społeczne: SNA + analiza zachowań + grupy
+- analiza sentymentu: techniki, itd
+- twitter
+- badania nad geolokacją, zastosowanie, jak
+\end{comment}
+
+W niniejszym rozdziale znajduje się aktualny stan badań dotyczący 4 tematów,
+które składają się na tę pracę. Na początku opisana jest dziedzina sieci
+społecznych, czym ta nauka się zajmuje, w jakich przypadkach może zostać
+zastosowana.
+Następnie omówiona zostaje analiza sentymentu wypowiedzi i przetwarzanie tekstu
+celem ekstrakcji jego wydźwięku.
+Później skupiam się nad temat związanym z geolokacją i opisem, co można dzięki
+niej się dowiedzieć, a rozdział kończę omówieniem serwisu społecznościowego Twitter,
+który został wykorzystany jako źródło danych do analizy sieci społecznych.
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% SIECI SPOŁECZNE
+\section{Sieci społeczne}
+Termin ten został użyty po raz pierwszy w 1954 roku przez Johna Arundela Barnesa
+\cite{JABarnes}. Oznacza strukturę społeczną, którą tworzą jednostki (np. osoby
+lub organizacje) i połączenia między nimi.
+Analiza sieci społecznych jest badaną od wielu lat dziedziną nauki. Szybki
+rozwój Internetu w XXI wieku wzbogacił ją o bogate źródło danych. Główne obszary
+badań \cite{SNDAtopics} to między innymi:
+\begin{itemize}
+  \item statystyczna analiza sieci społecznych -- opisuje jak wygląda typowa sieć społeczna,
+  badane są połączenia między jednostkami, aby sprawdzić czy posiadają kilka połączeń,
+  czy sieć zbudowana jest z \emph{hubami}, czy może liczba połączeń rozłożona 
+  jest równomiernie,
+  \item odkrywanie grup/społeczności -- jest jednym z głównych tematów analizy 
+  sieci społecznych; szukanie grup związane jest z klasteringiem i odkrywaniem 
+  regionów sieci, które są odpowiednio gęste; problem powiązany jest z badaniem
+  grafów, określaniem jak dzielić sieć na regiony,
+  \item klasyfikacja wierzchołków - w niektórych sieciach część wierzchołków 
+  może być oznaczona; badania skupiają się na tym by korzystając z atrybutów 
+  danego wierzchołka móc ocenić jakie inne również mogłyby przyjąć daną etykietę,
+  \item odnajdywanie ekspertów -- sieci społeczne mogą być używane jako narzędzia
+  w celu odkrywania ekspertów do danego zadania,
+  \item przewidywanie przyszłych połączeń wewnątrz sieci -- wiele badań skupia się
+  na połączeniach wierzchołków celem odkrycia interesujących informacji na temat
+  sieci społecznej; w wielu sieciach połączenia między węzłami są dynamiczne
+  i wynikiem tych badań może być poprawna predykcja przyszłych połączeń
+  węwnątrz sieci,
+  \item ekstrakcja wiedzy z sieci -- polega na eksploracji danych z mediów 
+  społecznościowych i eksploracji tekstu z serwisów społecznościowych; 
+  eksploracja danych dostarcza naukowcom narzędzia do analizy dużych, 
+  złożonych i często zmieniających się danych wewnątrz sieci, a eksploracja tekstu
+  może prowadzić do odkrycia nowych połączeń między węzłami i nowych
+  charakterystyk je łączących; jej użycie wpływawpłynąć na poprawę jakości
+  badanej sieci. 
+\end{itemize}
+
+
+
+\subsection{Przykłady zastosowania sieci społecznych}
+Wyniki badań nad sieciami społecznymi stwarzają wiele możliwości dla różnych
+dziedzin życia. Ich zastosowanie może być zaaplikowane przez:
+\begin{itemize}
+  \item służby porządkowe -- policja może przy ich pomocy odkrywać powiązania
+  między przestępcami i dochodzić do zależności między grupami przestępczymi,
+  a także odkrywać, kogo dane grupy mogłyby zwerbować, 
+  \item badania naukowe -- odkrywanie naukowców zajmujących się podobnymi tematami
+  celem opracowania bardziej kompletnych wyników lub podjęcia nowego,
+  wspólnego tematu,
+  \item przedsiębiorstwa handlowe -- odkrywanie zbliżonych typów klientów i 
+  oferwanie im produktów lub usług do nabycia przy użyciu systemów rekomendujących,
+  \item służby zdrowotne -- użycie sieci społecznych może pomóc w określaniu
+  obszarów, w które rozprzestrzeniają się wirusy gróźnych chorób, dzięki czemu
+  możliwe może być zapobieganie ich dalszej ekspansji.
+\end{itemize}
+
+
+
+\subsection{Reprezentacja sieci społecznych}
+Najczęściej spotykaną reprezentacją sieci społecznych jest reprezentacja grafowa.
+W naturalny sposób modeluje ona jednostki jako węzły grafu i relacje między nimi
+jako krawędzie. W zależności od rodzaju sieci graf taki może być skierowany lub 
+nieskierowany oraz o krawędziach ważonych lub nieważonych. W przypadku
+krawędzi ważonych waga danego połączenia może reprezentować na przykład
+liczbę wiadomości wymienionych między węzłami. Kierunek krawędzi reprezentuje,
+w która stronę dana komunikacja przebiegała. Wygląd takich grafów przedstawia rysunek 
+\ref{image:graf-reprezentacja}.
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=90mm]{img/graf-reprezentacja.png}
+\caption{Przykład grafu nieskierowanego bez krawędzi ważonych (po lewej)
+oraz grafu skierowanego z krawędziami ważonymi (po prawej)}
+\label{image:graf-reprezentacja}
+\end{figure}
+
+
+
+
+\subsection{Miary i pojęcia grafowe}
+Zamodelowanie sieci społecznych w postaci grafów pozwala na skorzystanie z szeregu
+miar związanych z tą dziedziną wiedzy. Dzięki nim możliwe jest odnajdywanie cech
+charakterystycznych danej sieci. Najważniejsze miary pomagające odnaleźć najważniejsze
+węzły to to \cite{estrada}: 
+
+
+\subsubsection{Stopień wierzchołka}
+Miara określająca liczbę krawędzi wchodzących i 
+  wychodzących z wierzchołka (patrz rys. \ref{image:stopien-wierzcholka})
+  
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=60mm]{img/stopien-wierzcholka.png}
+\caption{Graf z oznaczonymi stopniami wierzchołków}
+\label{image:stopien-wierzcholka}
+\end{figure}
+
+W przypadku grafów skierowanych możemy jeszcze mówić o stopniu wchodzącym 
+(ang. \textit{in degree}) oraz wychodzącym (ang. \textit{out degree}) 
+(patrz rys. \ref{image:stopien-wierzcholka-skierowany}).
+  
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=75mm]{img/stopien-wierzcholka-skierowany.png}
+\caption{Graf skierowany z oznaczonymi stopniami wierzchołków}
+\label{image:stopien-wierzcholka-skierowany}
+\end{figure}
+  
+  
+\clearpage
+\subsubsection{Pośrednictwo (ang. \textit{betweenness}) }  
+Liczba najkrótszych ścieżek w grafie, które przechodzą przez dany węzeł podzielona
+przez liczbę wszystkich najkrótszych ścieżek grafu. Przez najkrótszą ścieżkę 
+rozumie się taką ścieżkę między dwoma węzłami grafu, dla której liczba krawędzi
+jest najmniejsza.
+  
+\begin{equation}
+BC(k) = \sum\limits_{i}\sum\limits_{j}\frac{\rho(i, k, j)}{\rho(i, j)}, \quad i \neq j \neq k
+\end{equation}  
+
+Przykładowo aby obliczyć wartość tej miary dla wierzchołka $B$ posłużmy się rysunkiem 
+\ref{image:betweenness}.
+Najkrótsze ścieżki między węzłami innymi niż $B$ to: $ABC,$ $ABD$, $ABE$, $CBD$, $CBE$, $DE$.
+\mbox{W 5 z 6 z nich} znajduje się węzeł $B$, stąd wynika jego wartość \textit{betweenness}
+równa $5/6$. 
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=75mm]{img/betweenness.png}
+\caption{Najkrótsze scieżki przechodzące przez węzeł $B$}
+\label{image:betweenness}
+\end{figure}
+
+Węzły o wysokiej wartości współczynnika \textit{betweenness} są interesujące
+ponieważ mogą kontrolować przepływać informacji wewnątrz sieci oraz
+mogą być zmuszone do przetwarzania większej ilości informacji.
+Z tego wynika też, że mogą być skutecznym celem ataków.
+    
+  
+\clearpage  
+\subsubsection{Bliskość (ang. \textit{closeness})}  
+Znormalizowana odwrotność sumy odległości między węzłami w grafie.
+  
+\begin{equation}
+CC(i) = \frac{N - 1}{\sum\limits_{j}d(i, j)}
+\end{equation}  
+
+Dla każdej pary węzłów liczymy odległość między nimi (liczoną jako liczbę krawędzi),
+a następnie dla każdego wierzchołka dzielimy tę wartość przez $N - 1$, gdzie $N$
+to liczba wierzchołków. Przykładowy graf \ref{image:closeness} i tabela 
+\ref{tab:closeness} z obliczeniami znajdują się poniżej.
+
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=75mm]{img/closeness.png}
+\caption{Suma odległości do pozostałych węzłów w grafie}
+\label{image:closeness}
+\end{figure}
+  
+
+\begin{table}[ht!]  
+\begin{center}  
+\begin{tabular}{| c | c c c c c || c | c |}
+ \hline
+ & \multicolumn{5}{c ||}{Wierzchołki} & Suma odległości & Bliskość (\textit{closeness}) \\
+ \hline
+ & A & B & C & D & E &  $\sum\limits_{j}d(i, j)$ & $CC(i)$ \\
+\hline
+A & 0 & 1 & 2 & 2 & 3 & 8 & 0.5 \\ 
+B & 1 & 0 & 1 & 1 & 1 & 4 & \textbf{1.0} \\ 
+C & 2 & 1 & 0 & 2 & 2 & 7 & 0.57 \\ 
+D & 2 & 1 & 2 & 0 & 1 & 6 & 0.67 \\ 
+E & 3 & 1 & 2 & 1 & 0 & 7 & 0.57 \\ 
+ \hline
+\end{tabular} 
+\end{center} 
+\caption{Odległości między węzłami i wartości miary \textit{closeness}}
+\label{tab:closeness}
+\end{table}
+  
+Węzłem o najmniejszej sumie odległości do innych wierzchołków -- a co za tym idzie --
+o największej wartości bliskości jest węzeł $B$. Wynika z tego, że jest to
+wierzchołek najszybciej rozsyłający informacje wewnątrz sieci pomiędzy jej elementami. 
+
+
+\clearpage
+\subsubsection{Wektor własny (ang. \textit{eigenvector})}
+Miara centralności węzła,  która oceniając dany węzeł bierze także pod uwagę 
+wartości jego sąsiadów (bezpośrednio przyległych węzłów).
+Zastosowanie tej wielkości pozwala wskazać najważniejszy węzeł w sytuacji,
+gdy poprzednie miary zwracają równe wyniki. Wartość tej wielkości wyraża się
+wzorem:
+
+\begin{equation}
+x_i = \frac{1}{\lambda}\sum\limits_{j=1}^nA_{ij}x_j
+\end{equation}
+gdzie $\lambda$ jest stała i równa największej wartości własnej macierzy sąsiedztwa
+danego grafu, a wartość $A_{ij} = 1$, gdy wierzchołki mają wspólną krawędź,
+w przeciwnym wypadku wynosi $0$. Przykładowe wartości wielkości \textit{eigenvector}
+zaprezentowano na rysunku \ref{image:eigenvector}. Wartości te zostały
+obliczone przy pomocy narzędzia Gephi\footnote{https://gephi.github.io/}.
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=40mm]{img/eigenvector.png}
+\caption{Wartości wielkości \textit{eigenvector} w przykładowym grafie}
+\label{image:eigenvector}
+\end{figure}
+
+Dla uzupełnienia terminologii związanej z traktowaniem sieci społecznej
+jako grafu chciałbym przypomnieć jeszcze dwa pojęcia:
+\begin{itemize}
+  \item klika -- podgraf grafu, w którym wszystkie wierzchołki połączone są krawędzią
+  \item k-klika -- klika składająca się z dokładnie $k$-wierzchołków. Na przykład
+  k-klika o $k=3$ to podgraf zbudowany z 3 wierzchołków, gdzie między każdym z 
+  nich znajduje się krawędź (patrz rys. \ref{image:klika}).
+\end{itemize}
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=40mm]{img/klika.png}
+\caption{Wierzchołki $ABC$ tworzą klikę o rozmiarze 3}
+\label{image:klika}
+\end{figure}
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% SENTYMENT
+\clearpage\section{Sentyment wypowiedzi}
+Recenzje, komentarze i opinie odgrywają istotną rolę w ocenie satysfakcji
+z produktu lub usługi czy w badaniu reakcji na wydarzenia. Dane, które zawierają
+takie informacje mają bardzo wysoki potencjał w odkrywaniu wiedzy.
+Dowiadywanie się, co myślą inni ludzie zawsze było bardzo istotne w procesie
+podejmowania decyzji. Internet dał nam możliwości zapoznania się z opiniami
+innych zwykłych ludzi, ale także pozwolił na poznanie komentarzy 
+ekspertów w swoich dziedzinach. Badanie sentymentu -- a więc wydźwięku
+wypowiedzi (ocena wypowiedzi jako pozytywnej, negatywnej lub neutralnej)
+-- odgrywa bardzo istotną rolę. Jak wynika z badań przeprowadzonych na ponad
+2000 dorosłych Amerykanów \cite{pangLee} 81\% użytkowników Internetu
+przynajmniej raz poszukiwało w Internecie informacji o jakimś produkcie
+z czego od 73\% do 87\% osób twierdzi, że recenzje innych miały wpływ
+na ich wybory.
+
+Zastosowanie analizy sentymentu jest bardzo szerokie. Niektóre
+z obszarów jej użycia to \cite{pangLeeApplication}:
+\begin{itemize}
+  \item portale internetowe z opiniami -- zastosowanie analizy sentymentu
+może być użyte do poprawy błędów popełnionych przez użytkowników (gdy opinia
+jest pozytywna, a użytkownik omyłkowo wybrał niską ocenę) lub gdy opinie
+są ewidentnie stronnicze, mogą pomóc w faktycznej ocenie danego przedmiotu czy 
+usługi
+\item jako technologia wspomagająca większe systemy -- analiza sentymentu może
+być wsparciem dla systemów rekomendacji; na przykład może służyć do 
+nie rekomendowania produktów, które otrzymują negatywne opinie; 
+w systemach serwujących reklamy kontekstowe, wykrycie pozytywnego sentymentu
+na stronie może być powodem wyświetlenia jakiejś reklamy,
+a wykrycie negatywnego sentymentu powodem jej ukrycia;
+innym zastosowaniem jest ekstrakcja informacji, która może być
+polepszona poprzez pomijanie zdań subiektywnych, zawierających sentyment
+\item biznes -- poprzez dostarczenie informacji o odbiorze sprzedawanych produktów
+i serwowanych usług; gdy na przykład sprzedawany laptop ma negatywny odbiór
+stosując analizę sentymentu można to bardzo szybko wykryć i dowiedzieć się
+dlaczego zaistniała dana sytuacja; firma może badać swój ogólny odbiór
+w społeczeństwie -- szybko reagować na niezadowolenie klientów, lub wprowadzać
+poprawki do swoich produktów; wykrywanie sentymentu może również pomóc
+przewidzieć wyniki sprzedaży
+\item polityka -- użycie analizy sentymentu jest wręcz naturalne dla tego obszaru
+życia; partie czy politycy mogą badać odbiór społeczeństwa swoich programów
+i decyzji; badanie sentymentu może im na przykład wskazać w jakich miejscach,
+czy przy jakich postaciach się pokazać by zyskać sympatię wyborców; istotne
+również mogą być informacje na temat rekacji społeczeństwa na planowane
+przez rząd zmiany w prawie. 
+\end{itemize}
+
+Krótko mówiąc największym zyskiem związanym z badaniem sentymentu jest możliwość
+zbadania opinii bardzo dużej liczby osób w sposób mechaniczny. Nie ma potrzeby
+przeprowadzania ankiet, pytania ludzi co sądzą na dany temat. Internauci samodzielnie
+przedstawiają swoje opinie w Internecie, a przy pomocy analizy sentymentu bardzo
+łatwe staje się zbadanie nastrojów.
+
+
+\clearpage
+
+Badanie sentymentu nie jest trywialne. Związane jest bezpośrednio z 
+przetwarzaniem języka naturalnego, które niesie ze sobą szereg problemów:
+
+\begin{itemize}
+  \item złożoność języka naturalnego -- bardzo trudnym zadaniem jest nauczenie 
+programu komputerowego pełnego rozumienia języka naturalnego; co więcej każdy
+język jest inny, więc dla każdego konieczne jest zastosowanie różnych
+podejść -- inaczej trzeba zabrać się za badanie sentymentu w języku polskim
+a inaczej w angielskim; język ciągle się rozwija, nie jest martwy,
+\item trudność w analizie kontekstu wypowiedzi -- wykrycie ironii nie jest zadaniem 
+prostym; bardzo często wypowiedzi mogą mieć związek z jakimś pojęciem 
+zupełnie niezrozumiałym dla programu komputerowego, a oczywistym dla człowieka
+(np. idiomy, odniesienia do wydarzeń na świecie)
+\item slang w Internecie, skrótowce, literówki -- wszystkie te elementy
+dodatkowo utrudniają analizę sentymentu; użytkownicy Internetu nie zawsze
+dbają o jakość swojego języka, często stosują skróty, czy wyrażenia slangowe, 
+które mogą być niezrozumiałe dla automatycznego analizatora sentymentu;
+\item SPAM, szum -- wszystkie wpisy, które nie niosą ze sobą żadnej wartości
+a pojawiają się w internetowych forach, serwisach z opiniami również stanowią
+wyzwanie przy budowie narzędzia do analizy sentymentu.
+\end{itemize}
+
+
+\subsection{Techniki badania sentymentu}
+Podejść do badania sentymentu jest wiele. Poniżej przedstawione są te, które
+najlepiej nadają się do badania sentymentu na Twitterze (w związku z tym, że to
+ten serwis jest źródłem danych w tej pracy), a które zostały opisane w artykule 
+\cite{sentimentTechniques}. Oprócz nich przedstawię także metodę opracowaną
+przez Alexandra Paka i Patricka Paroubek'a \cite{pakParoubekSentiment}, którą 
+zastosowałem w swoich badanich. Techniki te to:
+
+\subsubsection{Podejście oparte na słowniku (ang. \textit{lexicon based approach})}
+Podejście polega na zastosowaniu słownika z wyrazami oznaczonymi jako pozytywne
+i negatywne. Klasyfikator ocenia tekst na podstawie liczby wystąpień
+odpowiednich słów. Niestety podejście to ma bardzo wysoki stopień błędów.
+Przykładowa funkcja oceniająca sentyment słowa to:
+\begin{equation}
+X_t = \frac{p(pos | topic, t)}{p(neg | topic, t)}
+\end{equation}
+w tym przypadku wyrazy mają przypisany odpowiedni sentyment w zależności od tematu,
+którego dotyczą.
+
+Największym problemem tego podejścia jest brak mechanizmu radzenia sobie z kontekstem
+słów.
+
+\subsubsection{Naiwny klasyfikator Bayesa (ang. \textit{naive Bayes classifier})}
+Jest to podejście probabilistyczne. W ramach tej metody zakłada się, że dana kategoria
+tekstów $k_1$ (np. pozytywne) charakteryzuje się określonym słownictwem, 
+a inna $k_2$ (negatywne) innym słownictwem. 
+Na tej podstawie określamy prawdopodobieństwo jeszcze przed przeprowadzeniem
+jakiejkolwiek klasyfikacji tekstu. Zakłada się także, że tekst, który posiada
+słownictwo z kategorii $k_1$ w większej liczbie niż z kategorii $k_2$, powinien
+być zaklasyfikowany do tej pierwszej. 
+W tym przypadku jest to określenie klasyfikacji posiadając pewną wiedzę na temat
+badanego tekstu.
+
+Naiwny klasyfikator Bayesa opiera się na założenia o wzajemnej niezależności
+słów. Oznacza to, że wyrazy, które identyfikują określoną kategorię mogą występować
+niezależnie w różnych lub tym samym tekście. Taki naiwny klasyfikator może więc 
+identyfikować i klasyfikować słowa, nie biorąc pod uwagę kontekstu w jakim one
+występują. Pomimo, że jest to podejście naiwne, okazuje się skuteczne ze względu
+na swoją prostotę. Wzór Bayesa określa bowiem prawdopodobieństwo tego, że szanse
+przypisania tekstu do odpowiedniej klasy zależą od tego jak często jego słowa
+należą do różnych klas i jak często do nich nie należą.
+
+Krótko mówiąc, jeśli naiwny klasyfikator Bayesa w wybranym tekście znajdzie więcej
+słów należących do klasy pozytywnej i jednocześnie mniej należących do negatywnej,
+wówczas większe będzie prawdopodobieństwo zaklasyfikowania tekstu do pierwszej
+kategorii. Klasyfikator ten zbiera uczy się klas wyrazów sukcesywnie analizując
+kolejne teksty \cite{tomanekSentyment}.
+
+
+
+\subsubsection{Technika maksymalnej entropii (ang. \textit{maximum entropy technique})}
+Technika estymacji rozkładu prawdopodobieństwa. Główna zasada polega na tym,
+że jeśli dane nie są dobrze znane, rozkład powinien być jak najbardziej jednolity,
+to znaczy mieć maksymalną entropię. Do tej techniki mogą dochodzić ograniczenia,
+które pozwalają by rozkład nie był maksymalnie jednolity. Ograniczenia
+takie mogą pochodzić z oznaczonych już danych treningów i reprezentowane jako
+oczekiwane wartości wybranych cech (wyrazów). 
+
+Na przykład w jakimś przypadku
+możemy założyć, że 50\% wpisów jest pozytywnych, wówczas pozostałe klasy
+powinny posiadać po 25\% prawdopodobieństwa (negatywne, neutralne).
+Taki model jest łatwy do zbudowania, ale staje się on bardziej skomplikowany
+wraz z rosnącą liczbą ograniczeń. Jako cechy dodawane mogą być również
+składniki wielowyrazowe zwiększające skuteczność tej techniki. Dlatego też
+podejście to nie cierpi z powodu założenia o niezależności wyrazów.
+Przykładowo wyrażenie ,,do widzenia'' może być traktowane jako całościowy term,
+a nie jako każdy wyraz z osobna.
+
+Niestety w związku z tym, że ograniczenia pochodzą z danych treningowych,
+jest duża szansa, że dane te będą relatywnie rzadkie i metoda ta może prowadzić
+do przeuczenia.
+
+
+\subsubsection{Maszyny wektorów nośnych (ang. \textit{support vector machines})}
+Support vector machines to podejście stosujące duży margines między klasami.
+Główna idea polega na znalezieniu hiperpłaszczyzny, która podzieli teksty na pozytywne
+i negatywne z marginesem pomiędzy klasami tak dużym jak to tylko możliwe.
+Technika ta zbudowana jest na zasadzie strukturalnej minimalizacji ryzyka 
+(ang. \textit{structural risk minimization principle}). Celem jest znalezienie
+funkcji $h$, dla której błąd klasyfikacji losowego tekstu będzie jak najmniejszy.
+Oznaczając hiperpłaszczyznę przez $\vec{h}$, a tekst przez $\vec{t}$ oraz klasy, do
+których może trafić jako $C_j \in \{1, -1\}$ wówczas możemy zapisać to 
+postaci:
+\begin{equation}
+\vec{h} = \sum\limits_{i}\alpha_iC_i\vec{t_j}, \quad \alpha_i \geq 0
+\end{equation}
+
+Wartość $\alpha_i$ może być znaleziona przez rozwiązanie problemu podwójnej 
+optymalizacji. Teksty o $\alpha_i$ większym od zera, to te które biorą udział
+w szukaniu funkcji $h$ nazywa się je wektorami wspierającymi 
+(ang. \textit{support vectors}).
+
+Wybór cech (wyrazów) jest bardzo ważnym zadaniem w technikach uczenia maszynowego.
+Musi to zostać tak wykonane by uniknąć przeuczenia i jednocześnie zwiększyć
+ogólną dokładność. Maszyny wektorów nośnych mają wysoki potencjał radzenia
+sobie z dużą liczbą wymiarów. Mierzą złożoność hipotezy którą dzielą dokumenty, 
+a nie liczbę cech. W związku z tym liczba cech nie jest problemem.
+Technika ta radzi sobie z duża liczbą słów poprzez oznaczanie części z nich jako
+nieistotne (tych najrzadziej pojawiających się). Niestety czasami prowadzi to 
+do utraty informacji. 
+
+Chociaż SVM przewyższa wszystkie tradycyjne metody klasyfikacji sentymentu,
+to niestety jest czarną skrzynką. Trudne jest zbadanie natury klasyfikacji i
+zidentyfikowanie, które słowa są dla niej istotne. Jest to jedna z głównych wad
+korzystania z tej techniki do klasyfikacji tekstów. 
+
+\subsubsection{Metoda Alexandra Paka i Patricka Paroubek'a}
+Technika jest odpowiedzią na problemy związane z brakiem odpowiedniego słownika
+do oceny sentymentu. Została opracowana z uwzględnieniem Twittera i korzysta
+w związku z tym z pewnych założeń. Skoro nie ma żadnego idealnego słownika
+ze słowami oznaczonymi jako pozytywne lub negatywne, to trzeba go mechanicznie
+zbudować. Do budowy takiego leksykonu zostały wykorzystane wpisy na Twitterze,
+które zawierają emotikony podzielone na pozytywne (np. \texttt{:)}) i 
+negatywne (np. \texttt{;(}). 
+
+Następnie spośród ściągniętych wpisów z Twittera analizowane są te,
+które zawierają odpowiednie emotikony i zliczana jest liczba wystąpień
+każdego wyrazu w każdym ze zbiorów (pozytywnym i negatywnym).
+W wyniku tego budowany jest leksykon zawierający wyrazy wraz z liczbą
+ich wystąpień w każdej z klas.
+W związku z tym, że wpisy na Twitterze ograniczone są do 140 znaków, autorzy przyjęli
+założenie, że emotikona dotyczy całego wpisu. 
+Ocena tekstu $T$ składającego się z wyrazów $w_1, w_2, \ldots w_n$ obliczana 
+jest jako:
+\begin{equation}
+valence(T) = \frac{\sum\limits_{i = 1}^n valence(w_i)}{n}
+\end{equation}
+
+gdzie wartość $valence(w_i)$ obliczana jest przy zastosowaniu skonstruowanego
+leksykonu i równa delta IDF (ang. \textit{inverse document frequency} -- 
+powszechnie stosowana miara ważności słowa w oparciu o liczbę wystąpień):
+\begin{equation}
+valence(w_i) = log\frac{N(w_i, M^+) + 1}{N(w_i, M^-) + 1}
+\end{equation} 
+Zastosowanie takiego wzoru prowadzi do tego, że niezależnie jak często
+dany wyraz pojawił się w zbiorze treningowym, najważniejsza jest jego polaryzacja.
+Gdy na przykład słowo \textit{świetny} pojawiło się w zbiorach pozytywnym
+i negatywnym odpowiednio 1000 i 20 razy, a słowo \textit{przezacny} odpowiednio
+50 i 1 raz to ich wpływ na ocenę tekstu będzie identyczny.
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% GEOLOKACJA
+\clearpage\section{Geolokacja}
+Geolokacja to identyfikacja położenia geograficznego jakiegoś obiektu.
+Może odnosić się do procesu zdobywania takiej informacji lub do już zdobytej
+wiedzy na ten temat. Główne sposoby pozyskiwania takich danych to:
+\begin{itemize}
+  \item korzystanie z urządzeń GPS -- wbudowanych we współczesne telefony
+komórkowe, tablety, itp.,
+  \item pozycjonowanie względne -- ustalanie pozycji na podstawie bazowych stacji
+telefonii komorków, ruterów WI-FI,
+\item użcyie bazy adresów przypisanych do IP.
+\end{itemize} 
+Zastosowanie geolokacji może być bardzo szerokie, między innymi:
+\begin{itemize}
+  \item dostarczanie lokalnych wiadomości
+  \item dystrybucja treści cyfrowych -- może być np. blokowana możliwość kupna, 
+  dla niektórych lokalizacji
+  \item wyszukiwanie lokalnych usług, przedsiębiorstw
+  \item wyświetlanie zlokalizowanych reklam
+  \item zapobieganie nadużyciom zakupowym -- sprawdzenie geolokacji
+  klienta sklepu internetowego i porównanie jej z danymi z karty kredytowej,
+  w celu ochrony osób, którym na przykład taka karta została skradziona
+  \item prezentowanie różnych treści na stronach w zależności od lokalnego
+  prawego (np. ukrywanie treści zabronionych w danym miejscu).
+\end{itemize}
+W szczególności w przypadku sieci społecznych geolokacja może być pomocna do
+ustalenia miejsca przebywania danych grup i może prowadzić
+do uzupełnienia zebranych danych o kolejne, wzbogacające analizę danej społeczności,
+pozwalające na wyciągnięcie bogatszych wniosków. Pomocnym może być na przykład
+zbadanie reakcji społeczeństwa w różnych regionach kraju na planowane zmiany
+w prawie przez rząd -- i może to prowadzić albo do ich wprowadzenia albo wycofania.
+
+Jako główne zalety stosowania geolokacji z punktu widzenia użytkowników
+telefonów komórkowych, sieci społecznych (\cite{lostInGeolocation}
+to dzielenie się ze społecznością (56\%) oraz dzielenie się z osobami, które znają
+lub mogą spotkać (41\%). Głównymi problemami, przed dzieleniem się geolokacją
+są obawy o prywatność (33\%) oraz brak korzyści, zainteresowania (26\%).
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TWITTER
+\clearpage\section{Twitter}
+Twitter to serwis społecznościowy o charakterystyce mikrobloga. Pozwala on
+na umieszczanie wpisów nie dłuższych niż 140 znaków. Domyślnie wszystkie 
+wpisy są publiczne, a użytkownicy mają możliwość publicznej wymiany zdań
+z innymi. Każdy użytkownik ma możliwość wyboru użytkowników, których
+wpisy chce widzieć na swojej stronie głównej (patrz rys. \ref{image:twitter-screen}).
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=160mm]{img/twitter-screen.png}
+\caption{Strona główna serwisu Twitter}
+\label{image:twitter-screen}
+\end{figure}
+
+
+ Podstawowe pojęcia związane z 
+tym serwisem to:
+\begin{itemize}
+  \item śledzenie (ang. \textit{follow}) -- osób, organizacji; śledzenie jakiegoś
+  użytkownika oznacza wyświetlanie wszystkich jego wpisów na swojej stronie
+  głównej 
+  \item tweet -- pojedynczy wpis/post na Twitterze; maksymalnie długość to 140
+  znaków; może dodatkowo zawierać zdjęcie lub informację o geolokalizacji,
+  \item retweet -- oznacza przekazanie jakiegoś wpisu dalej; jeśli użytkownik A
+  śledzi użytkownika B i użyje funkcji retweet dla jednego z jego wpisów, 
+  wówczas osoby śledzące użytkownika A, również zobaczą ten wpis na
+  swojej stronie głównej,
+  \item odpowiedź (ang. \textit{reply}) -- odpisanie na jakąś wiadomość w serwisie
+  Twitter, skomentowanie jej; serwis łączy takie wpisy w jedną grupę, wyświetlając
+  je jeden obok drugiego,
+  \item newsfeed -- inaczej strona główna użytkownika, na której widzi wszystkie
+  tweety wysłane przez osoby, które śledzi,
+  \item hashtag -- użycie symbolu \# wraz z jakimś słowem, ułatwia
+  rozmowy na wspólne tematy, wśród większych grup użytkowników 
+  (np. \#worldcupfinal dla osób komentujących finał mistrzostw świata).
+\end{itemize} 
+
+\subsection{Twitter jako źródło danych}
+
+
+

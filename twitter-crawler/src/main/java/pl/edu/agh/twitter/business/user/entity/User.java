@@ -3,16 +3,16 @@ package pl.edu.agh.twitter.business.user.entity;
 import com.google.common.collect.Maps;
 import pl.edu.agh.twitter.business.team.entity.Team;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import java.util.Date;
 import java.util.Map;
 
 @Entity
 @Table(schema = "mgr", name = "users")
+@NamedQuery(name = User.FIND_BY_SCREEN_NAME, query = User.FIND_BY_SCREEN_NAME_QUERY)
 public class User {
+    public static final String FIND_BY_SCREEN_NAME = "FIND_BY_SCREEN_NAME";
+    public static final String FIND_BY_SCREEN_NAME_QUERY = "FROM User WHERE screenName = :screenName";
     @Id
     private Long id;
     private String name;
@@ -33,6 +33,7 @@ public class User {
 
     @Transient
     private Map<Team, Long> teamMap = Maps.newHashMap();
+    private String topTeam;
 
     public User(twitter4j.User user) {
         id = user.getId();
@@ -198,5 +199,13 @@ public class User {
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (screenName != null ? screenName.hashCode() : 0);
         return result;
+    }
+
+    public void setTopTeam(String topTeam) {
+        this.topTeam = topTeam;
+    }
+
+    public String getTopTeam() {
+        return topTeam;
     }
 }

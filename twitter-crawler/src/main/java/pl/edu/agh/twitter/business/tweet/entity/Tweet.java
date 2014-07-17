@@ -12,7 +12,11 @@ import java.util.Date;
 
 @Entity
 @Table(schema = "mgr", name = "tweets")
+@NamedQuery(name = Tweet.FIND_RETWEETED_TWEETS, query = Tweet.FIND_RETWEETED_TWEETS_QUERY)
 public class Tweet {
+    public static final String FIND_RETWEETED_TWEETS_QUERY = "FROM Tweet t WHERE t.text LIKE 'RT @%:%' AND t.retweetUserId IS NULL";
+    public static final String FIND_RETWEETED_TWEETS = "FIND_RETWEETED_TWEETS";
+
     @Id
     private Long id;
 
@@ -47,6 +51,7 @@ public class Tweet {
 
     private int favouriteCount;
 
+    private Long retweetUserId;
 
     public Tweet(Status status, User user, MatchEvent matchEvent) {
         this.user = user;
@@ -159,6 +164,14 @@ public class Tweet {
 
     public void setTargetUser(User targetUser) {
         this.targetUser = targetUser;
+    }
+
+    public Long getRetweetUserId() {
+        return retweetUserId;
+    }
+
+    public void setRetweetUserId(Long retweetUserId) {
+        this.retweetUserId = retweetUserId;
     }
 
     @Override
