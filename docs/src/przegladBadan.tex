@@ -522,7 +522,8 @@ są obawy o prywatność (33\%) oraz brak korzyści, zainteresowania (26\%).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TWITTER
 \clearpage\section{Twitter}
-Twitter to serwis społecznościowy o charakterystyce mikrobloga. Pozwala on
+Twitter to serwis społecznościowy o charakterystyce mikrobloga zorientowany
+na szybką i bezpośrednią komunikację. Pozwala on
 na umieszczanie wpisów nie dłuższych niż 140 znaków. Domyślnie wszystkie 
 wpisy są publiczne, a użytkownicy mają możliwość publicznej wymiany zdań
 z innymi. Każdy użytkownik ma możliwość wyboru użytkowników, których
@@ -535,9 +536,7 @@ wpisy chce widzieć na swojej stronie głównej (patrz rys. \ref{image:twitter-s
 \label{image:twitter-screen}
 \end{figure}
 
-
- Podstawowe pojęcia związane z 
-tym serwisem to:
+Podstawowe pojęcia związane z tym serwisem to:
 \begin{itemize}
   \item śledzenie (ang. \textit{follow}) -- osób, organizacji; śledzenie jakiegoś
   użytkownika oznacza wyświetlanie wszystkich jego wpisów na swojej stronie
@@ -559,6 +558,31 @@ tym serwisem to:
 \end{itemize} 
 
 \subsection{Twitter jako źródło danych}
+Twitter używany jest przez 140 milionów użytkowników wysyłających ponad 400 
+milionów wpisów dziennie. Szybkość komunikacji i łatwość publikacji wpisów
+sprawia, że staje się medium komunikacyjnym dla wielu grup ludzi.
+Odgrywał ważną rolę w wydarzeniach społeczno-politycznych,
+takich jak Arabska Wiosna w 2010, czy okupowanie Wall Street w 2012 
+(\cite{TwitterDataAnalytics2013}).
+Serwis ten jest również bardzo często wykorzystywany do komentowania wydarzeń
+sportowych. W trakcie mundialu w Brazylii użytkownicy wysłali 672 miliony
+wpisów z tagiem \#WorldCup \cite{TwitterStatsWorldCup}.
 
+Popularność Twittera jako źródła informacji doprowadziła do rozwoju badań
+w różnych dziedzinach. Pomoc humanitarna i w przypadku klęsk żywiołowych
+jest jedną z domen, gdzie informacje z Twittera są używane w celu zapewnienia
+odpowiedniej pomocy. Naukowcy wykorzystują go by przewidzieć występowanie trzęsień
+ziemi i określić odpowiednich użytkowników, których śledzenie dostarcza informacji
+związanych z katastrofą \cite{TwitterDataAnalytics2013}.
 
+Dane z Twittera można uzyskać poprzez API udostępniające 1\% wpisów.
+Pozyskanie większej ich liczby wiąże się z dodatkowymi opłatami, z których
+korzystają największe przedsiębiorstwa badające społeczność Twittera.
+Korzystając ze Streaming API mamy możliwość konsumowania na żywo
+wpisów spełniających podane kryteria wyszukiwania (np. słowa kluczowe, lokalizację).
+Serwis udostępnia również REST API, które służy do pozyskiwania statycznych danych
+-- wpisów użytkownika w momencie wysłania żądania, listy jego obserwowanych,
+czy szczegółowych danych go dotyczących. Tweety zawierające dane o lokalizacji
+są do klienta przesyłane wraz z tą informacją, dzięki czemu możliwe jest
+skorzystanie z nich w analizach.
 
