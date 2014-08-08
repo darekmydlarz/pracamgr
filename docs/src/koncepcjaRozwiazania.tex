@@ -24,32 +24,81 @@ i całość kończę omówieniem wykorzystania geolokacji w moich badaniach
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% MODEL SYSTEMU
 \section{Model systemu}
 \label{section:modelsystemu}
-Stworzony przeze mnie system składa się z kilku modułów. Trzy najważniejsze
-z nich to:
+Stworzony system zbudowany jest z kilku modułów. Wyróżnić można jego
+trzy główne części:
 \begin{itemize}
   \item gromadzenie danych,
   \item przetwarzanie danych,
   \item analiza zebranych danych.
-\end{itemize}
-Wszystkie dane gromadzone są w jednej bazie danych.
-Gruboziarnisty model systemu przedstawiony został na rysunku 
+\end{itemize} 
+Wszystkie informacje zapisywanie są w jednej, centralnej bazie danych.
+Schemat systemu zaprezentowany jest na rysunku 
 \ref{image:gruboziarnisty-model-systemu}.
+
+
 \clearpage
 
 \begin{figure}[ht!]
 \centering
-\includegraphics[width=160mm]{img/budowa-systemu.png}
+\includegraphics[width=140mm]{img/budowa-systemu.png}
 \caption{Gruboziarnisty model systemu}
 \label{image:gruboziarnisty-model-systemu}
 \end{figure}
 
+Każda z wyróżnionych powyżej części systemu bierze udział w innym etapie
+badań. Na początku najważniejsze jest gromadzenie danych, po którym następuje
+ich przetwarzanie by na końcu zająć się analizą i próba ekstrakcji wiedzy.
+Wszystkie te części są ze sobą połączone wspólną bazą danych, w której
+przechowywana jest zgromadzona wiedza i wyniki przetwarzania i analizy danych.
+Poniżej pokrótce omówione są wszystkie z tych części.  
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% GROMADZENIE DANYCH
 \section{Gromadzenie danych}
 \label{section:gromadzeniedanych}
+W tej sekcji opisuję sposób przeprowadzenia początkowych prac związanych
+z moimi badaniami, które związane były ze zgromadzeniem danych potrzebnych
+do przeprowadzania analiz. Etap ten był niezwykle istotny i przeprowadzenie
+go, umożliwiło dalsze prace. Zgromadzone dane pochodzą z serwisu Twitter
+i zostały uzyskane przy pomocy udostępnionego publicznie API (interfejsu
+programistycznego).
+
 \subsection{Tematyka danych}
 % piłka nożna, kibice
+Aby przeprowadzić analizę danych koniecznym było wybranie podzbioru
+użytkowników Twittera. Dwa aspekty zadecydowały o tym, że skupiono się nad
+analizą anglojęzycznego środowiska piłkarskiego:
+\begin{itemize}   
+  \item struktura językowa użytkowników sieci Twitter -- według badań firmy Gnip
+  \cite{GnipTwitterLanguages} (zajmującej się gromadzeniem danych z tego serwisu
+  społecznościowego) w 2013 roku ponad 50\% tweetów wysłanych zostało w języku
+  angielskim.
+  Dla porównania w języku polskim było to zaledwie 0.11\%.
+  Dlatego też badanie użytkowników anglojęzycznych ma największy sens, gdyż
+  prowadzi do zebrania największej liczby tweetów.
+  Wybór konkretnego języka komunikacji jest o tyle istotny, iż wpływa znacznie
+  na część badań związaną z analizą sentymentu,
+  \item dynamika wpisów na Twitterze -- w związku z narzuconym w serwisie
+  ograniczeniem na liczbę znaków wpisu (140) oraz sposobem ich prezentowania
+  użytkownikom na ich stronie głównej (chronologicznie) serwis ten
+  charakteryzuje się wysoką dynamiką informacji wysyłanych przez użytkowników.
+  Wpisy bardzo często odnoszą się do aktualnych wydarzeń, krótko je komentując.
+  W związku z tym badanie środowiska piłkarskiego ma duży sens, gdyż zainteresowani
+  futbolem internauci mają wiele tematów do dyskusji -- komentowanie spotkań na żywo,
+  refleksje po meczach i dyskusje między spotkaniami.
+  W profesjonalnych ligach piłkarskich mecze odbywają się co najmniej raz w tygodniu,
+  a informacje o stanie kadrowym, kontuzjach i nadziejach przed meczem
+  rozpalają kibiców swoich drużyn. W związku z wysoką dynamiką świata piłkarskiego,
+  użytkownicy Twittera będący kibicami tworzą proporcjonalnie dużą liczbę
+  tweetów -- komentując na biężąco wszelkie wydarzenia. Dlatego też wybór
+  tej podgrupy do moich badań jest racjonalny i daje możliwość zbadania 
+  zachowań użytkowników społecznościowych dostarczając wiele tweetów, na których
+  można przeprowadzić analizy.
+\end{itemize}  
+
+
 \subsection{Sposób zbierania danych}
-% słowa kluczowe, API, nasłuchiwanie
+% wybrane kluby, słowa kluczowe, API, nasłuchiwanie
+
 \subsection{Podstawowe statystyki danych}
 
 
