@@ -79,8 +79,8 @@ analizą anglojęzycznego środowiska piłkarskiego:
   na część badań związaną z analizą sentymentu,
   \item dynamika wpisów na Twitterze -- w związku z narzuconym w serwisie
   ograniczeniem na liczbę znaków wpisu (140) oraz sposobem ich prezentowania
-  użytkownikom na ich stronie głównej (chronologicznie) serwis ten
-  charakteryzuje się wysoką dynamiką informacji wysyłanych przez użytkowników.
+  użytkownikom na ich stronie głównej (chronologicznie od najnowszych) serwis
+  ten charakteryzuje się wysoką dynamiką informacji wysyłanych przez użytkowników.
   Wpisy bardzo często odnoszą się do aktualnych wydarzeń, krótko je komentując.
   W związku z tym badanie środowiska piłkarskiego ma duży sens, gdyż zainteresowani
   futbolem internauci mają wiele tematów do dyskusji -- komentowanie spotkań na żywo,
@@ -91,13 +91,63 @@ analizą anglojęzycznego środowiska piłkarskiego:
   użytkownicy Twittera będący kibicami tworzą proporcjonalnie dużą liczbę
   tweetów -- komentując na biężąco wszelkie wydarzenia. Dlatego też wybór
   tej podgrupy do moich badań jest racjonalny i daje możliwość zbadania 
-  zachowań użytkowników społecznościowych dostarczając wiele tweetów, na których
+  zachowań użytkowników społecznościowych dostarczając wiele wpisów, na których
   można przeprowadzić analizy.
 \end{itemize}  
 
 
 \subsection{Sposób zbierania danych}
 % wybrane kluby, słowa kluczowe, API, nasłuchiwanie
+Aby uzyskać jak najlepsze rezultaty zbierania danych ze środowiska piłkarskiego
+(posługującego się językiem angielskim) jako dziedzinę badań wybrano
+najwyższą klasę rozgrywek piłki nożnej mężczyzn w Anglii (i Walii),
+czyli Premier Leauge -- uznawaną przez wielu ekspertów za najsilniejszą ligę na
+świecie. Co istotne, jest to także najczęściej oglądana liga piłkarska.
+Średnio pojedynczy mecz ma widownię ponad 12 milionów osób
+(\cite{PremierLeagueAudience}) bijąc ponad dwukrotnie oglądalność innych lig 
+(włoskiej, hiszpańskiej czy niemieckiej).
+
+Zbieranie danych odbywało się przy pomocy Twitter Stream API -- oficjalnie
+udostępnionego interfejsu programistycznego.
+Aby móc zbierać wpisy należy napisać program -- robota internetowego,
+korzystającego z API, który nasłuchuje na żywo pojawiających się wpisów.
+
+Technika ta ma jednak ograniczenia i pozwala na konsumowanie maksymalnie 1\%
+wszystkich pojawiających się w tym czasie wpisów na Twitterze (aby uzyskać
+wszystkie wpisy należy wnieść opłatę w serwisach partnerskich).
+
+Do nasłuchiwania wpisów koniecznym jest także zdefiniowanie filtrów
+określających jakie dane nas interesują. Twitter wymaga by podać przynajmniej
+jeden z niniejszych: słowa kluczowe, identyfikatory użytkowników lub obszary
+geograficzne. Dodatkowo możliwe jest podanie innych parametrów, jak na przykład
+języka wpisów. Dlatego też zdecydowałem się korzystać z filtra słów kluczowych
+wraz z ograniczeniem wpisów na język angielski.
+
+Twitter Stream API dostarcza jedynie tweetów pojawiających się w czasie
+rzeczywistym. Oznacza to, że możemy przy jego użyciu mieć jedynie dostęp do tych
+wpisów, które zostały wysłane, gdy jednocześnie uruchomiony był nasz program
+nasłuchujący. Aby zmaksymalizować jakość i zakres zebranych danych program
+nasłuchujący uruchamiany był w trakcie odbywania się meczów 
+(z kilkudziesięciuminutowym zapasem czasowym przed i po spotkaniu).
+
+W związku z koniecznością określania słów kluczowych ograniczono liczbę
+śledzonych klubów do najlepszej czwórki sezonu 2012/2013, którą tworzą:
+Manchester United FC, Manchester City FC, Chelsea FC oraz Arsenal FC.
+Są to więc odpowiednio dwa kluby z Manchesteru i dwa z Londynu.
+
+Mecze nasłuchiwano od 23 listopada do 29 grudnia 2013 roku. W tym czasie odbyło
+się 9 kolejek spotkań (od 12 do 19 kolejki włącznie). Jako słowa kluczowe przed
+każdym meczem definiowane były: nazwiska i znane określenia
+piłkarzy, nazwiska i znane określenia trenerów (menadżerów) drużyn, nazwy i
+określenia klubów, nazwisko głównego sędziego i nazwa stadionu. 
+Oprócz meczów Premier League nasłuchiwano także dwóch kolejek Ligi Mistrzów
+z udziałem wyżej wymienionych zespołów, które odbyły się w tym czasie.
+
+
+
+
+
+
 
 \subsection{Podstawowe statystyki danych}
 
