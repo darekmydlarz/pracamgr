@@ -58,7 +58,7 @@ Poniżej pokrótce omówione są wszystkie z tych części.
 W tej sekcji opisuję sposób przeprowadzenia początkowych prac związanych
 z moimi badaniami, które związane były ze zgromadzeniem danych potrzebnych
 do przeprowadzania analiz. Etap ten był niezwykle istotny i przeprowadzenie
-go, umożliwiło dalsze prace. Zgromadzone dane pochodzą z serwisu Twitter
+go umożliwiło dalsze prace. Zgromadzone dane pochodzą z serwisu Twitter
 i zostały uzyskane przy pomocy udostępnionego publicznie API (interfejsu
 programistycznego).
 
@@ -143,29 +143,152 @@ określenia klubów, nazwisko głównego sędziego i nazwa stadionu.
 Oprócz meczów Premier League nasłuchiwano także dwóch kolejek Ligi Mistrzów
 z udziałem wyżej wymienionych zespołów, które odbyły się w tym czasie.
 
-
-
-
-
-
-
-\subsection{Podstawowe statystyki danych}
-
-
 \clearpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% ANALIZA SENTYMENTU
 \section{Analiza sentymentu}
 \label{section:analizasentymentu}
+W tym miejscu opisuję sposób w jaki została użyta do moich badań analiza
+wydźwięku wypowiedzi. Przedstawiam czynności wstępne jakie zostały zastosowane
+na tekście, prezentuję krótko wybrany algorytm i zastosowane w nim modyfikacje
+oraz opisuję sposób zaaplikowania analizy wydźwięku na zgromadzonych tweetach.
 
 \subsection{Normalizacja tekstu}
 % pozbycie się słów kluczowych, zaprzeczenia, retweety
+
+W związku z tym, że wpisy są tworzone przez zwykłych użytkowników posiadają one
+wiele znaków i elementów, które z punktu widzenia analizy sentymentu są zbędne,
+a czasami prowadzące do błędów. Dlatego też tekst należy poddać normalizacji,
+usunięciu zbędnych elementów, szumów i spamu. Przykładowa lista wpisów jakie
+znalazły się w zgromadzonych danych przedstawia poniższa tabela
+(\ref{tab:wpisy-przed-normalizacja}).
+
+
+\begin{table}[ht!]  
+\begin{center}  
+\begin{tabular}{|r|p{140mm}|}
+\hline
+\multicolumn{2}{|c|}{Przed normalizacją}
+\\ \hline
+1 & RT @J\_SPEKZ: Haha quality! \#Fellaini \#United \#Moyes
+http://t.co/rJB4K1fvZy
+\\ \hline
+2 & Stay woke brah! The Arsenal is about to make everything alright soon :) RT
+@JCphoenixx: So damn tired, So not sleepy.
+\\ \hline
+3 & @abdul1haseeb My arsenal is not disappointing too :P 
+\\ \hline
+4 & @Arsenal didn't think i could respect @aaronramsey any more than i already
+did, bute what a gentleman he is for not to celebrate that goal:) 
+\\ \hline
+5 & BENDTNER!!! ARE YOU FUCKING SERIOUS!! Even though im not arsenal fan :o
+\\ \hline
+6 & Haha, you gotta agree, no one gets booed like Manchester United :D \#ZeDevilza
+\\
+\hline
+\end{tabular} 
+\end{center} 
+\caption{Przykładowa lista wpisów przed normalizacją}
+\label{tab:wpisy-przed-normalizacja}
+\end{table}
+
+
+Po przeprowadzeniu wszystkich prac związanych z normalizacją tekstu wpisy z
+powyższej tabeli prezentują się w następujący sposób:
+
+\begin{table}[ht!]  
+\begin{center}  
+\begin{tabular}{|r|p{140mm}|}
+\hline
+\multicolumn{2}{|c|}{Po normalizacji}
+\\ \hline
+1 & 
+\\ \hline
+2 & Stay woke brah make alright
+\\ \hline
+3 & not\_disappointing
+\\ \hline
+4 & didnt not\_respect bute gentleman not\_celebrate not\_goal
+\\ \hline
+5 & FUCKING im not\_fan
+\\ \hline
+6 & haha gotta agree not\_booed
+\\
+\hline
+\end{tabular} 
+\end{center} 
+\caption{Lista wpisów poddanych normalizacji}
+\label{tab:wpisy-po-normalizacja}
+\end{table}
+
+\clearpage
+Kolejne kroki, które przekształciły tweety do powyższej postaci to:
+\begin{enumerate}
+  \item Usunięcie skomentowanych retweetów.\\
+  \texttt{Stay woke brah! The Arsenal is about to make everything
+  alright soon :) \sout{RT @JCphoenixx: So damn tired, So not sleepy.}}
+  
+  \item Usunięcie skomentowanych cytowań. \\
+  \texttt{At all...\sout{"@dotun\_somoye: Even city's first goal
+  negredo was offside....:( the refs not helping at all"} }
+  
+  \item Usunięcie hiperlinków.\\
+  \texttt{You up for Arsenal's match later on? - what time? maybe if i'm not
+  busy baby sitting :) \sout{http://t.co/aC5Ec8ipy1}}
+ 
+  
+  \item Usunięcie nazw użytkowników.\\
+  \texttt{\sout{@abdul1haseeb} My arsenal is not disappointing too :P}
+  
+  
+  \item Usunięcie hashtagów. \\
+  \texttt{Haha, you gotta agree, no one gets booed like Manchester United :D
+  \sout{\#ZeDevilza}}
+  
+  
+  \item Oznaczenie wyrazów zaprzeczonych przedrostkiem \texttt{NOT\_} (opisuję
+  dokładniej w sekcji \ref{subsection:sentyment-algorytm}). \\
+  \texttt{didn't \textbf{NOT\_think NOT\_i NOT\_could NOT\_respect NOT\_any 
+  NOT\_more NOT\_than NOT\_i NOT\_already NOT\_did}, bute what a gentleman he 
+  is for not \textbf{NOT\_to NOT\_celebrate NOT\_that NOT\_goal:)}}
+
+ \item Zachowanie tylko znaków alfabetu:
+  	\begin{itemize}
+  		\item usunięcie zaimków dzierżawczych (\texttt{Helen's} $\to$ \texttt{Helen}),
+  		\item usunięcie apostrofu ze skróconych zaprzeczeń (\texttt{don't} $\to$ \texttt{dont}),
+  		\item normalizacja liter diakrytyzowanych (\texttt{José Mourinho} $\to$ \texttt{Jose
+  		Mourinho})
+  		\item usunięcie liczb i wszelkich znaków niealfabetycznych.
+	\end{itemize}
+
+  \texttt{You up for Arsenal\sout{'s} match later on\sout{? -} what
+  time\sout{?} maybe if i\sout{'}m not busy baby sitting \sout{:)}} 
+	
+	\item Usunięcie wyrazów zdefiniowanych w stop liście (powszechne wyrazy danego
+	języka, które mogą być pominięte nie tracąc jednocześnie żadnej informacji).
+	Zastosowałem stop listę z serwisu \mbox{WebPageAnalyse.com} 
+	(\cite{WebPageAnalyse}) zawierającą 528 słów.
+
+	\texttt{\sout{You up for} Arsenal match \sout{later on what} time \sout{maybe if} 
+ 	im \sout{not} busy baby sitting}
+	
+	\item Usunięcie słów kluczowych, które użyte były do gromadzenia wpisów z
+	Twittera -- czyli nazwisk piłkarzy, menadżerów, nazw klubów, itd.
+	
+	\texttt{\sout{BENDTNER}!!! ARE YOU FUCKING SERIOUS!! Even though im not
+	\sout{arsenal} fan :o}
+	
+\end{enumerate}
+
+
+
 \subsection{Algorytm i jego modyfikacja}
-% + dobór parametrów
+\label{subsection:sentyment-algorytm}
+% + dobór parametrów, emotikony, zaprzeczenia
 \subsection{Aplikacja analizy sentymentu}
 % przykładowe zdania i ich sentyment
 
 
-
+\clearpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% ANALIZA SIECI SPOŁECZNYCH
 \section{Analiza sieci społecznych}
 \label{section:siecispoleczne}

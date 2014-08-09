@@ -33,14 +33,14 @@ public class EmoticonClassifier {
 
     public static final String NEUTRAL_KEY = "";
 
-    public static Sentiment getSentimentByEmoticon(String text) {
+    public static Sentiment getSentimentByEmoticon(final String text) {
         Map<String, Integer> emoticonsCounter = new HashMap<>();
         for(String key : emoticonsSentiment.keySet())
             putIfMatched(text, emoticonsCounter, key);
         return getMostOftenSentiment(emoticonsCounter);
     }
 
-    private static void putIfMatched(String text, Map<String, Integer> emoticonsCounter, String key) {
+    private static void putIfMatched(final String text, Map<String, Integer> emoticonsCounter, String key) {
         final String pattern = Pattern.quote(key);
         Matcher matcher = Pattern.compile(pattern).matcher(text.toLowerCase());
         final boolean found = matcher.find();
