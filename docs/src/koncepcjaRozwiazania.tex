@@ -282,7 +282,7 @@ Kolejne kroki, które przekształciły tweety do powyższej postaci to:
 
 
 
-\subsection{Algorytm i jego modyfikacja}
+\subsection{Zastosowanie algorytmu}
 \label{subsection:sentyment-algorytm}
 % + dobór parametrów, emotikony, zaprzeczenia
 
@@ -377,7 +377,7 @@ tej wielkości:
 \clearpage
 \begin{table}[ht!]  
 \begin{center}  
-\begin{tabular}{|p{12mm}|p{70mm}|p{63mm}|}
+\begin{tabular}{|p{12mm}|p{70mm}|>{\raggedright\arraybackslash}p{60mm}|}
 \hline
 Valence & Wpis & Składowe 
 \\ \hline 
@@ -412,15 +412,53 @@ NEG & valence(t) <= AVG\_VALENCE \\
 Wielkość $AVG\_VALENCE$ jest średnią arytmetyczną wartości $valence$
 wszystkich wpisów. W moich badaniach wartość ta wyniosła $0.4786984978198536$.
 
-Powyższa metoda została zastosowana na wszystkich wpisach, które nie posiadają
-emotikon określając ich sentyment.
+\subsubsection{Wykrywanie i obsługa negacji}
+W oryginalnym podejściu panów Pak i Paroubek nie ma żadnego sposobu na
+wykrywanie i obsługę negacji. Oczywistym jednak jest, iż zaprzeczenia zmieniają
+znaczenie dalszej części tekstu i muszą być w jakiś sposób obsłużone.
+Wpisy na Twitterze są krótkie, więc postanowiłem zastosować podejście
+zaprezentowane w artykule \cite{thumbsUp2002}, które polega na dodaniu
+przedrostka \texttt{NOT\_} do wszystkich słów pomiędzy wyrazem negującym,
+a najbliższym znakiem przestankowym. Lista wyrazów negujących
+została zaczerpnięta z \cite{englishNots1983}. Słowa zanegowany miały osobno
+liczone liczby wystąpień w kontekstach pozytwnych i negatywnych. W takiej formie
+brały udział w ocenie sentymentu wpisów z Twittera.
 
-\clearpage
+
+\subsubsection{Dobór parametrów}
+Użyty przeze mnie algorytm zakłada dobór parametrów przed przeprowadzeniem
+analizy sentymentu. Parametry te dotyczą słów ze zbudowanego słownika --
+decydując, które z nich wezmą udział w procesie analizy. Są to: minimalna
+długość słowa, minimalna liczba występowania słowa. Doboru parametrów dokonałem
+w sposób zaprezentowany w opisie algorytmu. Wykorzystałem listę wpisów z
+emotikonami, podzieliłem je na zbiór uczący i testowy w stosunku 20\% do 80\%.
+Wygenerowałem słownik ze zbioru uczącego. Wpisy ze zbioru testowego oznaczyłem spodziewanym
+sentymentem -- był to sentyment emotikony jaką zawierały. Następnie
+przeprowadziłem testy poprawności klasyifkacji zbioru testowego słowami ze
+zbioru uczącego dla wyrazów o minimalnej długości od 1 do 10 i minimalnej
+liczbie wystąpień od 1 do 100 -- daje to w sumie 1000 testów.
+Najwyższy stopień poprawności klasyfikacji uzyskałem dla parametrów równych:
+minimalna długość wyrazu -- 3, \mbox{minimalna częstotliwość wystąpień -- 1}.
+Wyniki testów przedstawiam na poniższym wykresie
+\ref{image:pak-paroubek-parametry}.
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=140mm]{img/pak-paroubek-params.png}
+\caption{Dobór parametrów algorytmu analizy sentymentu}
+\label{image:pak-paroubek-parametry}
+\end{figure}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% ANALIZA SIECI SPOŁECZNYCH
 \section{Analiza sieci społecznych}
 \label{section:siecispoleczne}
+W tej sekcji przedstawiam zastosowane podejście do analizy sieci społecznych,
+model reprezentacji danych oraz sposoby na wykrywanie grup i badanie podobieństw
+między sieciami.
 \subsection{Model grafowy}
 % wykorzystanie reply, retweet
+
+\clearpage
 \subsection{Wykrywanie grup}
 % gephi, modularity
 \subsection{Badanie podobieństwa}
