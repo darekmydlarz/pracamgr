@@ -1,6 +1,7 @@
 package pl.edu.agh.twitter.sentiment;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import org.apache.log4j.Logger;
 import pl.edu.agh.twitter.Startable;
 import pl.edu.agh.twitter.business.paroubektweet.boundary.ParoubekTweetDAO;
@@ -16,6 +17,7 @@ import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 public class ParoubekClassifierPro implements Startable {
     private final Logger logger = Logger.getLogger(getClass());
@@ -29,34 +31,47 @@ public class ParoubekClassifierPro implements Startable {
         final Long tweetId;
         final String text;
         final Double valence;
+        final Map<String, Double> sentenceWordsValence;
+        private final String tweetText;
 
-        private ParoubekSentence(Long tweetId, String text, Double valence) {
-            this.tweetId = tweetId;
+        private ParoubekSentence(Tweet tweet, String text, Double valence, Map<String, Double> sentenceWordsValence) {
+            this.tweetId = tweet.getId();
+            this.tweetText = tweet.getText();
             this.text = text;
             this.valence = valence;
+            this.sentenceWordsValence = sentenceWordsValence;
+        }
+
+        @Override
+        public String toString() {
+            String sentiment = getSentiment(valence);
+            return valence + "\t" + sentiment + "\t" + tweetText + "\t" + sentenceWordsValence;
         }
 
         static class Builder {
-            final Long tweetId;
             final String text;
             final Map<String, WordFrequency> frequencyMap;
+            private Map<String, Double> sentenceWordsValence = Maps.newHashMap();
+            private Tweet tweet;
 
             Builder(Tweet tweet, Map<String, WordFrequency> frequencyMap) {
-                tweetId = tweet.getId();
+                this.tweet = tweet;
                 text = TEXT_CLEANER.clean(tweet.getText()).getText();
                 this.frequencyMap = frequencyMap;
             }
 
             public ParoubekSentence build() {
                 final Double valence = countSentenceValence(getWordsValences());
-                return new ParoubekSentence(tweetId, text, valence);
+                return new ParoubekSentence(tweet, text, valence, sentenceWordsValence);
             }
 
             private List<Double> getWordsValences() {
                 List<Double> wordValences = Lists.newArrayList();
                 for(String word : text.split("\\s")) {
                     if(frequencyMap.containsKey(word)) {
-                        wordValences.add(frequencyMap.get(word).getValence());
+                        Double currentWordValence = frequencyMap.get(word).getValence();
+                        wordValences.add(currentWordValence);
+                        sentenceWordsValence.put(word, currentWordValence);
                     }
                 }
                 return wordValences;
@@ -90,21 +105,34 @@ public class ParoubekClassifierPro implements Startable {
         logger.info("OK!");
     }
 
+    static String getSentiment(double valence) {
+        return valence > ParoubekTweet.VALENCE_AVG ? "POS" : "NEG";
+    }
+
     @Override
     public void start() {
         logger.info("Started...");
 //        int offset = 0;
 
-        int offset = 7_773_000;
-        final int limit = 105;
+        int offset = new Random().nextInt(7_000_000);
+        final int limit = 100;
         while(offset + limit < TWEETS_NUMBER) {
             logger.info("In progress...\t" + offset + "/" + TWEETS_NUMBER);
             final List<Tweet> tweets = tweetDAO.getTweetsLimitOffset(limit, offset);
             logger.info("Tweets fetched...");
-            processTweets(tweets);
+//            processTweets(tweets);
+            showInfo(tweets);
             offset += limit;
         }
         logger.info("END!");
+    }
+
+    private void showInfo(List<Tweet> tweets) {
+        for (Tweet tweet : tweets) {
+            ParoubekSentence sentence = new ParoubekSentence.Builder(tweet, frequencyMap).build();
+            System.out.println(sentence);
+        }
+
     }
 
     private void processTweets(List<Tweet> tweets) {

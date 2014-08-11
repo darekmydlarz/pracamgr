@@ -280,12 +280,140 @@ Kolejne kroki, które przekształciły tweety do powyższej postaci to:
 
 
 
+
+
 \subsection{Algorytm i jego modyfikacja}
 \label{subsection:sentyment-algorytm}
 % + dobór parametrów, emotikony, zaprzeczenia
-\subsection{Aplikacja analizy sentymentu}
-% przykładowe zdania i ich sentyment
 
+Do przeprowadzenia analizy sentymentu na zebranych tweetach skorzystałem z
+metody opracowanej przez Alexandra Paka i Patricka Paroubek'a, którą
+krótko przedstawiłem w sekcji \ref{subsubsection:pakandparoubek}.
+Jest to technika, która pozwala badać sentyment bez słownika sentymentu.
+Pierwszym krokiem jest zbudowanie słownika z zebranych danych.
+W tym celu wybiera się podzbiór wpisów, które zawierają emotikony.
+W związku ze 140 znakowym ograniczeniem na długość znaków przyjmuje się
+założenie, że dana emotikona nadaje wydźwięk całemu wpisowi.
+Według artykułu \cite{EmoticonAnalysisTwitter} 20 emotikon pokrywa
+w 90\% stosowanie tych znaków graficznych we wpisach (na 100 wpisów z
+emotikonami, 90 z nich zawiera emotikonę ze zbioru tych 20). Dlatego też
+skorzystałem z tego zbioru do własnych badań dzieląc emotikony na wyrażające
+wydźwięk pozytywny i negatywny w następujący sposób \footnote{emotikona
+\texttt{D:} została pominięta, gdyż pokrywała więcej przypadków niż tylko
+użycie emotikony (np.: \texttt{Accepte\textbf{d:} Mary, John, Jane})}:
+
+\begin{table}[ht!]  
+\begin{center}  
+\begin{tabular}{|c|r|l|}
+\hline
+Emotikona & Popularność & Wydźwięk
+\\ \hline
+\texttt{:)} & $33.4\%$ & pozytywny \\ \hline
+\texttt{:D} & $11.0\%$ & pozytywny \\ \hline
+\texttt{:(} & $7.9\%$ & negatywny \\ \hline
+\texttt{;)} & $7.5\%$ & pozytywny \\ \hline
+\texttt{:-)} & $4.4\%$ & pozytywny \\ \hline
+\texttt{:P} & $3.7\%$ & pozytywny \\ \hline
+\texttt{=)} & $3.7\%$ & pozytywny \\ \hline
+\texttt{(:} & $2.8\%$ & pozytywny \\ \hline
+\texttt{;-)} & $2.2\%$ & pozytywny \\ \hline
+\texttt{:/} & $1.9\%$ & negatywny \\ \hline
+\texttt{XD} & $1.9\%$ & pozytywny \\ \hline
+\texttt{=D} & $1.5\%$ & pozytywny \\ \hline
+\texttt{:O} & $1.1\%$ & pozytywny \\ \hline
+\texttt{=]} & $1.1\%$ & pozytywny \\ \hline
+\texttt{;D} & $1.0\%$ & pozytywny \\ \hline
+\texttt{:]} & $1.0\%$ & pozytywny \\ \hline
+\texttt{:-(} & $0.8\%$ & negatywny \\ \hline
+\texttt{=/} & $0.8\%$ & negatywny \\ \hline
+\texttt{=(} & $0.8\%$ & negatywny \\ \hline
+\end{tabular} 
+\end{center} 
+\caption{Wydźwięk emotikon}
+\label{tab:wydzwiek-emotikon}
+\end{table}
+
+Następnie przeglądnięto wszystkie tweety z emotikonami zliczając liczbę
+występowania wyrazów w kontekście pozytywnym i negatywnym.
+Najpierw badano sentyment całego wpisu (na podstawie emotikony -- gdy była ich
+większa ilość wybierano ten sentyment, który przeważał) a następnie dla każdego
+wyrazu z tego wpisu zwiększano licznik odpowiednio wystąpień pozytywnych lub
+negatywnych. Oczywiście wpisy były już poddane normalizacji.
+W ten sposób uzyskano słownik sentymentu zbudowany z zebranych danych, który
+zawierał 34183 słowa, a najpopularniejsze z nich to:
+
+
+\begin{table}[ht!]  
+\begin{center}  
+\begin{tabular}{|l|r|r|r|r|}
+\hline
+Słowo & Wyst. pozytywne  & Wyst. negatywne 
+& Pozytywność\tablefootnote{Wartość liczona jako: \texttt{pozytywne / (pozytywne +
+negatywne)} -- tylko na potrzeby niniejszej tabeli, nieużywana w algorytmie}
+& Valence
+\\ \hline 
+win & 4206 & 598 & 87.6 \% & 0.845 \\ \hline
+good & 3916 & 435 & 90.0 \% & 0.903 \\ \hline
+game & 3016 & 1012 & 74.9 \% & 0.301 \\ \hline
+goal & 2305 & 584 & 79.8 \% & 0.477 \\ \hline
+today & 2019 & 526 & 79.3 \% & 0.477 \\ \hline
+time & 1844 & 404 & 82.0 \% & 0.602 \\ \hline
+dont & 1461 & 775 & 65.3 \% & 0.000 \\ \hline
+match & 1669 & 449 & 78.8 \% & 0.477 \\ \hline
+great & 1885 & 160 & 92.2 \% & 1.041 \\ \hline
+love & 1837 & 202 & 90.1 \% & 0.954 \\ \hline
+\end{tabular} 
+\end{center} 
+\caption{Liczba występowania najpopularniejszych słów w zbudowanych słowniku
+sentymentu}
+\label{tab:liczebnosc-slow-sentymentu}
+\end{table}
+
+Zgodnie z algorytmem wartość \textit{valence} używana jest w dalszych
+obliczeniach. Dla każdego wpisu wyliczana jest średnia arytmetyczna tych
+wielkości przypisanych do każdego słowa. Wynik ten jest wartością
+\textit{valence} danego wpisu. Poniżej prezentuję przykładowe wyniki wyliczania
+tej wielkości:
+\clearpage
+\begin{table}[ht!]  
+\begin{center}  
+\begin{tabular}{|p{12mm}|p{70mm}|p{63mm}|}
+\hline
+Valence & Wpis & Składowe 
+\\ \hline 
+0.6261 POS & Just seen you in the crowd at Chelsea game! @domashman http://t.co/NjovoZdgZ3 & {game=0.4740, crowd=0.7782}
+\\ \hline
+0.5909 POS & RT @BTSP: \#PRIZEDRAW If Arsenal win tonight one lucky person
+will win a personalised BTSP mug! Simply RT \& follow to enter!
+http://t.co/9m... & {lucky=0.4613, tonight=0.6873, btsp=0.3010, person=0.4232, personalised=0.3010, enter=0.5351, follow=1.2229, win=0.8465, mug=0.4771, simply=0.3979}
+\\ \hline
+0.6199 POS & Liking the brightness of this Napoli kit \#tempted &
+{liking=0.8062, kit=0.4337} \\ \hline
+0.0305 NEG & @ricktaylor1987 You're not watching Arsenal? &
+{not\_watching=0.0305} \\ \hline
+0.1234 NEG & Poor start\#AFC & {poor=-0.2848, start=0.5317}
+\\ \hline
+0.1807 NEG & Do Arsenal have any players who don't fall down with ease?
+\#SwimmingTeam & {players=0.3684, not\_fall=-0.3979, not\_ease=0.4771,
+dont=0.2751} \\ \hline
+\end{tabular} 
+\end{center} 
+\caption{Wynik działania algorytmu analizy sentymentu na przykładowych wpisach}
+\end{table}
+
+Określenie sentymentu wpisu odbywa się zgodnie z równaniem:
+\begin{equation}
+S(t) =
+\begin{cases}
+POS & valence(t) > AVG\_VALENCE \\
+NEG & valence(t) <= AVG\_VALENCE \\
+\end{cases}
+\end{equation}
+Wielkość $AVG\_VALENCE$ jest średnią arytmetyczną wartości $valence$
+wszystkich wpisów. W moich badaniach wartość ta wyniosła $0.4786984978198536$.
+
+Powyższa metoda została zastosowana na wszystkich wpisach, które nie posiadają
+emotikon określając ich sentyment.
 
 \clearpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% ANALIZA SIECI SPOŁECZNYCH
