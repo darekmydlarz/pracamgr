@@ -449,22 +449,105 @@ Wyniki testów przedstawiam na poniższym wykresie
 \label{image:pak-paroubek-parametry}
 \end{figure}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% ANALIZA SIECI SPOŁECZNYCH
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% ANALIZA SIECI SPOŁECZNYCH
 \section{Analiza sieci społecznych}
 \label{section:siecispoleczne}
 W tej sekcji przedstawiam zastosowane podejście do analizy sieci społecznych,
-model reprezentacji danych oraz sposoby na wykrywanie grup i badanie podobieństw
-między sieciami.
-\subsection{Model grafowy}
+odkrywania sieci społecznych z zebranych danych oraz sposoby na wykrywanie grup
+i badanie podobieństw między sieciami.
+\subsection{Budowa sieci społecznych z danych z Twittera}
 % wykorzystanie reply, retweet
+Relacje między użytkownikami na Twitterze zbudowane są na modelu jednostronnym.
+Oznacza to, że każdy posiada dwie listy -- osób, które obserwuje oraz osób,
+przez które jest obserwowany (\textit{following} i \textit{followers}).
+Są to listy statyczne, budowanie ręcznie przez użytkowników tego portalu
+mikroblogowego. Twitter ukierunkowany jest jednak na swobodną komunikację między
+wszystykimi użytkownikami -- dlatego kontakty między nimi nie są ograniczone
+tylko do osób, które mamy na którejść z list. Nie ma żadnego problemu by jeden
+użytkownik komunikował się z drugim, gdy oboje nie mają się na żadnej z list.
+Najczęściej komunikacja ta odbywa się publicznie poprzez pisanie tweetów między
+sobą, odpowiadanie na wpisy innych użytkowników. Aby uzyskać lepsze efekty
+pokazując tworzące się grupy społeczne ukierunkowałem swoje prace na relacje
+tworzone w trakcie interakcji między użytkownikami poprzez odpowiedzi i
+retweety.
+
+Korzystając ze Streaming API pobierającego tweety otrzymywałem również
+informację o tym, do kogo skierowana jest odpowiedź w przypadku takiego rodzaju
+wpisu.
+W polu \texttt{in\_reply\_to\_user\_id} znajdował się unikalny numer ID
+użytkownika, do którego odpowiedź była skierowana, zaś w polu \texttt{user\_id}
+ID autora odpowiedzi. 
+Oprócz odpowiedzi istotne również były wpisy typu retweet. Przykładowy wpis tego
+typu wygląda następująco: \texttt{RT @AHeryantooo: Keep calm and trust in Moyes. Gapapa Yes ;;)}.
+Aby z takiego wpisu pobrać ID użytkownika, którego wpisu został retweetowany -- w tym
+przypadku jest to użytkownik \texttt{@AHeryantooo}, przeglądałem tabelę z użytkownikami
+i przypisywałem do tego rodzaju wpisów wartość pola \texttt{retweeted\_user\_id}
+jako znalezione ID konkretnego użytkownika.
+
+Korzystając z tych dwóch rodzajów połączeń między użytkownikami byłem w stanie 
+odkryć relacje między nimi. Naturalnym rodzajem traktowania tych danych było
+uznanie użytkowników (de facto ich numerów ID) za wierzchołki, a relacje między nimi
+(\texttt{in\_reply\_to\_user\_id} oraz \texttt{retweeted\_user\_id}) za krawędzie
+w grafie.
+
+ \subsection{Wykrywanie grup i badanie podobieństwa}
+% gephi, modularity
+Do wykrywania grup wśród sieci społecznych skorzystałem z narzędzia
+otwartoźródłowego narzędzia \textit{Gephi} wspomagającego analizę grafową, w
+którym został zaimplementowany algorytm przedstawiony w artykule
+\cite{blondel2008fuc}. Przy jego użyciu konkretne węzły zostały podzielone
+na grupy, nad którymi przeprowadzałem późniejsze analizy.
+
+Badanie podobieństwa oparte było głównie o analizę kolejnych wydarzeń.
+W tym celu zastosowałem dwa podejścia. Pierwsze oparte na wszystkich
+wierzchołkach (użytkownikach) polegało na zliczeniu ile z nich się powtarza.
+Podobieństwo między kolejnymi meczami zostało oparte o niniejsze równanie:
+\begin{equation}
+S = \frac{|E_1 \cap E_2|}{|E_1 \cup E_2|}
+\end{equation}  
+gdzie $E_i$ to zbiór wierzchołków w wydarzeniu $i$. Krótko mówiąc podobieństwo
+to iloraz liczby wspólnych wierzchołków między wydarzeniami a liczby sumy 
+wierzchołków tych wydarzeń.
+Drugie podejście zostało zastosowane do znalezionych przy pomocy \textit{Gephi} 
+grup. Bada ono podobieństwo pomiędzy grafami, uwzględniając zarówno wierzchołki
+jak i krawędzie. Jest to opracowany przez mnie algorytm, który można wyrazić
+wzorem:
+\begin{equation}
+S = \frac{E_1 \cap E_2}{E_{V_1 \cap V_2}} \cdot \frac{V_1 \cap V_2}{V_1 \cup V_2}
+\end{equation}
+gdzie $E_i$ oznacza krawędzie w grafie $i$, $V_i$ wierzchołki w grafie $i$,
+natomiast $E_{V_1 \cap V_2}$ oznacza wszystkie krawędzie między wspólnymi wierzchołkami.
 
 \clearpage
-\subsection{Wykrywanie grup}
-% gephi, modularity
-\subsection{Badanie podobieństwa}
-% algorytm podobieństwa grafów, podobieństwa krawędzi
+Poniżej przedstawiam wyniki podobieństwa między grafami przedstawionymi na 
+rysunku \ref{image:podobienstwo-grafow}.
 
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=140mm]{img/podobienstwo-grafow.png}
+\caption{Przykładowe grafy do przedstawienia algorytmu podobieństwa}
+\label{image:podobienstwo-grafow}
+\end{figure}
 
+\begin{table}[ht!]  
+\begin{center}  
+\begin{tabular}{|l|l|p{40mm}|p{40mm}||p{21mm}|}
+\hline
+Graf 1 & Graf 2 & Wsp. krawędzie / Krawędzie między wsp. wierzchołkami ($X_1$) & 
+	Wsp. wierzchołki / Suma wierzchołków ($X_2$) & Podobieństwo ($X_1 \cdot X_2$)
+\\ \hline 
+G1 & G2 & 1 / 2 & 3 / 3 & 50.0 \% 
+\\ \hline 
+G1 & G3 & 1 / 3 & 3 / 3 & 33.3 \% 
+\\ \hline 
+G2 & G3 & 0 / 3 & 3 / 3 &  0.0 \%
+\\ \hline 
+G1 & G4 & 2 / 3 & 3 / 3 & 66.7 \%
+\\ \hline
+\end{tabular} 
+\end{center} 
+\caption{Przykładowe wyniki algorytmu podobieństwa grafów}
+\end{table}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% WYKORZYSTANIE GEOLOKACJI
@@ -473,3 +556,34 @@ między sieciami.
 % tweety z geolokacją
 % wyciąganie informacji o miejscu - Open Street Map
 % zastosowanie: odl. między użytkownikiami, od stadionu, dzielnice
+W danych pobieranych z Twittera w części wpisów znajdowały się informacje o 
+geolokacji -- współrzędne długości i szerokości geograficznej, z której
+dany wpis został wysłany. Wykorzystanie tych informacji zostało zastosowane
+do wzbogacenia analiz przeprowadzonych na zebranych danych. Informacje
+o położeniu użytkowników bardzo często zbiegały się z miejscem rozgrywania meczu.
+W bazie danych miałem jednak tylko informacje o danych geograficznych.
+Aby wzbogacić je o więcej wiedzy postanowiłem skorzystać z projektu
+Open Street Map (\textit{http://www.openstreetmap.org}).
+Przy pomocy API, które projekt ten udostępnia udało mi się ubogacić dane
+na temat lokalizacji o informacje opisowe miejsca, o które chodzi.
+Poprzez \textit{Reverse Geocoding} możliwe było podając współrzędne
+goegraficzne uzyskać między innymi takie informacji o adresie jak:
+kraj (ang. \textit{country}), stan/państwo (ang. \textit{state}), 
+hrabstwo (ang. \textit{county}), miasto (ang. \textit{city}).
+
+Dodatkowo wykorzystanie geolokacji może być użyte do zbadania odległości między 
+użytkownikami tworzącymi sieć społeczną, o tym w jakiej odległości są oni od stadionu,
+czy również do zbadania sentymentu w zależności od wydarzeń na boisku,
+a miejscem przebywania danych użytkowników. 
+
+
+
+
+
+
+
+
+
+
+
+
