@@ -503,9 +503,9 @@ W tym celu zastosowałem dwa podejścia. Pierwsze oparte na wszystkich
 wierzchołkach (użytkownikach) polegało na zliczeniu ile z nich się powtarza.
 Podobieństwo między kolejnymi meczami zostało oparte o niniejsze równanie:
 \begin{equation}
-S = \frac{|E_1 \cap E_2|}{|E_1 \cup E_2|}
+S = \frac{|V_1 \cap V_2|}{|V_1 \cup V_2|}
 \end{equation}  
-gdzie $E_i$ to zbiór wierzchołków w wydarzeniu $i$. Krótko mówiąc podobieństwo
+gdzie $V_i$ to zbiór wierzchołków w wydarzeniu $i$. Krótko mówiąc podobieństwo
 to iloraz liczby wspólnych wierzchołków między wydarzeniami a liczby sumy 
 wierzchołków tych wydarzeń.
 Drugie podejście zostało zastosowane do znalezionych przy pomocy \textit{Gephi} 
@@ -516,11 +516,12 @@ wzorem:
 S = \frac{E_1 \cap E_2}{E_{V_1 \cap V_2}} \cdot \frac{V_1 \cap V_2}{V_1 \cup V_2}
 \end{equation}
 gdzie $E_i$ oznacza krawędzie w grafie $i$, $V_i$ wierzchołki w grafie $i$,
-natomiast $E_{V_1 \cap V_2}$ oznacza wszystkie krawędzie między wspólnymi wierzchołkami.
+natomiast $E_{V_1 \cap V_2}$ oznacza wszystkie krawędzie między wspólnymi 
+wierzchołkami. Poniżej przedstawiam przykład zastosowania powyższego algorytmu.
 
 \clearpage
-Poniżej przedstawiam wyniki podobieństwa między grafami przedstawionymi na 
-rysunku \ref{image:podobienstwo-grafow}.
+Wyniki podobieństwa między grafami zaprezentowane są na rysunku 
+\ref{image:podobienstwo-grafow}.
 
 \begin{figure}[ht!]
 \centering
