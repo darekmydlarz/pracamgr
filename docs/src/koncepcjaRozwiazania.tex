@@ -491,6 +491,7 @@ uznanie użytkowników (de facto ich numerów ID) za wierzchołki, a relacje mi�
 w grafie.
 
  \subsection{Wykrywanie grup i badanie podobieństwa}
+ \label{section:koncepcja-wykrywaniegrup}
 % gephi, modularity
 Do wykrywania grup wśród sieci społecznych skorzystałem z narzędzia
 otwartoźródłowego narzędzia \textit{Gephi} wspomagającego analizę grafową, w
@@ -498,6 +499,20 @@ którym został zaimplementowany algorytm przedstawiony w artykule
 \cite{blondel2008fuc}. Przy jego użyciu konkretne węzły zostały podzielone
 na grupy, nad którymi przeprowadzałem późniejsze analizy.
 
+
+
+Badanie podobieństwa oparte było o analizę kolejnych wydarzeń. 
+Polegało polegało na zliczeniu ile wierzchołków powtarza się w kolejnych meczach.
+Oparte zostało o niniejsze równanie:
+\begin{equation}
+S = \frac{|V_1 \cap V_2|}{|V_1|}
+\end{equation}  
+gdzie $V_1$ to zbiór wierzchołków w pierwszym wydarzeniu, a $V_2$ w drugim.
+Krótko mówiąc podobieństwo to iloraz liczby wspólnych wierzchołków między 
+wydarzeniami a liczby wierzchołków w pierwszym z nich.
+
+
+\begin{comment}
 Badanie podobieństwa oparte było głównie o analizę kolejnych wydarzeń.
 W tym celu zastosowałem dwa podejścia. Pierwsze oparte na wszystkich
 wierzchołkach (użytkownikach) polegało na zliczeniu ile z nich się powtarza.
@@ -550,6 +565,7 @@ G1 & G4 & 2 / 3 & 3 / 3 & 66.7 \%
 \caption{Przykładowe wyniki algorytmu podobieństwa grafów}
 \end{table}
 
+\end{comment}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% WYKORZYSTANIE GEOLOKACJI
 \section{Wykorzystanie geolokacji}

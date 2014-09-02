@@ -151,9 +151,8 @@ badaniach zaprezentowanych poniżej.
 
 
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% ANALIZA SPOŁECZNA
-\clearpage
+
 \section{Analiza sieci społecznych}
 \label{section:analizaspoleczna}
 Do analizy sieci społecznych zostały użyte dane użytkowników pobrane 
@@ -188,7 +187,6 @@ w następujący sposób:
 \end{itemize} 
 
 
-\clearpage
 \subsubsection{Charakterystyka komunikacji poprzez odpowiedzi (\textit{replies})}
 Zbadana został sposób w jaki komunikują się użytkownicy Twittera korzystając
 z funkcji \textit{odpowiedz}, polegającej na możliwości komentowania wpisów
@@ -277,7 +275,6 @@ retweetują wpisy innych zwolenników, a ci drudzy częściej dyskutują ze sob�
 
 
 
-\clearpage
 \subsection{Sentyment odpowiedzi między zwolennikami i przeciwnikami drużyny}
 Oprócz zbadania rodzaju i charakterystyki komunikacji pomiędzy użytkownikami 
 Twittera przyjrzano się także bliżej komunikacji związanej z odpowiedziami 
@@ -302,7 +299,7 @@ wpisów przeciwnika klubu.
 %również wpisami pozytywnymi \ref{image:reply-sentiment-zwolennik-zwolennik}.
 \begin{figure}[ht!]
 \centering
-\includegraphics[width=140mm]{img/reply-sentiment-zwolennik-zwolennik.png}
+\includegraphics[width=120mm]{img/reply-sentiment-zwolennik-zwolennik.png}
 \caption{Sentyment odpowiedzi. Odpowiada zwolennik Arsenalu na wpis zwolennika}
 \label{image:reply-sentiment-zwolennik-zwolennik}
 \end{figure}
@@ -311,7 +308,7 @@ wpisów przeciwnika klubu.
 
 \begin{figure}[ht!]
 \centering
-\includegraphics[width=140mm]{img/reply-sentiment-zwolennik-przeciwnik.png}
+\includegraphics[width=120mm]{img/reply-sentiment-zwolennik-przeciwnik.png}
 \caption{Sentyment odpowiedzi. Odpowiada zwolennik Arsenalu na wpis przeciwnika}
 \label{image:reply-sentiment-zwolennik-przeciwnik}
 \end{figure}
@@ -333,7 +330,6 @@ i dobry odbiór tematu, który jest im bliski. Tworzą więc grupę, która
 dobrze czuje się w swoim towarzystwie, a także stara się kreować
 pozytywny odbiór swojego ulubionego klubu na zewnątrz, wśród innych osób.
 
-\clearpage
 \subsubsection{Gdy odpowiada przeciwnik Arsenalu}
 Analogicznie do poprzednich eksperymentów w dwóch wykresach poniżej (na 
 rysunkach \ref{image:reply-sentiment-przeciwnik-zwolennik} i 
@@ -341,19 +337,19 @@ rysunkach \ref{image:reply-sentiment-przeciwnik-zwolennik} i
 wyniki badań nad odpowiedziami przeciwnika Arsenalu na wpisy zwolenników
 i przeciwników tego klubu.
 
+\clearpage
 \begin{figure}[ht!] \centering
-\includegraphics[width=140mm]{img/reply-sentiment-przeciwnik-zwolennik.png}
+\includegraphics[width=120mm]{img/reply-sentiment-przeciwnik-zwolennik.png}
 \caption{Sentyment odpowiedzi}
 \label{image:reply-sentiment-przeciwnik-zwolennik}
 \end{figure}
 
 \begin{figure}[ht!] \centering
-\includegraphics[width=140mm]{img/reply-sentiment-przeciwnik-przeciwnik.png}
+\includegraphics[width=120mm]{img/reply-sentiment-przeciwnik-przeciwnik.png}
 \caption{Sentyment odpowiedzi}
 \label{image:reply-sentiment-przeciwnik-przeciwnik}
 \end{figure}
 
-\clearpage
 \subsubsection{Obserwacje i wnioski}
 Z powyższych wykresów można wywnioskować, że wpisy przeciwników mają najczęściej
 wydźwięk negatywny. Gdy przeciwnik odpowiada na pozytywny wpis zwolennika, to tylko
@@ -385,25 +381,78 @@ przekonać ich do swojego punktu widzenia.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% ANALIZA GRUP W SIECIACH SPOŁECZNYCH
-\clearpage
 \subsection{Analiza grup w sieciach społecznych}
-Podobieństwo w meczach Arsenalu \ref{image:grupy-arsenal}
+%Podobieństwo w meczach Arsenalu \ref{image:grupy-arsenal}
+
+Oprócz powyższych badań nad sposobami komunikacji i relacji budowanymi między
+użytkownikami przeprowadzona została także analiza grup użytkowników 
+pomiędzy meczami. 
+
+W każdym kolejnym meczu przeprowadzono badanie grup wśród użytkowników.
+Uzyskane wyniki podzieliłem na trzy ,,koszyki''. W pierwszym znalazły się grupy 
+3 lub 4 osobowe. W~drugim koszyku grupy mające od 5 do 9 osób, a w trzecim koszyku
+większe grupy. Liczności tych grup zostało zaprezentowane na poniższych
+wykresach pokazując jak zmieniały się z meczu na mecz.
+Na pierwszym \ref{image:grupy-arsenal} przedstawione są dane
+dla Arsenalu, a na drugim \ref{image:grupy-munited} dla Manchesteru United.
+Oprócz wielkości poszczególnych grup wykresy prezentują także podobieństwo
+zbioru użytkowników komentującego następujące po sobie wydarzenia.
+Zarówno sposób odkrywania grup jak i wyliczenia podobieństwa przedstawiono
+w sekcji \ref{section:koncepcja-wykrywaniegrup}.  
  
 \begin{figure}[ht!]
 \centering
-\includegraphics[width=120mm]{img/grupy-arsenal.png}
+\includegraphics[width=160mm]{img/grupy-arsenal-nums.png}
 \caption{Struktura grup użytkowników w meczach Arsenalu}
 \label{image:grupy-arsenal}
 \end{figure}
 
-Podobieństwo w meczach Manchesteru United \ref{image:grupy-munited}
-
+\clearpage
 \begin{figure}[ht!]
 \centering
-\includegraphics[width=120mm]{img/grupy-munited.png}
+\includegraphics[width=160mm]{img/grupy-munited-nums.png}
 \caption{Struktura grup użytkowników w meczach Manchesteru United}
 \label{image:grupy-munited}
 \end{figure}
+
+
+\subsubsection{Obserwacje i wnioski}
+Z analizy wykresów można zaobserwować, że w każdym spotkaniu najliczniejsze
+są małe grupy -- 3 lub 4 osobowe. Liczba tych grup dodatkowo rośnie, gdy
+mecz odbywa się z ciekawym przeciwnikiem. Na przykład zauważyć można, że
+w meczach Arsenalu bardzo dużą liczbę grup wygenerowały spotkania
+z Manchesterm Citym i Chelsea Londyn, a w meczach Manchestery United
+skok liczby grup miał miejsce w meczu z Newcastle United.
+Grupy liczniejsze jeśli chodzi o wielkość tworzyły się już zdecydowanie rzadziej.
+I podobnie jak poprzednio ich większa liczbę również można zaobserwować
+w ciekawszych spotkaniach.
+
+Jeśli zaś chodzi o podobieństwo w kolejnych meczach to mamy tutaj do czynienia
+z ciekawą, aczkolwiek zrozumiała sytuacją. Otóż im ciekawszy przeciwnik,
+tym podobieństwo zbioru użytkowników w kolejnym meczu mniejsze.
+Gdy drużyna -- w przypadku Arsenalu --  gra najpierw z Chelsea a później z 
+West Ham United, to podobieństwo wynosi 3.7\%, a gdy najpierw gra z 
+West Ham United -- w przypadku Manchesteru Untied -- a potem z Hull City
+to podobieństwo między tymi meczami sięga 17.8\%.
+
+Widać więc pewną charakterystyczną zależność. Gdy drużyna gra mecze z popularnymi
+drużynami, wówczas liczba osób biorących na Twitterze udział w danym wydarzeniu
+piłkarskim jest duża. Spotkanie takie absorbuje większą publikę. Stąd
+większe słupki grup w popularnych meczach. Gdy jednak przeciwnik jest już nieco
+mniej ciekawy, wówczas również zainteresowanie na Twitterze takim meczem spada.
+Z tych prawidłowości wynika również dlaczego osiągany był taki, a nie inny
+wynik podobieństwa. Otóż gdy zespół gra mecz to zawsze
+wśród tweetujących na jego temat jest stała grupa fanów, która w spotkaniach
+ze słabymi rywalami jest łatwiej dostrzegalna -- stanowi większy odsetek
+wszystkich użytkowników Twittera. Gdy natomiast mecz jest interesujący
+dla większej liczby odbiorców -- wówczas ta stała grupa fanów jest trudniej
+dostrzegalna i odsetek podobieństwa drastycznie spada.
+Mecze z ciekawymi rywalami przyciągają więc do siebie osoby okazjonalnie zainteresowane
+danym temat -- te osoby następnym razem nie będą komentować meczu tej drużyny,
+gdy ta będzie rozgrywać spotkanie z mało ciekawym rywalem. 
+Wówczas jednak łatwiej będzie dostrzec tę grupę, która stanowi trzon zainteresowanych
+daną drużyną i która jest jej stałym fanem.
+
 
 % Podobieństwo węzłów między meczami 
 % Podobieństwo grafów między meczami 
@@ -421,26 +470,63 @@ Podobieństwo w meczach Manchesteru United \ref{image:grupy-munited}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% ANALIZA GEOGRAFICZNA
-\clearpage
+
 \section{Analiza geolokacji}
 \label{section:analizageograficzna}
 %Odległość użytkowników komunikujących się ze sobą od siebie
+W moich badaniach skupiłem się także nad analizą użytkowników w oparciu 
+o geolokalizację. Tak jak wspomniałem wcześniej, niewielka część wpisów
+zawierała informacje o tym, z którego miejsca została wysłana.
+Przy ich pomocy możliwe było dokonanie analizy danych związanych z położeniem
+geograficznym.
 
-Im kibice są fizycznie bliżej siebie, tym częściej się ze sobą komunikują, 
-co przedstawia poniższy wykres \ref{image:relacje-a-odleglosc}.
-Wartości odległości w kolejnych kolumnach rosną wykładniczo,
-a liczba użytkowników, między którymi doszło do wymiany wiadomości
-pozostaje na takim samym rzędzie wielkości. Między użytkownikami oddalonymi
-od siebie o maksymalnie 10 km doszło do tylu samo wymian wiadomości,
-jak między użytkownikami oddalonymi od 10 do 100 km, czy między użytkownikami
-oddalonymi od 100 do 1000 km od siebie.
+\subsection{Odległość między użytkownikami a częstość kontaktów}
+Zbadana została zależność pomiędzy tym jak często użytkownicy się ze sobą
+komunikują, a tym w jakiej odległości fizycznej od siebie się znajdują.
+Dane te zostały zbadane na podstawie odpowiedzi z geolokacją -- retweety
+nie zawierały informacji o położeniu użytkownika.
+Spośród tych użytkowników, którzy pisali z geolokacją zostało zliczone
+ilu z nich się ze sobą komunikowało w zależności od wzajemnej odległości.
+Wyniki przedstawia poniższy wykres \ref{image:relacje-a-odleglosc}.
+
+
+%Im kibice są fizycznie bliżej siebie, tym częściej się ze sobą komunikują, 
+%co przedstawia poniższy wykres \ref{image:relacje-a-odleglosc}.
+%Wartości odległości w kolejnych kolumnach rosną wykładniczo,
+%a liczba użytkowników, między którymi doszło do wymiany wiadomości
+%pozostaje na takim samym rzędzie wielkości. Między użytkownikami oddalonymi
+%od siebie o maksymalnie 10 km doszło do tylu samo wymian wiadomości,
+%jak między użytkownikami oddalonymi od 10 do 100 km, czy między użytkownikami
+%oddalonymi od 100 do 1000 km od siebie.
 
 \begin{figure}[ht!]
 \centering
-\includegraphics[width=120mm]{img/relacje-a-odleglosc.png}
-\caption{Relacje między użytkownikami a odległość fizyczna między nimi}
+\includegraphics[width=140mm]{img/relacje-a-odleglosc.png}
+\caption{Odległość między użytkownikami a częstość kontaktów}
 \label{image:relacje-a-odleglosc}
 \end{figure}
+
+\subsubsection{Obserwacje i wnioski}
+Każda kolejna kolumna na powyższym wykresie pokrywa obszar o dziesięciokrotnie 
+większym promieniu. Oznacza to, że pole powierzchni, którego dotyczą rośnie
+eksponencjalnie. Pomimo tego, liczba użytkowników, którzy wchodzili ze sobą
+w interakcje jest za każdym razem tego samego rzędu.
+
+Oznacza to więc, że im bliżej siebie byli użytkownicy fizycznie, tym częściej
+odpowiadali na swoje wpisy. Gdy znajdowali się w odległości maksymalnie
+10 kilometrów to do wymiany wpisów dochodziło tak samo
+często, gdy byli od siebie oddaleni od 10 do 100 km, czy nawet od 100 do 1000 km.
+
+Wniosek jest więc taki, iż pomimo tego, że internet nazywany jest globalną wioską
+łączącą ludzi z całego świata, to użytkownicy komunikują się i tak z najbliższymi
+sobie. Może to wynikać z kilku rzeczy. Na przykład osoby z Manchesteru 
+prawdopodobnie będą kibicami drużyny United lub City i większe jest prawdopodobieństwo,
+że będą komunikać się między sobą niż między osobami z innego miasta czy kraju.
+Innym powodem takiego stanu rzeczy może być również bariera językowa.
+Im dalej od danego kraju, tym mniej osób będzie w stanie posługiwać się językiem
+tam panującym. Dodatkowym ograniczeniem może być czas lokalny, czyli strefy czasowe.
+Gdy w jednym punkcie jest dzień, w drugim może być środek nocy jednoznacznie 
+utrudniający komunikację między osobami z większych odległości.  
 
 %Odległość od stadionu zwolenników, przeciwników 
 %Odległość od stadionu a sentyment
