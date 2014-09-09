@@ -105,7 +105,7 @@ najwyższą klasę rozgrywek piłki nożnej mężczyzn w Anglii (i Walii),
 czyli Premier Leauge -- uznawaną przez wielu ekspertów za najsilniejszą ligę na
 świecie. Co istotne, jest to także najczęściej oglądana liga piłkarska.
 Średnio pojedynczy mecz ma widownię ponad 12 milionów osób
-(\cite{PremierLeagueAudience}) bijąc ponad dwukrotnie oglądalność innych lig 
+\cite{PremierLeagueAudience} bijąc ponad dwukrotnie oglądalność innych lig 
 (włoskiej, hiszpańskiej czy niemieckiej).
 
 Zbieranie danych odbywało się przy pomocy Twitter Stream API -- oficjalnie
@@ -121,7 +121,8 @@ Do nasłuchiwania wpisów koniecznym jest także zdefiniowanie filtrów
 określających jakie dane nas interesują. Twitter wymaga by podać przynajmniej
 jeden z niniejszych: słowa kluczowe, identyfikatory użytkowników lub obszary
 geograficzne. Dodatkowo możliwe jest podanie innych parametrów, jak na przykład
-języka wpisów. Dlatego też zdecydowałem się korzystać z filtra słów kluczowych
+języka wpisów (serwis automatycznie wykrywa język wpisów). 
+Dlatego też zdecydowałem się korzystać z filtra słów kluczowych
 wraz z ograniczeniem wpisów na język angielski.
 
 Twitter Stream API dostarcza jedynie tweetów pojawiających się w czasie
@@ -267,7 +268,7 @@ Kolejne kroki, które przekształciły tweety do powyższej postaci to:
 	\item Usunięcie wyrazów zdefiniowanych w stop liście (powszechne wyrazy danego
 	języka, które mogą być pominięte nie tracąc jednocześnie żadnej informacji).
 	Zastosowałem stop listę z serwisu \mbox{WebPageAnalyse.com} 
-	(\cite{WebPageAnalyse}) zawierającą 528 słów.
+	\cite{WebPageAnalyse} zawierającą 528 słów.
 
 	\texttt{\sout{You up for} Arsenal match \sout{later on what} time \sout{maybe if} 
  	im \sout{not} busy baby sitting}
@@ -463,8 +464,8 @@ Oznacza to, że każdy posiada dwie listy -- osób, które obserwuje oraz osób,
 przez które jest obserwowany (\textit{following} i \textit{followers}).
 Są to listy statyczne, budowanie ręcznie przez użytkowników tego portalu
 mikroblogowego. Twitter ukierunkowany jest jednak na swobodną komunikację między
-wszystykimi użytkownikami -- dlatego kontakty między nimi nie są ograniczone
-tylko do osób, które mamy na którejść z list. Nie ma żadnego problemu by jeden
+wszystkimi użytkownikami -- dlatego kontakty między nimi nie są ograniczone
+tylko do osób, które mamy na którejś z list. Nie ma żadnego problemu by jeden
 użytkownik komunikował się z drugim, gdy oboje nie mają się na żadnej z list.
 Najczęściej komunikacja ta odbywa się publicznie poprzez pisanie tweetów między
 sobą, odpowiadanie na wpisy innych użytkowników. Aby uzyskać lepsze efekty
