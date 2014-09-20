@@ -669,55 +669,112 @@ kontekście badanego tematu. Powyższe wizualizacje potwierdzają stosowność
 zastosowania geolokacji i jej skuteczności w różnego rodzaju badaniach
 społecznych.
 
-\clearpage
-\subsection{*Odległość od stadionu}
-
-Rozkład odległości od stadionu rozgrywania meczów Arsenalu Londyn
-zwolenników i przeciwników klubu w zależności od miejsca meczu (u siebie i na 
-wyjeździe).
+\subsection{Odległość od stadionu}
+Dane zawierające geolokalizację pozwalają wykonać szereg ciekawych eksperymentów.
+Kolejnym z nich było zbadanie odległości kibiców od stadionu w zależności
+od tego, czy drużyna grała mecz u siebie czy na wyjeździe. Dodatkowo
+kibiców tych (dzięki analizie sentymentu) można było podzielić na zwolenników
+i przeciwników. Takie badanie zostało przeprowadzone dla wszystkich meczów
+Arsenalu Londyn a wyniki zaprezentowane są na rysunkach 
+\ref{image:odleglosc-od-stadionu-gospodarz} i \ref{image:odleglosc-od-stadionu-gosc}.
 
 \begin{figure}[ht!]
 \centering
 \includegraphics[width=140mm]{img/odleglosc-od-stadionu-home.PNG}
 \caption{Odległość od stadionu w meczach Arsenalu u siebie}
+\label{image:odleglosc-od-stadionu-gospodarz}
 \end{figure}
+
+\clearpage
 
 \begin{figure}[ht!]
 \centering
 \includegraphics[width=140mm]{img//odleglosc-od-stadionu-away.png}
 \caption{Odległość od stadionu w meczach Arsenalu na wyjeździe}
+\label{image:odleglosc-od-stadionu-gosc}
 \end{figure}
 
-\clearpage
-\subsection{*Rozkład wpisów z geolokacją w trakcie meczu}
+\subsubsection{Obserwacje i wnioski}
+To co możemy na nich zaobserwować to fakt, że gdy Arsenal rozgrywa spotkanie na własnym
+stadionie, wówczas liczba wpisów zwolenników przeważa wpisy przeciwników.
+Zwłaszcza w odległości 0-10 i 10-100 kilometrów od stadionu.
+Gdy natomiast mecz odbywa się na wyjeździe, wówczas lekko przeważające
+są wpisy, których autorami są przeciwnicy Arsenalu.
+W przypadku kiedy spojrzymy na kolumnę z wpisami wysyłanymi z odległości
+1 - 10 tysięcy kilometrów od stadionu wtedy w obu przypadkach
+więcej wpisów wysyłanych jest przez zwolenników londyńskiego klubu.
 
-Mecz Chelsea - Southampton, 01.12.2013 17:10.
+Widać więc, że spora część kibiców Arsenalu zapewne komentuje z Londynu
+i nie przemieszcza się za swoją drużyną na każdy mecz. Wówczas, gdy klub rozgrywa
+spotkanie na wyjeździe bliżej stadionu są kibice drużyny przeciwnej,
+którzy tworzą wpisy odznaczające się raczej niechęcią do Arsenalu. 
+Jeśli natomiast
+chodzi o kibiców z dalszych zakątków świata to można stwierdzić, że
+jeśli interesują się oni tą drużyną, to raczej nastawieni są do niej pozytywnie
+i łatwiej jest o sympatyków niż antyfanów.
+
+
+\clearpage
+\subsection{Rozkład wpisów z geolokacją w trakcie meczu}
+Pośród wszystkich zebranych tweetów tylko 3.06\% z nich zawierało informacje o
+geolokacji. Poniżej na podstawie meczu Chelsea F.C. z Southampton F.C.
+(01.12.2013 r.) zaprezentowano porównanie \ref{image:wpisy-odsetek-geotagged}
+liczby wpisów z geolokacją do wszystkich wpisów.
 
 \begin{figure}[ht!]
 \centering
 \includegraphics[width=140mm]{img/tweet-geo-w-meczu.PNG}
 \caption{Rozkład wpisów z geolokacją w trakcie meczu}
+\label{image:wpisy-odsetek-geotagged}
 \end{figure}
 
+\subsubsection{Obserwacje i wnioski}
+Wykres jednoznacznie obrazuje o jakiej różnicy jest mowa. Nieco ponad 3\% 
+wpisów z geolokacją to bardzo niewiele. Widać, że liczba takich tweetów
+rośnie w tych samych momentach, gdy rośnie ogólna liczba wpisów.
+Niestety (z punktu widzenia badań) geotagowanie wpisów
+nie jest jeszcze czymś powszechnym i zapewne musi minąć trochę czasu,
+by użytkownicy serwisów społecznościowych chętniej dzielili się miejscem,
+w którym się znajdują.
+
+\begin{comment}
 \clearpage
 \subsection{*Sentyment a położenie geograficzne}
+Dzięki zastosowaniu georeversingu przy pomocy Open Street Map,
+możliwe było odczytanie ze współrzędnych tweetów zawierających geolokalizację
+szczegółów dotyczących danego miejsca.
+Tym sposobem, do każdego wpisu dołączone zostały informacje o kraju,
+hrabstwie/powiacie oraz mieście, z którego został on wysłany. W połączeniu z
+analizą sentymentu zaprezentować można nastroje jakie pojawiają się
+w różnych miejscach. Poniżej przedstawiam wykresy pokazujące wartość
+sentymentu w różnych obszarach geograficznych, które zostały zaobserwowane
+podczas meczu Chelsea F.C. z Liverpool F.C. (29.12.2013 r.) zakończonego
+wynikiem 2-1. Są to rysunki z sentymentem w krajach \ref{image:sentyment-kraje},
+powiatach/hrabstwach (ang. county) \ref{image:sentyment-hrabstwa}
+oraz miastach \ref{image:sentyment-miasta}.
 
-Mecz Chelsea - Liverpool, 29.12.2013 17:00 (2-1).
-
-\begin{figure}[ht!]
+\begin{figure}[ht!] 
 \centering
 \includegraphics[width=140mm]{img/sentyment-kraje.PNG}
 \caption{Sentyment wpisów z podziałem na kraje}
+\label{image:sentyment-kraje}
 \end{figure}
 
 \begin{figure}[ht!]
 \centering
 \includegraphics[width=140mm]{img/sentyment-powiaty.PNG}
 \caption{Sentyment wpisów z podziałem na powiat/hrabstwo}
+\label{image:sentyment-hrabstwa}
 \end{figure}
+
+\clearpage
 
 \begin{figure}[ht!]
 \centering
 \includegraphics[width=140mm]{img/sentyment-miasto.PNG}
 \caption{Sentyment wpisów z podziałem na miasta}
+\label{image:sentyment-miasta}
 \end{figure}
+
+\subsubsection{Obserwacje i wnioski}
+\end{comment}
