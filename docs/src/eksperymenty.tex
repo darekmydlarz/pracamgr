@@ -27,8 +27,7 @@ zebranych danych, a następnie opisuję eksperymenty związane z analizą sentym
 \section{Opis zebranych danych}
 \label{section:opisdanych}
 % 300 slow kluczowych, 18 druzyn, 50 meczow, daty,
-% 7 mln tweetów, z tego 300 bylo retweetow, 800 z geolokacja, 
-% 900 nijakich
+% 7 mln tweetów, z tego 300 bylo retweetow, 800 z geolokacja, itd
 
 Pomiędzy październikiem a grudniem 2013 roku zebrano 7 263 523 tweety związane
 z piłką nożną. Pierwszy z nich ma datę 23 października 15:35:24 a ostatni
@@ -64,8 +63,8 @@ Na tych danych zostały przeprowadzone analizy zaprezentowane w kolejnych podroz
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% ANALIZA SENTYMENTU
 \section{Analiza sentymentu}
 \label{section:analizasentymentu2}
-% 40\% bylo pozytywnych, 30\% negatywnych w meczach Arsenalu byl taki sentyment
-% w chelsea sraki
+% 40\% bylo pozytywnych, 30\% negatywnych w meczach Arsenalu byl taki a taki sentyment
+
 Analiza sentymentu została przeprowadzona zgodnie z algorytmem przedstawionym w
 rozdziale \ref{section:analizasentymentu}. W związku z tym, że wpisy typu
 retweet nie mogą posiadać sentymentu wszystkie zaprezentowane poniżej analizy
@@ -129,9 +128,6 @@ dokładnie takie same jak zwykłych kibiców -- odzwierciedlają ich aktualny st
 ducha po meczu ulubionej drużyny. Nie ma tutaj żadnej różnicy między światem
 realnym a wirtualnym.
 
-\bigskip
-Szersze zastosowanie analizy sentymentu zostało wykorzystane w kolejnych
-badaniach zaprezentowanych poniżej.
 
 
 
@@ -146,15 +142,93 @@ badaniach zaprezentowanych poniżej.
 
 
 
+\subsection{Liczba tweetów i rozkład sentymentu w ciągu meczu}
+Kolejny eksperyment jaki można wykonać na zgromadzonych danych
+to zbadanie aktywności użytkowników Twittera w związku z wydarzeniami 
+na boisku. Badanie takie można przeprowadzić dla każdego meczu, który znalazł 
+się pośrod tych, które zostały pobrane. Poniżej przedstawione są rezultaty
+dla spotkania pomiędzy drużynami Chelsea F.C. a Southampton F.C. (01.12.2013 r.),
+które zakończyło się wynikiem 3-1. Są to dwa wykresy: pierwszy z liczbą tweetów
+na minutę (z uwzględnieniem wyrażanego przez nie sentymentu) 
+\ref{image:tweety-w-meczu} oraz drugi pokazujący zmianę sentymentu w trakcie
+spotkania \ref{image:sentyment-w-meczu}.
+
+Na obu wykresach zaznaczone są kluczowe wydarzenia:
+
+\begin{enumerate}
+  \item \textbf{17:10} -- 1 min., początek meczu i gol J. Rodriguez (Southampton FC) 0-1.
+  \item \textbf{17:59} -- 45 + 4 min., koniec pierwszej połowy.
+  \item \textbf{18:14} -- 45 min., początek drugiej połowy.
+  \item \textbf{18:24} -- 55 min., gol G. Cahill (Chelsea FC) 1-1.
+  \item \textbf{18:31} -- 62 min., gol J. Terry (Chelsea FC) 2-1.
+  \item \textbf{18:59} -- 90 min., gol D. Ba (Chelsea FC) 3-1.
+  \item \textbf{19:05} -- 90 + 6 min., koniec spotkania.
+\end{enumerate}
 
 
 
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=160mm]{img/tweety-w-meczu-nums.png}
+\caption{Zmiana liczby tweetów w trakcie meczu Chelsea -- Southampton}
+\label{image:tweety-w-meczu}
+\end{figure}
+
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=140mm]{img/sentyment-w-meczu-nums-50percentage.png}
+\caption{Rozkład sentymentu tweetów w trakcie meczu Chelsea -- Southampton}
+\label{image:sentyment-w-meczu}
+\end{figure}
+
+
+\subsubsection{Obserwacje i wnioski}
+Na pierwszym załączonym wykresie wyraźnie widać silną korelację istotnych
+wydarzeń boiskowych z wysokim wzrostem liczby wysyłanych tweetów. 
+Liczba ta rośnie nawet trzykrotnie w przypadku strzelonej bramki przez jedną
+z drużyn. Użytkownicy Twittera dużo mocniej angażują się w komentowanie i 
+komunikację poprzez to medium w najważniejszych momentach danego spotkania.
+Można zauważyć, że początek i koniec spotkania są momentami, w których
+kibice generują stosunkowo dużą liczbę wpisów. W trakcie spotkania
+ich aktywność wzrasta, gdy na boisku dzieje się coś ciekawego.
+Po zakończonym meczu liczba wpisów stopniowo maleje, a dane spotkanie
+nie cieszy się już zainteresowaniem takiego szerokiego grona
+odbiorców jak wcześniej. Są to już zapewne raczej wiadomości wysyłane
+przez bardziej zagorzałych fanów, analizujących dane spotkanie dłużej,
+wyciągających z niego wnioski, a nie tych osób, które były zainteresowane
+meczem tylko wtedy gdy ten się jeszcze odbywał.
+
+Drugi wykres przedstawiający zmiany sentymentu wyraźnie pokazuje, że wpisy były
+wyrównane w trakcie meczu (jeśli chodzi o proporcje sentymentu), aż do momentu,
+w którym Chelsea FC zdobyła bramkę na 3-1, ustalając w ten sposób de facto
+końcowy wynik spotkania. Wówczas wyraźnie przeważały wpisy o wydźwięku
+pozytywnym. Sam fakt tego, że to właśnie te tweety były liczniejsze może wynikać
+między innymi z tego, że Chelsea to klub mający więcej fanów na całym świecie
+niż Southampton, grający w ostatnich latach regularnie w Lidze Mistrzów, bijący
+się o zwycięsto w Premier League, czy jeżdżący w trakcie przygotowań do sezonu
+na tournee do Stanów Zjednoczonych i Azji. Southampton natomiast to klub z dolnej
+części tabeli, mający zupełnie inne cele w trakcie sezonu, nieposiadający tyle
+gwiazd, w związku z czym nie skupiający wokół siebie takiego zainteresowania.
+
+Bardzo podobne wykresy można uzyskać analizując także inne spotkania.
+Tam również internauci mocniej angażują się, gdy dzieje się coś ciekawego, a
+sentyment jest zgodny z wynikiem i liczbą przeważających kibiców danego klubu.
+Widać więc, że Twitter jest miejscem, w którym jego użytkownicy uzewnętrzniają
+swoje emocje błyskawicznie, gdy dzieje się coś co ich porusza.
+Są to takie same naturalne emocje, których doświadczają oni na co dzień, nie są
+w żaden sposób wyimaginowane, przemyślane, czy sterowane, ale pokazują aktualny
+stan ducha danej społeczności. Można więc dojść do wniosku, że badanie Twittera
+może przynieść nam wyniki, do których powinniśmy podejść poważnie i nie
+bagatelizować ich twierdząc, że być może w internecie osoby zachowują się
+inaczej niż w codziennym życiu.
 
 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% ANALIZA SPOŁECZNA
 
+\clearpage
 \section{Analiza sieci społecznych}
 \label{section:analizaspoleczna}
 Do analizy sieci społecznych zostały użyte dane użytkowników pobrane 
@@ -201,7 +275,7 @@ przykładzie wpisów dotyczących Manchesteru United -- można zauważyć ciekaw
 obserwacje. Wykres przedstawiający wyniki badań przedstawia rysunek 
 \ref{image:replies-munited}.
 
-
+\clearpage
 \begin{figure}[ht!]
 \centering
 \includegraphics[width=120mm]{img/replies-munited.png}
@@ -255,7 +329,6 @@ są na rysunku \ref{image:retweety-munited}.
 
 
 \subsubsection{Obserwacje i wnioski}
-%Zwolennicy najczęściej retweetują wpisy zwolenników \ref{image:retweety-munited}
 Tym razem widać zupełnie inne ułożenie słupków na wykresie.
 Na pierwszy plan wyraźnie wysuwa się słupek pierwszy z lewej, który oznacza
 liczbę wpisów zwolenników podanych dalej przez innych zwolenników. Widać więc,
@@ -297,8 +370,6 @@ odpowiedzi zwolennika na wpisy innego zwolennika, zaś w drugim
 \ref{image:reply-sentiment-zwolennik-przeciwnik} odpowiedzi odnoszą się do
 wpisów przeciwnika klubu.
 
-%Zwolennicy bardzo często odpowiadają innym zwolennikom na wpisy pozytywne,
-%również wpisami pozytywnymi \ref{image:reply-sentiment-zwolennik-zwolennik}.
 \begin{figure}[ht!]
 \centering
 \includegraphics[width=120mm]{img/reply-sentiment-zwolennik-zwolennik.png}
@@ -306,7 +377,6 @@ wpisów przeciwnika klubu.
 \label{image:reply-sentiment-zwolennik-zwolennik}
 \end{figure}
 
-\clearpage
 
 \begin{figure}[ht!]
 \centering
@@ -314,6 +384,8 @@ wpisów przeciwnika klubu.
 \caption{Sentyment odpowiedzi. Odpowiada zwolennik Arsenalu na wpis przeciwnika}
 \label{image:reply-sentiment-zwolennik-przeciwnik}
 \end{figure}
+
+
 
 \subsubsection{Obserwacje i wnioski}
 To co rzuca się na pierwszy rzut oka na zamieszczone wykresy to fakt, że 
@@ -339,16 +411,16 @@ rysunkach \ref{image:reply-sentiment-przeciwnik-zwolennik} i
 wyniki badań nad odpowiedziami przeciwnika Arsenalu na wpisy zwolenników
 i przeciwników tego klubu.
 
-\clearpage
 \begin{figure}[ht!] \centering
 \includegraphics[width=120mm]{img/reply-sentiment-przeciwnik-zwolennik.png}
-\caption{Sentyment odpowiedzi}
+\caption{Sentyment odpowiedzi. Odpowiada przeciwnik Arsenalu na wpis zwolennika}
 \label{image:reply-sentiment-przeciwnik-zwolennik}
 \end{figure}
 
+\clearpage
 \begin{figure}[ht!] \centering
 \includegraphics[width=120mm]{img/reply-sentiment-przeciwnik-przeciwnik.png}
-\caption{Sentyment odpowiedzi}
+\caption{Sentyment odpowiedzi. Odpowiada przeciwnik Arsenalu na wpis przeciwnika}
 \label{image:reply-sentiment-przeciwnik-przeciwnik}
 \end{figure}
 
@@ -384,7 +456,6 @@ przekonać ich do swojego punktu widzenia.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% ANALIZA GRUP W SIECIACH SPOŁECZNYCH
 \subsection{Analiza grup w sieciach społecznych}
-%Podobieństwo w meczach Arsenalu \ref{image:grupy-arsenal}
 
 Oprócz powyższych badań nad sposobami komunikacji i relacji budowanymi między
 użytkownikami przeprowadzona została także analiza grup użytkowników 
@@ -409,7 +480,6 @@ w sekcji \ref{section:koncepcja-wykrywaniegrup}.
 \label{image:grupy-arsenal}
 \end{figure}
 
-\clearpage
 \begin{figure}[ht!]
 \centering
 \includegraphics[width=160mm]{img/grupy-munited-nums.png}
@@ -418,6 +488,7 @@ w sekcji \ref{section:koncepcja-wykrywaniegrup}.
 \end{figure}
 
 
+\clearpage
 \subsubsection{Obserwacje i wnioski}
 Z analizy wykresów można zaobserwować, że w każdym spotkaniu najliczniejsze
 są małe grupy -- 3 lub 4 osobowe. Liczba tych grup dodatkowo rośnie, gdy
@@ -475,7 +546,7 @@ daną drużyną i która jest jej stałym fanem.
 
 \section{Analiza geolokacji}
 \label{section:analizageograficzna}
-%Odległość użytkowników komunikujących się ze sobą od siebie
+
 W moich badaniach skupiłem się także nad analizą użytkowników w oparciu 
 o geolokalizację. Tak jak wspomniałem wcześniej, niewielka część wpisów
 zawierała informacje o tym, z którego miejsca została wysłana.
@@ -490,16 +561,6 @@ nie zawierały informacji o położeniu użytkownika.
 Spośród tych użytkowników, którzy pisali z geolokacją zostało zliczone
 ilu z nich się ze sobą komunikowało w zależności od wzajemnej odległości.
 Wyniki przedstawia poniższy wykres \ref{image:relacje-a-odleglosc}.
-
-
-%Im kibice są fizycznie bliżej siebie, tym częściej się ze sobą komunikują, 
-%co przedstawia poniższy wykres \ref{image:relacje-a-odleglosc}.
-%Wartości odległości w kolejnych kolumnach rosną wykładniczo,
-%a liczba użytkowników, między którymi doszło do wymiany wiadomości
-%pozostaje na takim samym rzędzie wielkości. Między użytkownikami oddalonymi
-%od siebie o maksymalnie 10 km doszło do tylu samo wymian wiadomości,
-%jak między użytkownikami oddalonymi od 10 do 100 km, czy między użytkownikami
-%oddalonymi od 100 do 1000 km od siebie.
 
 \begin{figure}[ht!]
 \centering
@@ -536,5 +597,127 @@ utrudniający komunikację między osobami z większych odległości.
 %Kraje, a sentyment
 
 
+\clearpage
+\subsection{Rozkład wpisów na mapie}
+% Mecz Chelsea - Southampton, 01.12.2013 17:10.
+Zebrane Tweety posiadające geolokalizację można przedstawić na
+mapie\footnote{Załączone wizualizacje zostały stworzone przy pomocy serwisu
+CartoDB (www.cartodb.com)}.
+Poniżej na trzech kolejnych rysunkach zaprezentowany został rozkład wpisów,
+które wysłane zostały podczas meczu Chelsea F.C. z Southampton F.C.
+(01.12.2013 r.). Najpierw zaprezentowane są wpisy w skali całej Ziemii
+\ref{image:mapa-swiata}, następnie w skali Wielkiej Brytanii
+\ref{image:mapa-uk}, a na końcu zawierająca obszar między Londynem a Southampton
+\ref{image:mapa-uk-zoom}, czyli miastami obu klubów.
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=140mm]{img/geo-chelsea-southampton.png}
+\caption{Rozkład wpisów na mapie świata}
+\label{image:mapa-swiata}
+\end{figure}
+
+Na powyższej wizualizacji wyróżnić można kilka krajów. Przede wszystkim na
+pierwszym plan wyłania się Wielka Brytania -- z oczywistych względów, jako
+miejsce, w którym odbywa się mecz oraz całe rozgrywki. Oprócz niej dużą liczbę
+tweetów wysyła się z takich krajów jak między innymi:
+Stany Zjednoczone (3 kraj pod względem liczby ludności na świecie, dominujący
+język angielski), Indie (2 kraj pod względem ludności, j. angielski), Indonezja
+(4 kraj pod względem ludności) a także państwa afrykańskie: Kenia i Uganda na
+wschodze oraz Nigeria i Ghana na zachodzie. Należą one do najbardziej
+zaludnionych krajów Czarnego Lądu i w każdym z nich język angielskim jest
+językiem urzędowym.
+Na mapie nie ma wpisów z Chin (najludniejszego kraju świata), gdzie Twitter
+został zablokowany w 2009
+roku\footnote{http://www.theguardian.com/technology/2009/jun/02/twitter-china}
+oraz Rosji, w której popularniejsze są rodzime serwisy społecznościowe.
+
+W meczu wzięli udział między innymi zawodnicy z Nigerii (John Obi Mickel -- Chelsea FC)
+oraz Ghany (Michael Essien -- Chelsea FC, Victor Wanyama -- Southampton FC),
+co zapewne wzmogło aktywność internautów z tych regionów.
 
 
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=140mm]{img/geo-uk-chelsea-southampton.png}
+\caption{Rozkład wpisów w Wielkiej Brytani}
+\label{image:mapa-uk}
+\end{figure}
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=140mm]{img/geo-uk-zoom-chelsea-southampton.png}
+\caption{Rozkład wpisów wokół miast zespołów biorących udział w meczu}
+\label{image:mapa-uk-zoom}
+\end{figure}
+
+Oceniając rozkład wpisów w Wielkiej Brytanii zauważymy dużą ich koncetrację wokół
+Londynu -- największego miasta Zjednoczonego Królestwa (algomeracja Londynu to
+ponad 13 milionów 
+ludzi\footnote{2012 rok. Źródło: Eurostat (http://appsso.eurostat.ec.europa.eu/nui/show.do?dataset=met\_pjanaggr3\&lang=en)}).
+Gdy zbliżymy mapę do obszaru Southampton i Londynu to za pomocą analizy rozkładu
+wpisów na mapie bez problemu zlokalizujemy położenie tych miast.
+Właśnie w nich znajduje się najwięcej ich kibiców generujących
+największą liczbę wpisów.
+
+Widać więc, że dane wydarzenie angażuje przede wszystkim osoby, którym jest ono
+bliskie. Zastosowanie geolokalizacji pozwala nam te miejsca odkryć. I tak jak w
+przypadku meczu piłarskiego można takie miejsca określić de facto jeszcze przed
+analizą, tak w innego rodzaju badaniach przy użyciu tej techniki możliwe może
+być odkrycie miejsc, obszarów geograficznych, o których nie myślałoby się w
+kontekście badanego tematu. Powyższe wizualizacje potwierdzają stosowność
+zastosowania geolokacji i jej skuteczności w różnego rodzaju badaniach
+społecznych.
+
+\clearpage
+\subsection{*Odległość od stadionu}
+
+Rozkład odległości od stadionu rozgrywania meczów Arsenalu Londyn
+zwolenników i przeciwników klubu w zależności od miejsca meczu (u siebie i na 
+wyjeździe).
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=140mm]{img/odleglosc-od-stadionu-home.PNG}
+\caption{Odległość od stadionu w meczach Arsenalu u siebie}
+\end{figure}
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=140mm]{img//odleglosc-od-stadionu-away.png}
+\caption{Odległość od stadionu w meczach Arsenalu na wyjeździe}
+\end{figure}
+
+\clearpage
+\subsection{*Rozkład wpisów z geolokacją w trakcie meczu}
+
+Mecz Chelsea - Southampton, 01.12.2013 17:10.
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=140mm]{img/tweet-geo-w-meczu.PNG}
+\caption{Rozkład wpisów z geolokacją w trakcie meczu}
+\end{figure}
+
+\clearpage
+\subsection{*Sentyment a położenie geograficzne}
+
+Mecz Chelsea - Liverpool, 29.12.2013 17:00 (2-1).
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=140mm]{img/sentyment-kraje.PNG}
+\caption{Sentyment wpisów z podziałem na kraje}
+\end{figure}
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=140mm]{img/sentyment-powiaty.PNG}
+\caption{Sentyment wpisów z podziałem na powiat/hrabstwo}
+\end{figure}
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=140mm]{img/sentyment-miasto.PNG}
+\caption{Sentyment wpisów z podziałem na miasta}
+\end{figure}

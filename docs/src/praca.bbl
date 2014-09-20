@@ -1,0 +1,115 @@
+\begin{thebibliography}{10}
+
+\bibitem{WebPageAnalyse}
+English stopwords.
+\newblock \url{http://www.webpageanalyse.com/dev/stopwords/en}, February 2014.
+\newblock [Online: dostęp 11 lutego 2014].
+
+\bibitem{SNDAtopics}
+C.~Aggarwal.
+\newblock An {Introduction} to {Social} {Network} {Data} {Analytics}.
+\newblock In C.~Aggarwal, editor, {\em Social Network Data Analytics}, pages
+  8--13. Springer, 2011.
+
+\bibitem{JABarnes}
+J.~A. Barnes.
+\newblock Class and {Committees} in a {Norwegian} {Island} {Parish}.
+\newblock {\em Human Relations}, 7:39--58, 1954.
+
+\bibitem{sentimentTechniques}
+S.~Bhuta, U.~Doshi, A.~Doshi, and M.~Narvekar.
+\newblock A review of techniques for sentiment analysis of twitter data.
+\newblock Technical report, International Conference on Issues and Challenges
+  in Intelligent Computing Techniques, 2014.
+
+\bibitem{blondel2008fuc}
+V.D. Blondel, J.L. Guillaume, R.~Lambiotte, and E.L.J.S. Mech.
+\newblock {Fast unfolding of communities in large networks}.
+\newblock {\em J. Stat. Mech}, 2008.
+
+\bibitem{estrada}
+Ernesto Estrada.
+\newblock Introduction to network theory: Modern concepts, algorithms and
+  application.
+\newblock Technical report, Scottish Insight Institute, University of
+  Strathclyde, 2008.
+
+\bibitem{EmoticonAnalysisTwitter}
+Data Genetics.
+\newblock Emoticon analysis in twitter.
+\newblock \url{http://datagenetics.com/blog/october52012/index.html}, 2012.
+\newblock [Online: dostęp 17 grudnia 2013].
+
+\bibitem{TwitterDataAnalytics2013}
+Shamanth Kumar, Fred Morstatter, and Huan Liu.
+\newblock {\em Twitter Data Analytics}.
+\newblock Springer, New York, NY, USA, 2013.
+
+\bibitem{GnipTwitterLanguages}
+B.~Lehman.
+\newblock The evolution of languages on twitter.
+\newblock \url{http://blog.gnip.com/twitter-language-visualization/}, March
+  2014.
+\newblock [Online: dostęp 8 sierpnia 2014].
+
+\bibitem{pakParoubekSentiment}
+A.~Pak and P.~Paroubek.
+\newblock Twitter for sentiment analysis: When language resources are not
+  available.
+\newblock Technical report, 22nd International Workshop on Database and Expert
+  Systems Applications, 2011.
+
+\bibitem{pangLee}
+B.~Pang and L.~Lee.
+\newblock Opinion mining and sentiment analysis.
+\newblock {\em Foundations and Trends in Information Retrieval}, pages 1--2,
+  2008.
+
+\bibitem{pangLeeApplication}
+B.~Pang and L.~Lee.
+\newblock Opinion mining and sentiment analysis.
+\newblock {\em Foundations and Trends in Information Retrieval}, pages 11--15,
+  2008.
+
+\bibitem{thumbsUp2002}
+Bo~Pang, Lillian Lee, and Shivakumar Vaithyanathan.
+\newblock Thumbs up?: sentiment classification using machine learning
+  techniques.
+\newblock In {\em EMNLP '02: Proceedings of the ACL-02 conference on Empirical
+  methods in natural language processing}, pages 79--86, Philadelphia, PA, USA,
+  July 2002. Association for Computational Linguistics.
+
+\bibitem{PremierLeagueAudience}
+S.~Pilger.
+\newblock Why the premier league is the most powerful league in the world.
+\newblock
+  \url{http://bleacherreport.com/articles/1948434-why-the-premier-league-is-the-most-powerful-league-in-the-world},
+  February 2014.
+\newblock [Online: dostęp 9 sierpnia 2014].
+
+\bibitem{lostInGeolocation}
+W.~Reese and J.~Beckland.
+\newblock Lost in geolocation.
+\newblock Technical report, Spring, 2011.
+
+\bibitem{TwitterStatsWorldCup}
+S.~Rogers.
+\newblock Insights into the \#worldcup converation on twitter.
+\newblock
+  \url{https://blog.twitter.com/2014/insights-into-the-worldcup-conversation-on-twitter},
+  July 2014.
+\newblock [Online: dostęp 17 lipca 2014].
+
+\bibitem{tomanekSentyment}
+K.~Tomanek.
+\newblock Analiza sentymentu -- metoda analizy danych jakościowych. przykład
+  zastosowania oraz ewaluacja słownika rid i metody klasyfikacji bayesa w
+  analizie danych jakościowych.
+\newblock {\em Przegląd Socjologii Jakościowej}, 10(2):118--136, 2014.
+
+\bibitem{englishNots1983}
+A.M. Zwicky and G.K. Pullum.
+\newblock Cliticization vs. inflection: English n't.
+\newblock {\em Language}, 59(3), 1983.
+
+\end{thebibliography}
