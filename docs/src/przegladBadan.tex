@@ -25,7 +25,8 @@ który został wykorzystany jako źródło danych do analizy sieci społecznych.
 
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% SIECI SPOŁECZNE
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% SIECI
+% SPOŁECZNE
 \section{Sieci społeczne}
 Termin ten został użyty po raz pierwszy w 1954 roku przez Johna Arundela Barnesa
 \cite{JABarnes}. Oznacza strukturę społeczną, którą tworzą jednostki (np. osoby
@@ -36,22 +37,28 @@ badań \cite{SNDAtopics} to między innymi:
 \begin{itemize}
   \item statystyczna analiza sieci społecznych -- opisuje jak wygląda typowa sieć społeczna,
   badane są połączenia między jednostkami, aby sprawdzić czy posiadają kilka połączeń,
-  czy sieć zbudowana jest z hubami, czy może liczba połączeń rozłożona 
-  jest równomiernie,
+  czy sieć zbudowana jest z hubów (osobniki mające dużą liczbę połączeń, 
+  łączące ze sobą różne części sieci społecznej; wokół nich koncentrują się inne
+  jednostki), czy może liczba połączeń rozłożona jest równomiernie,
+  
   \item odkrywanie grup/społeczności -- jest jednym z głównych tematów analizy 
-  sieci społecznych; szukanie grup związane jest z klasteringiem i odkrywaniem 
-  regionów sieci, które są odpowiednio gęste; problem powiązany jest z badaniem
-  grafów, określaniem jak dzielić sieć na regiony,
-  \item klasyfikacja wierzchołków - w niektórych sieciach część wierzchołków 
-  może być oznaczona; badania skupiają się na tym by korzystając z atrybutów 
-  danego wierzchołka móc ocenić jakie inne również mogłyby przyjąć daną etykietę,
+  sieci społecznych; szukanie grup związane jest z klastrowaniem i odkrywaniem 
+  obszarów sieci, które są bardziej zagęszczone (czyli takie, w których
+  stosunek liczby krawędzi do liczby wierzchołków jest większy niż na zewnątrz);
+  problem powiązany jest z badaniem grafów, określaniem jak dzielić sieć na regiony,
+  
+  \item klasyfikacja wierzchołków -- polega na opracowaniu metody, dzięki której
+  możliwe jest zaklasyfikowanie wierzchołków do wcześniej zdefiniowanych klas na
+  podstawie podobieństwa z innymi jednostkami do tych klas już należących,
+  
   \item odnajdywanie ekspertów -- sieci społeczne mogą być używane jako narzędzia
   w celu odkrywania ekspertów do danego zadania,
-  \item przewidywanie przyszłych połączeń wewnątrz sieci -- wiele badań skupia się
-  na połączeniach wierzchołków celem odkrycia interesujących informacji na temat
-  sieci społecznej; w wielu sieciach połączenia między węzłami są dynamiczne
-  i wynikiem tych badań może być poprawna predykcja przyszłych połączeń
-  węwnątrz sieci,
+  
+  \item predykcja przyszłych połączeń wewnątrz sieci -- wiele badań skupia
+  się na statycznych połączeniach wierzchołków; w wielu sieciach jednak 
+  połączenia między węzłami są dynamiczne i badania te koncentrują się na 
+  tym by przewidzieć nowe połączenia wewnątrz sieci,
+  
   \item ekstrakcja wiedzy z sieci -- polega na eksploracji danych z mediów 
   społecznościowych i eksploracji tekstu z serwisów społecznościowych; 
   eksploracja danych dostarcza naukowcom narzędzia do analizy dużych, 
@@ -283,7 +290,7 @@ są ewidentnie stronnicze, mogą pomóc w faktycznej ocenie danego przedmiotu cz
 usługi
 \item jako technologia wspomagająca większe systemy -- analiza sentymentu może
 być wsparciem dla systemów rekomendacji; na przykład może służyć do 
-nie rekomendowania produktów, które otrzymują negatywne opinie; 
+tego by nie rekomendować produktów, które otrzymały negatywne opinie; 
 w systemach serwujących reklamy kontekstowe, wykrycie pozytywnego sentymentu
 na stronie może być powodem wyświetlenia jakiejś reklamy,
 a wykrycie negatywnego sentymentu powodem jej ukrycia;
@@ -320,8 +327,9 @@ przetwarzaniem języka naturalnego, które niesie ze sobą szereg problemów:
   \item złożoność języka naturalnego -- bardzo trudnym zadaniem jest nauczenie 
 programu komputerowego pełnego rozumienia języka naturalnego; co więcej każdy
 język jest inny, więc dla każdego konieczne jest zastosowanie różnych
-podejść -- inaczej trzeba zabrać się za badanie sentymentu w języku polskim
-a inaczej w angielskim; język ciągle się rozwija, nie jest martwy,
+rozwiązań -- inaczej trzeba podejść do badania sentymentu w języku polskim
+a inaczej w angielskim; trzeba pamiętać też, że język naturalny nie jest martwy 
+i ciągle się rozwija,
 \item trudność w analizie kontekstu wypowiedzi -- wykrycie ironii nie jest zadaniem 
 prostym; bardzo często wypowiedzi mogą mieć związek z jakimś pojęciem 
 zupełnie niezrozumiałym dla programu komputerowego, a oczywistym dla człowieka
