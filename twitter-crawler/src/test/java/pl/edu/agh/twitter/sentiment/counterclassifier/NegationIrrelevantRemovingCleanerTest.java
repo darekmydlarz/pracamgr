@@ -34,7 +34,9 @@ public class NegationIrrelevantRemovingCleanerTest {
                 "BENDTNER!!! ARE YOU FUCKING SERIOUS!! Even though im not arsenal fan :o",
                 "STEVEN GERRARD RT “@TooSomali: “@Capiii_: Now that's my captain” So you know :) aw, thanks.”",
                 "Such a Disney buff. Just found out about the new Alice in Wonderland movie. Official trailer: http://bit.ly/131Js0 I love the Cheshire Cat.",
-                "Haha, you gotta agree, no one gets booed like Manchester United :D #ZeDevilza"
+                "Haha, you gotta agree, no one gets booed like Manchester United :D #ZeDevilza",
+                "OHHHHHH!!!!! SO CLOSE!!! Wilshere!!! Good Job Ramsey keeping that move alive",
+                "Why didn't Chelsea loan Lukaku to Arsenal?"
         };
 
         String[] expected = {
@@ -64,7 +66,9 @@ public class NegationIrrelevantRemovingCleanerTest {
                 "FUCKING im not_fan",
                 "",
                 "disney buff alice wonderland movie official trailer love cheshire cat",
-                "haha gotta agree not_booed"
+                "haha gotta agree not_booed",
+                "ohhhhhh close good job keeping alive",
+                ""
         };
         compareSentences(given, expected);
     }

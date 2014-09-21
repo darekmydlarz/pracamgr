@@ -60,7 +60,8 @@ W tej sekcji opisuję sposób przeprowadzenia początkowych prac związanych
 z moimi badaniami, które związane były ze zgromadzeniem danych potrzebnych
 do przeprowadzania analiz. Etap ten był niezwykle istotny i przeprowadzenie
 go umożliwiło dalsze prace. Zgromadzone dane pochodzą z serwisu Twitter
-i zostały uzyskane przy pomocy udostępnionego publicznie API (interfejsu
+i zostały uzyskane przy pomocy udostępnionego publicznie 
+API\footnote{https://dev.twitter.com/overview/documentation} (interfejsu
 programistycznego).
 
 \subsection{Tematyka danych}
@@ -108,10 +109,10 @@ czyli Premier Leauge -- uznawaną przez wielu ekspertów za najsilniejszą ligę
 \cite{PremierLeagueAudience} bijąc ponad dwukrotnie oglądalność innych lig 
 (włoskiej, hiszpańskiej czy niemieckiej).
 
-Zbieranie danych odbywało się przy pomocy Twitter Stream API -- oficjalnie
-udostępnionego interfejsu programistycznego.
+Zbieranie danych odbywało się przy pomocy Twitter Stream 
+API\footnote{https://dev.twitter.com/streaming/overview}.
 Aby móc zbierać wpisy należy napisać program -- robota internetowego,
-korzystającego z API, który nasłuchuje na żywo pojawiających się wpisów.
+korzystającego z udostępnionego API, który nasłuchuje na żywo pojawiające się wpisy.
 
 Technika ta ma jednak ograniczenia i pozwala na konsumowanie maksymalnie 1\%
 wszystkich pojawiających się w tym czasie wpisów na Twitterze (aby uzyskać
@@ -182,7 +183,7 @@ http://t.co/rJB4K1fvZy
 4 & @Arsenal didn't think i could respect @aaronramsey any more than i already
 did, bute what a gentleman he is for not to celebrate that goal:) 
 \\ \hline
-5 & BENDTNER!!! ARE YOU FUCKING SERIOUS!! Even though im not arsenal fan :o
+5 & OHHHHHH!!!!! SO CLOSE!!! Wilshere!!! Good Job Ramsey keeping that move alive
 \\ \hline
 6 & Haha, you gotta agree, no one gets booed like Manchester United :D \#ZeDevilza
 \\
@@ -205,13 +206,13 @@ powyższej tabeli prezentują się w następujący sposób:
 \\ \hline
 1 & 
 \\ \hline
-2 & Stay woke brah make alright
+2 & stay woke brah make alright
 \\ \hline
 3 & not\_disappointing
 \\ \hline
 4 & didnt not\_respect bute gentleman not\_celebrate not\_goal
 \\ \hline
-5 & FUCKING im not\_fan
+5 & ohhhhhh close good job keeping alive
 \\ \hline
 6 & haha gotta agree not\_booed
 \\
@@ -276,7 +277,9 @@ Kolejne kroki, które przekształciły tweety do powyższej postaci to:
 	\item Usunięcie słów kluczowych, które użyte były do gromadzenia wpisów z
 	Twittera -- czyli nazwisk piłkarzy, menadżerów, nazw klubów, itd.
 	
-	\texttt{\sout{BENDTNER} FUCKING im \sout{NOT\_arsenal} NOT\_fan}
+	%\texttt{\sout{BENDTNER} FUCKING im \sout{NOT\_arsenal} NOT\_fan}
+	
+	\texttt{OHHHHHH CLOSE \sout{Wilshere} Good Job \sout{Ramsey} keeping alive}
 	
 \end{enumerate}
 
