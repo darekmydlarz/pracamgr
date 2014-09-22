@@ -74,7 +74,7 @@ im. Stanis\l{}awa Staszica w Krakowie}}}
 {\LARGE\scshape \@author}\\\vspace*{2cm}
 
 {\LARGE{\bfseries\scshape \@titlePL}}\\
-%{\large\textsc{\@titleEN}}
+{\large\textsc{\@titleEN}}
 \vspace*{2cm}
 
 \begin{flushright}

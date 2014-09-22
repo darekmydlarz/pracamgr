@@ -99,9 +99,10 @@ liczbę wiadomości wymienionych między węzłami. Kierunek krawędzi reprezent
 w która stronę dana komunikacja przebiegała. Wygląd takich grafów przedstawia rysunek 
 \ref{image:graf-reprezentacja}.
 
+\clearpage
 \begin{figure}[ht!]
 \centering
-\includegraphics[width=90mm]{img/graf-reprezentacja.png}
+\includegraphics[width=120mm]{img/graf-reprezentacja.png}
 \caption{Przykład grafu nieskierowanego bez krawędzi ważonych (po lewej)
 oraz grafu skierowanego z krawędziami ważonymi (po prawej)}
 \label{image:graf-reprezentacja}
@@ -123,7 +124,7 @@ Miara określająca liczbę krawędzi wchodzących i
   
 \begin{figure}[ht!]
 \centering
-\includegraphics[width=60mm]{img/stopien-wierzcholka.png}
+\includegraphics[width=80mm]{img/stopien-wierzcholka.png}
 \caption{Graf z oznaczonymi stopniami wierzchołków}
 \label{image:stopien-wierzcholka}
 \end{figure}
@@ -132,15 +133,15 @@ W przypadku grafów skierowanych możemy jeszcze mówić o stopniu wchodzącym
 (ang. \textit{in degree}) oraz wychodzącym (ang. \textit{out degree}) 
 (patrz rys. \ref{image:stopien-wierzcholka-skierowany}).
   
+\clearpage
 \begin{figure}[ht!]
 \centering
-\includegraphics[width=75mm]{img/stopien-wierzcholka-skierowany.png}
+\includegraphics[width=80mm]{img/stopien-wierzcholka-skierowany.png}
 \caption{Graf skierowany z oznaczonymi stopniami wierzchołków}
 \label{image:stopien-wierzcholka-skierowany}
 \end{figure}
   
   
-\clearpage
 \subsubsection{Pośrednictwo (ang. \textit{betweenness}) }  
 Liczba najkrótszych ścieżek w grafie, które przechodzą przez dany węzeł podzielona
 przez liczbę wszystkich najkrótszych ścieżek grafu. Przez najkrótszą ścieżkę 
@@ -149,7 +150,16 @@ jest najmniejsza.
   
 \begin{equation}
 BC(k) = \sum\limits_{i}\sum\limits_{j}\frac{\rho(i, k, j)}{\rho(i, j)}, \quad i \neq j \neq k
-\end{equation}  
+\end{equation}
+
+gdzie:
+
+$\rho(i, k, j)$ -- liczba najkrótszych ścieżek pomiędzy $i$ oraz $j$ przechodząca
+przez wierzchołek $k$,
+
+$\rho(i, j)$ -- liczba wszystkich najkrótszych ścieżek pomiędzy $i$ oraz $j$.
+
+\bigskip
 
 Przykładowo aby obliczyć wartość tej miary dla wierzchołka $B$ posłużmy się rysunkiem 
 \ref{image:betweenness}.
@@ -159,7 +169,7 @@ równa $5/6$.
 
 \begin{figure}[ht!]
 \centering
-\includegraphics[width=75mm]{img/betweenness.png}
+\includegraphics[width=90mm]{img/betweenness.png}
 \caption{Najkrótsze scieżki przechodzące przez węzeł $B$}
 \label{image:betweenness}
 \end{figure}
@@ -175,18 +185,26 @@ Z tego wynika też, że mogą być skutecznym celem ataków.
 Znormalizowana odwrotność sumy odległości między węzłami w grafie.
   
 \begin{equation}
-CC(i) = \frac{N - 1}{\sum\limits_{j}d(i, j)}
+CC(k) = \frac{\sum\limits_{j}d(k, j)}{N - 1}
 \end{equation}  
 
-Dla każdej pary węzłów liczymy odległość między nimi (liczoną jako liczbę krawędzi),
-a następnie dla każdego wierzchołka dzielimy tę wartość przez $N - 1$, gdzie $N$
-to liczba wierzchołków. Przykładowy graf \ref{image:closeness} i tabela 
-\ref{tab:closeness} z obliczeniami znajdują się poniżej.
+gdzie:
+
+$d(k, j)$ -- odległość między wierzchołkami $k$ oraz $j$,
+
+$N$ -- liczba wszystkich wierzchołków.
+
+\bigskip
+
+Wartość \textit{closeness} dla pojedynczego wierzchołka liczymy sumując
+odległości między nim a pozostałymi wierzchołkami,
+a następnie dzielimy tę wartość przez $N - 1$. Przykładowy graf \ref{image:closeness} i tabela 
+\ref{tab:closeness} z obliczeniami tej wielkości znajdują się poniżej.
 
 
 \begin{figure}[ht!]
 \centering
-\includegraphics[width=75mm]{img/closeness.png}
+\includegraphics[width=90mm]{img/closeness.png}
 \caption{Suma odległości do pozostałych węzłów w grafie}
 \label{image:closeness}
 \end{figure}
@@ -198,7 +216,7 @@ to liczba wierzchołków. Przykładowy graf \ref{image:closeness} i tabela
  \hline
  & \multicolumn{5}{c ||}{Wierzchołki} & Suma odległości & Bliskość (\textit{closeness}) \\
  \hline
- & A & B & C & D & E &  $\sum\limits_{j}d(i, j)$ & $CC(i)$ \\
+ & A & B & C & D & E &  $S = \sum\limits_{j}d(i, j)$ & $CC(i) = \frac{S}{N - 1} = \frac{S}{4}$ \\
 \hline
 A & 0 & 1 & 2 & 2 & 3 & 8 & 0.5 \\ 
 B & 1 & 0 & 1 & 1 & 1 & 4 & \textbf{1.0} \\ 
@@ -226,34 +244,53 @@ gdy poprzednie miary zwracają równe wyniki. Wartość tej wielkości wyraża s
 wzorem:
 
 \begin{equation}
-x_i = \frac{1}{\lambda}\sum\limits_{j=1}^nA_{ij}x_j
+EV(k) = \frac{1}{\lambda}\sum\limits_{j}A_{kj}x_j
 \end{equation}
-gdzie $\lambda$ jest stała i równa największej wartości własnej macierzy sąsiedztwa
-danego grafu, a wartość $A_{ij} = 1$, gdy wierzchołki mają wspólną krawędź,
-w przeciwnym wypadku wynosi $0$. Przykładowe wartości wielkości \textit{eigenvector}
+
+gdzie:
+
+$\lambda$ -- stała, równa największej wartości własnej macierzy sąsiedztwa grafu,
+
+\begin{math}
+ A_{kj} =
+  \begin{cases}
+   1, \text{gdy wierzchołki $k$ oraz $j$ mają wspólną krawędź} \\
+   0, \text{w przeciwnym wypadku}
+  \end{cases}
+
+\end{math}
+
+
+\bigskip
+
+Przykładowe wartości wielkości \textit{eigenvector}
 zaprezentowano na rysunku \ref{image:eigenvector}. Wartości te zostały
 obliczone przy pomocy narzędzia Gephi\footnote{https://gephi.github.io/}.
 
 \begin{figure}[ht!]
 \centering
-\includegraphics[width=40mm]{img/eigenvector.png}
+\includegraphics[width=50mm]{img/eigenvector.png}
 \caption{Wartości wielkości \textit{eigenvector} w przykładowym grafie}
 \label{image:eigenvector}
 \end{figure}
 
-Dla uzupełnienia terminologii związanej z traktowaniem sieci społecznej
-jako grafu chciałbym przypomnieć jeszcze dwa pojęcia:
+
+\subsubsection{Klika}
+W analizie sieci społecznych (traktowanych jako graf) przydatne są także 
+2 następujące pojęcia:
 \begin{itemize}
-  \item klika -- podgraf grafu, w którym wszystkie wierzchołki połączone są krawędzią
+  \item klika -- podgraf grafu, w którym wszystkie wierzchołki połączone są 
+  krawędzią,
   \item k-klika -- klika składająca się z dokładnie $k$-wierzchołków. Na przykład
   k-klika o $k=3$ to podgraf zbudowany z 3 wierzchołków, gdzie między każdym z 
   nich znajduje się krawędź (patrz rys. \ref{image:klika}).
 \end{itemize}
 
+\clearpage
 \begin{figure}[ht!]
 \centering
-\includegraphics[width=40mm]{img/klika.png}
-\caption{Wierzchołki $ABC$ tworzą klikę o rozmiarze 3}
+\includegraphics[width=50mm]{img/klika.png}
+\caption{K-klika o rozmiarze 3 zbudowana przez wierzchołki $ACD$}
 \label{image:klika}
 \end{figure}
 
@@ -265,7 +302,7 @@ jako grafu chciałbym przypomnieć jeszcze dwa pojęcia:
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% SENTYMENT
-\clearpage\section{Sentyment wypowiedzi}
+\section{Sentyment wypowiedzi}
 Recenzje, komentarze i opinie odgrywają istotną rolę w ocenie satysfakcji
 z produktu lub usługi czy w badaniu reakcji na wydarzenia. Dane, które zawierają
 takie informacje mają bardzo wysoki potencjał w odkrywaniu wiedzy.
@@ -318,7 +355,6 @@ przedstawiają swoje opinie w Internecie, a przy pomocy analizy sentymentu bardz
 łatwe staje się zbadanie nastrojów.
 
 
-\clearpage
 
 Badanie sentymentu nie jest trywialne. Związane jest bezpośrednio z 
 przetwarzaniem języka naturalnego, które niesie ze sobą szereg problemów:
@@ -358,13 +394,23 @@ i negatywne. Klasyfikator ocenia tekst na podstawie liczby wystąpień
 odpowiednich słów. Niestety podejście to ma bardzo wysoki stopień błędów.
 Przykładowa funkcja oceniająca sentyment słowa to:
 \begin{equation}
-X_t = \frac{p(pos | topic, t)}{p(neg | topic, t)}
+X_t = \frac{P(pos | topic, t)}{P(neg | topic, t)}
 \end{equation}
-w tym przypadku wyrazy mają przypisany odpowiedni sentyment w zależności od tematu,
-którego dotyczą.
 
-Największym problemem tego podejścia jest brak mechanizmu radzenia sobie z kontekstem
-słów.
+gdzie:
+
+$P(pos | topic, t)$ -- prawdopodobieństwo zdarzenia, że słowo $t$ w temacie 
+$topic$ wystąpi z sentymentem pozytywnym,
+
+$P(neg | topic, t)$ -- prawdopodobieństwo zdarzenia, że słowo $t$ w temacie
+$topic$ wystąpi z sentymentem negatywnym.
+
+\bigskip
+
+
+W tym przypadku wyrazy mają przypisany odpowiedni sentyment w zależności od
+tematu, którego dotyczą. Największym problemem tego podejścia jest brak
+mechanizmu radzenia sobie z kontekstem słów.
 
 \subsubsection{Naiwny klasyfikator Bayesa (ang. \textit{naive Bayes classifier})}
 Jest to podejście probabilistyczne. W ramach tej metody zakłada się, że dana kategoria
@@ -417,23 +463,33 @@ jest duża szansa, że dane te będą relatywnie rzadkie i metoda ta może prowa
 do przeuczenia.
 
 
-\subsubsection{Maszyny wektorów nośnych (ang. \textit{support vector machines})}
+\subsubsection{Metoda wektorów nośnych (ang. \textit{support vector machines})}
 Support vector machines to podejście stosujące duży margines między klasami.
 Główna idea polega na znalezieniu hiperpłaszczyzny, która podzieli teksty na pozytywne
 i negatywne z marginesem pomiędzy klasami tak dużym jak to tylko możliwe.
 Technika ta zbudowana jest na zasadzie strukturalnej minimalizacji ryzyka 
 (ang. \textit{structural risk minimization principle}). Celem jest znalezienie
 funkcji $h$, dla której błąd klasyfikacji losowego tekstu będzie jak najmniejszy.
-Oznaczając hiperpłaszczyznę przez $\vec{h}$, a tekst przez $\vec{t}$ oraz klasy, do
-których może trafić jako $C_j \in \{1, -1\}$ wówczas możemy zapisać to 
-postaci:
+Można ją opisać wzorem:
 \begin{equation}
 \vec{h} = \sum\limits_{i}\alpha_iC_i\vec{t_j}, \quad \alpha_i \geq 0
 \end{equation}
 
-Wartość $\alpha_i$ może być znaleziona przez rozwiązanie problemu podwójnej 
-optymalizacji. Teksty o $\alpha_i$ większym od zera, to te które biorą udział
-w szukaniu funkcji $h$ nazywa się je wektorami wspierającymi 
+gdzie:
+
+$\vec{h}$ -- szukana hiperpłaszczyzna,
+
+$\vec{t_j}$ -- badany tekst (pojedynczy wpis),
+
+$C_j \in \{1, -1\}$ -- klasy, do których może trafić wpis (pozytywna/negatywna),
+
+$\alpha_i$ -- wartość, która może być znaleziona przez rozwiązanie problemu
+podwójnej optymalizacji.
+
+\bigskip
+
+Teksty o $\alpha_i$ większym od zera, to te które biorą udział
+w szukaniu funkcji $h$ i nazywa się je wektorami wspierającymi 
 (ang. \textit{support vectors}).
 
 Wybór cech (wyrazów) jest bardzo ważnym zadaniem w technikach uczenia maszynowego.
@@ -467,21 +523,44 @@ W wyniku tego budowany jest leksykon zawierający wyrazy wraz z liczbą
 ich wystąpień w każdej z klas.
 W związku z tym, że wpisy na Twitterze ograniczone są do 140 znaków, autorzy przyjęli
 założenie, że emotikona dotyczy całego wpisu. 
-Ocena tekstu $T$ składającego się z wyrazów $w_1, w_2, \ldots w_n$ obliczana 
-jest jako:
+Ocena tekstu $T$ składającego się z wyrazów obliczana jest jako:
+
 \begin{equation}
 valence(T) = \frac{\sum\limits_{i = 1}^n valence(w_i)}{n}
 \end{equation}
 
-gdzie wartość $valence(w_i)$ obliczana jest przy zastosowaniu skonstruowanego
+gdzie:
+
+$T$ -- tekst poddany analizie,
+
+$w_i$ -- pojedyncze słowo w tekście $T$,
+
+$valence(w_i)$ -- wartość $valence$ dla słowa $w_i$,
+
+$n$ -- liczba słów w tekście $T$.
+
+\bigskip
+
+
+Wartość $valence(w_i)$ obliczana jest przy zastosowaniu skonstruowanego
 leksykonu i równa delta IDF (ang. \textit{inverse document frequency} -- 
 powszechnie stosowana miara ważności słowa w oparciu o liczbę wystąpień):
 \begin{equation}
 valence(w_i) = log\frac{N(w_i, M^+) + 1}{N(w_i, M^-) + 1}
 \end{equation} 
+
+gdzie:
+
+$N(w_i, M^+)$ -- liczba wystąpień słowa $w_i$ w zbudowanym leksykonie w 
+kontekście pozytywnym,
+
+$N(w_i, M^-)$ -- liczba wystąpień słowa $w_i$ w zbudowanym leksykonie w 
+kontekście negatywnym.
+
+\bigskip
 Zastosowanie takiego wzoru prowadzi do tego, że niezależnie jak często
-dany wyraz pojawił się w zbiorze treningowym, najważniejsza jest jego polaryzacja.
-Gdy na przykład słowo \textit{świetny} pojawiło się w zbiorach pozytywnym
+dany wyraz pojawia się w zbiorze treningowym, najważniejsza jest jego polaryzacja.
+Gdy na przykład słowo \textit{świetny} pojawia się w zbiorach pozytywnym
 i negatywnym odpowiednio 1000 i 20 razy, a słowo \textit{przezacny} odpowiednio
 50 i 1 raz to ich wpływ na ocenę tekstu będzie identyczny.
 
