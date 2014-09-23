@@ -291,21 +291,9 @@ zostały badania nad siecią społeczną, którą tworzą użytkownicy Twittera.
 % retweety pozytywne zwolennicy, replies negatywne, przeciwnicy, itd
 
 Jednym z eksperymentów przeprowadzonych w analizie sieci społecznych było
-sprawdzenie rodzaju komunikacji pomiędzy użytkownikami. Aby jednak wzbogacić
-ten eksperyment użyty został zbadany wcześniej sentyment. Przy jego pomocy
-oznaczono każdego użytkownika jako przeciwnika lub zwolennika danego klubu.
-
-\subsubsection{Wykrywanie zwolenników i przeciwników klubu}
-Proces oznaczania użytkowników jako sympatyków i przeciwników drużyny przebiegał
-w następujący sposób:
-\begin{itemize}
-  \item dla każdego użytkownika zliczono jego wpisy w meczach każdej z czterech 
-  drużyn,
-  \item jeśli w meczach drużyny A dla danego użytkownika przeważała liczba 
-  wpisów pozytywnych, wówczas oznaczano takiego kibica jako zwolennika drużyny A,
-  \item jeśli natomiast przeważała liczba wpisów negatywnych, wówczas taki kibic
-  traktowany był jako przeciwnik danej drużyny.  
-\end{itemize} 
+sprawdzenie rodzaju komunikacji pomiędzy użytkownikami. 
+Dodatkowo użytkownicy zostali podzieleni na zwolenników i przeciwników danego 
+klubu zgodnie z \ref{subsection:wykrywanie-zwolennikow}.
 
 
 \subsubsection{Charakterystyka komunikacji poprzez odpowiedzi (\textit{replies})}
@@ -504,14 +492,9 @@ przekonać ich do swojego punktu widzenia.
 
 Oprócz powyższych badań nad sposobami komunikacji i relacji budowanymi między
 użytkownikami przeprowadzona została także analiza grup użytkowników 
-pomiędzy meczami. Grupy zostały zbudowane na podstawie relacji \textit{reply}
-stworzonej z zebranych wpisów. Na podstawie odpowiedzi między różnymi
-użytkownikami budowany był model sieci społecznej.
+pomiędzy meczami. Grupy te były budowane zgodnie z \ref{subsection:wykrywaniegrup}. 
 
-W każdym kolejnym meczu przeprowadzono badanie grup wśród użytkowników.
-Uzyskane wyniki podzielono na trzy ,,koszyki''. W pierwszym znalazły się grupy 
-3 lub 4 osobowe. W~drugim koszyku grupy mające od 5 do 9 osób, a w trzecim koszyku
-większe grupy. Liczności tych grup zostało zaprezentowane na poniższych
+Liczności tych grup zostało zaprezentowane na poniższych
 wykresach pokazując jak zmieniały się z meczu na mecz.
 Na pierwszym \ref{image:grupy-arsenal} przedstawione są dane
 dla Arsenalu, a na drugim \ref{image:grupy-munited} dla Manchesteru United.
@@ -602,12 +585,9 @@ geograficznym.
 
 \subsection{Odległość między użytkownikami a częstość kontaktów}
 Zbadana została zależność pomiędzy tym jak często użytkownicy się ze sobą
-komunikują, a tym w jakiej odległości fizycznej od siebie się znajdują.
-Dane te zostały zbadane na podstawie odpowiedzi z geolokacją -- retweety
-nie zawierały informacji o położeniu użytkownika.
-Spośród tych użytkowników, którzy pisali z geolokacją zostało zliczone
-ilu z nich się ze sobą komunikowało w zależności od wzajemnej odległości.
-Wyniki przedstawia poniższy wykres \ref{image:relacje-a-odleglosc}.
+komunikują, a tym w jakiej odległości fizycznej od siebie się znajdują (zgodnie
+z \ref{subsection:badanieodleglosci}). Wyniki przedstawia poniższy wykres
+\ref{image:relacje-a-odleglosc}.
 
 \begin{figure}[ht!]
 \centering

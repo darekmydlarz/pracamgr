@@ -1,121 +1,90 @@
 \begin{thebibliography}{10}
 
 \bibitem{JABarnes}
-J.~A. Barnes.
-\newblock Class and {Committees} in a {Norwegian} {Island} {Parish}.
-\newblock {\em Human Relations}, 7:39--58, 1954.
+J.~A. Barnes, ``Class and {Committees} in a {Norwegian} {Island} {Parish},''
+  {\em Human Relations}, vol.~7, pp.~39--58, 1954.
 
 \bibitem{SNDAtopics}
-C.~Aggarwal.
-\newblock An {Introduction} to {Social} {Network} {Data} {Analytics}.
-\newblock In C.~Aggarwal, editor, {\em Social Network Data Analytics}, pages
-  8--13. Springer, 2011.
+C.~Aggarwal, ``An {Introduction} to {Social} {Network} {Data} {Analytics},'' in
+  {\em Social Network Data Analytics} (C.~Aggarwal, ed.), pp.~8--13, Springer,
+  2011.
 
 \bibitem{estrada}
-Ernesto Estrada.
-\newblock Introduction to network theory: Modern concepts, algorithms and
-  application.
-\newblock Technical report, Scottish Insight Institute, University of
+E.~Estrada, ``Introduction to network theory: Modern concepts, algorithms and
+  application,'' tech. rep., Scottish Insight Institute, University of
   Strathclyde, 2008.
 
 \bibitem{pangLee}
-B.~Pang and L.~Lee.
-\newblock Opinion mining and sentiment analysis.
-\newblock {\em Foundations and Trends in Information Retrieval}, pages 1--2,
-  2008.
+B.~Pang and L.~Lee, ``Opinion mining and sentiment analysis,'' {\em Foundations
+  and Trends in Information Retrieval}, pp.~1--2, 2008.
 
 \bibitem{pangLeeApplication}
-B.~Pang and L.~Lee.
-\newblock Opinion mining and sentiment analysis.
-\newblock {\em Foundations and Trends in Information Retrieval}, pages 11--15,
-  2008.
+B.~Pang and L.~Lee, ``Opinion mining and sentiment analysis,'' {\em Foundations
+  and Trends in Information Retrieval}, pp.~11--15, 2008.
 
 \bibitem{sentimentTechniques}
-S.~Bhuta, U.~Doshi, A.~Doshi, and M.~Narvekar.
-\newblock A review of techniques for sentiment analysis of twitter data.
-\newblock Technical report, International Conference on Issues and Challenges
-  in Intelligent Computing Techniques, 2014.
+S.~Bhuta, U.~Doshi, A.~Doshi, and M.~Narvekar, ``A review of techniques for
+  sentiment analysis of twitter data,'' tech. rep., International Conference on
+  Issues and Challenges in Intelligent Computing Techniques, 2014.
 
 \bibitem{pakParoubekSentiment}
-A.~Pak and P.~Paroubek.
-\newblock Twitter for sentiment analysis: When language resources are not
-  available.
-\newblock Technical report, 22nd International Workshop on Database and Expert
-  Systems Applications, 2011.
+A.~Pak and P.~Paroubek, ``Twitter for sentiment analysis: When language
+  resources are not available,'' tech. rep., 22nd International Workshop on
+  Database and Expert Systems Applications, 2011.
 
 \bibitem{tomanekSentyment}
-K.~Tomanek.
-\newblock Analiza sentymentu -- metoda analizy danych jakościowych. przykład
-  zastosowania oraz ewaluacja słownika rid i metody klasyfikacji bayesa w
-  analizie danych jakościowych.
-\newblock {\em Przegląd Socjologii Jakościowej}, 10(2):118--136, 2014.
+K.~Tomanek, ``Analiza sentymentu -- metoda analizy danych jakościowych.
+  przykład zastosowania oraz ewaluacja słownika rid i metody klasyfikacji
+  bayesa w analizie danych jakościowych,'' {\em Przegląd Socjologii
+  Jakościowej}, vol.~10, no.~2, pp.~118--136, 2014.
 
 \bibitem{lostInGeolocation}
-W.~Reese and J.~Beckland.
-\newblock Lost in geolocation.
-\newblock Technical report, Spring, 2011.
-
-\bibitem{GnipGeotaggedNumber}
-I.~Cairns.
-\newblock Emoticon analysis in twitter.
-\newblock \url{http://blog.gnip.com/twitter-geo-operators/}, 2014.
-\newblock [Online: dostęp 23 września 2014].
+W.~Reese and J.~Beckland, ``Lost in geolocation,'' tech. rep., Spring, 2011.
 
 \bibitem{TwitterDataAnalytics2013}
-Shamanth Kumar, Fred Morstatter, and Huan Liu.
-\newblock {\em Twitter Data Analytics}.
-\newblock Springer, New York, NY, USA, 2013.
+S.~Kumar, F.~Morstatter, and H.~Liu, {\em Twitter Data Analytics}.
+\newblock New York, NY, USA: Springer, 2013.
 
 \bibitem{TwitterStatsWorldCup}
-S.~Rogers.
-\newblock Insights into the \#worldcup converation on twitter.
-\newblock
+S.~Rogers, ``Insights into the \#worldcup converation on twitter.''
   \url{https://blog.twitter.com/2014/insights-into-the-worldcup-conversation-on-twitter},
   July 2014.
 \newblock [Online: dostęp 17 lipca 2014].
 
 \bibitem{GnipTwitterLanguages}
-B.~Lehman.
-\newblock The evolution of languages on twitter.
-\newblock \url{http://blog.gnip.com/twitter-language-visualization/}, March
-  2014.
+B.~Lehman, ``The evolution of languages on twitter.''
+  \url{http://blog.gnip.com/twitter-language-visualization/}, March 2014.
 \newblock [Online: dostęp 8 sierpnia 2014].
 
 \bibitem{PremierLeagueAudience}
-S.~Pilger.
-\newblock Why the premier league is the most powerful league in the world.
-\newblock
+S.~Pilger, ``Why the premier league is the most powerful league in the world.''
   \url{http://bleacherreport.com/articles/1948434-why-the-premier-league-is-the-most-powerful-league-in-the-world},
   February 2014.
 \newblock [Online: dostęp 9 sierpnia 2014].
 
 \bibitem{WebPageAnalyse}
-English stopwords.
-\newblock \url{http://www.webpageanalyse.com/dev/stopwords/en}, February 2014.
+``English stopwords.'' \url{http://www.webpageanalyse.com/dev/stopwords/en},
+  February 2014.
 \newblock [Online: dostęp 11 lutego 2014].
 
 \bibitem{EmoticonAnalysisTwitter}
-Data Genetics.
-\newblock Emoticon analysis in twitter.
-\newblock \url{http://datagenetics.com/blog/october52012/index.html}, 2012.
+D.~Genetics, ``Emoticon analysis in twitter.''
+  \url{http://datagenetics.com/blog/october52012/index.html}, 2012.
 \newblock [Online: dostęp 17 grudnia 2013].
 
 \bibitem{thumbsUp2002}
-Bo~Pang, Lillian Lee, and Shivakumar Vaithyanathan.
-\newblock Thumbs up?: sentiment classification using machine learning
-  techniques.
-\newblock In {\em EMNLP '02: Proceedings of the ACL-02 conference on Empirical
-  methods in natural language processing}, pages 79--86, Philadelphia, PA, USA,
-  July 2002. Association for Computational Linguistics.
+B.~Pang, L.~Lee, and S.~Vaithyanathan, ``Thumbs up?: sentiment classification
+  using machine learning techniques,'' in {\em EMNLP '02: Proceedings of the
+  ACL-02 conference on Empirical methods in natural language processing},
+  (Philadelphia, PA, USA), pp.~79--86, Association for Computational
+  Linguistics, July 2002.
 
 \bibitem{englishNots1983}
-A.M. Zwicky and G.K. Pullum.
-\newblock Cliticization vs. inflection: English n't.
-\newblock {\em Language}, 59(3), 1983.
+A.~Zwicky and G.~Pullum, ``Cliticization vs. inflection: English n't,'' {\em
+  Language}, vol.~59, no.~3, 1983.
 
 \bibitem{blondel2008fuc}
-V.D. Blondel, J.L. Guillaume, R.~Lambiotte, and E.L.J.S. Mech.
-\newblock {Fast unfolding of communities in large networks}.
-\newblock {\em J. Stat. Mech}, 2008.
+V.~Blondel, J.~Guillaume, R.~Lambiotte, and E.~Mech, ``{Fast unfolding of
+  communities in large networks},'' {\em J. Stat. Mech}, 2008.
 
 \end{thebibliography}

@@ -90,26 +90,51 @@ dziedzin życia. Mogą być zastosowane między innymi przez:
 
 
 \subsection{Reprezentacja sieci społecznych}
-Najczęściej spotykaną reprezentacją sieci społecznych jest reprezentacja grafowa.
-W naturalny sposób modeluje ona jednostki jako węzły grafu i relacje między nimi
-jako krawędzie. W zależności od rodzaju sieci graf taki może być skierowany lub 
-nieskierowany oraz o krawędziach ważonych lub nieważonych. W przypadku
-krawędzi ważonych waga danego połączenia może reprezentować na przykład
-liczbę wiadomości wymienionych między węzłami. Kierunek krawędzi reprezentuje,
-w która stronę dana komunikacja przebiegała. Wygląd takich grafów przedstawia rysunek 
-\ref{image:graf-reprezentacja}.
+Najczęściej spotykaną reprezentacją sieci społecznych jest reprezentacja
+grafowa. Grafem nazywamy strukturę G = (V, E) składającą się z węzłów
+(wierzchołków, oznaczonach przez V) wzajemnie połączonych za pomocą krawędzi
+(oznaczanych przez E). Przykładowy graf został zaprezentowany na rysunku
+\ref{image:graf-zwykly}.
 
-\clearpage
 \begin{figure}[ht!]
 \centering
-\includegraphics[width=120mm]{img/graf-reprezentacja.png}
-\caption{Przykład grafu nieskierowanego bez krawędzi ważonych (po lewej)
-oraz grafu skierowanego z krawędziami ważonymi (po prawej)}
-\label{image:graf-reprezentacja}
+\includegraphics[width=40mm]{img/graf-zwykly.png}
+\caption{Graf o 4 wierzchołkach i 4 krawędziach}
+\label{image:graf-zwykly}
+\end{figure}
+
+Reprezentacja grafowa w naturalny sposób modeluje jednostki jako węzły i relacje
+między nimi jako krawędzie. W zależności od rodzaju sieci graf taki może
+posiadać krawędzie skierowane lub nieskierowane oraz ważone lub nieważone.
+Krawędź skierowana reprezentuje kierunek, w którym przebiega komunikacja między
+węzłami. Krawędź ważona może reprezentować  liczbę wiadomości wymienionych
+między węzłami lub jakiś inny rodzaj wagi (oznaczania jednych krawędzi
+za bardziej istotne od innych). Przykładowy graf skierowany o krawędziach ważonych
+przedstawia rysunek \ref{image:graf-skierowany}.
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=40mm]{img/graf-skierowany.png}
+\caption{Graf skierowany o krawędziach ważonych}
+\label{image:graf-skierowany}
 \end{figure}
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% MIARY I POJĘCIA GRAFOWE
 
 \subsection{Miary i pojęcia grafowe}
 Zamodelowanie sieci społecznych w postaci grafów pozwala na skorzystanie z szeregu
@@ -169,7 +194,7 @@ równa $5/6$.
 
 \begin{figure}[ht!]
 \centering
-\includegraphics[width=90mm]{img/betweenness.png}
+\includegraphics[width=80mm]{img/betweenness.png}
 \caption{Najkrótsze scieżki przechodzące przez węzeł $B$}
 \label{image:betweenness}
 \end{figure}
@@ -204,7 +229,7 @@ a następnie dzielimy tę wartość przez $N - 1$. Przykładowy graf \ref{image:
 
 \begin{figure}[ht!]
 \centering
-\includegraphics[width=90mm]{img/closeness.png}
+\includegraphics[width=80mm]{img/closeness.png}
 \caption{Suma odległości do pozostałych węzłów w grafie}
 \label{image:closeness}
 \end{figure}
@@ -269,7 +294,7 @@ obliczone przy pomocy narzędzia Gephi\footnote{https://gephi.github.io/}.
 
 \begin{figure}[ht!]
 \centering
-\includegraphics[width=50mm]{img/eigenvector.png}
+\includegraphics[width=40mm]{img/eigenvector.png}
 \caption{Wartości wielkości \textit{eigenvector} w przykładowym grafie}
 \label{image:eigenvector}
 \end{figure}
@@ -289,7 +314,7 @@ W analizie sieci społecznych (traktowanych jako graf) przydatne są także
 \clearpage
 \begin{figure}[ht!]
 \centering
-\includegraphics[width=50mm]{img/klika.png}
+\includegraphics[width=40mm]{img/klika.png}
 \caption{K-klika o rozmiarze 3 zbudowana przez wierzchołki $ACD$}
 \label{image:klika}
 \end{figure}
@@ -301,21 +326,21 @@ W analizie sieci społecznych (traktowanych jako graf) przydatne są także
 
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% SENTYMENT
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SENTYMENT
 \section{Sentyment wypowiedzi}
-Recenzje, komentarze i opinie odgrywają istotną rolę w ocenie satysfakcji
-z produktu lub usługi czy w badaniu reakcji na wydarzenia. Dane, które zawierają
+Sentyment (inaczej wydźwięk wypowiedzi) to stosunek lub postawa wobec jakiejś
+sytuacji, zdarzenia. Badanie sentymentu niesie ze sobą bardzo dużo informacji.
+Recenzje, komentarze i opinie odgrywają istotną rolę w ocenie satysfakcji z
+produktu lub usługi czy w badaniu reakcji na wydarzenia. Dane, które zawierają
 takie informacje mają bardzo wysoki potencjał w odkrywaniu wiedzy.
 Dowiadywanie się, co myślą inni ludzie zawsze było bardzo istotne w procesie
-podejmowania decyzji. Internet dał nam możliwości zapoznania się z opiniami
-innych zwykłych ludzi, ale także pozwolił na poznanie komentarzy 
-ekspertów w swoich dziedzinach. Badanie sentymentu -- a więc wydźwięku
-wypowiedzi (ocena wypowiedzi jako pozytywnej, negatywnej lub neutralnej)
--- odgrywa bardzo istotną rolę. Jak wynika z badań przeprowadzonych na ponad
-2000 dorosłych Amerykanów \cite{pangLee} 81\% użytkowników Internetu
-przynajmniej raz poszukiwało w Internecie informacji o jakimś produkcie
-z czego od 73\% do 87\% osób twierdzi, że recenzje innych miały wpływ
-na ich wybory.
+podejmowania decyzji. Internet daje możliwość zapoznania się z opiniami innych
+ludzi czy ekspertów. Możliwość analizy sentymentu wypowiedzi może być bardzo
+pomocna. Jak wynika z badań przeprowadzonych na ponad 2000 dorosłych Amerykanów
+\cite{pangLee} 81\% użytkowników Internetu przynajmniej raz poszukiwało w
+Internecie informacji o jakimś produkcie z czego od 73\% do 87\% osób twierdzi,
+że recenzje innych miały wpływ na ich wybory.
 
 Zastosowanie analizy sentymentu jest bardzo szerokie. Niektóre
 z obszarów jej użycia to \cite{pangLeeApplication}:
@@ -583,9 +608,19 @@ $|neg|$ -- liczba wpisów oznaczonych jako negatywne.
 
 
 
+
+
+
+
+
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% GEOLOKACJA
 \clearpage\section{Geolokacja}
-Geolokacja to identyfikacja położenia geograficznego jakiegoś obiektu.
+Geolokacja to sposób, technika identyfikacja geograficznego położenia osoby
+lub urządzenia za pomocą cyfrowych narzędzi przetwarzanych w 
+Internecie\footnote{Oxford Dictionaries -- www.oxforddictionaries.com}.
+
 Główne sposoby pozyskiwania takich danych to:
 \begin{itemize}
   \item korzystanie z urządzeń GPS -- wbudowanych we współczesne telefony

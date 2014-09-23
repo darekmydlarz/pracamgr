@@ -465,7 +465,26 @@ Wyniki testów przedstawiam na poniższym wykresie
 \label{image:pak-paroubek-parametry}
 \end{figure}
 
+
+\subsection{Wykrywanie zwolenników i przeciwników klubu}
+\label{subsection:wykrywanie-zwolennikow}
+Proces oznaczania użytkowników jako sympatyków i przeciwników drużyny przebiegał
+w następujący sposób:
+\begin{itemize}
+  \item dla każdego użytkownika zliczono jego wpisy w meczach każdej z badanych 
+  drużyn,
+  \item jeśli w meczach drużyny A dla danego użytkownika przeważała liczba 
+  wpisów pozytywnych, wówczas oznaczano takiego kibica jako zwolennika drużyny A,
+  \item jeśli natomiast przeważała liczba wpisów negatywnych, wówczas taki kibic
+  traktowany był jako przeciwnik danej drużyny.  
+\end{itemize} 
+
+
+
+
+
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% ANALIZA SIECI SPOŁECZNYCH
+\clearpage
 \section{Analiza sieci społecznych}
 \label{section:siecispoleczne}
 W tej sekcji przedstawiam zastosowane podejście do analizy sieci społecznych,
@@ -619,6 +638,18 @@ G1 & G4 & 2 / 3 & 3 / 3 & 66.7 \%
 
 \end{comment}
 
+
+\subsection{Wykrywanie grup}
+\label{subsection:wykrywaniegrup}
+Grupy zostały zbudowane na podstawie relacji \textit{reply}
+stworzonej z zebranych wpisów. Na podstawie odpowiedzi między różnymi
+użytkownikami budowany był model sieci społecznej.
+W każdym kolejnym meczu przeprowadzono badanie grup wśród użytkowników.
+Uzyskane wyniki podzielono na trzy ,,koszyki''. W pierwszym znalazły się grupy 
+3 lub 4 osobowe. W~drugim koszyku grupy mające od 5 do 9 osób, a w trzecim koszyku
+większe grupy. 
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% WYKORZYSTANIE GEOLOKACJI
 \section{Wykorzystanie geolokacji}
 \label{section:wykorzystaniegeolokacji}
@@ -647,7 +678,12 @@ a miejscem przebywania danych użytkowników.
 
 
 
-
+\subsection{Badanie odległości między użytkownikami}
+\label{subsection:badanieodleglosci}
+Badanie odległosci między użytkownikami odbyło się na podstawie odpowiedzi z
+geolokacją -- retweety nie zawierają informacji o położeniu użytkownika.
+Spośród tych użytkowników, którzy pisali z geolokacją zostało zliczone ilu z
+nich się ze sobą komunikowało w zależności od wzajemnej odległości.
 
 
 
