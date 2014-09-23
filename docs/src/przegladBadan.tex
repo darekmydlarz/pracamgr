@@ -527,6 +527,7 @@ Ocena tekstu $T$ składającego się z wyrazów obliczana jest jako:
 
 \begin{equation}
 valence(T) = \frac{\sum\limits_{i = 1}^n valence(w_i)}{n}
+\label{equation:pakparoubek}
 \end{equation}
 
 gdzie:
@@ -565,7 +566,20 @@ i negatywnym odpowiednio 1000 i 20 razy, a słowo \textit{przezacny} odpowiednio
 50 i 1 raz to ich wpływ na ocenę tekstu będzie identyczny.
 
 
+\subsubsection{Ocena pozytywności wpisu * do koncepcji}
+W kilku miejscach została zastosowana miara pozytywności wpisu.
+Została ona wyliczona przy pomocy następującego równania:
 
+\begin{equation}
+\label{equation:pozytywnosc}
+P = \frac{|pos|}{|pos| + |neg|}
+\end{equation}
+
+gdzie:
+
+$|pos|$ -- liczba wpisów oznaczonych jako pozytywne,
+
+$|neg|$ -- liczba wpisów oznaczonych jako negatywne.
 
 
 
@@ -600,11 +614,12 @@ pozwalające na wyciągnięcie bogatszych wniosków. Pomocnym może być na przy
 zbadanie reakcji społeczeństwa w różnych regionach kraju na planowane zmiany
 w prawie przez rząd -- i może to prowadzić albo do ich wprowadzenia albo wycofania.
 
-Jako główne zalety stosowania geolokacji z punktu widzenia użytkowników
-telefonów komórkowych, sieci społecznych (\cite{lostInGeolocation}
-to dzielenie się ze społecznością (56\%) oraz dzielenie się z osobami, które znają
-lub mogą spotkać (41\%). Głównymi problemami, przed dzieleniem się geolokacją
-są obawy o prywatność (33\%) oraz brak korzyści, zainteresowania (26\%).
+Jako główne zalety stosowania geolokacji \cite{lostInGeolocation} z punktu
+widzenia użytkowników telefonów komórkowych i sieci społecznych wymienia się
+dzielenie się ze społecznością (56\%) oraz dzielenie się z osobami, które się 
+zna lub można poznać (spotkać) (41\%). Głównymi problemami związanymi z 
+dzieleniem się geolokacją są obawy o prywatność (33\%) oraz brak korzyści z niej
+wynikających (26\%).
 
 
 
@@ -617,35 +632,50 @@ wpisy są publiczne, a użytkownicy mają możliwość publicznej wymiany zdań
 z innymi. Każdy użytkownik ma możliwość wyboru użytkowników, których
 wpisy chce widzieć na swojej stronie głównej.
 
-Podstawowe pojęcia związane z tym serwisem to:
-\begin{itemize}
-  \item śledzenie (ang. \textit{follow}) -- osób, organizacji; śledzenie jakiegoś
-  użytkownika oznacza wyświetlanie wszystkich jego wpisów na swojej stronie
-  głównej 
-  \item tweet -- pojedynczy wpis/post na Twitterze; maksymalnie długość to 140
-  znaków; może dodatkowo zawierać zdjęcie lub informację o geolokalizacji,
-  \item retweet -- oznacza przekazanie jakiegoś wpisu dalej; jeśli użytkownik A
-  śledzi użytkownika B i użyje funkcji retweet dla jednego z jego wpisów, 
-  wówczas osoby śledzące użytkownika A, również zobaczą ten wpis na
-  swojej stronie głównej,
-  \item odpowiedź (ang. \textit{reply}) -- odpisanie na jakąś wiadomość w serwisie
+Podstawowe pojęcia związane z tym serwisem to (oznaczone na rysunku \ref{image:twitter-screen}):
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=160mm]{img/twitter-screen2.png}
+\caption{Budowa serwisu Twitter}
+\label{image:twitter-screen}
+\end{figure}
+
+\begin{enumerate}
+  \item Ściana wpisów (ang. \textit{newsfeed}) -- inaczej strona główna 
+  użytkownika, na której widzi wszystkie tweety wysłane przez osoby, które śledzi.
+  
+  \item Wpis (ang. \textit{tweet}) -- pojedynczy wpis/post na Twitterze; 
+  maksymalna długość to 140 znaków; może dodatkowo zawierać zdjęcie lub 
+  informację o geolokalizacji.
+
+  \item Odpowiedź (ang. \textit{reply}) -- odpisanie na jakąś wiadomość w serwisie
   Twitter, skomentowanie jej; serwis łączy takie wpisy w jedną grupę, wyświetlając
-  je jeden obok drugiego,
-  \item newsfeed -- inaczej strona główna użytkownika, na której widzi wszystkie
-  tweety wysłane przez osoby, które śledzi,
-  \item hashtag -- użycie symbolu \# wraz z jakimś słowem, ułatwia
-  rozmowy na wspólne tematy, wśród większych grup użytkowników 
-  (np. \#worldcupfinal dla osób komentujących finał mistrzostw świata).
-\end{itemize} 
+  je jeden obok drugiego.
+  
+  \item Podanie wpisu dalej (ang. \textit{retweet}) -- oznacza przekazanie 
+  jakiegoś wpisu dalej; jeśli użytkownik A użyje funkcji
+  retweet dla dowolnego wpisu w serwisie, wówczas osoby śledzące użytkownika A, 
+  również zobaczą ten wpis na swojej stronie głównej.
+  
+  \item Wyraz z symbolem kratki (ang. \textit{hashtag}) -- użycie symbolu \# 
+  wraz z jakimś słowem; ułatwia rozmowy na wspólne tematy, wśród większych grup
+  użytkowników (np. \textit{\#worldcupfinal} dla osób komentujących finał 
+  mistrzostw świata).
+
+  \item Śledzenie (ang. \textit{follow}) -- osób, organizacji; śledzenie 
+  jakiegoś użytkownika oznacza wyświetlanie wszystkich jego wpisów na swojej 
+  stronie głównej.
+\end{enumerate} 
 
 \subsection{Twitter jako źródło danych}
 Twitter używany jest przez 271 milionów użytkowników wysyłających 500 
-milionów wpisów dziennie\footnote{https://about.twitter.com/company}.
+milionów wpisów dziennie\footnote{www.about.twitter.com/company}.
 Szybkość komunikacji i łatwość publikacji wpisów
 sprawia, że staje się medium komunikacyjnym dla wielu grup ludzi.
 Odgrywał ważną rolę w wydarzeniach społeczno-politycznych,
 takich jak Arabska Wiosna w 2010, czy okupowanie Wall Street w 2012 
-(\cite{TwitterDataAnalytics2013}).
+\cite{TwitterDataAnalytics2013}.
 Serwis ten jest również bardzo często wykorzystywany do komentowania wydarzeń
 sportowych. W trakcie mundialu w Brazylii użytkownicy wysłali 672 miliony
 wpisów z tagiem \#WorldCup \cite{TwitterStatsWorldCup}.
@@ -657,6 +687,35 @@ odpowiedniej pomocy. Naukowcy wykorzystują go by przewidzieć występowanie trz
 ziemi i określić odpowiednich użytkowników, których śledzenie dostarcza informacji
 związanych z katastrofą \cite{TwitterDataAnalytics2013}.
 
+\subsubsection{Sposób dostępu do danych}
+Dostęp do danych z Twittera możemy uzyskać na dwa sposoby.
+Pierwszy to Streaming API\footnote{www.dev.twitter.com/streaming/overview}.
+Aby z niego korzystać należy napisać program, który nasłuchuje pojawiających się
+na żywo wpisów. Co ważne ich liczba jest ograniczona do maksymalnie 1\% wszystkich
+wpisów na Twitterze. Streaming API pozwala na zbieranie danych przy użyciu słów
+kluczowych, określenia języka wpisów, lokalizacji i tym podobnych.
+
+Drugim sposobem zbierania danych z Twittera jest REST 
+API\footnote{www.dev.twitter.com/rest/public}. Służy ono do wykonywania
+zapytań RESTowych, za pomocą których możliwe jest pobranie listy wpisów
+danego użytkownika, listy jego znajomych, listy wpisów z zadanymi słowami
+kluczowymi i tym podobne. W przeciwieństwie do poprzedniej metody REST API nie nasłuchuje
+wpisów na żywo, a jedynie zwraca dane dostępne w momencie wysłania żądania.
+Zapytania do API można wykonywać w 15 minutowych oknach, w których możliwe
+jest wysłanie maksymalnie 180 zapytań, w wyniku których można uzyskać
+nie więcej niż 100 wpisów (to daje nam maksymalnie 7200 wpisów na godzinę).
+Co więcej wyszukiwanie wpisów przez REST API przy użyciu 
+słów kluczowych w rezultacie zwraca jedynie wyniki z ostatnich
+6-9 dni. 
+%The Search API is not complete index of all Tweets, but instead an index of 
+%recent Tweets. At the moment that index includes between 6-9 days of Tweets. 
+To API bardziej przydaje się więc do tworzenia aplikacji
+klienckich dla Twittera niż do zbierania danych (konsumowania ich na żywo),
+gdzie lepszym rozwiązaniem jest Streaming API.
+
+
+
+\begin{comment}
 Dane z Twittera można uzyskać poprzez API udostępniające 1\% wpisów.
 Pozyskanie większej ich liczby wiąże się z dodatkowymi opłatami, z których
 korzystają największe przedsiębiorstwa badające społeczność Twittera.
@@ -668,3 +727,8 @@ czy szczegółowych danych go dotyczących. Tweety zawierające dane o lokalizac
 są do klienta przesyłane wraz z tą informacją, dzięki czemu możliwe jest
 skorzystanie z nich w analizach.
 
+
+Co ciekawe zaledwie około 2\% wpisów posiada informację o lokalizacji wysłania
+ustaloną na podstawie współrzędnych dostarczonych przez system 
+GPS\cite{GnipGeotaggedNumber}.
+\end{comment}

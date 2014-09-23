@@ -294,8 +294,9 @@ Kolejne kroki, które przekształciły tweety do powyższej postaci to:
 Do przeprowadzenia analizy sentymentu na zebranych tweetach skorzystałem z
 metody opracowanej przez Alexandra Paka i Patricka Paroubek'a, którą
 krótko przedstawiłem w sekcji \ref{subsubsection:pakandparoubek}.
-Jest to technika, która pozwala badać sentyment bez słownika sentymentu.
-Pierwszym krokiem jest zbudowanie słownika z zebranych danych.
+Jest to technika, która pozwala badać sentyment nie posiadając wcześniej 
+słownika sentymentu. Dlatego też pierwszym krokiem jest zbudowanie takiego
+słownika z zebranych danych.
 W tym celu wybiera się podzbiór wpisów, które zawierają emotikony.
 W związku ze 140 znakowym ograniczeniem na długość znaków przyjmuje się
 założenie, że dana emotikona nadaje wydźwięk całemu wpisowi.
@@ -353,8 +354,7 @@ zawierał 34183 słowa, a najpopularniejsze z nich to:
 \begin{tabular}{|l|r|r|r|r|}
 \hline
 Słowo & Wyst. pozytywne  & Wyst. negatywne 
-& Pozytywność\tablefootnote{Wartość liczona jako: \texttt{pozytywne / (pozytywne +
-negatywne)} -- tylko na potrzeby niniejszej tabeli, nieużywana w algorytmie}
+& Pozytywność
 & Valence
 \\ \hline 
 win & 4206 & 598 & 87.6 \% & 0.845 \\ \hline
@@ -374,8 +374,16 @@ sentymentu}
 \label{tab:liczebnosc-slow-sentymentu}
 \end{table}
 
-Zgodnie z algorytmem wartość \textit{valence} używana jest w dalszych
-obliczeniach. Dla każdego wpisu wyliczana jest średnia arytmetyczna tych
+gdzie:
+
+wartość \textit{valence} wyliczna jest według wzoru \ref{equation:pakparoubek} 
+i jest używana jest w dalszych obliczeniach,
+
+wartość pozytywności wyliczona jest według wzoru \ref{equation:pozytywnosc}.
+
+\bigskip
+
+Dla każdego wpisu wyliczana jest średnia arytmetyczna tych
 wielkości przypisanych do każdego słowa. Wynik ten jest wartością
 \textit{valence} danego wpisu. Poniżej prezentuję przykładowe wyniki wyliczania
 tej wielkości:
@@ -479,10 +487,41 @@ pokazując tworzące się grupy społeczne ukierunkowałem swoje prace na relacj
 tworzone w trakcie interakcji między użytkownikami poprzez odpowiedzi i
 retweety.
 
-Korzystając ze Streaming API pobierającego tweety otrzymywałem również
-informację o tym, do kogo skierowana jest odpowiedź w przypadku takiego rodzaju
-wpisu.
-W polu \texttt{in\_reply\_to\_user\_id} znajdował się unikalny numer ID
+Streaming API dostarcza Tweet z następującymi polami: 
+\begin{verbatim}
+coordinates, favorited, truncated, created_at, id_str,
+entities: {
+  urls, hashtags, user_mentions
+},
+in_reply_to_user_id_str, contributors, text, retweet_count, 
+in_reply_to_status_id_str, id, geo, retweeted, possibly_sensitive, 
+in_reply_to_user_id, place,
+user: {
+  profile_sidebar_fill_color, profile_sidebar_border_color, 
+  profile_background_tile, name, profile_image_url, created_at, 
+  location, follow_request_sent, profile_link_color, is_translator,
+  id_str, 
+  entities: {
+    url: {
+      urls
+    },
+    description: {
+      urls
+    }
+  },
+  default_profile, contributors_enabled, favourites_count, url, 
+  profile_image_url_https, utc_offset, id, 
+  profile_use_background_image,  listed_count, profile_text_color, 
+  lang, followers_count, protected, notifications, 
+  profile_background_image_url_https, profile_background_color,
+  verified, geo_enabled, time_zone, description,
+  default_profile_image, profile_background_image_url, statuses_count,
+  friends_count, following, show_all_inline_media, screen_name, 
+},
+in_reply_to_screen_name, source, in_reply_to_status_id
+\end{verbatim} 
+
+W polu \texttt{in\_reply\_to\_user\_id} znajdowuje się unikalny numer ID
 użytkownika, do którego odpowiedź była skierowana, zaś w polu \texttt{user\_id}
 ID autora odpowiedzi. 
 Oprócz odpowiedzi istotne również były wpisy typu retweet. Przykładowy wpis tego

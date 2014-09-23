@@ -55,6 +55,12 @@ W.~Reese and J.~Beckland.
 \newblock Lost in geolocation.
 \newblock Technical report, Spring, 2011.
 
+\bibitem{GnipGeotaggedNumber}
+I.~Cairns.
+\newblock Emoticon analysis in twitter.
+\newblock \url{http://blog.gnip.com/twitter-geo-operators/}, 2014.
+\newblock [Online: dostęp 23 września 2014].
+
 \bibitem{TwitterDataAnalytics2013}
 Shamanth Kumar, Fred Morstatter, and Huan Liu.
 \newblock {\em Twitter Data Analytics}.

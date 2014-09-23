@@ -42,7 +42,10 @@ język Java. Oprócz niego wymienić należy także:
   \item baza danych -- PostgreSQL\footnote{www.postgresql.org},
   \item budowanie aplikacji -- Apache Maven\footnote{www.maven.apache.org},
   \item system kontroli wersji -- Git\footnote{www.git-scm.com} z 
-  repozytorium na GitHub\footnote{www.github.com}.
+  repozytorium na GitHub\footnote{www.github.com},
+  \item wizualizacja wpisów na mapie -- CartoDB\footnote{www.cartodb},
+  narzędzie webowe pozwalające na wyświetlanie danych posiadających współrzędne
+  geograficzne na mapie świata.
 \end{itemize}
 \section{Wykorzystane biblioteki i narzędzia}
 \label{section:bibliotekiinarzedzia}
@@ -75,3 +78,17 @@ Najważniejsze biblioteki, z których skorzystałem to:
   \item JUnit\footnote{www.junit.org} -- framework do pisania i uruchamiana
   testów automatycznych.
 \end{itemize}
+
+
+\section{Baza danych}
+Jak zostało już wspomniane użyta została baza danych PostgreSQL.
+Poniżej znajduje się rysunek \ref{image:schemat-bazy} przedstawiający schemat bazy. 
+W tych tabelach zostały zapisane wszystkie informacje potrzebne do pobierania
+danych z nasłuchiwanych meczów.
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=160mm]{img/db-schema-intellij.png}
+\caption{Schemat bazy danych}
+\label{image:schemat-bazy}
+\end{figure}
