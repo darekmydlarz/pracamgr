@@ -113,6 +113,61 @@ Lp. & Data & Gospodarz & Gość & Tweetów & Geolok.
 
 
 
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% PLAN EKSPERYMENTÓW
+\section{Plan eksperymentów}
+W ramach eksperymentów chcę udowodnić sensowność zastosowania zarówno
+analizy sentymentu jak i geolokacji w analizie użytkowników sieci 
+społecznościowych. Przedstawię serię badań pokazujących w jaki sposób
+można zastosować te dwie dziedziny odkrywające nową wiedzę dotyczącą sieci
+społecznych. Pokażę do czego można użyć sentymentu, do czego geolokacji
+i w jaki sposób je połączyć.
+
+Eksperymenty, które przedstawię to:
+\begin{itemize}
+  \item wartość sentymentu w kolejnych meczach 
+  \ref{subsection:sentymentwmeczach},
+  
+  \item aktywność użytkowników i sentyment w ciągu meczu
+  \ref{subsection:aktywnoscwmeczu},
+  
+  \item sposoby komunikacji między zwolennikami i przeciwnikami klubu 
+  \ref{subsection:rodzajekomunikacji},
+  
+  \item sentyment wypowiedzi w relacjach między użytkownikami
+  \ref{subsection:sentymentwrelacjach},
+  
+  \item struktura grup użytkowników w kolejnych meczach
+  \ref{subsection:strukturagrup},
+  
+  \item odległość między użytkownikami a częstość kontaktów
+  \ref{subsection:odlegloscmiedzyuzytkownikami},
+  
+  \item rozkład wpisów na mapie świata
+  \ref{subsection:rozkladnamapie},
+  
+  \item odległość kibiców od miejsca rozgrywania meczu
+  \ref{subsection:odlegloscodstadionu},
+  
+  \item rozkład wpisów z geolokacją
+  \ref{subsection:geowpisy}.
+\end{itemize}
+
+W większości przypadków przedstawiam eksperymenty dla jednej, dwóch drużyn.
+Jeśli nie zaznaczono inaczej, takie same prawidłowości zauważono dla
+pozostałych zespołów.
+
+
+
+
+
+
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% ANALIZA SENTYMENTU
 \section{Analiza sentymentu}
 \label{section:analizasentymentu2}
@@ -129,12 +184,15 @@ zostały oznaczone jako pozytywne -- 48.68\%, a 1 944 448 jako negatywne --
 
 
 \subsection{Sentyment w meczach}
+\label{subsection:sentymentwmeczach}
 Pierwszym eksperymentem jaki został przeprowadzony było zbadanie tego w jaki 
 sposób zmienia się wydźwięk wypowiedzi pomiędzy kolejnymi meczami danej drużyny.
 W tym celu zbadany został ogólny sentyment podczas danego wydarzenia sportowego.
 Procentowy wynik pozytywności został określony wzorem \ref{equation:pozytywnosc}.
 Na wykresach \ref{image:pozytywnosc-arsenal} oraz 
 \ref{image:pozytywnosc-munited} przedstawione są wyniki tych badań.
+
+\clearpage
 
 \begin{figure}[ht!]
 \centering
@@ -143,7 +201,6 @@ Na wykresach \ref{image:pozytywnosc-arsenal} oraz
 \label{image:pozytywnosc-arsenal}
 \end{figure}
 
-\clearpage
 \begin{figure}[ht!]
 \centering
 \includegraphics[width=120mm]{img/pozytywnosc-munited2.png}
@@ -189,6 +246,7 @@ realnym a wirtualnym.
 
 
 \subsection{Liczba tweetów i rozkład sentymentu w ciągu meczu}
+\label{subsection:aktywnoscwmeczu}
 Kolejny eksperyment jaki można wykonać na zgromadzonych danych
 to zbadanie aktywności użytkowników Twittera w związku z wydarzeniami 
 na boisku. Badanie takie można przeprowadzić dla każdego meczu, który znalazł 
@@ -220,7 +278,6 @@ Na obu wykresach zaznaczone są kluczowe wydarzenia:
 \label{image:tweety-w-meczu}
 \end{figure}
 
-\clearpage
 \begin{figure}[ht!]
 \centering
 \includegraphics[width=140mm]{img/sentyment-w-meczu-nums-50percentage.png}
@@ -288,6 +345,7 @@ zostały badania nad siecią społeczną, którą tworzą użytkownicy Twittera.
 
 
 \subsection{Liczba i rodzaje komunikacji między zwolennikami i przeciwnikami klubów}
+\label{subsection:rodzajekomunikacji}
 % retweety pozytywne zwolennicy, replies negatywne, przeciwnicy, itd
 
 Jednym z eksperymentów przeprowadzonych w analizie sieci społecznych było
@@ -308,7 +366,6 @@ przykładzie wpisów dotyczących Manchesteru United -- można zauważyć ciekaw
 obserwacje. Wykres przedstawiający wyniki badań przedstawia rysunek 
 \ref{image:replies-munited}.
 
-\clearpage
 \begin{figure}[ht!]
 \centering
 \includegraphics[width=120mm]{img/replies-munited.png}
@@ -384,6 +441,7 @@ retweetują wpisy innych zwolenników, a ci drudzy częściej dyskutują ze sob�
 
 
 \subsection{Sentyment odpowiedzi między zwolennikami i przeciwnikami drużyny}
+\label{subsection:sentymentwrelacjach}
 Oprócz zbadania rodzaju i charakterystyki komunikacji pomiędzy użytkownikami 
 Twittera przyjrzano się także bliżej komunikacji związanej z odpowiedziami 
 (\textit{replies}). Przeprowadzono eksperyment, w którym zwrócono uwagę
@@ -489,7 +547,7 @@ przekonać ich do swojego punktu widzenia.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% ANALIZA GRUP W SIECIACH SPOŁECZNYCH
 \subsection{Analiza grup w sieciach społecznych}
-
+\label{subsection:strukturagrup}
 Oprócz powyższych badań nad sposobami komunikacji i relacji budowanymi między
 użytkownikami przeprowadzona została także analiza grup użytkowników 
 pomiędzy meczami. Grupy te były budowane zgodnie z \ref{subsection:wykrywaniegrup}. 
@@ -584,6 +642,7 @@ Przy ich pomocy możliwe było dokonanie analizy danych związanych z położeni
 geograficznym.
 
 \subsection{Odległość między użytkownikami a częstość kontaktów}
+\label{subsection:odlegloscmiedzyuzytkownikami}
 Zbadana została zależność pomiędzy tym jak często użytkownicy się ze sobą
 komunikują, a tym w jakiej odległości fizycznej od siebie się znajdują (zgodnie
 z \ref{subsection:badanieodleglosci}). Wyniki przedstawia poniższy wykres
@@ -626,6 +685,7 @@ utrudniający komunikację między osobami z większych odległości.
 
 \clearpage
 \subsection{Rozkład wpisów na mapie}
+\label{subsection:rozkladnamapie}
 % Mecz Chelsea - Southampton, 01.12.2013 17:10.
 Zebrane Tweety posiadające geolokalizację można przedstawić na
 mapie\footnote{Załączone wizualizacje zostały stworzone przy pomocy serwisu
@@ -697,6 +757,7 @@ zastosowania geolokacji i jej skuteczności w różnego rodzaju badaniach
 społecznych.
 
 \subsection{Odległość od stadionu}
+\label{subsection:odlegloscodstadionu}
 Dane zawierające geolokalizację pozwalają wykonać szereg ciekawych eksperymentów.
 Kolejnym z nich było zbadanie odległości kibiców od stadionu w zależności
 od tego, czy drużyna grała mecz u siebie czy na wyjeździe. Dodatkowo
@@ -743,6 +804,7 @@ i łatwiej jest o sympatyków niż antyfanów.
 
 \clearpage
 \subsection{Rozkład wpisów z geolokacją w trakcie meczu}
+\label{subsection:geowpisy}
 Pośród wszystkich zebranych tweetów tylko 3.06\% z nich zawierało informacje o
 geolokacji. Poniżej na podstawie meczu Chelsea F.C. z Southampton F.C.
 (01.12.2013 r.) zaprezentowano porównanie \ref{image:wpisy-odsetek-geotagged}

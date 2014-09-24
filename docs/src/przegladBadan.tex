@@ -70,21 +70,28 @@ badań \cite{SNDAtopics} to między innymi:
 
 
 
-\subsection{Przykłady zastosowania sieci społecznych}
+\subsection{Przykłady zastosowania analizy sieci społecznych}
 Wyniki badań nad sieciami społecznymi stwarzają wiele możliwości dla różnych
 dziedzin życia. Mogą być zastosowane między innymi przez:
 \begin{itemize}
   \item służby porządkowe -- policja może przy ich pomocy odkrywać powiązania
   między przestępcami i dochodzić do zależności między grupami przestępczymi,
-  a także odkrywać, kogo dane grupy mogłyby zwerbować, 
-  \item badania naukowe -- odkrywanie naukowców zajmujących się podobnymi tematami
-  celem opracowania bardziej kompletnych wyników lub podjęcia nowego,
-  wspólnego tematu,
+  a także odkrywać, kogo dane grupy mogłyby zwerbować; odkrywać siatki 
+  przestępcze \cite{SNACriminal},
+  
+  \item badania naukowe -- odkrywanie naukowców zajmujących się podobnymi
+  tematami celem opracowania bardziej kompletnych wyników lub podjęcia nowego,
+  wspólnego tematu \cite{SNAScientists},
+  
   \item przedsiębiorstwa handlowe -- odkrywanie zbliżonych typów klientów i 
-  oferwanie im produktów lub usług do nabycia przy użyciu systemów rekomendujących,
+  oferowanie im produktów lub usług do nabycia przy użyciu systemów 
+  rekomendujących \cite{SNAReccomendation},
+  
   \item służby zdrowotne -- użycie sieci społecznych może pomóc w określaniu
-  obszarów, w które rozprzestrzeniają się wirusy gróźnych chorób, dzięki czemu
-  możliwe może być zapobieganie ich dalszej ekspansji.
+  obszarów, w które rozprzestrzeniają się wirusy groźnych chorób, dzięki czemu
+  możliwe może być zapobieganie ich dalszej ekspansji \cite{SNAEpidemic}.
+  
+    
 \end{itemize}
 
 
@@ -92,7 +99,7 @@ dziedzin życia. Mogą być zastosowane między innymi przez:
 \subsection{Reprezentacja sieci społecznych}
 Najczęściej spotykaną reprezentacją sieci społecznych jest reprezentacja
 grafowa. Grafem nazywamy strukturę G = (V, E) składającą się z węzłów
-(wierzchołków, oznaczonach przez V) wzajemnie połączonych za pomocą krawędzi
+(wierzchołków, oznaczonych przez V) wzajemnie połączonych za pomocą krawędzi
 (oznaczanych przez E). Przykładowy graf został zaprezentowany na rysunku
 \ref{image:graf-zwykly}.
 
@@ -326,8 +333,7 @@ W analizie sieci społecznych (traktowanych jako graf) przydatne są także
 
 
 
-% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SENTYMENT
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% SENTYMENT
 \section{Sentyment wypowiedzi}
 Sentyment (inaczej wydźwięk wypowiedzi) to stosunek lub postawa wobec jakiejś
 sytuacji, zdarzenia. Badanie sentymentu niesie ze sobą bardzo dużo informacji.
@@ -382,36 +388,95 @@ przedstawiają swoje opinie w Internecie, a przy pomocy analizy sentymentu bardz
 
 
 Badanie sentymentu nie jest trywialne. Związane jest bezpośrednio z 
-przetwarzaniem języka naturalnego, które niesie ze sobą szereg problemów:
+przetwarzaniem języka naturalnego, które niesie ze sobą szereg problemów
+\cite{ChallengeOfSpokenLanguage}, \cite{NaturalLanguageProcessingFuture}:
 
 \begin{itemize}
   \item złożoność języka naturalnego -- bardzo trudnym zadaniem jest nauczenie 
-programu komputerowego pełnego rozumienia języka naturalnego; co więcej każdy
-język jest inny, więc dla każdego konieczne jest zastosowanie różnych
-rozwiązań -- inaczej trzeba podejść do badania sentymentu w języku polskim
-a inaczej w angielskim; trzeba pamiętać też, że język naturalny nie jest martwy 
-i ciągle się rozwija,
-\item trudność w analizie kontekstu wypowiedzi -- wykrycie ironii nie jest zadaniem 
-prostym; bardzo często wypowiedzi mogą mieć związek z jakimś pojęciem 
-zupełnie niezrozumiałym dla programu komputerowego, a oczywistym dla człowieka
-(np. idiomy, odniesienia do wydarzeń na świecie)
-\item slang w Internecie, skrótowce, literówki -- wszystkie te elementy
-dodatkowo utrudniają analizę sentymentu; użytkownicy Internetu nie zawsze
-dbają o jakość swojego języka, często stosują skróty, czy wyrażenia slangowe, 
-które mogą być niezrozumiałe dla automatycznego analizatora sentymentu;
-\item SPAM, szum -- wszystkie wpisy, które nie niosą ze sobą żadnej wartości
-a pojawiają się w internetowych forach, serwisach z opiniami również stanowią
-wyzwanie przy budowie narzędzia do analizy sentymentu.
+  programu komputerowego pełnego rozumienia języka naturalnego; co więcej każdy
+  język jest inny, więc dla każdego konieczne jest zastosowanie różnych
+  rozwiązań -- inaczej trzeba podejść do badania sentymentu w języku polskim
+  a inaczej w angielskim; trzeba pamiętać też, że język naturalny nie jest
+  martwy i ciągle się rozwija,
+
+  \item trudność w analizie kontekstu wypowiedzi -- wykrycie ironii nie jest
+  zadaniem prostym; bardzo często wypowiedzi mogą mieć związek z jakimś pojęciem
+  zupełnie niezrozumiałym dla programu komputerowego, a oczywistym dla człowieka
+  (np. idiomy, odniesienia do wydarzeń na świecie),
+
+  \item slang w Internecie, skrótowce, literówki -- wszystkie te elementy
+  dodatkowo utrudniają analizę sentymentu; użytkownicy Internetu nie zawsze
+  dbają o jakość swojego języka, często stosują skróty, czy wyrażenia slangowe,
+  które mogą być niezrozumiałe dla automatycznego analizatora sentymentu,
+
+  \item SPAM, szum -- wszystkie wpisy, które nie niosą ze sobą żadnej wartości
+  a pojawiają się w internetowych forach, serwisach z opiniami również stanowią
+  wyzwanie przy budowie narzędzia do analizy sentymentu.
+
 \end{itemize}
+
+\subsection{Reprezentacja tekstu w przetwarzaniu języka naturalnego}
+Zanim zacznie się badać sentyment należy w jakiś sposób reprezentować tekst w
+komputerze. Wymienić można kilka podejść, między innymi:
+\begin{itemize}
+  \item \textit{bag of words} \cite{BOWordsAndBOConcepts} -- najpopularniejszy
+  sposób reprezentacji tekstu, polega na podzieleniu tekstu na termy,
+  niezależnie od tego czy powinny występować razem, czy nie, nie zachowuje
+  żadnego połączenia między wyrazami w tekście; 
+  
+  na przykład tekst 
+  \texttt{nawet nie powiedział do widzenia} jest reprezentowany w postaci:
+  \texttt{nawet, nie, powiedział, do, widzenia},
+  
+  
+  \item \textit{bag of concepts} \cite{BOWordsAndBOConcepts} -- rozwinięcie idei
+  \textit{bag of words}; polega na reprezentacji tekstu w postaci konceptów,
+  a nie pojedynczych słów; główna zaleta polega na tym, iz zachowuje znaczenie
+  semantyczne i połączenia między wyrazami pojawiającymi się w dokumencie; do
+  odkrywania konceptów konieczna jest podstawowa wiedza semantyczna dostarczona
+  przez słowniki, listy konceptów, i tym podobne,
+  
+  \item reprezentacja wektorowa (ang. \textit{vector space model})
+  \cite{VectorSpaceModel} -- oparte jest na reprezentacji dokumentu tekstowego w
+  oparciu o reprezentację wektorową dokumentu; polega na tym, że dowolny
+  dokument reprezentowany jest w postaci wektora częstości występowania słów
+  kluczowych; słowa kluczowe tworzą bazę, a zbiór dokumentów tekstowych
+  można przedstawić w formie macierzy informującej ile razy, który term wystąpił
+  w badanym dokumencie; minusem tego podejścia jest fakt, że zbiór słów
+  kluczowych może być bardzo duży; reprezentacja wektorowa znajduje swoje
+  zastosowanie w szukanie podobieństw między tekstami, próbami kategoryzacji
+  dużych zbiorów tekstów, itp.,
+  
+  \item reprezentacja grafowa \cite{GraphBasedTextModel} -- reprezentacja,
+  która rozszerza reprezentację wektorową o to, że interesuje się również
+  kolejnością termów w tekście, zachowując bogatsze informacje na temat
+  przetwarzanego tekstu, które w VSM są zapominane; dzięki temu zachowuje
+  semantyczne znaczenie przechowywanych dokumentów; wyrazy są węzłami grafu,
+  połączone krawędziami jeśli występują wspólnie w tekście; krawędzie mogą być
+  skierowane aby pokazać kolejność słów. Reprezentacja grafowa jest użyta między
+  innymi w mechanizmie Google PageRank \cite{TextNetworkModel}, wspomagającym
+  wyszukiwarkę i pozycjonowanie w niej stron internetowych.  
+\end{itemize}
+
+Ze względu na prostotę i małą długość tekstów do analizy zdecydowałem się
+na reprezentowanie i przetwarzanie tekstu w postaci \textit{bag of words}.
 
 
 \subsection{Techniki badania sentymentu}
 Podejść do badania sentymentu jest wiele. Poniżej przedstawione są te, które
 najlepiej nadają się do badania sentymentu na Twitterze (w związku z tym, że to
-ten serwis jest źródłem danych w tej pracy), a które zostały opisane w artykule 
+ten serwis jest źródłem danych w tej pracy). Zostały one opisane w artykule 
 \cite{sentimentTechniques}. Oprócz nich przedstawię także metodę opracowaną
 przez Alexandra Paka i Patricka Paroubek'a \cite{pakParoubekSentiment}, którą 
-zastosowałem w swoich badanich. Techniki te to:
+zastosowałem w swoich badaniach i rozszerzyłem o wykrywanie i przetwarzanie 
+negacji. 
+
+Techniki badania sentymentu można podzielić na dwie klasy: oparte o słowniki
+oraz bazujące na klasyfikatorach. Te pierwsze bazują na zbudowanych wcześcniej
+ręcznie bądź mechanicznie listach słów z określonym sentymentem,
+a te drugie oceniają tekst używając technik maszynowego uczenia się.
+
+Niektóre ze sposobów oceny sentymentu to:
 
 \subsubsection{Podejście oparte na słowniku (ang. \textit{lexicon based approach})}
 Podejście polega na zastosowaniu słownika z wyrazami oznaczonymi jako pozytywne
@@ -589,28 +654,6 @@ dany wyraz pojawia się w zbiorze treningowym, najważniejsza jest jego polaryza
 Gdy na przykład słowo \textit{świetny} pojawia się w zbiorach pozytywnym
 i negatywnym odpowiednio 1000 i 20 razy, a słowo \textit{przezacny} odpowiednio
 50 i 1 raz to ich wpływ na ocenę tekstu będzie identyczny.
-
-
-\subsubsection{Ocena pozytywności wpisu * do koncepcji}
-W kilku miejscach została zastosowana miara pozytywności wpisu.
-Została ona wyliczona przy pomocy następującego równania:
-
-\begin{equation}
-\label{equation:pozytywnosc}
-P = \frac{|pos|}{|pos| + |neg|}
-\end{equation}
-
-gdzie:
-
-$|pos|$ -- liczba wpisów oznaczonych jako pozytywne,
-
-$|neg|$ -- liczba wpisów oznaczonych jako negatywne.
-
-
-
-
-
-
 
 
 
