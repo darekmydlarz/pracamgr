@@ -626,11 +626,23 @@ do przeuczenia.
 
 \subsubsection{Metoda wektorów nośnych (ang. \textit{support vector machines})}
 Support vector machines to podejście stosujące duży margines między klasami.
-Główna idea polega na znalezieniu hiperpłaszczyzny, która podzieli teksty na pozytywne
-i negatywne z marginesem pomiędzy klasami tak dużym jak to tylko możliwe.
-Technika ta zbudowana jest na zasadzie strukturalnej minimalizacji ryzyka 
-(ang. \textit{structural risk minimization principle}). Celem jest znalezienie
-funkcji $h$, dla której błąd klasyfikacji losowego tekstu będzie jak najmniejszy.
+Główna idea polega na znalezieniu hiperpłaszczyzny (patrz rys. \ref{image:svm}),
+która podzieli teksty na pozytywne i negatywne z marginesem pomiędzy klasami tak
+dużym jak to tylko możliwe.
+Technika ta zbudowana jest na zasadzie strukturalnej minimalizacji ryzyka (ang.
+\textit{structural risk minimization principle}). Celem jest znalezienie funkcji
+$h$, dla której błąd klasyfikacji losowego tekstu będzie jak najmniejszy.
+
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=80mm]{img/svm.png}
+\caption{Hiperpłaszczyzna $h$ dzieląca zbiór na dwie części}
+\label{image:svm}
+\end{figure}
+
+
+
 Można ją opisać wzorem:
 \begin{equation}
 \vec{h} = \sum\limits_{i}\alpha_iC_i\vec{t_j}, \quad \alpha_i \geq 0
@@ -653,14 +665,13 @@ Teksty o $\alpha_i$ większym od zera, to te które biorą udział
 w szukaniu funkcji $h$ i nazywa się je wektorami wspierającymi 
 (ang. \textit{support vectors}).
 
-Wybór cech (wyrazów) jest bardzo ważnym zadaniem w technikach uczenia maszynowego.
+Wybór cech (wyrazów) jest bardzo ważnym zadaniem w technikach uczenia
+maszynowego.
 Musi to zostać tak wykonane by uniknąć przeuczenia i jednocześnie zwiększyć
-ogólną dokładność. Maszyny wektorów nośnych mają wysoki potencjał radzenia
-sobie z dużą liczbą wymiarów. Mierzą złożoność hipotezy którą dzielą dokumenty, 
-a nie liczbę cech. W związku z tym liczba cech nie jest problemem.
-Technika ta radzi sobie z duża liczbą słów poprzez oznaczanie części z nich jako
-nieistotne (tych najrzadziej pojawiających się). Niestety czasami prowadzi to 
-do utraty informacji. 
+ogólną dokładność. Maszyny wektorów nośnych mają wysoki potencjał radzenia sobie
+z dużą liczbą wymiarów, a także z dużą liczbą słów poprzez oznaczanie części z
+nich jako nieistotne (tych najrzadziej pojawiających się). Niestety czasami
+prowadzi to do utraty informacji.
 
 Chociaż SVM przewyższa wszystkie tradycyjne metody klasyfikacji sentymentu,
 to niestety jest czarną skrzynką. Trudne jest zbadanie natury klasyfikacji i
