@@ -356,6 +356,7 @@ może być użyte do poprawy błędów popełnionych przez użytkowników (gdy o
 jest pozytywna, a użytkownik omyłkowo wybrał niską ocenę) lub gdy opinie
 są ewidentnie stronnicze, mogą pomóc w faktycznej ocenie danego przedmiotu czy 
 usługi
+
 \item jako technologia wspomagająca większe systemy -- analiza sentymentu może
 być wsparciem dla systemów rekomendacji; na przykład może służyć do 
 tego by nie rekomendować produktów, które otrzymały negatywne opinie; 
@@ -364,6 +365,7 @@ na stronie może być powodem wyświetlenia jakiejś reklamy,
 a wykrycie negatywnego sentymentu powodem jej ukrycia;
 innym zastosowaniem jest ekstrakcja informacji, która może być
 polepszona poprzez pomijanie zdań subiektywnych, zawierających sentyment
+
 \item biznes -- poprzez dostarczenie informacji o odbiorze sprzedawanych produktów
 i serwowanych usług; gdy na przykład sprzedawany laptop ma negatywny odbiór
 stosując analizę sentymentu można to bardzo szybko wykryć i dowiedzieć się
@@ -371,6 +373,7 @@ dlaczego zaistniała dana sytuacja; firma może badać swój ogólny odbiór
 w społeczeństwie -- szybko reagować na niezadowolenie klientów, lub wprowadzać
 poprawki do swoich produktów; wykrywanie sentymentu może również pomóc
 przewidzieć wyniki sprzedaży
+
 \item polityka -- użycie analizy sentymentu jest wręcz naturalne dla tego obszaru
 życia; partie czy politycy mogą badać odbiór społeczeństwa swoich programów
 i decyzji; badanie sentymentu może im na przykład wskazać w jakich miejscach,
@@ -423,40 +426,65 @@ przetwarzaniem języka naturalnego, które niesie ze sobą szereg problemów
 Analiza sentymentu ma szerokie zastosowanie w analizie mediów społecznościowych.
 Możliwość oceny wydźwięku wypowiedzi zamieszczanych przez internautów w sieci
 prowadzi do interesujących wyników i na jej podstawie wyciągać można pomocne
-wnioski. Wymienić można między innymi zastosowanie takie jak:
+wnioski. Na jej podstawie przeprowadzono wiele badań. 
 
-\begin{itemize}
-  \item w celach bezpieczeństwa [Agile Sentiment Analysis of Social Media
-  Content.pdf]
+W \cite{AgileSentimentAnalysis}
+poprzez crawlowanie (z ang. przeszukiwanie stron i selekcjonowanie z nich
+informacji) blogów związanych z Egiptem w 2011 roku badano nastroje
+społeczeństwa w trakcie masowych demonstracji w tym kraju w związku z
+niezadowoleniem rządzącymi. Sentyment pokazywał, że jeszcze przed rozpoczęciem
+się demonstracji nastroje były bardzo negatywne. 
 
-  \item ocena odbioru produktów firm [Identifying Themes in Social Media and
-  Detecting Sentiments.pdf]
-  
-  \item przewidywanie wielkości sprzedaży [Mining Sentiments in Social
-  Media.pdf]
-  
-  \item przewidywanie wyników wyborów [2012 Presidential Elections on Twitter --
-  An Analysis of How the US and French Election were Reflected in Tweets.pdf]
-  
-  \item przewidywanie radykalizacji internautów przez wpływ mediów
-  społecznościowych [Combining Social Network Analysis and Sentiment Analysis to
-  Explore the Potential for Online Radicalisation.pdf]
-  
-  \item odkrywanie opinii dotyczących problemów społecznych [Sentiment Analysis
-  of Social Issues.pdf]
-  
-  \item 
-\end{itemize}
+W \cite{SentimentRevealedInSocialMedia} porównany jest wpływ na giełdę artykułów
+w \textit{Wall Street Jorunal} (nowojorska gazeta o tematyce gospodarczej) z
+wpisami na \textit{Seeking Alpha} (popularny serwis społecznościowy skierowany
+do osób grających na giełdzie). Artykuł udowadnia, że wpisy w \textit{Seeking
+Alpha} mają większy i bardziej trwały wpis na zwracanie akcji niż opinie
+wyrażane w \textit{Wall Street Journal}.
 
+Z kolei w \cite{PresidentialElectionsOnTwitter} zostały przeprowadzone badania
+nad sentymentem wpisów na Twitterze w kontekście wyborów prezydenckich we
+Francji i Stanach Zjednoczonych.
+Artykuł pokazuje, że sympatia do kandydatów wyrażana w internecie była wprost
+propocjonalna do ich wyników sondażowych. W badaniach nad wyborami Francuskimi
+więcej uwagi skupiał na sobie przegrany Nicolas Sarkozy (mogłoby się wydawać
+więc, że powinien wygrać), natomiast wielce istotne jest to, że skierowane w
+jego kierunku było wiele wpisów o wydźwięku negatywnym. Jeśli chodzi o USA to
+przez cały czas Barack Obama wyprzedzał swojego konkurenta Mitta Romneya zarówno
+w sondażach jak i w opiniach w sieciach społecznościowych. To badanie również
+było ciekawe z tego względu, iż kandydaci korzystali w czasie kampanii z
+Twittera czym wzmagali liczbę rozmów na ich temat.
 
+W opracowaniu \cite{AnalyzingSentimentialInfluenceOfPosts}
+została zbadana korelacja sentymentu wpisów na blogach z wpisami na portalach
+społecznościowych. Teksty zostały podzielone na dwie kategorie:
+publiczne (takie jak afery, newsy) oraz prywatne (wpisy, które nie są związane z
+publicznymi wydarzeniami). Okazało się, że sentyment wyrażany w postach
+publicznych miał bardzo duży wpływ na to jakie wpisy pojawiały się na Twitterze,
+czy w komentarzach. Co ciekawe, dużo większy wpływ na uwagę internautów miały
+wpisy o wydźwięku negatywnym. Tymczasem w tematach prywatnych sentyment
+odpowiedzi był raczej pozytywny. Gdy wpis miał pozytywny ton, odpowiadający
+również wyrażali się pozytywnie wspierając wyrażoną opinię.
+Takie wyniki wynikają z tego, że wpisy publiczne gromadząc wokół siebie większą
+liczbę ludzi powodują, iż nie są oni tak bardzo związani z tematem i wypowiadają
+się wtedy, gdy jakieś zło również ich dotyka. W tematach prywatnych bardzo
+często komentujący w jakiś sposób identyfikują się z autorem, wspierając go,
+podzielając jego opinie.
 
+Jeszcze inne zastosowanie analizy sentymentu zaprezentowano w
+\cite{CombiningSocialNetworkAnalysis}, gdzie zastosowano go do zbadania
+radykalizacji internautów przez sieci społeczne. W tym celu zbadano komentarze
+użytkowników Youtube wspierających filmiki promujące Dżihad. Użytkowników
+podzielono ze względu na płcie. Okazało się, że w badanej grupie kobiety
+prezentują bardziej ekstremalne i mniej tolerancyjne poglądy od mężczyzn.
 
-
-
-
-
-
-
+Natomiast w \cite{SentimentAnalysisOfSocialIssues} przebadano wpisy dotyczące
+aborcji z takich portali jak CNN, ProCon.org, Yahoo Answers i Women's Issues na
+About.com. Porównano je z wpisami dotyczącymi produktów i usług. W wyniku badań
+okazało się, że dużo trudniej jest oceniać problemy społeczne. Autorzy
+zaproponowali skupienie się na czasownikach, jako rdzeniu swojej metody analizy
+sentymentu. Średnia dokładność tego podejścia wyniosła 65\%, co było wynikiem
+lepszym od dotychczasowych badań podobnych tematów.  
 
 \subsection{Reprezentacja tekstu w przetwarzaniu języka naturalnego}
 Zanim zacznie się badać sentyment należy w jakiś sposób reprezentować tekst w
