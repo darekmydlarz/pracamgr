@@ -148,7 +148,6 @@ z udziałem wyżej wymienionych zespołów, które odbyły się w tym czasie.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% ANALIZA SENTYMENTU
-\clearpage
 \section{Analiza sentymentu}
 \label{section:analizasentymentu}
 W tym miejscu opisuję sposób w jaki została użyta do moich badań analiza
@@ -196,6 +195,7 @@ did, bute what a gentleman he is for not to celebrate that goal:)
 \end{table}
 
 
+\clearpage
 Po przeprowadzeniu wszystkich prac związanych z normalizacją tekstu wpisy z
 powyższej tabeli prezentują się w następujący sposób:
 
@@ -224,7 +224,6 @@ powyższej tabeli prezentują się w następujący sposób:
 \label{tab:wpisy-po-normalizacja}
 \end{table}
 
-\clearpage
 Kolejne kroki, które przekształciły tweety do powyższej postaci to:
 \begin{enumerate}
   \item Usunięcie skomentowanych retweetów.\\
@@ -293,21 +292,22 @@ Kolejne kroki, które przekształciły tweety do powyższej postaci to:
 % + dobór parametrów, emotikony, zaprzeczenia
 
 Do przeprowadzenia analizy sentymentu na zebranych tweetach skorzystałem z
-metody opracowanej przez Alexandra Paka i Patricka Paroubek'a, którą
-krótko przedstawiłem w sekcji \ref{subsubsection:pakandparoubek}.
-Jest to technika, która pozwala badać sentyment nie posiadając wcześniej 
+metody opracowanej przez Alexandra Paka i Patricka Paroubek'a, którą krótko
+przedstawiłem w sekcji \ref{subsubsection:pakandparoubek}.
+Jest to technika, która pozwala badać sentyment nie posiadając wcześniej
 słownika sentymentu. Dlatego też pierwszym krokiem jest zbudowanie takiego
 słownika z zebranych danych.
 W tym celu wybiera się podzbiór wpisów, które zawierają emotikony.
 W związku ze 140 znakowym ograniczeniem na długość znaków przyjmuje się
 założenie, że dana emotikona nadaje wydźwięk całemu wpisowi.
-Według artykułu \cite{EmoticonAnalysisTwitter} 20 emotikon pokrywa
-w 90\% stosowanie tych znaków graficznych we wpisach (na 100 wpisów z
-emotikonami, 90 z nich zawiera emotikonę ze zbioru tych 20). Dlatego też
-skorzystałem z tego zbioru do własnych badań dzieląc emotikony na wyrażające
-wydźwięk pozytywny i negatywny w następujący sposób \footnote{emotikona
-\texttt{D:} została pominięta, gdyż pokrywała więcej przypadków niż tylko
-użycie emotikony (np.: \texttt{Accepte\textbf{d:} Mary, John, Jane})}:
+Według artykułu \cite{EmoticonAnalysisTwitter} 20 emotikon pokrywa w 90\%
+stosowanie tych znaków graficznych we wpisach (na 100 wpisów z emotikonami, 90 z
+nich zawiera emotikonę ze zbioru tych 20). Dlatego też skorzystałem z tego
+zbioru do własnych badań dzieląc emotikony na wyrażające wydźwięk pozytywny i
+negatywny w sposób\footnote{emotikona \texttt{D:} została pominięta, gdyż
+pokrywała więcej przypadków niż tylko użycie emotikony (np.:
+\texttt{Accepte\textbf{d:} Mary, John, Jane})} przedstawiony w tabeli
+\ref{tab:wydzwiek-emotikon}.
 
 \begin{table}[ht!]  
 \begin{center}  
@@ -347,8 +347,13 @@ większa ilość wybierano ten sentyment, który przeważał) a następnie dla k
 wyrazu z tego wpisu zwiększano licznik odpowiednio wystąpień pozytywnych lub
 negatywnych. Oczywiście wpisy były już poddane normalizacji.
 W ten sposób uzyskano słownik sentymentu zbudowany z zebranych danych, który
-zawierał 34183 słowa, a najpopularniejsze z nich to:
+zawierał 34183 słowa, a najpopularniejsze z nich zaprezentowane są w tabeli
+\ref{tab:liczebnosc-slow-sentymentu}, gdzie:
 
+wartość \textit{valence} wyliczna jest według wzoru \ref{equation:pakparoubek} 
+i jest używana jest w dalszych obliczeniach,
+
+wartość pozytywności wyliczona jest według wzoru \ref{equation:pozytywnosc}.
 
 \begin{table}[ht!]  
 \begin{center}  
@@ -375,21 +380,12 @@ sentymentu}
 \label{tab:liczebnosc-slow-sentymentu}
 \end{table}
 
-gdzie:
+Dla każdego wpisu wyliczana jest średnia arytmetyczna tych wielkości
+przypisanych do każdego słowa. Wynik ten jest wartością \textit{valence} danego
+wpisu. W tabeli \ref{tab:valence-przyklad} prezentuję przykładowe wyniki
+wyliczania tej wielkości.
 
-wartość \textit{valence} wyliczna jest według wzoru \ref{equation:pakparoubek} 
-i jest używana jest w dalszych obliczeniach,
-
-wartość pozytywności wyliczona jest według wzoru \ref{equation:pozytywnosc}.
-
-\bigskip
-
-Dla każdego wpisu wyliczana jest średnia arytmetyczna tych
-wielkości przypisanych do każdego słowa. Wynik ten jest wartością
-\textit{valence} danego wpisu. Poniżej prezentuję przykładowe wyniki wyliczania
-tej wielkości:
-\clearpage
-\begin{table}[ht!]  
+\clearpage \begin{table}[ht!]
 \begin{center}  
 \begin{tabular}{|p{12mm}|p{70mm}|>{\raggedright\arraybackslash}p{60mm}|}
 \hline
@@ -413,6 +409,7 @@ dont=0.2751} \\ \hline
 \end{tabular} 
 \end{center} 
 \caption{Wynik działania algorytmu analizy sentymentu na przykładowych wpisach}
+\label{tab:valence-przyklad}
 \end{table}
 
 Określenie sentymentu wpisu odbywa się zgodnie z równaniem:
@@ -500,7 +497,6 @@ $|neg|$ -- liczba wpisów oznaczonych jako negatywne.
 
 
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% ANALIZA SIECI SPOŁECZNYCH
-\clearpage
 \section{Analiza sieci społecznych}
 \label{section:siecispoleczne}
 W tej sekcji przedstawiam zastosowane podejście do analizy sieci społecznych,
