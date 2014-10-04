@@ -343,24 +343,18 @@ dochodzi do interakcji, które wzajemnie na siebie oddziałują oraz spostrzegaj
 się w kategorii ,,my''~\cite[s.~268]{SocialPsychology}.
 
 Jednym z elementów analizy sieci społecznych jest wyodrębnianie grup spośród
-wszystkich członków sieci. Dzięki temu możliwe jest rożne podejście do analizy
-konkretnych grup i ich zachowań. Istnieje wiele sposobów odkrywania takich grup,
-między innymi:
-
-\begin{itemize}
-  \item budowanie drzewa odległości (ang. \textit{distance tree}) między 
-  użytkownikami na podstawie macierzy relacji między nimi [Combining Social Network Analysis and Web.pdf],
-  [TODO Rysunek]
-  
-  \item wydorębnianie grup na podstawie modularności \cite{FastUnfoldingOfCommunites} -- 
-  \textbf{metoda zastosowana w szukaniu grup w niniejszej pracy}
-\end{itemize}
-
-
-
-
-
-
+wszystkich członków sieci. Użytkownicy w naturalny sposób tworzą między sobą
+takie grupy. Wykrycie ich daje szansę na rożne podejście do analizy różnych grup
+i ich zachowań. Ekstrakcja grup z pośród sieci społecznych może wymagać wielu
+ciężkich obliczeń. Istnieją jednak prostsze metody, takie jak między innymi
+zaprezentowana w \cite{ComputingCommunitesInLargeNetworks} metoda oparta na
+losowych przejściach po grafie sieci społecznej (badająca podobieństow
+wierzchołków), czy metoda wykorzystująca 3 rodzaje metryk, których ważność jest
+balansowana celem odkrywania grup w \cite{FindingCommunityStructure}.
+Bardzo szybką metodą wyodrębniania grup jest również metoda zaprezentowana w
+\cite{FastUnfoldingOfCommunites} oparta na optymalizacji modularności
+wierzchołków. Tę metodę (zaimplementowaną w środowisku Gephi) zastosowałem w
+swoich badaniach do odkrywania grup.
 
 
 
@@ -432,7 +426,7 @@ przedstawiają swoje opinie w Internecie, a przy pomocy analizy sentymentu bardz
 
 Badanie sentymentu nie jest trywialne. Związane jest bezpośrednio z 
 przetwarzaniem języka naturalnego, które niesie ze sobą szereg problemów
-\cite{ChallengeOfSpokenLanguage}, \cite{NaturalLanguageProcessingFuture}:
+\cite{ChallengeOfSpokenLanguage, NaturalLanguageProcessingFuture}:
 
 \begin{itemize}
   \item złożoność języka naturalnego -- bardzo trudnym zadaniem jest nauczenie 

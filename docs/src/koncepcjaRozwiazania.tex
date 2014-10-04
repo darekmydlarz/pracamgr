@@ -61,7 +61,7 @@ z moimi badaniami, które związane były ze zgromadzeniem danych potrzebnych
 do przeprowadzania analiz. Etap ten był niezwykle istotny i przeprowadzenie
 go umożliwiło dalsze prace. Zgromadzone dane pochodzą z serwisu Twitter
 i zostały uzyskane przy pomocy udostępnionego publicznie 
-API\footnote{https://dev.twitter.com/overview/documentation} (interfejsu
+API (interfejsu
 programistycznego).
 
 \subsection{Tematyka danych}
@@ -109,24 +109,12 @@ czyli Premier Leauge -- uznawaną przez wielu ekspertów za najsilniejszą ligę
 \cite{PremierLeagueAudience} bijąc ponad dwukrotnie oglądalność innych lig 
 (włoskiej, hiszpańskiej czy niemieckiej).
 
-Zbieranie danych odbywało się przy pomocy Twitter Stream 
-API\footnote{https://dev.twitter.com/streaming/overview}.
-Aby móc zbierać wpisy należy napisać program -- robota internetowego,
-korzystającego z udostępnionego API, który nasłuchuje na żywo pojawiające się wpisy.
+Zbieranie danych odbywało się przy pomocy Twitter Stream API. Do nasłuchiwania
+wpisów koniecznym jest także zdefiniowanie filtrów określających jakie dane nas
+interesują. Zdecydowałem się korzystać z filtra słów kluczowych wraz z
+ograniczeniem wpisów na język angielski.
 
-Technika ta ma jednak ograniczenia i pozwala na konsumowanie maksymalnie 1\%
-wszystkich pojawiających się w tym czasie wpisów na Twitterze (aby uzyskać
-wszystkie wpisy należy wnieść opłatę w serwisach partnerskich).
-
-Do nasłuchiwania wpisów koniecznym jest także zdefiniowanie filtrów
-określających jakie dane nas interesują. Twitter wymaga by podać przynajmniej
-jeden z niniejszych: słowa kluczowe, identyfikatory użytkowników lub obszary
-geograficzne. Dodatkowo możliwe jest podanie innych parametrów, jak na przykład
-języka wpisów (serwis automatycznie wykrywa język wpisów). 
-Dlatego też zdecydowałem się korzystać z filtra słów kluczowych
-wraz z ograniczeniem wpisów na język angielski.
-
-Twitter Stream API dostarcza jedynie tweetów pojawiających się w czasie
+Twitter Stream API dostarcza jedynie tweety pojawiających się w czasie
 rzeczywistym. Oznacza to, że możemy przy jego użyciu mieć jedynie dostęp do tych
 wpisów, które zostały wysłane, gdy jednocześnie uruchomiony był nasz program
 nasłuchujący. Aby zmaksymalizować jakość i zakres zebranych danych program
@@ -313,8 +301,8 @@ pokrywała więcej przypadków niż tylko użycie emotikony (np.:
 \begin{center}  
 \begin{tabular}{|c|r|l|}
 \hline
-Emotikona & Popularność & Wydźwięk
-\\ \hline
+Emotikona & Popularnoś według \cite{EmoticonAnalysisTwitter} &
+Wydźwięk \\ \hline
 \texttt{:)} & $33.4\%$ & pozytywny \\ \hline
 \texttt{:D} & $11.0\%$ & pozytywny \\ \hline
 \texttt{:(} & $7.9\%$ & negatywny \\ \hline
@@ -351,7 +339,7 @@ zawierał 34183 słowa, a najpopularniejsze z nich zaprezentowane są w tabeli
 \ref{tab:liczebnosc-slow-sentymentu}, gdzie:
 
 wartość \textit{valence} wyliczna jest według wzoru \ref{equation:pakparoubek} 
-i jest używana jest w dalszych obliczeniach,
+i używana jest w dalszych obliczeniach,
 
 wartość pozytywności wyliczona jest według wzoru \ref{equation:pozytywnosc}.
 
@@ -380,10 +368,10 @@ sentymentu}
 \label{tab:liczebnosc-slow-sentymentu}
 \end{table}
 
-Dla każdego wpisu wyliczana jest średnia arytmetyczna tych wielkości
-przypisanych do każdego słowa. Wynik ten jest wartością \textit{valence} danego
-wpisu. W tabeli \ref{tab:valence-przyklad} prezentuję przykładowe wyniki
-wyliczania tej wielkości.
+Dla każdego wpisu wyliczana jest średnia arytmetyczna wartości \textit{valence}
+wszystkich słów. W ten sposób wylicza sie wartość \textit{valence} danego wpisu.
+W tabeli \ref{tab:valence-przyklad} prezentuję przykładowe wyniki wyliczania tej
+wielkości.
 
 \clearpage \begin{table}[ht!]
 \begin{center}  
@@ -434,7 +422,7 @@ Wpisy na Twitterze są krótkie, więc postanowiłem zastosować podejście
 zaprezentowane w artykule \cite{thumbsUp2002}, które polega na dodaniu
 przedrostka \texttt{NOT\_} do wszystkich słów pomiędzy wyrazem negującym,
 a najbliższym znakiem przestankowym. Lista wyrazów negujących
-została zaczerpnięta z \cite{englishNots1983}. Słowa zanegowany miały osobno
+została zaczerpnięta z \cite{englishNots1983}. Słowa zanegowane miały osobno
 liczone liczby wystąpień w kontekstach pozytwnych i negatywnych. W takiej formie
 brały udział w ocenie sentymentu wpisów z Twittera.
 
