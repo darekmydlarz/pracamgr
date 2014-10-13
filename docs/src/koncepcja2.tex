@@ -14,24 +14,7 @@ badania zachowań użytkowników sieci społecznościowych.
 
 \subsection{Model analizy sentymentu}
 
-\subsection{Model grup społecznych}
-
-\subsection{Model geolokacji}
-
-
-
-
-
-
-
-
-\section{Wielkości wykorzystywane w eksperymentach}
-
-
-
-
-
-\subsection{Wykrywanie zwolenników i przeciwników klubu}
+\subsubsection{Wykrywanie zwolenników i przeciwników klubu}
 \label{subsection:wykrywanie-zwolennikow}
 Proces oznaczania użytkowników jako sympatyków i przeciwników drużyny przebiegał
 w następujący sposób:
@@ -46,8 +29,58 @@ w następujący sposób:
 
 
 
+\subsection{Model grup społecznych}
 
-\subsubsection{Ocena pozytywności wpisu}
+
+\subsubsection{Wykrywanie grup}
+ \label{section:koncepcja-wykrywaniegrup}
+% gephi, modularity
+Do wykrywania grup wśród sieci społecznych skorzystałem z narzędzia
+otwartoźródłowego narzędzia \textit{Gephi} wspomagającego analizę grafową, w
+którym został zaimplementowany algorytm przedstawiony w artykule
+\cite{blondel2008fuc}. Przy jego użyciu konkretne węzły zostały podzielone
+na grupy, nad którymi przeprowadzałem późniejsze analizy.
+
+Grupy zostały zbudowane na podstawie relacji \textit{reply}
+stworzonej z zebranych wpisów. Na podstawie odpowiedzi między różnymi
+użytkownikami budowany był model sieci społecznej.
+W każdym kolejnym meczu przeprowadzono badanie grup wśród użytkowników.
+Uzyskane wyniki podzielono na trzy ,,koszyki''. W pierwszym znalazły się grupy 
+3 lub 4 osobowe. W~drugim koszyku grupy mające od 5 do 9 osób, a w trzecim koszyku
+większe grupy. 
+
+\subsection{Model geolokacji}
+
+
+
+\subsection{Badanie odległości między użytkownikami}
+\label{subsection:badanieodleglosci}
+TODO napisać trochę więcej.
+
+Badanie odległosci między użytkownikami odbyło się na podstawie odpowiedzi z
+geolokacją -- retweety nie zawierają informacji o położeniu użytkownika.
+Spośród tych użytkowników, którzy pisali z geolokacją zostało zliczone ilu z
+nich się ze sobą komunikowało w zależności od wzajemnej odległości.
+
+
+
+
+
+
+\subsection{Badanie odległości od stadionu}
+\label{subsection:badanieodleglosciodstadionu}
+TODO opisać 
+
+
+
+
+
+
+
+\section{Wielkości wykorzystywane w eksperymentach}
+
+
+\subsection{Ocena pozytywności wpisu}
 W kilku miejscach została zastosowana miara pozytywności wpisu.
 Została ona wyliczona przy pomocy następującego równania:
 
@@ -63,23 +96,6 @@ $|pos|$ -- liczba wpisów oznaczonych jako pozytywne,
 $|neg|$ -- liczba wpisów oznaczonych jako negatywne.
 
 
-\subsection{Wykrywanie grup}
- \label{section:koncepcja-wykrywaniegrup}
-% gephi, modularity
-Do wykrywania grup wśród sieci społecznych skorzystałem z narzędzia
-otwartoźródłowego narzędzia \textit{Gephi} wspomagającego analizę grafową, w
-którym został zaimplementowany algorytm przedstawiony w artykule
-\cite{blondel2008fuc}. Przy jego użyciu konkretne węzły zostały podzielone
-na grupy, nad którymi przeprowadzałem późniejsze analizy.
-
-
-Grupy zostały zbudowane na podstawie relacji \textit{reply}
-stworzonej z zebranych wpisów. Na podstawie odpowiedzi między różnymi
-użytkownikami budowany był model sieci społecznej.
-W każdym kolejnym meczu przeprowadzono badanie grup wśród użytkowników.
-Uzyskane wyniki podzielono na trzy ,,koszyki''. W pierwszym znalazły się grupy 
-3 lub 4 osobowe. W~drugim koszyku grupy mające od 5 do 9 osób, a w trzecim koszyku
-większe grupy. 
 
 \subsection{Badanie podobieństwa grup}
 Badanie podobieństwa oparte było o analizę kolejnych wydarzeń. 
@@ -100,14 +116,17 @@ wydarzeniami a liczby wierzchołków w pierwszym z nich.
 
 
 
-\subsection{Badanie odległości między użytkownikami}
-\label{subsection:badanieodleglosci}
-TODO napisać trochę więcej.
 
-Badanie odległosci między użytkownikami odbyło się na podstawie odpowiedzi z
-geolokacją -- retweety nie zawierają informacji o położeniu użytkownika.
-Spośród tych użytkowników, którzy pisali z geolokacją zostało zliczone ilu z
-nich się ze sobą komunikowało w zależności od wzajemnej odległości.
+
+
+
+
+
+
+
+
+
+
 
 
 
