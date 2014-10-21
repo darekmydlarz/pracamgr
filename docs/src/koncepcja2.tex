@@ -3,19 +3,39 @@ zachowań użytkowników sieci społecznościowych.}
 
 W tym rozdziale opisany jest sposób realizacji celów mojej pracy magisterskiej
 -- czyli sposób powiązania ze sobą analizy sentymentu i geolokacji w kontekście
-badania zachowań użytkowników sieci społecznościowych.
+badania zachowań użytkowników sieci społecznościowych. W podrozdziale
+\ref{section:modelsystemu} zaprezentowany został model systemu z uwzględnieniem
+przetwarzania wstępnego \ref{subsection:przetwarzaniewstepne}, modelu analizy
+sentymentu \ref{subsection:modelanalizysentymentu}, modelu grup społecznych
+\ref{subsection:modelanalizysentymentu} i modelu geolokacji
+\ref{subsection:modelgeolokacji}. Następnie przedstawione są wielkości
+wykorzystywane w eskperymentach \ref{section:wielkosciwykorzystywane}, a na
+końcu szczegółowo została opisana koncepcja i algorytm analizy sentymentu
+\ref{section:koncepcjaialgorytmanalizysentymentu}.
 
 
 
 
 \section{Model systemu}
+\label{section:modelsystemu}
+
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=160mm]{img/model-systemu.png}
+\caption{Model systemu}
+\label{image:model-systemu}
+\end{figure}
 
 \subsection{Przetwarzanie wstępne}
+\label{subsection:przetwarzaniewstepne}
 
 \subsection{Model analizy sentymentu}
+\label{subsection:modelanalizysentymentu}
 
 \subsubsection{Wykrywanie zwolenników i przeciwników klubu}
-\label{subsection:wykrywanie-zwolennikow}
+\label{subsubsection:wykrywaniezwolennikow}
+
 Proces oznaczania użytkowników jako sympatyków i przeciwników drużyny przebiegał
 w następujący sposób:
 \begin{itemize}
@@ -30,10 +50,10 @@ w następujący sposób:
 
 
 \subsection{Model grup społecznych}
-
+\label{subsection:modelgrupspolecznych}
 
 \subsubsection{Wykrywanie grup}
- \label{section:koncepcja-wykrywaniegrup}
+ \label{subsubsection:koncepcja-wykrywaniegrup}
 % gephi, modularity
 Do wykrywania grup wśród sieci społecznych skorzystałem z narzędzia
 otwartoźródłowego narzędzia \textit{Gephi} wspomagającego analizę grafową, w
@@ -50,11 +70,11 @@ Uzyskane wyniki podzielono na trzy ,,koszyki''. W pierwszym znalazły się grupy
 większe grupy. 
 
 \subsection{Model geolokacji}
+\label{subsection:modelgeolokacji}
 
 
-
-\subsection{Badanie odległości między użytkownikami}
-\label{subsection:badanieodleglosci}
+\subsubsection{Badanie odległości między użytkownikami}
+\label{subsubsection:badanieodleglosci}
 TODO napisać trochę więcej.
 
 Badanie odległosci między użytkownikami odbyło się na podstawie odpowiedzi z
@@ -67,8 +87,8 @@ nich się ze sobą komunikowało w zależności od wzajemnej odległości.
 
 
 
-\subsection{Badanie odległości od stadionu}
-\label{subsection:badanieodleglosciodstadionu}
+\subsubsection{Badanie odległości od stadionu}
+\label{subsubsection:badanieodleglosciodstadionu}
 TODO opisać 
 
 
@@ -78,9 +98,10 @@ TODO opisać
 
 
 \section{Wielkości wykorzystywane w eksperymentach}
-
+\label{section:wielkosciwykorzystywane}
 
 \subsection{Ocena pozytywności wpisu}
+\label{subsection:ocenapozytywnosci}
 W kilku miejscach została zastosowana miara pozytywności wpisu.
 Została ona wyliczona przy pomocy następującego równania:
 
@@ -98,6 +119,7 @@ $|neg|$ -- liczba wpisów oznaczonych jako negatywne.
 
 
 \subsection{Badanie podobieństwa grup}
+\label{subsection:badaniepodobienstwagrup}
 Badanie podobieństwa oparte było o analizę kolejnych wydarzeń. 
 Polegało na zliczeniu ile wierzchołków powtarza się w kolejnych meczach.
 Oparte zostało o niniejsze równanie:
@@ -135,13 +157,14 @@ wydarzeniami a liczby wierzchołków w pierwszym z nich.
 
 \section{Koncepcja i algorytm analizy sentymentu}
 
-\label{section:analizasentymentu}
+\label{section:koncepcjaialgorytmanalizysentymentu}
 W tym miejscu opisuję sposób w jaki została użyta do moich badań analiza
 wydźwięku wypowiedzi. Przedstawiam czynności wstępne jakie zostały zastosowane
 na tekście, prezentuję krótko wybrany algorytm i zastosowane w nim modyfikacje
 oraz opisuję sposób zaaplikowania analizy wydźwięku na zgromadzonych tweetach.
 
 \subsection{Normalizacja tekstu}
+\label{subsection:normalizacjatekstu}
 % pozbycie się słów kluczowych, zaprzeczenia, retweety
 
 W związku z tym, że wpisy są tworzone przez zwykłych użytkowników posiadają one
@@ -412,6 +435,7 @@ $AVG\_VALENCE$ jest średnią arytmetyczną wartości $valence$
 wszystkich wpisów. W moich badaniach wartość ta wyniosła $0.4786984978198536$.
 
 \subsubsection{Wykrywanie i obsługa negacji}
+\label{subsubsection:wykrywanieiobsluganegacji}
 W oryginalnym podejściu panów Pak i Paroubek nie ma żadnego sposobu na
 wykrywanie i obsługę negacji. Oczywistym jednak jest, iż zaprzeczenia zmieniają
 znaczenie dalszej części tekstu i muszą być w jakiś sposób obsłużone.
@@ -430,6 +454,7 @@ brały udział w ocenie sentymentu wpisów z Twittera.
 
 
 \subsubsection{Dobór parametrów}
+\label{subsubsection:doborparametrow}
 Użyty przeze mnie algorytm zakłada dobór parametrów przed przeprowadzeniem
 analizy sentymentu. Parametry te dotyczą słów ze zbudowanego słownika --
 decydując, które z nich wezmą udział w procesie analizy. Są to: minimalna

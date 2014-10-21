@@ -23,3 +23,6 @@ twitter-crawler/src/main/resources/twitter4j.properties
 # Logs
 twitter-crawler/*.log
 
+gephi-toolkit/
+twitter-crawler/topTeams.txt
+
