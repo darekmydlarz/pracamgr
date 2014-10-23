@@ -7,7 +7,7 @@ badania zachowań użytkowników sieci społecznościowych. W podrozdziale
 \ref{section:modelsystemu} zaprezentowany został model systemu z uwzględnieniem
 przetwarzania wstępnego \ref{subsection:zbieraniedanych}, modelu analizy
 sentymentu \ref{subsection:modelanalizysentymentu}, modelu grup społecznych
-\ref{subsection:modelanalizysentymentu} i modelu geolokacji
+\ref{subsection:modelgrupirelacjispolecznych} i modelu geolokacji
 \ref{subsection:modelgeolokacji}. Następnie przedstawione są wielkości
 wykorzystywane w eskperymentach \ref{section:wielkosciwykorzystywane}, a na
 końcu szczegółowo została opisana koncepcja i algorytm analizy sentymentu
@@ -85,6 +85,87 @@ jedynie identyfikator meczu, do którego już są przypisane słowa kluczowe.
 \subsection{Model analizy sentymentu}
 \label{subsection:modelanalizysentymentu}
 
+Analiza sentymentu należy do jednego z elementów drugiej części systemu.
+W tej części zebrane uprzednio dane były przetwarzane, między innymi pod kątem
+oceny ich sentymentu. Proces ten przebiegał według schematu
+zaprezentowanego na rysunku \ref{image:model-analizy-sentymentu}.
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=160mm]{img/model-analizy-sentymentu.png}
+\caption{Model analizy sentymentu}
+\label{image:model-analizy-sentymentu}
+\end{figure}
+
+
+Dla każego tweeta w bazie obliczana była jego wartość \textit{valence}.
+Aby do tego doszło tweet był wcześniej odpowiednio oczyszczany z wszystkich
+elementów, które mogły zakłócić wyliczenie tej wartości. Proces przebiegał
+zgodnie z pomysłem i algorytmem panów Pak i Paroubek (krótko omówiony w sekcji
+\ref{subsubsection:pakandparoubek}), a szczegóły jego działania wraz z
+zastosowaną przez ze mnie modyfikacją (polegającą na dodaniu wykrywania negacji)
+zostały opisany w sekcji \ref{section:koncepcjaialgorytmanalizysentymentu}.
+
+Po wyliczeniu wartości \textit{valence} dla zebranych tweetów obliczona została
+jego średnia wartość i wpisy o wartości wyższej od średniej zostały oznaczone
+jako pozytywne, zaś o wartości niższej jako negatywne (zgodnie z pomysłem Paka
+i Paroubeka).
+
+Oznaczenie wartości sentymentu zebranych wpisów pozwoliło na przeprowadzenie
+ciekawych eksperymentów opisanych w rozdziale \ref{chapter:eksperymenty}.
+
+
+\subsection{Model grup i relacji społecznych}
+\label{subsection:modelgrupirelacjispolecznych}
+
+
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=160mm]{img/odkrywanie-relacji.png}
+\caption{Model grup i relacji społecznych}
+\label{image:odkrywanie-relacji}
+\end{figure}
+
+\subsection{Model geolokacji}
+\label{subsection:modelgeolokacji}
+
+
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=160mm]{img/odkrywanie-geolokacji.png}
+\caption{Model geolokacji}
+\label{image:odkrywanie-geolokacji}
+\end{figure}
+
+
+
+
+
+% ==============================================================================
+\section{Wielkości i techniki wykorzystywane w eksperymentach}
+\label{section:wielkosciwykorzystywane}
+% ==============================================================================
+\subsection{Analiza sentymentu}
+\subsubsection{Ocena pozytywności wpisu}
+\label{subsection:ocenapozytywnosci}
+W kilku miejscach została zastosowana miara pozytywności wpisu.
+Została ona wyliczona przy pomocy następującego równania:
+
+\begin{equation}
+\label{equation:pozytywnosc}
+P = \frac{|pos|}{|pos| + |neg|}
+\end{equation}
+
+gdzie:
+
+$|pos|$ -- liczba wpisów oznaczonych jako pozytywne,
+
+$|neg|$ -- liczba wpisów oznaczonych jako negatywne.
+
+
+
 \subsubsection{Wykrywanie zwolenników i przeciwników klubu}
 \label{subsubsection:wykrywaniezwolennikow}
 
@@ -99,10 +180,9 @@ w następujący sposób:
   traktowany był jako przeciwnik danej drużyny.  
 \end{itemize} 
 
+\subsection{Relacje}
 
 
-\subsection{Model grup społecznych}
-\label{subsection:modelgrupspolecznych}
 
 \subsubsection{Wykrywanie grup}
  \label{subsubsection:koncepcja-wykrywaniegrup}
@@ -121,10 +201,32 @@ Uzyskane wyniki podzielono na trzy ,,koszyki''. W pierwszym znalazły się grupy
 3 lub 4 osobowe. W~drugim koszyku grupy mające od 5 do 9 osób, a w trzecim koszyku
 większe grupy. 
 
-\subsection{Model geolokacji}
-\label{subsection:modelgeolokacji}
+
+\subsubsection{Badanie podobieństwa grup}
+\label{subsection:badaniepodobienstwagrup}
+Badanie podobieństwa oparte było o analizę kolejnych wydarzeń. 
+Polegało na zliczeniu ile wierzchołków powtarza się w kolejnych meczach.
+Oparte zostało o niniejsze równanie:
+\begin{equation}
+S = \frac{|V_1 \cap V_2|}{|V_1|}
+\end{equation}  
+gdzie:
+
+$V_1$ -- zbiór wierzchołków w pierwszym wydarzeniu,
+
+$V_2$ -- zbiór wierzchołków w drugim wydarzeniu.
+
+Krótko mówiąc podobieństwo to iloraz liczby wspólnych wierzchołków między 
+wydarzeniami a liczby wierzchołków w pierwszym z nich.
 
 
+
+
+
+
+
+
+\subsection{Geolokacja}
 \subsubsection{Badanie odległości między użytkownikami}
 \label{subsubsection:badanieodleglosci}
 TODO napisać trochę więcej.
@@ -149,43 +251,6 @@ TODO opisać
 
 
 
-\section{Wielkości wykorzystywane w eksperymentach}
-\label{section:wielkosciwykorzystywane}
-
-\subsection{Ocena pozytywności wpisu}
-\label{subsection:ocenapozytywnosci}
-W kilku miejscach została zastosowana miara pozytywności wpisu.
-Została ona wyliczona przy pomocy następującego równania:
-
-\begin{equation}
-\label{equation:pozytywnosc}
-P = \frac{|pos|}{|pos| + |neg|}
-\end{equation}
-
-gdzie:
-
-$|pos|$ -- liczba wpisów oznaczonych jako pozytywne,
-
-$|neg|$ -- liczba wpisów oznaczonych jako negatywne.
-
-
-
-\subsection{Badanie podobieństwa grup}
-\label{subsection:badaniepodobienstwagrup}
-Badanie podobieństwa oparte było o analizę kolejnych wydarzeń. 
-Polegało na zliczeniu ile wierzchołków powtarza się w kolejnych meczach.
-Oparte zostało o niniejsze równanie:
-\begin{equation}
-S = \frac{|V_1 \cap V_2|}{|V_1|}
-\end{equation}  
-gdzie:
-
-$V_1$ -- zbiór wierzchołków w pierwszym wydarzeniu,
-
-$V_2$ -- zbiór wierzchołków w drugim wydarzeniu.
-
-Krótko mówiąc podobieństwo to iloraz liczby wspólnych wierzchołków między 
-wydarzeniami a liczby wierzchołków w pierwszym z nich.
 
 
 
@@ -193,23 +258,11 @@ wydarzeniami a liczby wierzchołków w pierwszym z nich.
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+% ==============================================================================
 \section{Koncepcja i algorytm analizy sentymentu}
-
 \label{section:koncepcjaialgorytmanalizysentymentu}
+% ==============================================================================
+
 W tym miejscu opisuję sposób w jaki została użyta do moich badań analiza
 wydźwięku wypowiedzi. Przedstawiam czynności wstępne jakie zostały zastosowane
 na tekście, prezentuję krótko wybrany algorytm i zastosowane w nim modyfikacje
