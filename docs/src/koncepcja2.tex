@@ -117,7 +117,11 @@ ciekawych eksperymentów opisanych w rozdziale \ref{chapter:eksperymenty}.
 
 \subsection{Model grup i relacji społecznych}
 \label{subsection:modelgrupirelacjispolecznych}
-
+Drugim ważnym elementem przetwarzania zebranych danych było skupienie się nad
+odkrywaniem relacji między użytkownikami Twittera i odnajdywanie grup, które
+wspólnie tworzą. Pomaga to w lepszym zrozumieniu zachowań użytkowników i
+możliwości osobnej analizy różnych grup. Schemat odkrywania zachowań społecznych
+został przedstawiony na rysunku \ref{image:odkrywanie-relacji}.
 
 
 \begin{figure}[ht!]
@@ -127,10 +131,29 @@ ciekawych eksperymentów opisanych w rozdziale \ref{chapter:eksperymenty}.
 \label{image:odkrywanie-relacji}
 \end{figure}
 
+
+Sieć użytkowników zamodelowana jest w postaci grafu, gdzie użytkownicy to
+wierzchołki, a wpisy będące retweetami lub odpowiedziami są krawędziami
+(skierowanymi) tego grafu. Relacje te są przechowywane bezpośrednio w każdym z z
+tweetów w polach \texttt{in\_reply\_to\_user\_id} oraz
+\texttt{retweeted\_user\_id}.
+Do konkretnych eksperymentów dane te były odpowiednio agregowane (np. zliczano
+liczbę powiązań między wierzchołkami i traktowano je jako pojedynczą relację w
+jakiejś jednostce czasu -- na przykład w pojedynczym meczu).
+
+Odkrywanie grup zostało przeprowadzone przy pomocy algorytmu opisanego w
+\cite{FastUnfoldingOfCommunites}, który został zaimplementowany w środowisku
+Gephi. Wyniki klasyfikacji wierzchołków do odpowiednich grup zostały następnie
+zapisane w bazie danych.
+
+
 \subsection{Model geolokacji}
 \label{subsection:modelgeolokacji}
-
-
+Ostatnim elementem przetwarzania zebranych danych było związane z danymi
+geolokacyjnymi. Przechowywane w bazie tweety posiadają jedynie współrzędne
+określające miejsce, z którego zostały wysłane (oczywiście niewielki odsetek
+tweetów z całego zbioru). Schemat przetwarzania tych danych prezentuje rysunek
+\ref{image:odkrywanie-geolokacji}.
 
 \begin{figure}[ht!]
 \centering
@@ -139,6 +162,17 @@ ciekawych eksperymentów opisanych w rozdziale \ref{chapter:eksperymenty}.
 \label{image:odkrywanie-geolokacji}
 \end{figure}
 
+Przy pomocy serwisu \textit{Open Street Map}\footnote{www.openstreetmap.com} i
+skorzystaniu z API służącego do georeversingu dla każdego tweeta posiadającego
+współrzędne pobrano informacje szczegółowe na temat miejsca, na które te
+współrzędne wskazują. W ten sposób uzyskano takie dane jak: kraj,
+stan/województwo (ang. \textit{state}), powiat/hrabstwo (ang. \textit{county})
+oraz miasto (ang. \textit{city}).
+
+Dodatkowo zaprezentowano w pracy mapy cieplne uwidaczniające częstość wpisów z
+różnych lokalizacji na całym świecie. Do tego zadania skorzystano z usługi
+\textit{CartoDB}\footnote{www.cartodb.com}, za pomocą którego dostarczając dane
+z geolokacją można otrzymać takiego rodzaju mapy.
 
 
 
