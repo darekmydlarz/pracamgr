@@ -5,7 +5,7 @@ W tym rozdziale opisany jest sposób realizacji celów mojej pracy magisterskiej
 -- czyli sposób powiązania ze sobą analizy sentymentu i geolokacji w kontekście
 badania zachowań użytkowników sieci społecznościowych. W podrozdziale
 \ref{section:modelsystemu} zaprezentowany został model systemu z uwzględnieniem
-przetwarzania wstępnego \ref{subsection:przetwarzaniewstepne}, modelu analizy
+przetwarzania wstępnego \ref{subsection:zbieraniedanych}, modelu analizy
 sentymentu \ref{subsection:modelanalizysentymentu}, modelu grup społecznych
 \ref{subsection:modelanalizysentymentu} i modelu geolokacji
 \ref{subsection:modelgeolokacji}. Następnie przedstawione są wielkości
@@ -15,20 +15,72 @@ końcu szczegółowo została opisana koncepcja i algorytm analizy sentymentu
 
 
 
-
+% =============================================================================
 \section{Model systemu}
 \label{section:modelsystemu}
-
+% =============================================================================
+Ogólny model systemu został przedstawiony na rysunku \ref{image:model-systemu}.
 
 \begin{figure}[ht!]
 \centering
-\includegraphics[width=160mm]{img/model-systemu.png}
-\caption{Model systemu}
+\includegraphics[width=160mm]{img/gruby-model.png}
+\caption{Ogólny model systemu}
 \label{image:model-systemu}
 \end{figure}
 
-\subsection{Przetwarzanie wstępne}
-\label{subsection:przetwarzaniewstepne}
+
+Można go podzielić na trzy następujące części (podpisane na wspomnianym
+rysunku):
+\begin{enumerate}
+  \item Zbieranie danych.
+  \item Przetwarzanie i uzupełnianie danych.
+  \item Zdobywanie wiedzy z zebranych i przetworzonych danych.
+\end{enumerate}
+
+
+
+\clearpage
+\subsection{Zbieranie danych}
+\label{subsection:zbieraniedanych}
+Zbieranie danych jest pierwszym elementem składowym całego systemu.
+Jego koncepcje przedstawia rysunek \ref{image:zbieranie-danych}.
+Jest to bardzo ważny składnik systemu. Aby móc przeprowadzić jakiekolwiek
+analizy potrzeba najpierw zebrać dane.
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=160mm]{img/zbieranie-danych.png}
+\caption{Zbieranie danych}
+\label{image:zbieranie-danych}
+\end{figure}
+
+
+Zbieranie danych z serwisu Twitter odbyło się przy pomocy wspomnianego w sekcji
+\ref{subsection:twitterjakozrodlodanych} Twitter Streaming API. Napisany został
+program w Javie, który nasłuchiwał w trakcie każdego śledzonego meczu wpisów w
+języku angielskim, które zawierały odpowiednie słowa kluczowe. Były nimi
+przygotowane wcześniej słowa związane z danym spotkaniem: nazwiska i przydomki
+piłkarzy, menadżerów, nazwy i przydomki klubów, nazwa stadionu czy nazwisko
+sędziego. W taki sposób uzyskiwano tweety, które można było powiązać z
+konkretnym meczem.
+
+Program do nasłuchiwania uruchamiany jest na czas trwania meczu z pewnym
+marginesem przed i po spotkaniu. Jest to o tyle ważne, że udostępnione API służy
+tylko do konsumowania wpisów na żywo. Pobranie tych samych wpisów już po danym
+wydarzeniu byłoby dużo bardziej skomplikowane. Program otrzymuje nie więcej niż
+1\% wszystkich wpisów w danym momencie na Twitterze \footnote{Jeśli w danym
+momencie na Twitterze jest 1000 wpisów, z czego 10 z podanymi słowami
+kluczowymi, wówczas program otrzyma wszystkie 10 wpisów. Jeśli z określonymi
+słowami kluczowymi byłoby więcej wpisów, wówczas program nadal otrzymałby tylko
+10 z nich.}. Każdemu wpisowi nadawany jest identyfikator meczu (wprowadzonego
+wcześniej do bazy danych) i w takiej postaci jest on zapisywany do bazy.
+
+W ten sposób zbieranie są dane z Twittera. Podejście to pozwala na elastyczną
+wymianę słów kluczowych do nasłuchiwania, gdyż program na wejściu potrzebuje
+jedynie identyfikator meczu, do którego już są przypisane słowa kluczowe.
+
+
+
 
 \subsection{Model analizy sentymentu}
 \label{subsection:modelanalizysentymentu}
