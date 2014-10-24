@@ -181,11 +181,20 @@ z geolokacją można otrzymać takiego rodzaju mapy.
 \section{Wielkości i techniki wykorzystywane w eksperymentach}
 \label{section:wielkosciwykorzystywane}
 % ==============================================================================
+W tej sekcji zaprezentowane są wielkości i techniki, które zostały zastosowane w
+zaprezentowanych w rozdziale \ref{chapter:eksperymenty} eksperymentach.
+Przedstawione są one z podziałem na moduł, którego dotyczą.
+
 \subsection{Analiza sentymentu}
-\subsubsection{Ocena pozytywności wpisu}
+Przy pomocy sentymentu można ocenić wydźwięk wypowiedzi, jaki tworzą zebrane
+wpisy. W eksperymentach użyte zostały opisany poniżej miary i techniki.
+
+\subsubsection{Ocena pozytywności wpisów}
 \label{subsection:ocenapozytywnosci}
-W kilku miejscach została zastosowana miara pozytywności wpisu.
-Została ona wyliczona przy pomocy następującego równania:
+Miara pozytywności wpisów mówi określa ich sumaryczny wydźwięk. Jest to stosunek
+liczby wpisów pozytywnych do sumy liczby wpisów pozytywnych i negatywnych. Gdy
+wartość ta jest większa niż 50\% można mówić o wydźwięku pozytywnym, a gdy
+mniejsza -- o negatywnym. Wartość tę określa się poniższym wzorem: 
 
 \begin{equation}
 \label{equation:pozytywnosc}
@@ -203,6 +212,12 @@ $|neg|$ -- liczba wpisów oznaczonych jako negatywne.
 \subsubsection{Wykrywanie zwolenników i przeciwników klubu}
 \label{subsubsection:wykrywaniezwolennikow}
 
+Dzięki oznaczeniu wszystkich zebranych wpisów odpowiednim sentymentem
+(pozytwnym lub negatywnym) możliwe były wykorzystanie tych informacji do
+odkrywania nowej wiedzy. Sentyment ten umożliwił odkrywanie wśród wszystkich
+autorów wpisów ich preferencji klubowych -- poprzez zliczanie liczby wpisów
+pozytywnych i negatywnych w meczach danego zespołu.
+
 Proces oznaczania użytkowników jako sympatyków i przeciwników drużyny przebiegał
 w następujący sposób:
 \begin{itemize}
@@ -214,33 +229,33 @@ w następujący sposób:
   traktowany był jako przeciwnik danej drużyny.  
 \end{itemize} 
 
-\subsection{Relacje}
+Zastosowanie tej techniki pozwala na przeprowadzenie eksperymentów z podziałem
+na zwolenników i przeciwników danego klubu i zbadania ich zachowań w zależności
+od sympatii.
 
 
+
+
+\subsection{Relacje między użytkownikami i grupy}
+W tej sekcji przedstawione zostały miary i techniki użyte podczas eksperymentów
+związanych z odkrywaniem relacji i grup między użytkownikami.
 
 \subsubsection{Wykrywanie grup}
  \label{subsubsection:koncepcja-wykrywaniegrup}
 % gephi, modularity
-Do wykrywania grup wśród sieci społecznych skorzystałem z narzędzia
-otwartoźródłowego narzędzia \textit{Gephi} wspomagającego analizę grafową, w
-którym został zaimplementowany algorytm przedstawiony w artykule
-\cite{blondel2008fuc}. Przy jego użyciu konkretne węzły zostały podzielone
-na grupy, nad którymi przeprowadzałem późniejsze analizy.
-
-Grupy zostały zbudowane na podstawie relacji \textit{reply}
-stworzonej z zebranych wpisów. Na podstawie odpowiedzi między różnymi
-użytkownikami budowany był model sieci społecznej.
-W każdym kolejnym meczu przeprowadzono badanie grup wśród użytkowników.
-Uzyskane wyniki podzielono na trzy ,,koszyki''. W pierwszym znalazły się grupy 
-3 lub 4 osobowe. W~drugim koszyku grupy mające od 5 do 9 osób, a w trzecim koszyku
-większe grupy. 
-
+Do wykrywania grup wśród sieci społecznych zastosowałem model opisany w sekcji
+\ref{subsection:modelgrupirelacjispolecznych}. Znalezione w ten sposób grupy
+użytkowników poddane zostały analizie -- z podziałem na kolejne mecze.
+Grupy te zostały zagregowane w trzy przedziały: od 3 do 4 osób, od 5 do 9 osób
+oraz więcej niż 9 osób. Na takich zagregowanych grupach został przeprowadzony
+eksperyment ich podobieństwa między kolejnymi meczami.
 
 \subsubsection{Badanie podobieństwa grup}
 \label{subsection:badaniepodobienstwagrup}
-Badanie podobieństwa oparte było o analizę kolejnych wydarzeń. 
-Polegało na zliczeniu ile wierzchołków powtarza się w kolejnych meczach.
-Oparte zostało o niniejsze równanie:
+Tak jak wspomniano wyżej badanie podobieństwa oparte było o analizę kolejnych
+wydarzeń (meczów).
+Polegało na zliczeniu ile wierzchołków powtarza się w kolejnych spotkaniach.
+Oparte zostało o poniższy algorytm:
 \begin{equation}
 S = \frac{|V_1 \cap V_2|}{|V_1|}
 \end{equation}  
@@ -248,7 +263,7 @@ gdzie:
 
 $V_1$ -- zbiór wierzchołków w pierwszym wydarzeniu,
 
-$V_2$ -- zbiór wierzchołków w drugim wydarzeniu.
+$V_2$ -- zbiór wierzchołków w następnym wydarzeniu.
 
 Krótko mówiąc podobieństwo to iloraz liczby wspólnych wierzchołków między 
 wydarzeniami a liczby wierzchołków w pierwszym z nich.
@@ -259,29 +274,59 @@ wydarzeniami a liczby wierzchołków w pierwszym z nich.
 
 
 
-
 \subsection{Geolokacja}
-\subsubsection{Badanie odległości między użytkownikami}
-\label{subsubsection:badanieodleglosci}
-TODO napisać trochę więcej.
+W niniejszej sekcji opisuję wielkości, które zostały zastosowane podczas
+przeprowadzania eksperymentów, w których najważniejszym elementem było położenie
+fizyczne, czyli współrzędne przypisane do wpisu.
 
-Badanie odległosci między użytkownikami odbyło się na podstawie odpowiedzi z
-geolokacją -- retweety nie zawierają informacji o położeniu użytkownika.
-Spośród tych użytkowników, którzy pisali z geolokacją zostało zliczone ilu z
-nich się ze sobą komunikowało w zależności od wzajemnej odległości.
+\subsubsection{Zmierzenie odległości między użytkownikami}
+\label{subsubsection:zmierzenieodleglosci}
 
 
+Badanie odległości między użytkownikami odbyło się na podstawie odpowiedzi z
+geolokacją -- czyli tweetów zawierających dane o współrzędnych miejsca ich
+wysłania oraz będących odpowiedziami (mającymi niepuste pole
+\texttt{in\_reply\_to\_user\_id}). Wpisy typu retweet nie zawierają informacji
+o położeniu użytkownika (taka informacja nie jest dołączana przez Twitter).
+
+Zmierzenie odległości między użytkownikami odbyło się przy pomocy rozszerzenia
+PostGIS do bazy PostgreSQL z pomocą, którego można obliczyć odległość w metrach
+między dwoma punktami geograficznymi.
+
+Cały proces przebiegał według następującego schematu:
+\begin{itemize}
+  \item pobierz wszystkie wpisy będące odpowiedziami (\textit{reply}) i
+  zawierające współrzędne geograficzne
+  \item pogrupuj użytkowników w pary według tego, który z kim się komunikował,
+  \item wylicz średnie położenie każdego z użytkowników dla każdej konwersacji*,
+  \item wylicz przy pomocy PostGIS-a odległość między nimi.
+\end{itemize}
+
+* średnie położenie użytkownika zostało wyliczone jako średnia arytmetyczna
+długości i szerokości geograficznych jego wpisów w danej konwersacji.
+
+Zmierzenie odległości między użytkownikami zostało użyte w eksperymencie
+opisującym zależność odległości od częstości komunikacji.
 
 
 
-
-\subsubsection{Badanie odległości od stadionu}
+\subsubsection{Badanie odległości kibiców od stadionu}
 \label{subsubsection:badanieodleglosciodstadionu}
-TODO opisać 
+Do każdego nasłuchiwanego meczu zostały przypisane współrzędne miejsca, w którym
+się odbywał -- czyli współrzędne gospodarza danego spotkania. Badanie odległości
+kibiców od stadionu zostało przeprowadzone oddzielnie dla każdego meczu. Aby je
+przeprowadzić zastosowano poniższy schemat działania:
 
+\begin{itemize}
+  \item pobierz wszystkie wpisy posiadające współrzędne geograficzne (a więc
+  nie tylko te będące odpowiedziami, jak w powyższym badaniu),
+  \item wylicz średnie położenie każdego użytkownika z podziałem na spotkania,
+  \item wylicz przy pomocy PostGIS-a odległość użytkownika od stadionu.
+\end{itemize}
 
-
-
+Badanie zostało przeprowadzone z podziałem na zwolenników i przeciwników i
+pokazuje zależność odległości kibiców od miejsca rozegrania meczu w zależności
+czy ich ulubiona drużyna gra mecz u siebie czy na wyjeździe.
 
 
 
@@ -297,10 +342,11 @@ TODO opisać
 \label{section:koncepcjaialgorytmanalizysentymentu}
 % ==============================================================================
 
-W tym miejscu opisuję sposób w jaki została użyta do moich badań analiza
-wydźwięku wypowiedzi. Przedstawiam czynności wstępne jakie zostały zastosowane
-na tekście, prezentuję krótko wybrany algorytm i zastosowane w nim modyfikacje
-oraz opisuję sposób zaaplikowania analizy wydźwięku na zgromadzonych tweetach.
+W tym miejscu opisuję dokładnie koncepcję wyznaczania wydźwęku wypowiedzi i
+zastosowany algorytm do analizy sentymentu. Przedstawiam czynności wstępne jakie
+zostały zastosowane na tekście, prezentuję krótko wybrany algorytm i zastosowane
+w nim modyfikacje oraz opisuję sposób zaaplikowania analizy wydźwięku na
+zgromadzonych tweetach.
 
 \subsection{Normalizacja tekstu}
 \label{subsection:normalizacjatekstu}
@@ -309,69 +355,61 @@ oraz opisuję sposób zaaplikowania analizy wydźwięku na zgromadzonych tweetac
 W związku z tym, że wpisy są tworzone przez zwykłych użytkowników posiadają one
 wiele znaków i elementów, które z punktu widzenia analizy sentymentu są zbędne,
 a czasami prowadzące do błędów. Dlatego też tekst należy poddać normalizacji,
-usunięciu zbędnych elementów, szumów i spamu. Przykładowa lista wpisów jakie
-znalazły się w zgromadzonych danych przedstawia poniższa tabela
-(\ref{tab:wpisy-przed-normalizacja}).
+usunięciu zbędnych elementów, szumów i spamu. Przykładowe wpisy przed i po
+normalizacji przedstawia tabela \ref{tab:wpisy-normalizacja}.
 
 
 \begin{table}[ht!]  
 \begin{center}  
-\begin{tabular}{|r|p{140mm}|}
+\begin{tabular}{|r|p{70mm}|p{70mm}|}
 \hline
-\multicolumn{2}{|c|}{Przed normalizacją}
+ & Przed normalizacją & Po normalizacji
 \\ \hline
-1 & RT @J\_SPEKZ: Haha quality! \#Fellaini \#United \#Moyes
-http://t.co/rJB4K1fvZy
+
+1 
+& RT @J\_SPEKZ: Haha quality! \#Fellaini \#United \#Moyes http://t.co/rJB4K1fvZy
+& 
+
 \\ \hline
-2 & Stay woke brah! The Arsenal is about to make everything alright soon :) RT
-@JCphoenixx: So damn tired, So not sleepy.
+
+2
+& Stay woke brah! The Arsenal is about to make everything alright soon :) RT
+@JCphoenixx: So damn tired, So not sleepy. 
+& stay woke brah make alright
+
 \\ \hline
-3 & @abdul1haseeb My arsenal is not disappointing too :P 
+
+3 
+& @abdul1haseeb My arsenal is not disappointing too :P
+& not\_disappointing
+ 
 \\ \hline
-4 & @Arsenal didn't think i could respect @aaronramsey any more than i already
+
+4 
+& @Arsenal didn't think i could respect @aaronramsey any more than i already
 did, bute what a gentleman he is for not to celebrate that goal:) 
+& didnt not\_respect bute gentleman not\_celebrate not\_goal
+
 \\ \hline
-5 & OHHHHHH!!!!! SO CLOSE!!! Wilshere!!! Good Job Ramsey keeping that move alive
+
+5 
+& OHHHHHH!!!!! SO CLOSE!!! Wilshere!!! Good Job Ramsey keeping that move alive
+& ohhhhhh close good job keeping alive
+
 \\ \hline
-6 & Haha, you gotta agree, no one gets booed like Manchester United :D \#ZeDevilza
-\\
-\hline
+
+6 
+& Haha, you gotta agree, no one gets booed like Manchester United :D \#ZeDevilza
+& haha gotta agree not\_booed
+
+\\ \hline
 \end{tabular} 
 \end{center} 
-\caption{Przykładowa lista wpisów przed normalizacją}
-\label{tab:wpisy-przed-normalizacja}
+\caption{Wpisy przed i po normalizacji}
+\label{tab:wpisy-normalizacja}
 \end{table}
 
-
-Po przeprowadzeniu wszystkich prac związanych z normalizacją tekstu wpisy z
-powyższej tabeli prezentują się w następujący sposób:
-
-\begin{table}[ht!]  
-\begin{center}  
-\begin{tabular}{|r|p{140mm}|}
-\hline
-\multicolumn{2}{|c|}{Po normalizacji}
-\\ \hline
-1 & 
-\\ \hline
-2 & stay woke brah make alright
-\\ \hline
-3 & not\_disappointing
-\\ \hline
-4 & didnt not\_respect bute gentleman not\_celebrate not\_goal
-\\ \hline
-5 & ohhhhhh close good job keeping alive
-\\ \hline
-6 & haha gotta agree not\_booed
-\\
-\hline
-\end{tabular} 
-\end{center} 
-\caption{Lista wpisów poddanych normalizacji}
-\label{tab:wpisy-po-normalizacja}
-\end{table}
-
-Kolejne kroki, które przekształciły tweety do powyższej postaci to:
+Kolejne kroki, które przekształciły tweety do takiej postaci to:
 \begin{enumerate}
   \item Usunięcie skomentowanych retweetów.\\
   \texttt{Stay woke brah! The Arsenal is about to make everything
@@ -570,8 +608,8 @@ NEG & valence(t) <= AVG\_VALENCE \\
 
 gdzie:
 
-$AVG\_VALENCE$ jest średnią arytmetyczną wartości $valence$
-wszystkich wpisów. W moich badaniach wartość ta wyniosła $0.4786984978198536$.
+$AVG\_VALENCE$ jest średnią arytmetyczną wartości $valence$ wszystkich wpisów.
+%wszystkich wpisów. W moich badaniach wartość ta wyniosła $0.4786984978198536$.
 
 \subsubsection{Wykrywanie i obsługa negacji}
 \label{subsubsection:wykrywanieiobsluganegacji}
