@@ -1,10 +1,11 @@
 \chapter{Architektura, technologie, narzędzia}
 \label{chapter:architektura}
-W tym rozdziale opisuję krótko architekturę zbudowanego systemu.
-W sekcji \ref{section:architekturasystemu} opisuję ogólną architekturę,
-w \ref{section:zastosowanetechnologie} omawiam technologie, które zastosowałem,
-a w ostatniej części \ref{section:bibliotekiinarzedzia} wymieniam użyte
-biblioteki i narzędzia.
+W tym rozdziale opisuję architekturę zbudowanego systemu, wykorzystane
+technologie i użyte narzędzia.
+W sekcji \ref{section:architekturasystemu} opisana jest architektura, w
+\ref{section:zastosowanetechnologie} omówione są technologie, a w ostatniej
+części \ref{section:bibliotekiinarzedzia} wymienione są użyte biblioteki i
+narzędzia.
 \section{Architektura systemu}
 \label{section:architekturasystemu}
 
@@ -14,22 +15,22 @@ biblioteki i narzędzia.
 \caption{Architektura systemu}
 \label{image:architektura-systemu}
 \end{figure}
-Systemu została zbudowany na pojedynczej aplikacji Javowej,
-w której zostały zaimplementowane wszystkie potrzebne operacje.
+System została zbudowany jako pojedyncza aplikacji Javowa,
+w której zostały zaimplementowane wszystkie potrzebne mechanizmy.
 Aplikacja ta komunikuje się z pojedynczą bazą danych, w której zawarte
-są wszystkie wpisy potrzebne zarówno do zbierania danych jak i te, które są
+są wszystkie rekordy potrzebne zarówno do zbierania danych jak i te, które są
 wynikiem analiz. Dodatkowo odpowiada ona za komunikację z usługami w chmurze --
 czyli zbieraniem danych z Twittera i \textit{georeversingiem} lokacji z Open
 Street Map. Wszystkie analizy zebranych danych również zostały przeprowadzone
 przy użyciu aplikacji Javowej.
 
-Oprócz aplikacji Javowej wykorzystano także program Gephi, które wyniki zapisano
+Oprócz niej wykorzystano także program Gephi, którego wyniki zapisano
 do plików, a następnie przy użyciu wyżej wymienionej aplikacji przeparsowano i
 umieszczono w bazie danych.
 
 Wewnątrz aplikacji zaimplementowano między innymi moduł do zbierania danych z
 Twittera (na podstawie podanych słów kluczowych), moduł związany z
-przeprowadzeniem całego procesu analizy sentymentu -- od budowy słownika, do
+przeprowadzeniem całego procesu analizy sentymentu -- od budowy słownika do
 zanalizowania pojedynczych wpisów, moduł związany z analizą zebranych danych,
 a także kod odpowiedzialny za operacje związane z geolokacją.
 
@@ -81,10 +82,11 @@ Najważniejsze biblioteki, z których skorzystałem to:
 
 
 \section{Baza danych}
-Jak zostało już wspomniane użyta została baza danych PostgreSQL.
-Poniżej znajduje się rysunek \ref{image:schemat-bazy} przedstawiający schemat bazy. 
-W tych tabelach zostały zapisane wszystkie informacje potrzebne do pobierania
-danych z nasłuchiwanych meczów.
+Jak zostało już wspomniane użyty została system zarządzania bazą danych
+PostgreSQL.
+Na rysunku \ref{image:schemat-bazy} zaprezentowany jest schemat bazy danych. W
+przedstawionych tabelach zostały zapisane wszystkie informacje potrzebne do
+pobierania danych z nasłuchiwanych meczów.
 
 \begin{figure}[ht!]
 \centering

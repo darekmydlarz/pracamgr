@@ -10,12 +10,12 @@
 
 W niniejszym rozdziale znajduje się aktualny stan badań dotyczący 4 tematów,
 które składają się na tę pracę. Na początku opisana jest dziedzina sieci
-społecznych, czym ta nauka się zajmuje, w jakich przypadkach może zostać
-zastosowana.
+społecznych, a konkretnie czym ta nauka się zajmuje i w jakich przypadkach może
+zostać zastosowana.
 Następnie omówiona zostaje analiza sentymentu wypowiedzi i przetwarzanie tekstu
-celem ekstrakcji jego wydźwięku.
-Później skupiam się nad temat związanym z geolokacją i opisem, co można dzięki
-niej się dowiedzieć, a rozdział kończę omówieniem serwisu społecznościowego Twitter,
+pod kątem tej analizy.
+Później skupiam się nad geolokacją, opisem tego co można dzięki niej się
+dowiedzieć, a rozdział kończę omówieniem serwisu społecznościowego Twitter,
 który został wykorzystany jako źródło danych do analizy sieci społecznych.
 
 
@@ -37,9 +37,9 @@ badań \cite{SNDAtopics} to między innymi:
 \begin{itemize}
   \item statystyczna analiza sieci społecznych -- opisuje jak wygląda typowa sieć społeczna,
   badane są połączenia między jednostkami, aby sprawdzić czy posiadają kilka połączeń,
-  czy sieć zbudowana jest z hubów (osobniki mające dużą liczbę połączeń, 
-  łączące ze sobą różne części sieci społecznej; wokół nich koncentrują się inne
-  jednostki), czy może liczba połączeń rozłożona jest równomiernie,
+  czy sieć zbudowana jest z hubów\footnote{hub -- jednostka mająca dużą liczbę
+  połączeń, łącząca ze sobą różne części sieci społecznej; wokół niej
+  koncentrują się inne jednostki}, czy może liczba połączeń rozłożona jest równomiernie,
   
   \item odkrywanie grup/społeczności -- jest jednym z głównych tematów analizy 
   sieci społecznych; szukanie grup związane jest z klastrowaniem i odkrywaniem 
@@ -51,13 +51,13 @@ badań \cite{SNDAtopics} to między innymi:
   możliwe jest zaklasyfikowanie wierzchołków do wcześniej zdefiniowanych klas na
   podstawie podobieństwa z innymi jednostkami do tych klas już należących,
   
-  \item odnajdywanie ekspertów -- sieci społeczne mogą być używane jako narzędzia
+  \item odnajdowanie ekspertów -- sieci społeczne mogą być używane jako narzędzia
   w celu odkrywania ekspertów do danego zadania,
   
-  \item predykcja przyszłych połączeń wewnątrz sieci -- wiele badań skupia
-  się na statycznych połączeniach wierzchołków; w wielu sieciach jednak 
-  połączenia między węzłami są dynamiczne i badania te koncentrują się na 
-  tym by przewidzieć nowe połączenia wewnątrz sieci,
+  \item predykcja przyszłych połączeń wewnątrz sieci -- wiele badań skupia się
+  na statycznych połączeniach wierzchołków; w dużej liczbie sieci połączenia
+  między węzłami są jednak dynamiczne i badania te koncentrują się na tym by
+  przewidzieć nowe połączenia wewnątrz takich sieci,
   
   \item ekstrakcja wiedzy z sieci -- polega na eksploracji danych z mediów 
   społecznościowych i eksploracji tekstu z serwisów społecznościowych; 
@@ -65,7 +65,7 @@ badań \cite{SNDAtopics} to między innymi:
   złożonych i często zmieniających się danych wewnątrz sieci, a eksploracja tekstu
   może prowadzić do odkrycia nowych połączeń między węzłami i nowych
   charakterystyk je łączących; jej użycie wpływa na poprawę jakości
-  badanej sieci. 
+  badania danej sieci. 
 \end{itemize}
 
 
@@ -76,8 +76,7 @@ dziedzin życia. Mogą być zastosowane między innymi przez:
 \begin{itemize}
   \item służby porządkowe -- policja może przy ich pomocy odkrywać powiązania
   między przestępcami i dochodzić do zależności między grupami przestępczymi,
-  a także odkrywać, kogo dane grupy mogłyby zwerbować; odkrywać siatki 
-  przestępcze \cite{SNACriminal},
+  a także odkrywać, kogo dane grupy mogłyby zwerbować \cite{SNACriminal},
   
   \item badania naukowe -- odkrywanie naukowców zajmujących się podobnymi
   tematami celem opracowania bardziej kompletnych wyników lub podjęcia nowego,
@@ -114,10 +113,11 @@ Reprezentacja grafowa w naturalny sposób modeluje jednostki jako węzły i rela
 między nimi jako krawędzie. W zależności od rodzaju sieci graf taki może
 posiadać krawędzie skierowane lub nieskierowane oraz ważone lub nieważone.
 Krawędź skierowana reprezentuje kierunek, w którym przebiega komunikacja między
-węzłami. Krawędź ważona może reprezentować  liczbę wiadomości wymienionych
-między węzłami lub jakiś inny rodzaj wagi (oznaczania jednych krawędzi
-za bardziej istotne od innych). Przykładowy graf skierowany o krawędziach ważonych
-przedstawia rysunek \ref{image:graf-skierowany}.
+węzłami. Krawędź, która jest ważona zawiera w sobie dodatkową informację o
+jakości danego połączenia (reprezentuje na przykład liczbę wymienianych
+wiadmości między jednostkami czy odległość między nimi).
+Przykładowy graf skierowany o krawędziach ważonych przedstawia rysunek
+\ref{image:graf-skierowany}.
 
 \begin{figure}[ht!]
 \centering
@@ -146,8 +146,7 @@ przedstawia rysunek \ref{image:graf-skierowany}.
 \subsection{Miary i pojęcia grafowe}
 Zamodelowanie sieci społecznych w postaci grafów pozwala na skorzystanie z szeregu
 miar związanych z tą dziedziną wiedzy. Dzięki nim możliwe jest odnajdywanie cech
-charakterystycznych danej sieci. Najważniejsze miary pomagające odnaleźć najważniejsze
-węzły to \cite{estrada}: 
+charakterystycznych danej sieci. Najważniejsze miary to \cite{estrada}: 
 
 
 \subsubsection{Stopień wierzchołka}
@@ -217,7 +216,7 @@ Z tego wynika też, że mogą być skutecznym celem ataków.
 Znormalizowana odwrotność sumy odległości między węzłami w grafie.
   
 \begin{equation}
-CC(k) = \frac{\sum\limits_{j}d(k, j)}{N - 1}
+CC(k) = \frac{N - 1}{\sum\limits_{j}d(k, j)}
 \end{equation}  
 
 gdzie:
@@ -229,9 +228,10 @@ $N$ -- liczba wszystkich wierzchołków.
 \bigskip
 
 Wartość \textit{closeness} dla pojedynczego wierzchołka liczymy sumując
-odległości między nim a pozostałymi wierzchołkami,
-a następnie dzielimy tę wartość przez $N - 1$. Przykładowy graf \ref{image:closeness} i tabela 
-\ref{tab:closeness} z obliczeniami tej wielkości znajdują się poniżej.
+odległości między nim a pozostałymi wierzchołkami, a następnie wartość $N - 1$
+dzielimy przez wyliczoną przed chwilą sumę.
+Przykładowy graf \ref{image:closeness} i tabela \ref{tab:closeness} z
+obliczeniami tej wielkości znajdują się poniżej.
 
 
 \begin{figure}[ht!]
@@ -248,7 +248,8 @@ a następnie dzielimy tę wartość przez $N - 1$. Przykładowy graf \ref{image:
  \hline
  & \multicolumn{5}{c ||}{Wierzchołki} & Suma odległości & Bliskość (\textit{closeness}) \\
  \hline
- & A & B & C & D & E &  $S = \sum\limits_{j}d(i, j)$ & $CC(i) = \frac{S}{N - 1} = \frac{S}{4}$ \\
+ & A & B & C & D & E &  $S = \sum\limits_{j}d(i, j)$ & $CC(i) = \frac{N - 1}{S}
+ = \frac{4}{S}$ \\
 \hline
 A & 0 & 1 & 2 & 2 & 3 & 8 & 0.5 \\ 
 B & 1 & 0 & 1 & 1 & 1 & 4 & \textbf{1.0} \\ 
@@ -264,7 +265,7 @@ E & 3 & 1 & 2 & 1 & 0 & 7 & 0.57 \\
   
 Węzłem o najmniejszej sumie odległości do innych wierzchołków -- a co za tym idzie --
 o największej wartości bliskości jest węzeł $B$. Wynika z tego, że jest to
-wierzchołek najszybciej rozsyłający informacje wewnątrz sieci pomiędzy jej elementami. 
+wierzchołek najszybciej rozsyłający informacje wewnątrz sieci. 
 
 
 \clearpage
@@ -283,14 +284,13 @@ gdzie:
 
 $\lambda$ -- stała, równa największej wartości własnej macierzy sąsiedztwa grafu,
 
-\begin{math}
+\begin{equation}
  A_{kj} =
   \begin{cases}
    1, \text{gdy wierzchołki $k$ oraz $j$ mają wspólną krawędź} \\
    0, \text{w przeciwnym wypadku}
   \end{cases}
-
-\end{math}
+\end{equation}
 
 
 \bigskip
@@ -350,7 +350,8 @@ ciężkich obliczeń. Istnieją jednak prostsze metody, takie jak między innymi
 zaprezentowana w \cite{ComputingCommunitesInLargeNetworks} metoda oparta na
 losowych przejściach po grafie sieci społecznej (badająca podobieństow
 wierzchołków), czy metoda wykorzystująca 3 rodzaje metryk, których ważność jest
-balansowana celem odkrywania grup w \cite{FindingCommunityStructure}.
+balansowana celem odkrywania grup -- przedstawiona w
+\cite{FindingCommunityStructure}.
 Bardzo szybką metodą wyodrębniania grup jest również metoda zaprezentowana w
 \cite{FastUnfoldingOfCommunites} oparta na optymalizacji modularności
 wierzchołków. Tę metodę (zaimplementowaną w środowisku Gephi) zastosowałem w
@@ -370,7 +371,7 @@ swoich badaniach do odkrywania grup.
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% SENTYMENT
 \section{Sentyment wypowiedzi}
 Sentyment (inaczej wydźwięk wypowiedzi) to stosunek lub postawa wobec jakiejś
-sytuacji, zdarzenia. Badanie sentymentu niesie ze sobą bardzo dużo informacji.
+sytuacji, zdarzenia. Badanie sentymentu wnosi bardzo dużo informacji.
 Recenzje, komentarze i opinie odgrywają istotną rolę w ocenie satysfakcji z
 produktu lub usługi czy w badaniu reakcji na wydarzenia. Dane, które zawierają
 takie informacje mają bardzo wysoki potencjał w odkrywaniu wiedzy.
@@ -389,7 +390,7 @@ z obszarów jej użycia to \cite{pangLeeApplication}:
 może być użyte do poprawy błędów popełnionych przez użytkowników (gdy opinia
 jest pozytywna, a użytkownik omyłkowo wybrał niską ocenę) lub gdy opinie
 są ewidentnie stronnicze, mogą pomóc w faktycznej ocenie danego przedmiotu czy 
-usługi
+usługi,
 
 \item jako technologia wspomagająca większe systemy -- analiza sentymentu może
 być wsparciem dla systemów rekomendacji; na przykład może służyć do 
@@ -398,22 +399,22 @@ w systemach serwujących reklamy kontekstowe, wykrycie pozytywnego sentymentu
 na stronie może być powodem wyświetlenia jakiejś reklamy,
 a wykrycie negatywnego sentymentu powodem jej ukrycia;
 innym zastosowaniem jest ekstrakcja informacji, która może być
-polepszona poprzez pomijanie zdań subiektywnych, zawierających sentyment
+polepszona poprzez pomijanie zdań subiektywnych, zawierających sentyment,
 
 \item biznes -- poprzez dostarczenie informacji o odbiorze sprzedawanych produktów
 i serwowanych usług; gdy na przykład sprzedawany laptop ma negatywny odbiór
 stosując analizę sentymentu można to bardzo szybko wykryć i dowiedzieć się
 dlaczego zaistniała dana sytuacja; firma może badać swój ogólny odbiór
-w społeczeństwie -- szybko reagować na niezadowolenie klientów, lub wprowadzać
+w społeczeństwie -- szybko reagować na niezadowolenie klientów lub wprowadzać
 poprawki do swoich produktów; wykrywanie sentymentu może również pomóc
-przewidzieć wyniki sprzedaży
+przewidzieć wyniki sprzedaży,
 
-\item polityka -- użycie analizy sentymentu jest wręcz naturalne dla tego obszaru
-życia; partie czy politycy mogą badać odbiór społeczeństwa swoich programów
-i decyzji; badanie sentymentu może im na przykład wskazać w jakich miejscach,
-czy przy jakich postaciach się pokazać by zyskać sympatię wyborców; istotne
-również mogą być informacje na temat reakcji społeczeństwa na planowane
-przez rząd zmiany w prawie. 
+\item polityka -- użycie analizy sentymentu jest wręcz naturalne dla tego
+obszaru życia; partie czy politycy mogą badać odbiór przez społeczeństwo swoich
+programów i decyzji; badanie sentymentu może im na przykład wskazać w jakich
+miejscach, czy przy jakich postaciach się pokazać by zyskać sympatię wyborców;
+istotne również mogą być informacje na temat reakcji społeczeństwa na planowane
+przez rząd zmiany w prawie.
 \end{itemize}
 
 Krótko mówiąc największym zyskiem związanym z badaniem sentymentu jest możliwość
@@ -424,9 +425,10 @@ przedstawiają swoje opinie w Internecie, a przy pomocy analizy sentymentu bardz
 
 
 
-Badanie sentymentu nie jest trywialne. Związane jest bezpośrednio z 
-przetwarzaniem języka naturalnego, które niesie ze sobą szereg problemów
-\cite{ChallengeOfSpokenLanguage, NaturalLanguageProcessingFuture}:
+Badanie sentymentu nie jest trywialne. Związane jest bezpośrednio z
+przetwarzaniem języka naturalnego, z którym związane są między innymi
+następujące trudności \cite{ChallengeOfSpokenLanguage,
+NaturalLanguageProcessingFuture}:
 
 \begin{itemize}
   \item złożoność języka naturalnego -- bardzo trudnym zadaniem jest nauczenie 
@@ -447,8 +449,8 @@ przetwarzaniem języka naturalnego, które niesie ze sobą szereg problemów
   które mogą być niezrozumiałe dla automatycznego analizatora sentymentu,
 
   \item SPAM, szum -- wszystkie wpisy, które nie niosą ze sobą żadnej wartości
-  a pojawiają się w internetowych forach, serwisach z opiniami również stanowią
-  wyzwanie przy budowie narzędzia do analizy sentymentu.
+  a pojawiają się na internetowych forach czy serwisach z opiniami również
+  stanowią wyzwanie przy budowie narzędzia do analizy sentymentu.
 
 \end{itemize}
 
@@ -459,8 +461,8 @@ przetwarzaniem języka naturalnego, które niesie ze sobą szereg problemów
 \subsection{Zastosowanie sentymentu w mediach społecznościowych}
 Analiza sentymentu ma szerokie zastosowanie w analizie mediów społecznościowych.
 Możliwość oceny wydźwięku wypowiedzi zamieszczanych przez internautów w sieci
-prowadzi do interesujących wyników i na jej podstawie wyciągać można pomocne
-wnioski. Na jej podstawie przeprowadzono wiele badań. 
+prowadzi do interesujących wyników i na jej podstawie wyciągać można ciekawe.
+wnioski. Przy jej użyciu przeprowadzono wiele badań. 
 
 W \cite{AgileSentimentAnalysis}
 poprzez crawlowanie (z ang. przeszukiwanie stron i selekcjonowanie z nich
@@ -489,22 +491,26 @@ w sondażach jak i w opiniach w sieciach społecznościowych. To badanie równie
 było ciekawe z tego względu, iż kandydaci korzystali w czasie kampanii z
 Twittera czym wzmagali liczbę rozmów na ich temat.
 
-W opracowaniu \cite{AnalyzingSentimentialInfluenceOfPosts}
-została zbadana korelacja sentymentu wpisów na blogach z wpisami na portalach
-społecznościowych. Teksty zostały podzielone na dwie kategorie:
-publiczne (takie jak afery, newsy) oraz prywatne (wpisy, które nie są związane z
-publicznymi wydarzeniami). Okazało się, że sentyment wyrażany w postach
-publicznych miał bardzo duży wpływ na to jakie wpisy pojawiały się na Twitterze,
-czy w komentarzach. Co ciekawe, dużo większy wpływ na uwagę internautów miały
-wpisy o wydźwięku negatywnym. Tymczasem w tematach prywatnych sentyment
-odpowiedzi był raczej pozytywny. Gdy wpis miał pozytywny ton, odpowiadający
-również wyrażali się pozytywnie wspierając wyrażoną opinię.
-Takie wyniki wynikają z tego, że wpisy publiczne gromadząc wokół siebie większą
-liczbę ludzi powodują, iż nie są oni tak bardzo związani z tematem i wypowiadają
-się wtedy, gdy jakieś zło również ich dotyka. W tematach prywatnych bardzo
-często komentujący w jakiś sposób identyfikują się z autorem, wspierając go,
-podzielając jego opinie.
+W opracowaniu \cite{AnalyzingSentimentialInfluenceOfPosts} została zbadana
+korelacja sentymentu wpisów na blogach z wpisami na portalach społecznościowych.
+Teksty zostały podzielone na dwie kategorie:
+publiczne (takie jak afery, newsy) oraz prywatne (wydarzenia z życia autorów
+wpisów).
+Okazało się, że sentyment wyrażany w postach publicznych miał bardzo duży wpływ
+na to jakie wpisy pojawiały się na Twitterze czy w komentarzach. Co ciekawe,
+dużo większą uwagę internautów skupiały wpisy o wydźwięku negatywnym.
+Tymczasem we wpisach prywatnych sentyment odpowiedzi był raczej pozytywny. Gdy
+wpis miał pozytywny ton, odpowiadający również wyrażali się pozytywnie
+wspierając wyrażoną opinię.
+Otrzymane wyniki związane są z tym, że wpisy publiczne gromadzą
+wokół siebie większą liczbę ludzi, niekoniecznie blisko związaną z danym
+tematem. Ludzie ci wypowiadają się częściej wtedy, gdy pisze się o jakiejś
+krzywdzie, która dotyka również ich.
+We wpisach o charakterze prywatnym komentujący bardzo często w jakiś sposób
+identyfikują się z autorem, dlatego też w większości przypadków wspierają go i
+podzielają jego opinie.
 
+\begin{comment}
 Jeszcze inne zastosowanie analizy sentymentu zaprezentowano w
 \cite{CombiningSocialNetworkAnalysis}, gdzie zastosowano go do zbadania
 radykalizacji internautów przez sieci społeczne. W tym celu zbadano komentarze
@@ -519,19 +525,25 @@ okazało się, że dużo trudniej jest oceniać problemy społeczne. Autorzy
 zaproponowali skupienie się na czasownikach, jako rdzeniu swojej metody analizy
 sentymentu. Średnia dokładność tego podejścia wyniosła 65\%, co było wynikiem
 lepszym od dotychczasowych badań podobnych tematów.  
+\end{comment}
+
+
+
+
+
 
 \subsection{Reprezentacja tekstu w przetwarzaniu języka naturalnego}
 Zanim zacznie się badać sentyment należy w jakiś sposób reprezentować tekst w
 komputerze. Wymienić można kilka podejść, między innymi:
 \begin{itemize}
   \item \textit{bag of words} \cite{BOWordsAndBOConcepts} -- najpopularniejszy
-  sposób reprezentacji tekstu, polega na podzieleniu tekstu na termy,
-  niezależnie od tego czy powinny występować razem, czy nie, nie zachowuje
+  sposób reprezentacji tekstu, polega na podzieleniu tekstu na termy (napisy),
+  niezależnie od tego czy powinny występować razem czy nie; nie zachowuje
   żadnego połączenia między wyrazami w tekście; 
   
   na przykład tekst 
-  \texttt{nawet nie powiedział do widzenia} jest reprezentowany w postaci:
-  \texttt{nawet, nie, powiedział, do, widzenia},
+  \texttt{,,nawet nie powiedział do widzenia''} jest reprezentowany w postaci:
+  \texttt{\{,,nawet'', ,,nie'', ,,powiedział'', ,,do'', ,,widzenia''\}},
   
   
   \item \textit{bag of concepts} \cite{BOWordsAndBOConcepts} -- rozwinięcie idei
@@ -542,7 +554,7 @@ komputerze. Wymienić można kilka podejść, między innymi:
   przez słowniki, listy konceptów, i tym podobne,
   
   \item reprezentacja wektorowa (ang. \textit{vector space model})
-  \cite{VectorSpaceModel} -- oparte jest na reprezentacji dokumentu tekstowego w
+  \cite{VectorSpaceModel} -- reprezentuje dokument tekstowy w
   oparciu o reprezentację wektorową dokumentu; polega na tym, że dowolny
   dokument reprezentowany jest w postaci wektora częstości występowania słów
   kluczowych; słowa kluczowe tworzą bazę, a zbiór dokumentów tekstowych
@@ -567,21 +579,21 @@ Ze względu na prostotę i małą długość tekstów do analizy zdecydowałem s
 na reprezentowanie i przetwarzanie tekstu w postaci \textit{bag of words}.
 
 
+
+
+
+
 \subsection{Techniki badania sentymentu}
 Podejść do badania sentymentu jest wiele. Poniżej przedstawione są te, które
 najlepiej nadają się do badania sentymentu na Twitterze (w związku z tym, że to
-ten serwis jest źródłem danych w tej pracy). Zostały one opisane w artykule 
-\cite{sentimentTechniques}. Oprócz nich przedstawię także metodę opracowaną
-przez Alexandra Paka i Patricka Paroubek'a \cite{pakParoubekSentiment}, którą 
-zastosowałem w swoich badaniach i rozszerzyłem o wykrywanie i przetwarzanie 
-negacji. 
+ten serwis jest źródłem danych w tej pracy).
 
 Techniki badania sentymentu można podzielić na dwie klasy: oparte o słowniki
 oraz bazujące na klasyfikatorach. Te pierwsze bazują na zbudowanych wcześcniej
 ręcznie bądź mechanicznie listach słów z określonym sentymentem,
 a te drugie oceniają tekst używając technik maszynowego uczenia się.
 
-Niektóre ze sposobów oceny sentymentu to:
+Niektóre ze sposobów oceny sentymentu to \cite{sentimentTechniques}:
 
 \subsubsection{Podejście oparte na słowniku (ang. \textit{lexicon based approach})}
 Podejście polega na zastosowaniu słownika z wyrazami oznaczonymi jako pozytywne
@@ -640,7 +652,7 @@ Technika estymacji rozkładu prawdopodobieństwa. Główna zasada polega na tym,
 że jeśli dane nie są dobrze znane, rozkład powinien być jak najbardziej jednolity,
 to znaczy mieć maksymalną entropię. Do tej techniki mogą dochodzić ograniczenia,
 które pozwalają by rozkład nie był maksymalnie jednolity. Ograniczenia
-takie mogą pochodzić z oznaczonych już danych treningów i reprezentowane jako
+takie mogą pochodzić z oznaczonych już danych treningowych i reprezentowane jako
 oczekiwane wartości wybranych cech (wyrazów). 
 
 Na przykład w jakimś przypadku
@@ -659,13 +671,11 @@ do przeuczenia.
 
 
 \subsubsection{Metoda wektorów nośnych (ang. \textit{support vector machines})}
-Support vector machines to podejście stosujące duży margines między klasami.
+\textit{Support vector machines} to podejście stosujące duży margines między
+klasami.
 Główna idea polega na znalezieniu hiperpłaszczyzny (patrz rys. \ref{image:svm}),
 która podzieli teksty na pozytywne i negatywne z marginesem pomiędzy klasami tak
 dużym jak to tylko możliwe.
-Technika ta zbudowana jest na zasadzie strukturalnej minimalizacji ryzyka (ang.
-\textit{structural risk minimization principle}). Celem jest znalezienie funkcji
-$h$, dla której błąd klasyfikacji losowego tekstu będzie jak najmniejszy.
 
 
 \begin{figure}[ht!]
@@ -677,9 +687,12 @@ $h$, dla której błąd klasyfikacji losowego tekstu będzie jak najmniejszy.
 
 
 
+Technika ta zbudowana jest na zasadzie strukturalnej minimalizacji ryzyka (ang.
+\textit{structural risk minimization principle}). Celem jest znalezienie funkcji
+$h$, dla której błąd klasyfikacji losowego tekstu będzie jak najmniejszy.
 Można ją opisać wzorem:
 \begin{equation}
-\vec{h} = \sum\limits_{i}\alpha_iC_i\vec{t_j}, \quad \alpha_i \geq 0
+\vec{h} = \sum\limits_{i}\alpha_i C_i \vec{t_j}, \quad \alpha_i \geq 0
 \end{equation}
 
 gdzie:
@@ -688,7 +701,7 @@ $\vec{h}$ -- szukana hiperpłaszczyzna,
 
 $\vec{t_j}$ -- badany tekst (pojedynczy wpis),
 
-$C_j \in \{1, -1\}$ -- klasy, do których może trafić wpis (pozytywna/negatywna),
+$C_i \in \{1, -1\}$ -- klasy, do których może trafić wpis (pozytywna/negatywna),
 
 $\alpha_i$ -- wartość, która może być znaleziona przez rozwiązanie problemu
 podwójnej optymalizacji.
@@ -712,15 +725,15 @@ to niestety jest czarną skrzynką. Trudne jest zbadanie natury klasyfikacji i
 zidentyfikowanie, które słowa są dla niej istotne. Jest to jedna z głównych wad
 korzystania z tej techniki do klasyfikacji tekstów. 
 
-\subsubsection{Metoda Alexandra Paka i Patricka Paroubek'a}
+\subsubsection{Metoda Alexandra Paka i Patricka Paroubek'a \cite{pakParoubekSentiment}}
 \label{subsubsection:pakandparoubek}
 Technika jest odpowiedzią na problemy związane z brakiem odpowiedniego słownika
-do oceny sentymentu. Została opracowana z uwzględnieniem Twittera i korzysta
-w związku z tym z pewnych założeń. Skoro nie ma żadnego idealnego słownika
-ze słowami oznaczonymi jako pozytywne lub negatywne, to trzeba go mechanicznie
+do oceny sentymentu. Została opracowana z uwzględnieniem Twittera i korzysta w
+związku z tym z pewnych założeń. Skoro nie ma żadnego idealnego słownika ze
+słowami oznaczonymi jako pozytywne lub negatywne, to trzeba go mechanicznie
 zbudować. Do budowy takiego leksykonu zostały wykorzystane wpisy na Twitterze,
-które zawierają emotikony podzielone na pozytywne (np. \texttt{:)}) i 
-negatywne (np. \texttt{;(}). 
+które zawierają emotikony podzielone na pozytywne (np. \texttt{:)}) i negatywne
+(np. \texttt{;(}).
 
 Następnie spośród ściągniętych wpisów z Twittera analizowane są te,
 które zawierają odpowiednie emotikony i zliczana jest liczba wystąpień
@@ -792,7 +805,7 @@ Zastosowanie geolokacji może być bardzo szerokie, między innymi:
 \begin{itemize}
   \item dostarczanie lokalnych wiadomości,
   
-  \item dystrybucja treści cyfrowych -- może być np. blokowana możliwość kupna, 
+  \item dystrybucja treści cyfrowych -- może być np. blokowana możliwość kupna 
   dla niektórych lokalizacji,
   
   \item wyszukiwanie lokalnych usług, przedsiębiorstw,
@@ -800,8 +813,8 @@ Zastosowanie geolokacji może być bardzo szerokie, między innymi:
   \item wyświetlanie zlokalizowanych reklam,
   
   \item zapobieganie nadużyciom zakupowym -- sprawdzenie geolokacji
-  klienta sklepu internetowego i porównanie jej z danymi z karty kredytowej,
-  w celu ochrony osób, którym na przykład taka karta została skradziona,
+  klienta sklepu internetowego i porównanie jej z danymi z karty kredytowej
+  w celu ochrony osób, którym taka karta mogła zostać skradziona,
   
   \item prezentowanie różnych treści na stronach w zależności od lokalnego
   prawego (np. ukrywanie treści zabronionych w danym miejscu).
@@ -810,8 +823,8 @@ W szczególności w przypadku sieci społecznych geolokacja może być pomocna d
 ustalenia miejsca przebywania danych grup i może prowadzić
 do uzupełnienia zebranych danych o kolejne, wzbogacające analizę danej społeczności,
 pozwalające na wyciągnięcie bogatszych wniosków. Pomocnym może być na przykład
-zbadanie reakcji społeczeństwa w różnych regionach kraju na planowane zmiany
-w prawie przez rząd -- i może to prowadzić albo do ich wprowadzenia albo wycofania.
+zbadanie reakcji społeczeństwa w różnych regionach kraju na planowane
+przez rząd zmiany w prawie -- może to na przykład prowadzić do ich wycofania.
 
 Jako główne zalety stosowania geolokacji \cite{lostInGeolocation} z punktu
 widzenia użytkowników telefonów komórkowych i sieci społecznych wymienia się
@@ -880,7 +893,7 @@ Podstawowe pojęcia związane z tym serwisem to (oznaczone na rysunku \ref{image
   
   \item Podanie wpisu dalej (ang. \textit{retweet}) -- oznacza przekazanie 
   jakiegoś wpisu dalej; jeśli użytkownik A użyje funkcji
-  retweet dla dowolnego wpisu w serwisie, wówczas osoby śledzące użytkownika A, 
+  retweet dla dowolnego wpisu w serwisie, wówczas osoby śledzące użytkownika A
   również zobaczą ten wpis na swojej stronie głównej.
   
   \item Wyraz z symbolem kratki (ang. \textit{hashtag}) -- użycie symbolu \# 
@@ -894,23 +907,26 @@ Podstawowe pojęcia związane z tym serwisem to (oznaczone na rysunku \ref{image
 \end{enumerate} 
 
 \subsection{Twitter jako źródło danych}
+\label{subsection:twitterjakozrodlodanych}
 Twitter używany jest przez 271 milionów użytkowników wysyłających 500 
-milionów wpisów dziennie\footnote{www.about.twitter.com/company}.
+milionów wpisów dziennie\footnote{www.about.twitter.com/company -- na dzień 16
+lipca 2014 r.}.
 Szybkość komunikacji i łatwość publikacji wpisów
 sprawia, że staje się medium komunikacyjnym dla wielu grup ludzi.
-Odgrywał ważną rolę w wydarzeniach społeczno-politycznych,
-takich jak Arabska Wiosna w 2010, czy okupowanie Wall Street w 2012 
+Odgrywał ważną rolę w wydarzeniach społeczno-politycznych
+takich jak Arabska Wiosna w 2010 czy okupowanie Wall Street w 2012 
 \cite{TwitterDataAnalytics2013}.
 Serwis ten jest również bardzo często wykorzystywany do komentowania wydarzeń
 sportowych. W trakcie mundialu w Brazylii użytkownicy wysłali 672 miliony
-wpisów z tagiem \#WorldCup \cite{TwitterStatsWorldCup}.
+wpisów z tagiem \textit{\#WorldCup} \cite{TwitterStatsWorldCup}.
 
 Popularność Twittera jako źródła informacji doprowadziła do rozwoju badań
-w różnych dziedzinach. Pomoc humanitarna i w przypadku klęsk żywiołowych
-jest jedną z domen, gdzie informacje z Twittera są używane w celu zapewnienia
-odpowiedniej pomocy. Naukowcy wykorzystują go by przewidzieć występowanie trzęsień
-ziemi i określić odpowiednich użytkowników, których śledzenie dostarcza informacji
-związanych z katastrofą \cite{TwitterDataAnalytics2013}.
+w różnych dziedzinach. Pomoc humanitarna i w klęskach żywiołowych jest jedną z
+takich dziedzin, w których informacje z Twittera są używane w celu
+zapewnienia odpowiedniej pomocy. Naukowcy wykorzystują go by przewidzieć występowanie trzęsień
+ziemi i śledzić odpowiednich użytkowników, dzięki którym można na
+bieżąco otrzymywać informacje związane z katastrofą
+\cite{TwitterDataAnalytics2013}.
 
 \subsubsection{Sposób dostępu do danych}
 Dostęp do danych z Twittera możemy uzyskać na dwa sposoby.
@@ -922,7 +938,7 @@ kluczowych, określenia języka wpisów, lokalizacji i tym podobnych.
 
 Drugim sposobem zbierania danych z Twittera jest REST 
 API\footnote{www.dev.twitter.com/rest/public}. Służy ono do wykonywania
-zapytań RESTowych, za pomocą których możliwe jest pobranie listy wpisów
+zapytań restowych, za pomocą których możliwe jest pobranie listy wpisów
 danego użytkownika, listy jego znajomych, listy wpisów z zadanymi słowami
 kluczowymi i tym podobne. W przeciwieństwie do poprzedniej metody REST API nie nasłuchuje
 wpisów na żywo, a jedynie zwraca dane dostępne w momencie wysłania żądania.
@@ -935,7 +951,7 @@ słów kluczowych w rezultacie zwraca jedynie wyniki z ostatnich
 %The Search API is not complete index of all Tweets, but instead an index of 
 %recent Tweets. At the moment that index includes between 6-9 days of Tweets. 
 To API bardziej przydaje się więc do tworzenia aplikacji
-klienckich dla Twittera niż do zbierania danych (konsumowania ich na żywo),
+klienckich do Twittera niż do zbierania danych (konsumowania ich na żywo),
 gdzie lepszym rozwiązaniem jest Streaming API.
 
 

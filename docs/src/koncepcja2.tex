@@ -1,88 +1,199 @@
 \chapter{Koncepcja powiązania analizy sentymentu i geolokacji w badaniu
 zachowań użytkowników sieci społecznościowych.}
+\label{chapter:koncepcjarozwiazania}
 
 W tym rozdziale opisany jest sposób realizacji celów mojej pracy magisterskiej
 -- czyli sposób powiązania ze sobą analizy sentymentu i geolokacji w kontekście
-badania zachowań użytkowników sieci społecznościowych.
+badania zachowań użytkowników sieci społecznościowych. W podrozdziale
+\ref{section:modelsystemu} zaprezentowany został model systemu z uwzględnieniem
+przetwarzania wstępnego w \ref{subsection:zbieraniedanych}, modelu analizy
+sentymentu w \ref{subsection:modelanalizysentymentu}, modelu grup społecznych w
+\ref{subsection:modelgrupirelacjispolecznych} i modelu geolokacji w
+\ref{subsection:modelgeolokacji}. Następnie przedstawione są wielkości
+wykorzystywane w eskperymentach w \ref{section:wielkosciwykorzystywane}, a na
+końcu szczegółowo została opisana koncepcja i algorytm analizy sentymentu w
+\ref{section:koncepcjaialgorytmanalizysentymentu}.
 
 
 
-
+% =============================================================================
 \section{Model systemu}
+\label{section:modelsystemu}
+% =============================================================================
+Ogólny model systemu został przedstawiony na rysunku \ref{image:model-systemu}.
 
-\subsection{Przetwarzanie wstępne}
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=160mm]{img/gruby-model.png}
+\caption{Ogólny model systemu}
+\label{image:model-systemu}
+\end{figure}
+
+
+Można go podzielić na trzy następujące części:
+\begin{enumerate}
+  \item Zbieranie danych.
+  \item Przetwarzanie i uzupełnianie danych.
+  \item Zdobywanie wiedzy z zebranych i przetworzonych danych.
+\end{enumerate}
+
+
+
+\clearpage
+\subsection{Zbieranie danych}
+\label{subsection:zbieraniedanych}
+Zbieranie danych jest pierwszym elementem składowym całego systemu.
+Jego koncepcje przedstawia rysunek \ref{image:zbieranie-danych}.
+Jest to bardzo ważny składnik systemu. Aby móc przeprowadzić jakiekolwiek
+analizy potrzeba najpierw zebrać dane.
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=160mm]{img/zbieranie-danych.png}
+\caption{Zbieranie danych}
+\label{image:zbieranie-danych}
+\end{figure}
+
+
+Zbieranie danych z serwisu Twitter odbyło się przy pomocy wspomnianego w sekcji
+\ref{subsection:twitterjakozrodlodanych} Twitter Streaming API. Napisany został
+program w Javie, który nasłuchiwał w trakcie każdego śledzonego meczu wpisów w
+języku angielskim, które zawierały odpowiednie słowa kluczowe. Były nimi
+przygotowane wcześniej słowa związane z danym spotkaniem: nazwiska i przydomki
+piłkarzy, menadżerów, nazwy i przydomki klubów, nazwa stadionu czy nazwisko
+sędziego. W taki sposób uzyskiwano tweety, które można było powiązać z
+konkretnym meczem.
+
+Program do nasłuchiwania uruchamiany jest na czas trwania meczu z pewnym
+marginesem przed i po spotkaniu. Jest to o tyle ważne, że udostępnione API służy
+tylko do konsumowania wpisów na żywo. Pobranie tych samych wpisów już po danym
+wydarzeniu byłoby dużo bardziej skomplikowane. Program otrzymuje nie więcej niż
+1\% wszystkich wpisów w danym momencie na Twitterze \footnote{Jeśli w danym
+momencie na Twitterze jest 1000 wpisów, z czego 10 z podanymi słowami
+kluczowymi, wówczas program otrzyma wszystkie 10 wpisów. Jeśli z określonymi
+słowami kluczowymi byłoby np. 100 z 1000 wpisów, wówczas program nadal
+otrzymałby tylko 10 z nich.}. Każdemu wpisowi nadawany jest identyfikator meczu (wprowadzonego
+wcześniej do bazy danych) i w takiej postaci jest on zapisywany do bazy.
+
+W ten sposób zbieranie są dane z Twittera. Podejście to pozwala na elastyczną
+wymianę słów kluczowych do nasłuchiwania, gdyż program na wejściu potrzebuje
+jedynie identyfikator meczu, do którego już są przypisane słowa kluczowe.
+
+
+
 
 \subsection{Model analizy sentymentu}
+\label{subsection:modelanalizysentymentu}
 
-\subsubsection{Wykrywanie zwolenników i przeciwników klubu}
-\label{subsection:wykrywanie-zwolennikow}
-Proces oznaczania użytkowników jako sympatyków i przeciwników drużyny przebiegał
-w następujący sposób:
-\begin{itemize}
-  \item dla każdego użytkownika zliczono jego wpisy w meczach każdej z badanych 
-  drużyn,
-  \item jeśli w meczach drużyny A dla danego użytkownika przeważała liczba 
-  wpisów pozytywnych, wówczas oznaczano takiego kibica jako zwolennika drużyny A,
-  \item jeśli natomiast przeważała liczba wpisów negatywnych, wówczas taki kibic
-  traktowany był jako przeciwnik danej drużyny.  
-\end{itemize} 
+Analiza sentymentu należy do jednego z elementów drugiej części systemu.
+W tej części zebrane uprzednio dane były przetwarzane między innymi pod kątem
+oceny ich sentymentu. Proces ten przebiegał według schematu
+zaprezentowanego na rysunku \ref{image:model-analizy-sentymentu}.
 
-
-
-\subsection{Model grup społecznych}
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=160mm]{img/model-analizy-sentymentu.png}
+\caption{Model analizy sentymentu}
+\label{image:model-analizy-sentymentu}
+\end{figure}
 
 
-\subsubsection{Wykrywanie grup}
- \label{section:koncepcja-wykrywaniegrup}
-% gephi, modularity
-Do wykrywania grup wśród sieci społecznych skorzystałem z narzędzia
-otwartoźródłowego narzędzia \textit{Gephi} wspomagającego analizę grafową, w
-którym został zaimplementowany algorytm przedstawiony w artykule
-\cite{blondel2008fuc}. Przy jego użyciu konkretne węzły zostały podzielone
-na grupy, nad którymi przeprowadzałem późniejsze analizy.
+Dla każego tweeta w bazie obliczana była jego wartość \textit{valence}.
+Aby do tego doszło tweet był wcześniej odpowiednio oczyszczany z wszystkich
+elementów, które mogły zakłócić wyliczenie tej wartości. Proces przebiegał
+zgodnie z pomysłem i algorytmem panów Pak i Paroubek (omówiony w sekcji
+\ref{subsubsection:pakandparoubek}), a szczegóły jego działania wraz z
+zastosowaną przez ze mnie modyfikacją (polegającą na dodaniu wykrywania negacji)
+zostały opisane w sekcji \ref{section:koncepcjaialgorytmanalizysentymentu}.
 
-Grupy zostały zbudowane na podstawie relacji \textit{reply}
-stworzonej z zebranych wpisów. Na podstawie odpowiedzi między różnymi
-użytkownikami budowany był model sieci społecznej.
-W każdym kolejnym meczu przeprowadzono badanie grup wśród użytkowników.
-Uzyskane wyniki podzielono na trzy ,,koszyki''. W pierwszym znalazły się grupy 
-3 lub 4 osobowe. W~drugim koszyku grupy mające od 5 do 9 osób, a w trzecim koszyku
-większe grupy. 
+Po wyliczeniu wartości \textit{valence} dla zebranych tweetów obliczona została
+jego średnia wartość i wpisy o wartości wyższej od średniej zostały oznaczone
+jako pozytywne, zaś o wartości niższej jako negatywne (zgodnie z pomysłem Paka
+i Paroubeka).
+
+Oznaczenie wartości sentymentu zebranych wpisów pozwoliło na przeprowadzenie
+ciekawych eksperymentów opisanych w rozdziale \ref{chapter:eksperymenty}.
+
+
+\subsection{Model grup i relacji społecznych}
+\label{subsection:modelgrupirelacjispolecznych}
+Drugim ważnym elementem przetwarzania zebranych danych było skupienie się na
+odkrywaniu relacji między użytkownikami Twittera i odnajdywaniu grup, które
+wspólnie tworzą. Pomaga to w lepszym zrozumieniu zachowań użytkowników i
+możliwości osobnej analizy różnych grup. Schemat odkrywania zachowań społecznych
+został przedstawiony na rysunku \ref{image:odkrywanie-relacji}.
+
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=160mm]{img/odkrywanie-relacji.png}
+\caption{Model grup i relacji społecznych}
+\label{image:odkrywanie-relacji}
+\end{figure}
+
+
+Sieć użytkowników zamodelowana jest w postaci grafu, gdzie użytkownicy to
+wierzchołki, a wpisy będące retweetami lub odpowiedziami są krawędziami
+(skierowanymi) tego grafu. Relacje te są przechowywane bezpośrednio w każdym z
+tweetów w polach \texttt{in\_reply\_to\_user\_id} oraz
+\texttt{retweeted\_user\_id}.
+Do konkretnych eksperymentów dane te były odpowiednio agregowane (np. zliczano
+liczbę powiązań między wierzchołkami i traktowano je jako pojedynczą relację w
+jakiejś jednostce czasu -- na przykład w pojedynczym meczu).
+
+Odkrywanie grup zostało przeprowadzone przy pomocy algorytmu opisanego w
+\cite{FastUnfoldingOfCommunites}, który został zaimplementowany w środowisku
+Gephi. Wyniki klasyfikacji wierzchołków do odpowiednich grup zostały następnie
+zapisane w bazie danych.
+
 
 \subsection{Model geolokacji}
+\label{subsection:modelgeolokacji}
+Ostatnim elementem przetwarzania zebranych danych było przetwarzanie związane z
+danymi geolokacyjnymi. Przechowywane w bazie tweety posiadają jedynie współrzędne
+określające miejsce, z którego zostały wysłane (oczywiście niewielki odsetek
+tweetów z całego zbioru). Schemat przetwarzania tych danych prezentuje rysunek
+\ref{image:odkrywanie-geolokacji}.
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=160mm]{img/odkrywanie-geolokacji.png}
+\caption{Model geolokacji}
+\label{image:odkrywanie-geolokacji}
+\end{figure}
+
+Przy pomocy serwisu \textit{Open Street Map}\footnote{www.openstreetmap.com} i
+skorzystaniu z API służącego do georeversingu dla każdego tweeta posiadającego
+współrzędne pobrano informacje szczegółowe na temat miejsca, na które te
+współrzędne wskazują. W ten sposób uzyskano takie dane jak: kraj,
+stan/województwo (ang. \textit{state}), powiat/hrabstwo (ang. \textit{county})
+oraz miasto (ang. \textit{city}).
+
+Dodatkowo zaprezentowano w pracy mapy cieplne uwidaczniające częstość wpisów z
+różnych lokalizacji na całym świecie. Do tego zadania skorzystano z usługi
+\textit{CartoDB}\footnote{www.cartodb.com}, za pomocą której dostarczając dane
+z geolokacją można otrzymać takiego rodzaju mapy.
 
 
 
-\subsection{Badanie odległości między użytkownikami}
-\label{subsection:badanieodleglosci}
-TODO napisać trochę więcej.
 
-Badanie odległosci między użytkownikami odbyło się na podstawie odpowiedzi z
-geolokacją -- retweety nie zawierają informacji o położeniu użytkownika.
-Spośród tych użytkowników, którzy pisali z geolokacją zostało zliczone ilu z
-nich się ze sobą komunikowało w zależności od wzajemnej odległości.
+% ==============================================================================
+\section{Wielkości i techniki wykorzystywane w eksperymentach}
+\label{section:wielkosciwykorzystywane}
+% ==============================================================================
+W tej sekcji zaprezentowane są wielkości i techniki, które zostały zastosowane w
+zaprezentowanych w rozdziale \ref{chapter:eksperymenty} eksperymentach.
+Przedstawione są one z podziałem na moduł, którego dotyczą.
 
+\subsection{Analiza sentymentu}
+Użyte w eksperymentach użyte miary i techniki związane z analizą sentymentu.
 
-
-
-
-
-\subsection{Badanie odległości od stadionu}
-\label{subsection:badanieodleglosciodstadionu}
-TODO opisać 
-
-
-
-
-
-
-
-\section{Wielkości wykorzystywane w eksperymentach}
-
-
-\subsection{Ocena pozytywności wpisu}
-W kilku miejscach została zastosowana miara pozytywności wpisu.
-Została ona wyliczona przy pomocy następującego równania:
+\subsubsection{Ocena pozytywności wpisów}
+\label{subsection:ocenapozytywnosci}
+Miara pozytywności wpisów określa ich sumaryczny wydźwięk. Jest to stosunek
+liczby wpisów pozytywnych do sumy liczby wpisów pozytywnych i negatywnych. Gdy
+wartość ta jest większa niż 50\% można mówić o wydźwięku pozytywnym, a gdy
+mniejsza -- o negatywnym. Wartość tę określa się poniższym wzorem: 
 
 \begin{equation}
 \label{equation:pozytywnosc}
@@ -97,10 +208,54 @@ $|neg|$ -- liczba wpisów oznaczonych jako negatywne.
 
 
 
-\subsection{Badanie podobieństwa grup}
-Badanie podobieństwa oparte było o analizę kolejnych wydarzeń. 
-Polegało na zliczeniu ile wierzchołków powtarza się w kolejnych meczach.
-Oparte zostało o niniejsze równanie:
+\subsubsection{Wykrywanie zwolenników i przeciwników klubu}
+\label{subsubsection:wykrywaniezwolennikow}
+
+Dzięki oznaczeniu wszystkich zebranych wpisów odpowiednim sentymentem
+(pozytwnym lub negatywnym) możliwe były wykorzystanie tych informacji do
+odkrywania nowej wiedzy. Sentyment ten umożliwił odkrywanie wśród wszystkich
+autorów wpisów ich preferencji klubowych -- poprzez zliczanie liczby wpisów
+pozytywnych i negatywnych w meczach danego zespołu.
+
+Proces oznaczania użytkowników jako sympatyków i przeciwników drużyny przebiegał
+w następujący sposób:
+\begin{itemize}
+  \item dla każdego użytkownika zliczono jego wpisy w meczach każdej z badanych 
+  drużyn,
+  \item jeśli w meczach drużyny A dla danego użytkownika przeważała liczba 
+  wpisów pozytywnych, wówczas oznaczano takiego kibica jako zwolennika drużyny A,
+  \item jeśli natomiast przeważała liczba wpisów negatywnych, wówczas taki kibic
+  traktowany był jako przeciwnik danej drużyny.  
+\end{itemize} 
+
+Zastosowanie tej techniki pozwala na przeprowadzenie eksperymentów z podziałem
+na zwolenników i przeciwników danego klubu i zbadanie ich zachowań w zależności
+od sympatii.
+
+
+
+
+\subsection{Relacje między użytkownikami i grupy}
+\label{subsection:miary-relacje}
+W tej sekcji przedstawione zostały miary i techniki użyte podczas eksperymentów
+związanych z odkrywaniem relacji i grup między użytkownikami.
+
+\subsubsection{Wykrywanie grup}
+\label{subsubsection:koncepcja-wykrywaniegrup}
+% gephi, modularity
+Do wykrywania grup wśród sieci społecznych zastosowałem model opisany w sekcji
+\ref{subsection:modelgrupirelacjispolecznych}. Znalezione w ten sposób grupy
+użytkowników poddane zostały analizie -- z podziałem na kolejne mecze.
+Grupy te zostały zagregowane w trzy przedziały: od 3 do 4 osób, od 5 do 9 osób
+oraz więcej niż 9 osób. Na takich zagregowanych grupach został przeprowadzony
+eksperyment ich podobieństwa między kolejnymi meczami.
+
+\subsubsection{Badanie podobieństwa grup}
+\label{subsection:badaniepodobienstwagrup}
+Tak jak wspomniano wyżej badanie podobieństwa oparte było o analizę kolejnych
+wydarzeń (meczów).
+Polegało na zliczeniu ile wierzchołków powtarza się w kolejnych spotkaniach.
+Oparte zostało o poniższy wzór:
 \begin{equation}
 S = \frac{|V_1 \cap V_2|}{|V_1|}
 \end{equation}  
@@ -108,7 +263,7 @@ gdzie:
 
 $V_1$ -- zbiór wierzchołków w pierwszym wydarzeniu,
 
-$V_2$ -- zbiór wierzchołków w drugim wydarzeniu.
+$V_2$ -- zbiór wierzchołków w następnym wydarzeniu.
 
 Krótko mówiąc podobieństwo to iloraz liczby wspólnych wierzchołków między 
 wydarzeniami a liczby wierzchołków w pierwszym z nich.
@@ -119,6 +274,60 @@ wydarzeniami a liczby wierzchołków w pierwszym z nich.
 
 
 
+\subsection{Geolokacja}
+W niniejszej sekcji opisuję wielkości, które zostały zastosowane podczas
+przeprowadzania eksperymentów, w których najważniejszym elementem było położenie
+fizyczne, czyli współrzędne przypisane do wpisu.
+
+\subsubsection{Zmierzenie odległości między użytkownikami}
+\label{subsubsection:zmierzenieodleglosci}
+
+
+Badanie odległości między użytkownikami odbyło się na podstawie odpowiedzi z
+geolokacją -- czyli tweetów zawierających dane o współrzędnych miejsca ich
+wysłania oraz będących odpowiedziami (mającymi niepuste pole
+\texttt{in\_reply\_to\_user\_id}). Wpisy typu retweet nie zawierają informacji
+o położeniu użytkownika (taka informacja nie jest rejestrowana przez Twitter).
+
+Zmierzenie odległości między użytkownikami odbyło się przy pomocy rozszerzenia
+PostGIS\footnote{www.postgis.net} do bazy
+PostgreSQL\footnote{www.postgresql.org}, z pomocą którego można obliczyć
+odległość w metrach między dwoma punktami geograficznymi.
+
+Cały proces przebiegał według następującego schematu:
+\begin{itemize}
+  \item pobierz wszystkie wpisy będące odpowiedziami (\textit{reply}) i
+  zawierające współrzędne geograficzne,
+  \item pogrupuj użytkowników w pary według tego, kto z kim się komunikował,
+  \item wylicz średnie położenie każdego z użytkowników dla każdej konwersacji*,
+  \item wylicz przy pomocy PostGIS-a odległość między nimi.
+\end{itemize}
+
+* średnie położenie użytkownika zostało wyliczone jako średnia arytmetyczna
+długości i szerokości geograficznych jego wpisów w danej konwersacji.
+
+Zmierzenie odległości między użytkownikami zostało użyte w eksperymencie
+opisującym zależność odległości od częstości komunikacji.
+
+
+
+\subsubsection{Badanie odległości kibiców od stadionu}
+\label{subsubsection:badanieodleglosciodstadionu}
+Do każdego nasłuchiwanego meczu zostały przypisane współrzędne miejsca, w którym
+się odbywał -- czyli współrzędne stadionu gospodarza danego spotkania. Badanie
+odległości kibiców od stadionu zostało przeprowadzone oddzielnie dla każdego meczu. Aby je
+przeprowadzić zastosowano poniższy schemat działania:
+
+\begin{itemize}
+  \item pobierz wszystkie wpisy posiadające współrzędne geograficzne (a więc
+  nie tylko te będące odpowiedziami, jak w powyższym badaniu),
+  \item wylicz średnie położenie każdego użytkownika z podziałem na spotkania,
+  \item wylicz przy pomocy PostGIS-a odległość użytkownika od stadionu.
+\end{itemize}
+
+Badanie zostało przeprowadzone z podziałem na zwolenników i przeciwników i
+pokazuje zależność odległości kibiców od miejsca rozegrania meczu w zależności
+czy ich ulubiona drużyna gra mecz u siebie czy na wyjeździe.
 
 
 
@@ -129,87 +338,79 @@ wydarzeniami a liczby wierzchołków w pierwszym z nich.
 
 
 
-
-
-
-
+% ==============================================================================
 \section{Koncepcja i algorytm analizy sentymentu}
+\label{section:koncepcjaialgorytmanalizysentymentu}
+% ==============================================================================
 
-\label{section:analizasentymentu}
-W tym miejscu opisuję sposób w jaki została użyta do moich badań analiza
-wydźwięku wypowiedzi. Przedstawiam czynności wstępne jakie zostały zastosowane
-na tekście, prezentuję krótko wybrany algorytm i zastosowane w nim modyfikacje
-oraz opisuję sposób zaaplikowania analizy wydźwięku na zgromadzonych tweetach.
+W tym miejscu opisuję dokładnie koncepcję wyznaczania wydźwięku wypowiedzi i
+zastosowany algorytm do analizy sentymentu. Przedstawiam czynności wstępne jakie
+zostały zastosowane na tekście, prezentuję wybrany algorytm i zastosowane
+w nim modyfikacje oraz opisuję sposób aplikacji algorytmu na przykładowych
+tweetach.
 
 \subsection{Normalizacja tekstu}
+\label{subsection:normalizacjatekstu}
 % pozbycie się słów kluczowych, zaprzeczenia, retweety
 
 W związku z tym, że wpisy są tworzone przez zwykłych użytkowników posiadają one
 wiele znaków i elementów, które z punktu widzenia analizy sentymentu są zbędne,
 a czasami prowadzące do błędów. Dlatego też tekst należy poddać normalizacji,
-usunięciu zbędnych elementów, szumów i spamu. Przykładowa lista wpisów jakie
-znalazły się w zgromadzonych danych przedstawia poniższa tabela
-(\ref{tab:wpisy-przed-normalizacja}).
+usunięciu zbędnych elementów, szumów i spamu. Przykładowe wpisy przed i po
+normalizacji przedstawia tabela \ref{tab:wpisy-normalizacja}.
 
 
 \begin{table}[ht!]  
 \begin{center}  
-\begin{tabular}{|r|p{140mm}|}
+\begin{tabular}{|r|p{70mm}|p{70mm}|}
 \hline
-\multicolumn{2}{|c|}{Przed normalizacją}
+ & Przed normalizacją & Po normalizacji
 \\ \hline
-1 & RT @J\_SPEKZ: Haha quality! \#Fellaini \#United \#Moyes
-http://t.co/rJB4K1fvZy
+
+1 
+& RT @J\_SPEKZ: Haha quality! \#Fellaini \#United \#Moyes http://t.co/rJB4K1fvZy
+& --
+
 \\ \hline
-2 & Stay woke brah! The Arsenal is about to make everything alright soon :) RT
-@JCphoenixx: So damn tired, So not sleepy.
+
+2
+& Stay woke brah! The Arsenal is about to make everything alright soon :) RT
+@JCphoenixx: So damn tired, So not sleepy. 
+& stay woke brah make alright
+
 \\ \hline
-3 & @abdul1haseeb My arsenal is not disappointing too :P 
+
+3 
+& @abdul1haseeb My arsenal is not disappointing too :P
+& not\_disappointing
+ 
 \\ \hline
-4 & @Arsenal didn't think i could respect @aaronramsey any more than i already
+
+4 
+& @Arsenal didn't think i could respect @aaronramsey any more than i already
 did, bute what a gentleman he is for not to celebrate that goal:) 
+& didnt not\_respect bute gentleman not\_celebrate not\_goal
+
 \\ \hline
-5 & OHHHHHH!!!!! SO CLOSE!!! Wilshere!!! Good Job Ramsey keeping that move alive
+
+5 
+& OHHHHHH!!!!! SO CLOSE!!! Wilshere!!! Good Job Ramsey keeping that move alive
+& ohhhhhh close good job keeping alive
+
 \\ \hline
-6 & Haha, you gotta agree, no one gets booed like Manchester United :D \#ZeDevilza
-\\
-\hline
+
+6 
+& Haha, you gotta agree, no one gets booed like Manchester United :D \#ZeDevilza
+& haha gotta agree not\_booed
+
+\\ \hline
 \end{tabular} 
 \end{center} 
-\caption{Przykładowa lista wpisów przed normalizacją}
-\label{tab:wpisy-przed-normalizacja}
+\caption{Wpisy przed i po normalizacji}
+\label{tab:wpisy-normalizacja}
 \end{table}
 
-
-Po przeprowadzeniu wszystkich prac związanych z normalizacją tekstu wpisy z
-powyższej tabeli prezentują się w następujący sposób:
-
-\begin{table}[ht!]  
-\begin{center}  
-\begin{tabular}{|r|p{140mm}|}
-\hline
-\multicolumn{2}{|c|}{Po normalizacji}
-\\ \hline
-1 & 
-\\ \hline
-2 & stay woke brah make alright
-\\ \hline
-3 & not\_disappointing
-\\ \hline
-4 & didnt not\_respect bute gentleman not\_celebrate not\_goal
-\\ \hline
-5 & ohhhhhh close good job keeping alive
-\\ \hline
-6 & haha gotta agree not\_booed
-\\
-\hline
-\end{tabular} 
-\end{center} 
-\caption{Lista wpisów poddanych normalizacji}
-\label{tab:wpisy-po-normalizacja}
-\end{table}
-
-Kolejne kroki, które przekształciły tweety do powyższej postaci to:
+Kolejne kroki, które przekształciły tweety do takiej postaci to:
 \begin{enumerate}
   \item Usunięcie skomentowanych retweetów.\\
   \texttt{Stay woke brah! The Arsenal is about to make everything
@@ -277,18 +478,19 @@ Kolejne kroki, które przekształciły tweety do powyższej postaci to:
 % + dobór parametrów, emotikony, zaprzeczenia
 
 Do przeprowadzenia analizy sentymentu na zebranych tweetach skorzystałem z
-metody opracowanej przez Alexandra Paka i Patricka Paroubek'a, którą krótko
+metody opracowanej przez Alexandra Paka i Patricka Paroubek'a, którą 
 przedstawiłem w sekcji \ref{subsubsection:pakandparoubek}.
 Jest to technika, która pozwala badać sentyment nie posiadając wcześniej
 słownika sentymentu. Dlatego też pierwszym krokiem jest zbudowanie takiego
 słownika z zebranych danych.
 W tym celu wybiera się podzbiór wpisów, które zawierają emotikony.
-W związku ze 140 znakowym ograniczeniem na długość znaków przyjmuje się
+W związku ze 140-znakowym ograniczeniem na długość znaków przyjmuje się
 założenie, że dana emotikona nadaje wydźwięk całemu wpisowi.
+
 Według artykułu \cite{EmoticonAnalysisTwitter} 20 emotikon pokrywa w 90\%
 stosowanie tych znaków graficznych we wpisach (na 100 wpisów z emotikonami, 90 z
-nich zawiera emotikonę ze zbioru tych 20). Dlatego też skorzystałem z tego
-zbioru do własnych badań dzieląc emotikony na wyrażające wydźwięk pozytywny i
+nich zawiera emotikonę ze zbioru tych 20) na Twitterze. Dlatego też skorzystałem
+z tego zbioru do własnych badań dzieląc emotikony na wyrażające wydźwięk pozytywny i
 negatywny w sposób\footnote{emotikona \texttt{D:} została pominięta, gdyż
 pokrywała więcej przypadków niż tylko użycie emotikony (np.:
 \texttt{Accepte\textbf{d:} Mary, John, Jane})} przedstawiony w tabeli
@@ -298,7 +500,7 @@ pokrywała więcej przypadków niż tylko użycie emotikony (np.:
 \begin{center}  
 \begin{tabular}{|c|r|l|}
 \hline
-Emotikona & Popularnoś według \cite{EmoticonAnalysisTwitter} &
+Emotikona & Popularność (wg \cite{EmoticonAnalysisTwitter}) &
 Wydźwięk \\ \hline
 \texttt{:)} & $33.4\%$ & pozytywny \\ \hline
 \texttt{:D} & $11.0\%$ & pozytywny \\ \hline
@@ -408,16 +610,17 @@ NEG & valence(t) <= AVG\_VALENCE \\
 
 gdzie:
 
-$AVG\_VALENCE$ jest średnią arytmetyczną wartości $valence$
-wszystkich wpisów. W moich badaniach wartość ta wyniosła $0.4786984978198536$.
+$AVG\_VALENCE$ jest średnią arytmetyczną wartości $valence$ wszystkich wpisów.
+%wszystkich wpisów. W moich badaniach wartość ta wyniosła $0.4786984978198536$.
 
-\subsubsection{Wykrywanie i obsługa negacji}
+\subsection{Wykrywanie i obsługa negacji}
+\label{subsubsection:wykrywanieiobsluganegacji}
 W oryginalnym podejściu panów Pak i Paroubek nie ma żadnego sposobu na
 wykrywanie i obsługę negacji. Oczywistym jednak jest, iż zaprzeczenia zmieniają
 znaczenie dalszej części tekstu i muszą być w jakiś sposób obsłużone.
 Wpisy na Twitterze są krótkie, więc postanowiłem zastosować podejście
 zaprezentowane w artykule \cite{thumbsUp2002}, które polega na dodaniu
-przedrostka \texttt{NOT\_} do wszystkich słów pomiędzy wyrazem negującym,
+przedrostka \texttt{NOT\_} do wszystkich słów pomiędzy wyrazem negującym
 a najbliższym znakiem przestankowym. Lista wyrazów negujących
 została zaczerpnięta z \cite{englishNots1983}. Słowa zanegowane miały osobno
 liczone liczby wystąpień w kontekstach pozytwnych i negatywnych. W takiej formie
@@ -430,6 +633,7 @@ brały udział w ocenie sentymentu wpisów z Twittera.
 
 
 \subsubsection{Dobór parametrów}
+\label{subsubsection:doborparametrow}
 Użyty przeze mnie algorytm zakłada dobór parametrów przed przeprowadzeniem
 analizy sentymentu. Parametry te dotyczą słów ze zbudowanego słownika --
 decydując, które z nich wezmą udział w procesie analizy. Są to: minimalna
@@ -443,12 +647,12 @@ zbioru uczącego dla wyrazów o minimalnej długości od 1 do 10 i minimalnej
 liczbie wystąpień od 1 do 100 -- daje to w sumie 1000 testów.
 Najwyższy stopień poprawności klasyfikacji uzyskałem dla parametrów równych:
 minimalna długość wyrazu -- 3, \mbox{minimalna częstotliwość wystąpień -- 1}.
-Wyniki testów przedstawiam na poniższym wykresie
+Wyniki testów przedstawiam na wykresie
 \ref{image:pak-paroubek-parametry}.
 
 \begin{figure}[ht!]
 \centering
-\includegraphics[width=140mm]{img/pak-paroubek-params.png}
+\includegraphics[width=160mm]{img/pak-paroubek-params_pl.png}
 \caption{Dobór parametrów algorytmu analizy sentymentu}
 \label{image:pak-paroubek-parametry}
 \end{figure}
