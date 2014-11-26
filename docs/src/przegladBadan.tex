@@ -8,15 +8,15 @@
 - badania nad geolokacją, zastosowanie, jak
 \end{comment}
 
-W niniejszym rozdziale znajduje się aktualny stan badań dotyczący 4 tematów,
-które składają się na tę pracę. Na początku opisana jest dziedzina sieci
-społecznych, a konkretnie czym ta nauka się zajmuje i w jakich przypadkach może
-zostać zastosowana.
-Następnie omówiona zostaje analiza sentymentu wypowiedzi i przetwarzanie tekstu
-pod kątem tej analizy.
+W niniejszym rozdziale znajduje się aktualny stan badań dotyczący trzech
+tematów, które składają się na tę pracę. Na początku omawiam dziedzinę sieci
+społecznych, czym ta nauka się zajmuje i w jakich przypadkach może zostać
+zastosowana.
+Następnie opisuję analiza sentymentu wypowiedzi i przetwarzanie tekstu pod kątem
+tej analizy.
 Później skupiam się nad geolokacją, opisem tego co można dzięki niej się
-dowiedzieć, a rozdział kończę omówieniem serwisu społecznościowego Twitter,
-który został wykorzystany jako źródło danych do analizy sieci społecznych.
+dowiedzieć. Dodatkowo na końcu omawiam serwis społecznościowego Twitter, który
+został wykorzystany jako źródło danych do analizy sieci społecznych.
 
 
 
@@ -151,23 +151,23 @@ charakterystycznych danej sieci. Najważniejsze miary to \cite{estrada}:
 
 \subsubsection{Stopień wierzchołka}
 Miara określająca liczbę krawędzi wchodzących i 
-  wychodzących z wierzchołka (patrz rys. \ref{image:stopien-wierzcholka})
+  wychodzących z wierzchołka \refimg{image:stopien-wierzcholka}
   
 \begin{figure}[ht!]
 \centering
-\includegraphics[width=80mm]{img/stopien-wierzcholka.png}
+\includegraphics[width=60mm]{img/stopien-wierzcholka.png}
 \caption{Graf z oznaczonymi stopniami wierzchołków}
 \label{image:stopien-wierzcholka}
 \end{figure}
 
 W przypadku grafów skierowanych możemy jeszcze mówić o stopniu wchodzącym 
-(ang. \textit{in degree}) oraz wychodzącym (ang. \textit{out degree}) 
-(patrz rys. \ref{image:stopien-wierzcholka-skierowany}).
+\ang{in degree} oraz wychodzącym \ang{out degree}
+\refimg{image:stopien-wierzcholka-skierowany}.
   
 \clearpage
 \begin{figure}[ht!]
 \centering
-\includegraphics[width=80mm]{img/stopien-wierzcholka-skierowany.png}
+\includegraphics[width=60mm]{img/stopien-wierzcholka-skierowany.png}
 \caption{Graf skierowany z oznaczonymi stopniami wierzchołków}
 \label{image:stopien-wierzcholka-skierowany}
 \end{figure}
@@ -200,7 +200,7 @@ równa $5/6$.
 
 \begin{figure}[ht!]
 \centering
-\includegraphics[width=80mm]{img/betweenness.png}
+\includegraphics[width=60mm]{img/betweenness.png}
 \caption{Najkrótsze scieżki przechodzące przez węzeł $B$}
 \label{image:betweenness}
 \end{figure}
@@ -236,7 +236,7 @@ obliczeniami tej wielkości znajdują się poniżej.
 
 \begin{figure}[ht!]
 \centering
-\includegraphics[width=80mm]{img/closeness.png}
+\includegraphics[width=60mm]{img/closeness.png}
 \caption{Suma odległości do pozostałych węzłów w grafie}
 \label{image:closeness}
 \end{figure}
@@ -459,17 +459,17 @@ NaturalLanguageProcessingFuture}:
 
 
 \subsection{Zastosowanie sentymentu w mediach społecznościowych}
-Analiza sentymentu ma szerokie zastosowanie w analizie mediów społecznościowych.
+Analiza sentymentu zaczyna mieć szerokie zastosowanie w analizie mediów
+społecznościowych.
 Możliwość oceny wydźwięku wypowiedzi zamieszczanych przez internautów w sieci
-prowadzi do interesujących wyników i na jej podstawie wyciągać można ciekawe.
-wnioski. Przy jej użyciu przeprowadzono wiele badań. 
+prowadzi do interesujących wyników i na jej podstawie wyciągać można ciekawe
+wnioski. 
 
-W \cite{AgileSentimentAnalysis}
-poprzez crawlowanie (z ang. przeszukiwanie stron i selekcjonowanie z nich
-informacji) blogów związanych z Egiptem w 2011 roku badano nastroje
-społeczeństwa w trakcie masowych demonstracji w tym kraju w związku z
-niezadowoleniem rządzącymi. Sentyment pokazywał, że jeszcze przed rozpoczęciem
-się demonstracji nastroje były bardzo negatywne. 
+W \cite{AgileSentimentAnalysis} poprzez crawlowanie (z ang. przeszukiwanie stron
+i selekcjonowanie z nich informacji) blogów związanych z Egiptem w 2011 roku
+badano nastroje społeczeństwa w trakcie masowych demonstracji w tym kraju.
+Sentyment pokazywał, że jeszcze przed ich rozpoczęciem nastroje były bardzo
+negatywne.
 
 W \cite{SentimentRevealedInSocialMedia} porównany jest wpływ na giełdę artykułów
 w \textit{Wall Street Jorunal} (nowojorska gazeta o tematyce gospodarczej) z
@@ -670,9 +670,8 @@ jest duża szansa, że dane te będą relatywnie rzadkie i metoda ta może prowa
 do przeuczenia.
 
 
-\subsubsection{Metoda wektorów nośnych (ang. \textit{support vector machines})}
-\textit{Support vector machines} to podejście stosujące duży margines między
-klasami.
+\subsubsection{Metoda wektorów nośnych \ang{support vector machines})}
+Podejście stosujące duży margines między klasami.
 Główna idea polega na znalezieniu hiperpłaszczyzny (patrz rys. \ref{image:svm}),
 która podzieli teksty na pozytywne i negatywne z marginesem pomiędzy klasami tak
 dużym jak to tylko możliwe.
@@ -687,8 +686,8 @@ dużym jak to tylko możliwe.
 
 
 
-Technika ta zbudowana jest na zasadzie strukturalnej minimalizacji ryzyka (ang.
-\textit{structural risk minimization principle}). Celem jest znalezienie funkcji
+Technika ta zbudowana jest na zasadzie strukturalnej minimalizacji ryzyka
+\ang{structural risk minimization principle}. Celem jest znalezienie funkcji
 $h$, dla której błąd klasyfikacji losowego tekstu będzie jak najmniejszy.
 Można ją opisać wzorem:
 \begin{equation}
@@ -709,8 +708,7 @@ podwójnej optymalizacji.
 \bigskip
 
 Teksty o $\alpha_i$ większym od zera, to te które biorą udział
-w szukaniu funkcji $h$ i nazywa się je wektorami wspierającymi 
-(ang. \textit{support vectors}).
+w szukaniu funkcji $h$ i nazywa się je wektorami nośnymi \ang{support vectors}.
 
 Wybór cech (wyrazów) jest bardzo ważnym zadaniem w technikach uczenia
 maszynowego.
@@ -723,19 +721,18 @@ prowadzi to do utraty informacji.
 Chociaż SVM przewyższa wszystkie tradycyjne metody klasyfikacji sentymentu,
 to niestety jest czarną skrzynką. Trudne jest zbadanie natury klasyfikacji i
 zidentyfikowanie, które słowa są dla niej istotne. Jest to jedna z głównych wad
-korzystania z tej techniki do klasyfikacji tekstów. 
+tej metody.
 
 \subsubsection{Metoda Alexandra Paka i Patricka Paroubek'a \cite{pakParoubekSentiment}}
 \label{subsubsection:pakandparoubek}
 Technika jest odpowiedzią na problemy związane z brakiem odpowiedniego słownika
-do oceny sentymentu. Została opracowana z uwzględnieniem Twittera i korzysta w
-związku z tym z pewnych założeń. Skoro nie ma żadnego idealnego słownika ze
-słowami oznaczonymi jako pozytywne lub negatywne, to trzeba go mechanicznie
-zbudować. Do budowy takiego leksykonu zostały wykorzystane wpisy na Twitterze,
+do oceny sentymentu. Została opracowana z uwzględnieniem Twittera i korzysta
+założeń z nim związanych. Skoro nie ma żadnego idealnego słownika ze słowami
+oznaczonymi jako pozytywne lub negatywne, to trzeba go mechanicznie zbudować. Do budowy takiego leksykonu zostały wykorzystane wpisy na Twitterze,
 które zawierają emotikony podzielone na pozytywne (np. \texttt{:)}) i negatywne
 (np. \texttt{;(}).
 
-Następnie spośród ściągniętych wpisów z Twittera analizowane są te,
+Następnie spośród wpisów z Twittera analizowane są te,
 które zawierają odpowiednie emotikony i zliczana jest liczba wystąpień
 każdego wyrazu w każdym ze zbiorów (pozytywnym i negatywnym).
 W wyniku tego budowany jest leksykon zawierający wyrazy wraz z liczbą
@@ -763,8 +760,7 @@ $n$ -- liczba słów w tekście $T$.
 
 
 Wartość $valence(w_i)$ obliczana jest przy zastosowaniu skonstruowanego
-leksykonu i równa delta IDF (ang. \textit{inverse document frequency} -- 
-powszechnie stosowana miara ważności słowa w oparciu o liczbę wystąpień):
+leksykonu za pomocą następującego równania:
 \begin{equation}
 valence(w_i) = log\frac{N(w_i, M^+) + 1}{N(w_i, M^-) + 1}
 \end{equation} 
@@ -799,7 +795,7 @@ Główne sposoby pozyskiwania takich danych to:
 komórkowe, tablety, itp.,
   \item pozycjonowanie względne -- ustalanie pozycji na podstawie bazowych stacji
 telefonii komorków, ruterów WI-FI,
-\item użcyie bazy adresów przypisanych do IP.
+\item użycie bazy adresów przypisanych do IP.
 \end{itemize} 
 Zastosowanie geolokacji może być bardzo szerokie, między innymi:
 \begin{itemize}
@@ -810,7 +806,7 @@ Zastosowanie geolokacji może być bardzo szerokie, między innymi:
   
   \item wyszukiwanie lokalnych usług, przedsiębiorstw,
   
-  \item wyświetlanie zlokalizowanych reklam,
+  \item wyświetlanie lokalnych reklam,
   
   \item zapobieganie nadużyciom zakupowym -- sprawdzenie geolokacji
   klienta sklepu internetowego i porównanie jej z danymi z karty kredytowej
@@ -838,7 +834,7 @@ wynikających (26\%).
 Możliwość odkrywania pozycji osób korzystających z sieci społecznościowych
 stała się przyczynkiem do tworzenia serwisów społecznościowych opartych
 właśnie o geolokację, tak zwane \textit{location based social networks}.
-Niektóre ze sposobów zastosowania geolokacji w sieciach społecznościowych to:
+Niektóre ze sposobów wykorzystania geolokacji w sieciach społecznościowych to:
 
 \begin{itemize}
   \item rekomendacje nowych miejsc spotkań w mieście 
@@ -908,9 +904,9 @@ Podstawowe pojęcia związane z tym serwisem to (oznaczone na rysunku \ref{image
 
 \subsection{Twitter jako źródło danych}
 \label{subsection:twitterjakozrodlodanych}
-Twitter używany jest przez 271 milionów użytkowników wysyłających 500 
-milionów wpisów dziennie\footnote{www.about.twitter.com/company -- na dzień 16
-lipca 2014 r.}.
+Twitter używany jest przez ponad 270 milionów użytkowników wysyłających ponad
+500 milionów wpisów dziennie\footnote{www.about.twitter.com/company -- na dzień 16
+lipca 2014 r.} i liczby te szybko rosną.
 Szybkość komunikacji i łatwość publikacji wpisów
 sprawia, że staje się medium komunikacyjnym dla wielu grup ludzi.
 Odgrywał ważną rolę w wydarzeniach społeczno-politycznych

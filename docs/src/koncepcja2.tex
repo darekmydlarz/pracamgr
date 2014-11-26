@@ -55,16 +55,16 @@ analizy potrzeba najpierw zebrać dane.
 \end{figure}
 
 
-Zbieranie danych z serwisu Twitter odbyło się przy pomocy wspomnianego w sekcji
-\ref{subsection:twitterjakozrodlodanych} Twitter Streaming API. Napisany został
-program w Javie, który nasłuchiwał w trakcie każdego śledzonego meczu wpisów w
-języku angielskim, które zawierały odpowiednie słowa kluczowe. Były nimi
-przygotowane wcześniej słowa związane z danym spotkaniem: nazwiska i przydomki
-piłkarzy, menadżerów, nazwy i przydomki klubów, nazwa stadionu czy nazwisko
-sędziego. W taki sposób uzyskiwano tweety, które można było powiązać z
+Zbieranie danych z serwisu Twitter odbyło się przy pomocy wspomnianego w
+rozdziale \ref{subsection:twitterjakozrodlodanych} Twitter Streaming API.
+Napisany został program w Javie, który nasłuchiwał w trakcie każdego śledzonego
+meczu wpisów w języku angielskim, które zawierały odpowiednie słowa kluczowe.
+Były nimi przygotowane wcześniej słowa związane z danym spotkaniem: nazwiska i
+przydomki piłkarzy, menadżerów, nazwy i przydomki klubów, nazwa stadionu czy
+nazwisko sędziego. W taki sposób uzyskiwano tweety, które można było powiązać z
 konkretnym meczem.
 
-Program do nasłuchiwania uruchamiany jest na czas trwania meczu z pewnym
+Program do nasłuchiwania uruchamiany był na czas trwania meczu z pewnym
 marginesem przed i po spotkaniu. Jest to o tyle ważne, że udostępnione API służy
 tylko do konsumowania wpisów na żywo. Pobranie tych samych wpisów już po danym
 wydarzeniu byłoby dużo bardziej skomplikowane. Program otrzymuje nie więcej niż
@@ -75,7 +75,7 @@ słowami kluczowymi byłoby np. 100 z 1000 wpisów, wówczas program nadal
 otrzymałby tylko 10 z nich.}. Każdemu wpisowi nadawany jest identyfikator meczu (wprowadzonego
 wcześniej do bazy danych) i w takiej postaci jest on zapisywany do bazy.
 
-W ten sposób zbieranie są dane z Twittera. Podejście to pozwala na elastyczną
+Takie podejście to pozwala na elastyczną
 wymianę słów kluczowych do nasłuchiwania, gdyż program na wejściu potrzebuje
 jedynie identyfikator meczu, do którego już są przypisane słowa kluczowe.
 
@@ -86,9 +86,9 @@ jedynie identyfikator meczu, do którego już są przypisane słowa kluczowe.
 \label{subsection:modelanalizysentymentu}
 
 Analiza sentymentu należy do jednego z elementów drugiej części systemu.
-W tej części zebrane uprzednio dane były przetwarzane między innymi pod kątem
-oceny ich sentymentu. Proces ten przebiegał według schematu
-zaprezentowanego na rysunku \ref{image:model-analizy-sentymentu}.
+W tej części zebrane dane były przetwarzane pod kątem
+oceny ich sentymentu. Proces ten przedstawiony jest na schemacie
+\refimg{image:model-analizy-sentymentu}.
 
 \begin{figure}[ht!]
 \centering
@@ -98,18 +98,18 @@ zaprezentowanego na rysunku \ref{image:model-analizy-sentymentu}.
 \end{figure}
 
 
-Dla każego tweeta w bazie obliczana była jego wartość \textit{valence}.
-Aby do tego doszło tweet był wcześniej odpowiednio oczyszczany z wszystkich
-elementów, które mogły zakłócić wyliczenie tej wartości. Proces przebiegał
-zgodnie z pomysłem i algorytmem panów Pak i Paroubek (omówiony w sekcji
-\ref{subsubsection:pakandparoubek}), a szczegóły jego działania wraz z
-zastosowaną przez ze mnie modyfikacją (polegającą na dodaniu wykrywania negacji)
-zostały opisane w sekcji \ref{section:koncepcjaialgorytmanalizysentymentu}.
+Dla każego tweeta w bazie obliczana była jego wartość \textit{valence}
+\rref{subsubsection:pakandparoubek}.
+Aby do tego doszło tweet był wcześniej oczyszczany z elementów, które mogły
+zakłócić wyliczenie tej wartości. Proces przebiegał zgodnie z algorytmem Paka i
+Paroubek'a \rref{subsubsection:pakandparoubek}, a szczegóły jego działania wraz
+z zastosowaną przez ze mnie modyfikacją (polegającą na dodaniu wykrywania
+negacji) zostały opisane w rozdziale
+\ref{section:koncepcjaialgorytmanalizysentymentu}.
 
 Po wyliczeniu wartości \textit{valence} dla zebranych tweetów obliczona została
 jego średnia wartość i wpisy o wartości wyższej od średniej zostały oznaczone
-jako pozytywne, zaś o wartości niższej jako negatywne (zgodnie z pomysłem Paka
-i Paroubeka).
+jako pozytywne, zaś o wartości niższej jako negatywne.
 
 Oznaczenie wartości sentymentu zebranych wpisów pozwoliło na przeprowadzenie
 ciekawych eksperymentów opisanych w rozdziale \ref{chapter:eksperymenty}.
@@ -141,10 +141,11 @@ Do konkretnych eksperymentów dane te były odpowiednio agregowane (np. zliczano
 liczbę powiązań między wierzchołkami i traktowano je jako pojedynczą relację w
 jakiejś jednostce czasu -- na przykład w pojedynczym meczu).
 
-Odkrywanie grup zostało przeprowadzone przy pomocy algorytmu opisanego w
-\cite{FastUnfoldingOfCommunites}, który został zaimplementowany w środowisku
-Gephi. Wyniki klasyfikacji wierzchołków do odpowiednich grup zostały następnie
-zapisane w bazie danych.
+Odkrywanie grup przeprowadziłem przy pomocy algorytmu szybkiego wykrywania grup
+w dużych sieciach \ang{fast unfolding of communities in large networks}
+opisanego w \cite{FastUnfoldingOfCommunites}, który został zaimplementowany w
+środowisku Gephi. Wyniki klasyfikacji wierzchołków do odpowiednich grup zostały
+następnie zapisane w bazie danych.
 
 
 \subsection{Model geolokacji}
@@ -178,10 +179,10 @@ z geolokacją można otrzymać takiego rodzaju mapy.
 
 
 % ==============================================================================
-\section{Wielkości i techniki wykorzystywane w eksperymentach}
+\section{Zastosowane algorytmy i miary}
 \label{section:wielkosciwykorzystywane}
 % ==============================================================================
-W tej sekcji zaprezentowane są wielkości i techniki, które zostały zastosowane w
+W tej sekcji zaprezentowane są algorytmy i miary, które zostały zastosowane w
 zaprezentowanych w rozdziale \ref{chapter:eksperymenty} eksperymentach.
 Przedstawione są one z podziałem na moduł, którego dotyczą.
 
@@ -212,8 +213,8 @@ $|neg|$ -- liczba wpisów oznaczonych jako negatywne.
 \label{subsubsection:wykrywaniezwolennikow}
 
 Dzięki oznaczeniu wszystkich zebranych wpisów odpowiednim sentymentem
-(pozytwnym lub negatywnym) możliwe były wykorzystanie tych informacji do
-odkrywania nowej wiedzy. Sentyment ten umożliwił odkrywanie wśród wszystkich
+(pozytywnym lub negatywnym) możliwe były wykorzystanie tych informacji do
+odkrywania nowej wiedzy. Sentyment umożliwił odkrywanie wśród wszystkich
 autorów wpisów ich preferencji klubowych -- poprzez zliczanie liczby wpisów
 pozytywnych i negatywnych w meczach danego zespołu.
 
@@ -299,15 +300,16 @@ Cały proces przebiegał według następującego schematu:
   \item pobierz wszystkie wpisy będące odpowiedziami (\textit{reply}) i
   zawierające współrzędne geograficzne,
   \item pogrupuj użytkowników w pary według tego, kto z kim się komunikował,
-  \item wylicz średnie położenie każdego z użytkowników dla każdej konwersacji*,
+  \item wylicz średnie położenie każdego z użytkowników dla każdej konwersacji
+  (średnie położenie użytkownika zostało wyliczone jako średnia arytmetyczna
+długości i szerokości geograficznych jego wpisów w danej konwersacji),
   \item wylicz przy pomocy PostGIS-a odległość między nimi.
 \end{itemize}
 
-* średnie położenie użytkownika zostało wyliczone jako średnia arytmetyczna
-długości i szerokości geograficznych jego wpisów w danej konwersacji.
 
 Zmierzenie odległości między użytkownikami zostało użyte w eksperymencie
-opisującym zależność odległości od częstości komunikacji.
+opisującym zależność odległości od częstości komunikacji
+\rref{subsection:odlegloscmiedzyuzytkownikami}.
 
 
 
@@ -339,17 +341,16 @@ czy ich ulubiona drużyna gra mecz u siebie czy na wyjeździe.
 
 
 % ==============================================================================
-\section{Koncepcja i algorytm analizy sentymentu}
+\section{Koncepcja algorytmu analizy sentymentu}
 \label{section:koncepcjaialgorytmanalizysentymentu}
 % ==============================================================================
 
 W tym miejscu opisuję dokładnie koncepcję wyznaczania wydźwięku wypowiedzi i
-zastosowany algorytm do analizy sentymentu. Przedstawiam czynności wstępne jakie
-zostały zastosowane na tekście, prezentuję wybrany algorytm i zastosowane
-w nim modyfikacje oraz opisuję sposób aplikacji algorytmu na przykładowych
-tweetach.
+zastosowany algorytm do analizy sentymentu. Przedstawiam czynności wstępne,
+prezentuję wybrany algorytm i zastosowane w nim modyfikacje oraz opisuję sposób
+aplikacji algorytmu na przykładowych tweetach.
 
-\subsection{Normalizacja tekstu}
+\subsection{Przygotowanie tekstu}
 \label{subsection:normalizacjatekstu}
 % pozbycie się słów kluczowych, zaprzeczenia, retweety
 
@@ -476,16 +477,16 @@ Kolejne kroki, które przekształciły tweety do takiej postaci to:
 \subsection{Zastosowanie algorytmu}
 \label{subsection:sentyment-algorytm}
 % + dobór parametrów, emotikony, zaprzeczenia
-
-Do przeprowadzenia analizy sentymentu na zebranych tweetach skorzystałem z
-metody opracowanej przez Alexandra Paka i Patricka Paroubek'a, którą 
-przedstawiłem w sekcji \ref{subsubsection:pakandparoubek}.
-Jest to technika, która pozwala badać sentyment nie posiadając wcześniej
-słownika sentymentu. Dlatego też pierwszym krokiem jest zbudowanie takiego
-słownika z zebranych danych.
-W tym celu wybiera się podzbiór wpisów, które zawierają emotikony.
-W związku ze 140-znakowym ograniczeniem na długość znaków przyjmuje się
-założenie, że dana emotikona nadaje wydźwięk całemu wpisowi.
+ 
+%Do przeprowadzenia analizy sentymentu na zebranych tweetach skorzystałem z
+%metody opracowanej przez Alexandra Paka i Patricka Paroubek'a, którą 
+%przedstawiłem w sekcji \ref{subsubsection:pakandparoubek}.
+%Jest to technika, która pozwala badać sentyment nie posiadając wcześniej
+%słownika sentymentu. Dlatego też pierwszym krokiem jest zbudowanie takiego
+%słownika z zebranych danych.
+%W tym celu wybiera się podzbiór wpisów, które zawierają emotikony.
+%W związku ze 140-znakowym ograniczeniem na długość znaków przyjmuje się
+%założenie, że dana emotikona nadaje wydźwięk całemu wpisowi.
 
 Według artykułu \cite{EmoticonAnalysisTwitter} 20 emotikon pokrywa w 90\%
 stosowanie tych znaków graficznych we wpisach (na 100 wpisów z emotikonami, 90 z
@@ -498,29 +499,25 @@ pokrywała więcej przypadków niż tylko użycie emotikony (np.:
 
 \begin{table}[ht!]  
 \begin{center}  
-\begin{tabular}{|c|r|l|}
+\begin{tabular}{|l|l|}
 \hline
-Emotikona & Popularność (wg \cite{EmoticonAnalysisTwitter}) &
-Wydźwięk \\ \hline
-\texttt{:)} & $33.4\%$ & pozytywny \\ \hline
-\texttt{:D} & $11.0\%$ & pozytywny \\ \hline
-\texttt{:(} & $7.9\%$ & negatywny \\ \hline
-\texttt{;)} & $7.5\%$ & pozytywny \\ \hline
-\texttt{:-)} & $4.4\%$ & pozytywny \\ \hline
-\texttt{:P} & $3.7\%$ & pozytywny \\ \hline
-\texttt{=)} & $3.7\%$ & pozytywny \\ \hline
-\texttt{(:} & $2.8\%$ & pozytywny \\ \hline
-\texttt{;-)} & $2.2\%$ & pozytywny \\ \hline
-\texttt{:/} & $1.9\%$ & negatywny \\ \hline
-\texttt{XD} & $1.9\%$ & pozytywny \\ \hline
-\texttt{=D} & $1.5\%$ & pozytywny \\ \hline
-\texttt{:O} & $1.1\%$ & pozytywny \\ \hline
-\texttt{=]} & $1.1\%$ & pozytywny \\ \hline
-\texttt{;D} & $1.0\%$ & pozytywny \\ \hline
-\texttt{:]} & $1.0\%$ & pozytywny \\ \hline
-\texttt{:-(} & $0.8\%$ & negatywny \\ \hline
-\texttt{=/} & $0.8\%$ & negatywny \\ \hline
-\texttt{=(} & $0.8\%$ & negatywny \\ \hline
+Wydźwięk & Najpopularniejsze emotikony
+\\ \hline
+
+Pozytywny & 
+
+\texttt{:)}\quad \texttt{:D}\quad \texttt{;)}\quad \texttt{:-)}\quad 
+\texttt{:P}\quad \texttt{=)}\quad \texttt{(:}\quad \texttt{;-)}\quad 
+\texttt{XD}\quad \texttt{=D}\quad \texttt{:O}\quad \texttt{=]}\quad 
+\texttt{;D}\quad \texttt{:]}\quad 
+
+\\ \hline
+
+Negatywny & 
+\texttt{:(} \quad \texttt{:/} \quad \texttt{:-(} \quad \texttt{=/} \quad \texttt{=(}
+
+\\ \hline
+
 \end{tabular} 
 \end{center} 
 \caption{Wydźwięk emotikon}
@@ -615,7 +612,7 @@ $AVG\_VALENCE$ jest średnią arytmetyczną wartości $valence$ wszystkich wpis�
 
 \subsection{Wykrywanie i obsługa negacji}
 \label{subsubsection:wykrywanieiobsluganegacji}
-W oryginalnym podejściu panów Pak i Paroubek nie ma żadnego sposobu na
+W oryginalnym algorytmie \rref{subsubsection:pakandparoubek} nie ma żadnego sposobu na
 wykrywanie i obsługę negacji. Oczywistym jednak jest, iż zaprzeczenia zmieniają
 znaczenie dalszej części tekstu i muszą być w jakiś sposób obsłużone.
 Wpisy na Twitterze są krótkie, więc postanowiłem zastosować podejście
@@ -632,23 +629,23 @@ brały udział w ocenie sentymentu wpisów z Twittera.
 
 
 
-\subsubsection{Dobór parametrów}
+\subsection{Dobór parametrów algorytmu analizy sentymentu}
 \label{subsubsection:doborparametrow}
 Użyty przeze mnie algorytm zakłada dobór parametrów przed przeprowadzeniem
 analizy sentymentu. Parametry te dotyczą słów ze zbudowanego słownika --
 decydując, które z nich wezmą udział w procesie analizy. Są to: minimalna
 długość słowa, minimalna liczba występowania słowa. Doboru parametrów dokonałem
-w sposób zaprezentowany w opisie algorytmu. Wykorzystałem listę wpisów z
-emotikonami, podzieliłem je na zbiór uczący i testowy w stosunku 20\% do 80\%.
-Wygenerowałem słownik ze zbioru uczącego. Wpisy ze zbioru testowego oznaczyłem spodziewanym
-sentymentem -- był to sentyment emotikony jaką zawierały. Następnie
+w sposób zaprezentowany w opisie algorytmu \rref{subsubsection:pakandparoubek}.
+Wykorzystałem listę wpisów z emotikonami, podzieliłem je na zbiór uczący i
+testowy w stosunku 20\% do 80\%.
+Wygenerowałem słownik ze zbioru uczącego. Wpisy ze zbioru testowego oznaczyłem
+spodziewanym sentymentem -- był to sentyment emotikony jaką zawierały. Następnie
 przeprowadziłem testy poprawności klasyifkacji zbioru testowego słowami ze
 zbioru uczącego dla wyrazów o minimalnej długości od 1 do 10 i minimalnej
 liczbie wystąpień od 1 do 100 -- daje to w sumie 1000 testów.
 Najwyższy stopień poprawności klasyfikacji uzyskałem dla parametrów równych:
 minimalna długość wyrazu -- 3, \mbox{minimalna częstotliwość wystąpień -- 1}.
-Wyniki testów przedstawiam na wykresie
-\ref{image:pak-paroubek-parametry}.
+Wyniki testów przedstawiam na wykresie \ref{image:pak-paroubek-parametry}.
 
 \begin{figure}[ht!]
 \centering
