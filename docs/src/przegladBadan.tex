@@ -9,13 +9,13 @@
 \end{comment}
 
 W niniejszym rozdziale znajduje się aktualny stan badań dotyczący trzech
-tematów, które składają się na tę pracę. Na początku omawiam dziedzinę sieci
-społecznych, czym ta nauka się zajmuje i w jakich przypadkach może zostać
-zastosowana.
-Następnie opisuję analiza sentymentu wypowiedzi i przetwarzanie tekstu pod kątem
-tej analizy.
-Później skupiam się nad geolokacją, opisem tego co można dzięki niej się
-dowiedzieć. Dodatkowo na końcu omawiam serwis społecznościowego Twitter, który
+tematów, które składają się na tę pracę. Na początku omówiona jest dziedzina
+sieci społecznych -- czym ta nauka się zajmuje i w jakich przypadkach może
+zostać zastosowana.
+Następnie opisana jest analiza sentymentu wypowiedzi i jej zastosowanie.
+Po niej omówiona jest geolokacja wraz z opisem tego co można dzięki niej się
+dowiedzieć.
+Na końcu skupiono się nad opisem serwisu społecznościowego Twitter, który
 został wykorzystany jako źródło danych do analizy sieci społecznych.
 
 
@@ -338,6 +338,7 @@ W analizie sieci społecznych (traktowanych jako graf) przydatne są także
 
 
 \subsection{Wykrywanie grup w sieciach społecznych}
+\label{subsection:fastufoldingofcommunities}
 Grupa to dwie lub więcej osób, między którymi dłużej niż przez parę chwil 
 dochodzi do interakcji, które wzajemnie na siebie oddziałują oraz spostrzegają
 się w kategorii ,,my''~\cite[s.~268]{SocialPsychology}.
@@ -346,25 +347,38 @@ Jednym z elementów analizy sieci społecznych jest wyodrębnianie grup spośró
 wszystkich członków sieci. Użytkownicy w naturalny sposób tworzą między sobą
 takie grupy. Wykrycie ich daje szansę na rożne podejście do analizy różnych grup
 i ich zachowań. Ekstrakcja grup z pośród sieci społecznych może wymagać wielu
-ciężkich obliczeń. Istnieją jednak prostsze metody, takie jak między innymi
-zaprezentowana w \cite{ComputingCommunitesInLargeNetworks} metoda oparta na
-losowych przejściach po grafie sieci społecznej (badająca podobieństow
-wierzchołków), czy metoda wykorzystująca 3 rodzaje metryk, których ważność jest
-balansowana celem odkrywania grup -- przedstawiona w
-\cite{FindingCommunityStructure}.
-Bardzo szybką metodą wyodrębniania grup jest również metoda zaprezentowana w
-\cite{FastUnfoldingOfCommunites} oparta na optymalizacji modularności
-wierzchołków. Tę metodę (zaimplementowaną w środowisku Gephi) zastosowałem w
-swoich badaniach do odkrywania grup.
+ciężkich obliczeń. Istnieją jednak prostsze metody, takie jak między innymi:
 
+\begin{itemize}
+  \item losowe przejścia po grafie \ang{random walks} badając podobieństwo wierzchołków
+   \cite{ComputingCommunitesInLargeNetworks},
+  \item zastosowanie 3 rodzajów metryk i balansowanie ich ważnoścą \cite{FindingCommunityStructure},
+  \item szybkie wykrywanie społeczności \ang{fast unfolding of communities in
+  large networks} \cite{FastUnfoldingOfCommunites}.
+\end{itemize}
 
+Ostatni algorytm wykorzystano w zaprezentowanych w tej pracy badaniach.
+Jego implementacja znajduje się w programie
+Gephi\footnote{https://gephi.github.io/}. Algorytm jest heurestyczną metodą
+opartą na wyliczaniu modularności wierzchołków i jej optymalizacji.
+Opiera się na dekompozycji dużej sieci na podzbiory społeczności, w których
+wierzchołki są ze sobą ściśle połączone. Identyfikacja tych społeczności jest
+niezwykla ważna i prowadzi do odkrywania nieznanych podsieci.
 
-
-
-
-
-
-
+Algorytm jest podzielony na dwie fazy, które powtarzane są iteracyjnie.
+W pierwszej fazie, każdy wierzchołek przypisany jest do innej społeczności.
+Następnie dla każdego węzła badani są jego sąsiedzi i oceniana jest jakość
+modularności poprzez usunięcie aktualnej społeczności węzła i włączenie go do
+społeczności sąsiada. Węzeł dołącza do tego sąsiada, u którego zysk
+modualarności jest największy. Ten proces jest wielokrotnie powtarzany aż do
+momentu, w którym nie zauważa się żadnego zysku.
+Drugi etap  polega na budowie nowej sieci, której wierzchołkami są społeczności
+wykryte w pierwszej fazie. Wagi krawędzi między nowymi wierzchołkami wyliczane
+są jako suma wag krawędzi między wierzchołkami w dwóch badanych społecznościach.
+Gdy drugi etap się skończy algorytm ponownie wraca do kroku pierwszego.
+W każdej iteracji zmniejsza się więc liczba różnych społeczności.
+Kroki te są powtarzane do momentu, w którym nie dochodzi już do żadnych zysków
+i maksymalna modularnośc zostaje osiągnięta.
 
 
 
@@ -671,10 +685,9 @@ do przeuczenia.
 
 
 \subsubsection{Metoda wektorów nośnych \ang{support vector machines})}
-Podejście stosujące duży margines między klasami.
-Główna idea polega na znalezieniu hiperpłaszczyzny (patrz rys. \ref{image:svm}),
-która podzieli teksty na pozytywne i negatywne z marginesem pomiędzy klasami tak
-dużym jak to tylko możliwe.
+Metoda wektorów nośnych to metoda klasyfikacji, której główna idea polega na
+znalezieniu hiperpłaszczyzny \refimg{image:svm}, która podzieli teksty na
+pozytywne i negatywne z marginesem pomiędzy klasami tak dużym jak to tylko możliwe.
 
 
 \begin{figure}[ht!]
@@ -816,17 +829,16 @@ Zastosowanie geolokacji może być bardzo szerokie, między innymi:
   prawego (np. ukrywanie treści zabronionych w danym miejscu).
 \end{itemize}
 W szczególności w przypadku sieci społecznych geolokacja może być pomocna do
-ustalenia miejsca przebywania danych grup i może prowadzić
-do uzupełnienia zebranych danych o kolejne, wzbogacające analizę danej społeczności,
-pozwalające na wyciągnięcie bogatszych wniosków. Pomocnym może być na przykład
-zbadanie reakcji społeczeństwa w różnych regionach kraju na planowane
-przez rząd zmiany w prawie -- może to na przykład prowadzić do ich wycofania.
+ustalenia miejsca przebywania danych grup. Prowadzi to do uzupełnienia zebranych
+danych. Dzięki temu analiza danej społeczności może być wzbogacona.
+Ciekawym zastosowaniem może być na przykład zbadanie reakcji społeczeństwa w
+różnych regionach kraju na planowane przez rząd zmiany w prawie.
 
-Jako główne zalety stosowania geolokacji \cite{lostInGeolocation} z punktu
-widzenia użytkowników telefonów komórkowych i sieci społecznych wymienia się
-dzielenie się ze społecznością (56\%) oraz dzielenie się z osobami, które się 
-zna lub można poznać (spotkać) (41\%). Głównymi problemami związanymi z 
-dzieleniem się geolokacją są obawy o prywatność (33\%) oraz brak korzyści z niej
+Główne zalety dzielenia się informacją o geolokacji \cite{lostInGeolocation} (z
+punktu widzenia użytkowników telefonów komórkowych i sieci społecznych) to
+to udostępnianie jej z ogólnie rozumianą społecznością (56\%) oraz ze
+ze znajomymi (41\%).
+Głównymi problemami są obawy o prywatność (33\%) oraz brak korzyści z niej
 wynikających (26\%).
 
 

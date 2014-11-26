@@ -30,9 +30,8 @@ Wielkie firmy chcą wiedzieć jak odbierane są ich produkty, jakie emocje
 wzbudzają wśród klientów ich usługi i czy udaje im się spełniać ich oczekiwania.
 Analiza użytkowników serwisów społecznościowych może być także bardzo
 interesującym przedmiotem badań socjologów nad zmieniającym się społeczeństwem i
-wpływem Internetu na ten proces.
-Dodatkowo, analiza geolokalizacji może pozwolić marketingowcom na
-odkrywanie nowych rejonów świata, w których mogliby oferować swoje
+wpływem Internetu na ten proces. Analiza geolokalizacji może pozwolić
+marketingowcom na odkrywanie nowych rejonów świata, w których mogliby oferować swoje
 produkty i usługi.
 
 Naprzeciw tym potrzebom budowane są systemy informatyczne, które potrafią takie
@@ -41,44 +40,67 @@ zrealizowany w ramach tej\linebreak pracy~magisterskiej.
 
 \section{Cel pracy}
 Celem niniejszej pracy jest przedstawienie możliwości wykorzystania
-analizy sentymentu oraz geolokacji w analizie użytkowników sieci
+analizy sentymentu oraz geolokacji w analizie zachowań użytkowników sieci
 społecznościowych. Praca ta ma przedstawić czy możliwe jest połączenie tych
 trzech dziedzin ze sobą i jeśli tak, to w jaki sposób to zrobić i co dzięki
-temu można się dowiedzieć.
+temu można się dowiedzieć. 
+Analiza sentymentu polega na badania wydźwięku
+wypowiedzi. Polega ona na określaniu danego tekstu jako pozytywnego, negatywnego lub neutralnego.
+Zastosowanie komputerowych technik do badania sentymentu pozwala na dużo szybszą
+ocenę pojedynczego tekstu lub grupy tekstów w porównaniu do ręcznego badania.
+Geolokacja to technika identyfikacji geograficznego położenia osoby lub
+urządzenia za pomocą cyfrowych danych przetwarzanych przy pomocy Internetu.
+Poprzez zastosowanie nadajników GPS w nowoczesnych urządzeniach elektronicznych
+(telefony, tablety) ich użytkownicy mogą udostępniać innym informacje o swojej
+lokalizacji. Zastosowanie geolokacji pozwala odkrywać charakterystyczne
+zachowania w różnych rejonach świata.
+Analiza sieci społecznych zajmuje się badaniem struktury społecznej tworzonej
+przez jednostki (osoby lub organizacji) i połączeniami między nimi. Spośród
+trzech wymienionych dziedzin jest najdłużej badanym obszarem. Pozwala odkrywać
+rodzaje połączeniem między jednostkami, kierunki ewolucji danych grup oraz
+przewidywać zmiany w nich zachodzące.
 
-Przedmiotem badań są użytkownicy serwisu mikroblogowego Twitter, a dokładniej
-rzec biorąc osoby komentujące mecze piłkarskie w ramach angielskiej Premier
-League.
-Staram się odpowiedzieć na~pytania:
+Przedmiotem niniejszych badań są użytkownicy serwisu mikroblogowego
+Twitter\footnote{www.twitter.com}. Skupiono się na osobach komentujących mecze
+piłkarskie angielskiej Premier League. Praca podejmuje następujące tematy:
 \begin{itemize}
-  \item jak internauci korzystają z mediów społecznościowych,
-  \item kiedy są najaktywniejsi,
-  \item jakie wyrażają emocję,
-  \item z jakich miejsc komentują,
-  \item czy i w jakie grupy się łączą.
+  \item jak internauci korzystają z mediów społecznościowych -- jakie
+  charakterystyczne zachowania można zauważyć,
+  \item kiedy są najaktywniejsi i tworzą najwięcej wpisów i komentarzy,
+  \item jakie wyrażają emocję -- kiedy i dlaczego tworzą wpisy pozytywne, a
+  kiedy negatywny, jaki ma to wpływ na innych,
+  \item z jakich miejsc komentują i dlaczego, jak daleko znajdują się od
+  siebie, jak to wpływa na interakcje między nimi,
+  \item czy i jakie grupy tworzą, jak te grupy się zmieniają w czasie i
+  dlaczego?
 \end{itemize}
 
+Do realizacji postawionych celów zbudowany został system
+zbierający i przetwarzający dane z serwisu Twitter. Przeprowadzonych zostało
+wiele eksperymentów mających odpowiedzieć na zadane pytania. Zaprezentowane
+zostały ich wyniki i wnioski.
+
 \section{Struktura i zawartość pracy}
-W niniejszy dokumencie można wyróżnić trzy części. W pierwszej prezentuję
-aktualny przegląd badań dotyczący poruszanych przeze mnie tematów, który
-opisany został w rozdziale \ref{chapter:przegladbadan}, a więc 
+Pracę można podzielić trzy części. W pierwszej zaprezentowany jest
+aktualny przegląd badań dotyczący poruszanych tematów, który
+opisany został w rozdziale \ref{chapter:przegladbadan}. Są to 
 informacje na temat sieci społecznych, analizy sentymentu, geolokacji
 a także na temat Twittera w kontekście aktualnego stanu wiedzy na ich temat i
 sposobu wykorzystania ich w nauce.
 
 Drugą część stanowią rozdziały \ref{chapter:koncepcjarozwiazania} oraz
-\ref{chapter:architektura}, gdzie prezentuję odpowiednio koncepcję rozwiązania
-oraz architekturę systemu. W pierwszym z nich przedstawiam koncepcję, metody i
-algorytmy, które zastosowałem w procesie przeprowadzania badań. Omawiam tam
-również sposób w jaki dane były zbierane i przetwarzane. Opisany jest algorytm
-badania wydźwięku wypowiedzi a także sposoby badania sieci społecznych i
-geolokacji. W drugim zaś przedstawiona jest architektura zbudowanego systemu.
+\ref{chapter:architektura}, gdzie zaprezentowano koncepcję
+rozwiązania oraz architekturę systemu. W pierwszym z nich przedstawiona jest
+koncepcja, metody i algorytmy, które zostały zastosowane w procesie
+przeprowadzania badań. Omówiony tam jest sposób w jaki dane były
+zbierane i przetwarzane. Opisany jest także algorytm badania wydźwięku
+wypowiedzi oraz sposoby badania sieci społecznych i geolokacji. W drugim zaś
+przedstawiona jest zastosowana architektura systemu i wykorzystane narzędzia.
 
 Trzecia część pracy to rozdział \ref{chapter:eksperymenty}, w którym
-prezentowane są eksperymenty przeprowadzone na zebranych danych.
-Koncentruję się na pokazaniu zastosowania Twittera w analizie
-sentymentu, sieci społecznych i geolokalizacji starając się połączyć
-ze sobą te trzy dziedziny.
+zaprezentowane są przeprowdzone eksperymenty. Skupiają się one na pokazaniu
+zastosowania Twittera w analizie sentymentu, sieci społecznych i geolokalizacji.
+Nacisk położony jest również na to by połączyć ze sobą te trzy dziedziny.
 
 %Każdy eksperyment jest opisany, posiada w miarę potrzeb załączony wykres,
 %oraz wnioski, które można na jego podstawie wysnuć.

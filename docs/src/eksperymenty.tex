@@ -4,7 +4,7 @@
 W niniejszym rozdziale przedstawione są eksperymenty, które zostały
 przeprowadzone na zebranych wcześniej danych.
 Opisany jest sposób ich wykonania, wyniki i wnioski.
-Na początku w sekcji \ref{section:opisdanych} opisana jest charakterystyka
+Na początku w rozdziale \ref{section:opisdanych} opisana jest charakterystyka
 zebranych danych, a następnie opisuję eksperymenty związane z analizą sentymentu
 \ref{section:analizasentymentu2}, analizą społeczną 
 \ref{section:analizaspoleczna} i analizą geolokacji 
@@ -431,15 +431,14 @@ retweetują wpisy innych zwolenników, a ci drudzy częściej dyskutują ze sob�
 
 
 
-
 \subsection{Sentyment odpowiedzi między zwolennikami i przeciwnikami drużyny}
 \label{subsection:sentymentwrelacjach}
 Oprócz zbadania rodzaju i charakterystyki komunikacji pomiędzy użytkownikami 
 Twittera przyjrzano się także bliżej komunikacji związanej z odpowiedziami 
 (\textit{replies}). Przeprowadzono eksperyment, w którym zwrócono uwagę
 na wydźwięk wpisów będących odpowiedziami na inne wpisy -- ponownie z podziałem
-na zwolenników i przeciwników danej drużyny. W tej sekcji skupiono się tylko na
-odpowiedziach, gdyż niemożliwe jest badanie sentymentu retweetów, które są
+na zwolenników i przeciwników danej drużyny. W tym rozdziale skupiono się tylko
+na odpowiedziach, gdyż niemożliwe jest badanie sentymentu retweetów, które są
 tylko podaniem dalej innych wpisów. Poniżej prezentuję jak rozkładał się
 sentyment wpisów dla wszystkich kombinacji zwolenników i przeciwników
 Arsenalu jako autorów i odpowiadających.
@@ -548,8 +547,8 @@ Na pierwszym \refimg{image:grupy-arsenal} przedstawione są dane
 dla Arsenalu, a na drugim \refimg{image:grupy-munited} dla Manchesteru United.
 Oprócz wielkości poszczególnych grup wykresy prezentują także podobieństwo
 zbioru użytkowników komentującego następujące po sobie wydarzenia.
-Sposoby wykrywania grup i badania podobieństwa zostały opisane w sekcji
-\label{subsection:miary-relacje}.
+Sposoby wykrywania grup i badania podobieństwa zostały opisane w rozdziale
+\ref{subsection:miary-relacje}.
  
 \begin{figure}[ht!]
 \centering
@@ -632,21 +631,23 @@ geograficznym.
 
 \subsection{Odległość między użytkownikami a częstość kontaktów}
 \label{subsection:odlegloscmiedzyuzytkownikami}
-Zbadana została zależność \rref{subsubsection:zmierzenieodleglosci} pomiędzy tym
-jak często użytkownicy się ze sobą komunikują, a tym w jakiej odległości
-fizycznej od siebie się znajdują \refimg{image:relacje-a-odleglosc}.
+Pierwsze badanie polegało na zmierzeniu odległości fizycznej pomiędzy
+użytkownikami, którzy się ze sobą kontaktują i zbadaniu korelacji tej odległości
+do liczby wiadomości jakie między sobą wymieniają. Sposób przeprowadzenia tego
+badania został opisany w rozdziale \ref{subsubsection:zmierzenieodleglosci}.
 
 \begin{figure}[ht!]
 \centering
-\includegraphics[width=110mm]{img/relacje-a-odleglosc.png}
+\includegraphics[width=80mm]{img/relacje-a-odleglosc.png}
 \caption{Odległość między użytkownikami a częstość kontaktów}
 \label{image:relacje-a-odleglosc}
 \end{figure}
 
 Każda kolejna kolumna na powyższym wykresie pokrywa obszar o dziesięciokrotnie 
-większym promieniu. Oznacza to, że pole powierzchni, którego dotyczą rośnie
+większym promieniu. Oznacza to, że powierzchnia, której dotyczą rośnie
 eksponencjalnie. Pomimo tego, liczba użytkowników którzy wchodzili ze sobą
-w interakcje jest za każdym razem tego samego rzędu.
+w interakcje jest za każdym razem tego samego rzędu wielkości (co widać na
+wykresie \ref{image:relacje-a-odleglosc}).
 Oznacza to więc, że im bliżej siebie byli użytkownicy fizycznie tym częściej
 odpowiadali na swoje wpisy. Gdy znajdowali się w odległości maksymalnie
 10 kilometrów to do wymiany wpisów dochodziło tak samo
@@ -734,7 +735,6 @@ to za pomocą analizy rozkładu wpisów na mapie bez problemu zlokalizujemy
 położenie tych miast.
 Właśnie w nich znajduje się najwięcej ich kibiców generujących największą liczbę
 wpisów.
-
 Widać więc, że dane wydarzenie angażuje przede wszystkim osoby, którym jest ono
 bliskie. Zastosowanie geolokalizacji pozwala nam te miejsca odkryć. I tak jak w
 przypadku meczu piłarskiego można takie miejsca określić de facto jeszcze przed
@@ -760,7 +760,7 @@ Eksperyment ten został przeprowadzony zgodnie z opisem w rozdziale
 
 \begin{figure}[ht!]
 \centering
-\includegraphics[width=120mm]{img/odleglosc-od-stadionu-home.PNG}
+\includegraphics[width=95mm]{img/odleglosc-od-stadionu-home.PNG}
 \caption{Odległość od stadionu w meczach Arsenalu u siebie}
 \label{image:odleglosc-od-stadionu-gospodarz}
 \end{figure}
@@ -768,7 +768,7 @@ Eksperyment ten został przeprowadzony zgodnie z opisem w rozdziale
 
 \begin{figure}[ht!]
 \centering
-\includegraphics[width=120mm]{img//odleglosc-od-stadionu-away.png}
+\includegraphics[width=95mm]{img//odleglosc-od-stadionu-away.png}
 \caption{Odległość od stadionu w meczach Arsenalu na wyjeździe}
 \label{image:odleglosc-od-stadionu-gosc}
 \end{figure}
@@ -783,7 +783,6 @@ których autorami są przeciwnicy Arsenalu.
 W przypadku kiedy spojrzymy na kolumnę z wpisami wysyłanymi z odległości
 1000-10000 tysięcy kilometrów od stadionu wtedy w obu przypadkach więcej wpisów
 wysyłanych jest przez zwolenników londyńskiego klubu.
-
 Widać więc, że spora część kibiców Arsenalu zapewne komentuje z Londynu
 i nie przemieszcza się za swoją drużyną na każdy mecz. Wówczas, gdy klub rozgrywa
 spotkanie na wyjeździe bliżej stadionu są kibice drużyny przeciwnej,

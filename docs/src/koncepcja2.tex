@@ -143,7 +143,7 @@ jakiejś jednostce czasu -- na przykład w pojedynczym meczu).
 
 Odkrywanie grup przeprowadziłem przy pomocy algorytmu szybkiego wykrywania grup
 w dużych sieciach \ang{fast unfolding of communities in large networks}
-opisanego w \cite{FastUnfoldingOfCommunites}, który został zaimplementowany w
+\rref{subsection:fastufoldingofcommunities}, który został zaimplementowany w
 środowisku Gephi. Wyniki klasyfikacji wierzchołków do odpowiednich grup zostały
 następnie zapisane w bazie danych.
 
@@ -182,7 +182,7 @@ z geolokacją można otrzymać takiego rodzaju mapy.
 \section{Zastosowane algorytmy i miary}
 \label{section:wielkosciwykorzystywane}
 % ==============================================================================
-W tej sekcji zaprezentowane są algorytmy i miary, które zostały zastosowane w
+W tym rozdziale zaprezentowane są algorytmy i miary, które zostały zastosowane w
 zaprezentowanych w rozdziale \ref{chapter:eksperymenty} eksperymentach.
 Przedstawione są one z podziałem na moduł, którego dotyczą.
 
@@ -238,14 +238,14 @@ od sympatii.
 
 \subsection{Relacje między użytkownikami i grupy}
 \label{subsection:miary-relacje}
-W tej sekcji przedstawione zostały miary i techniki użyte podczas eksperymentów
-związanych z odkrywaniem relacji i grup między użytkownikami.
+W tym rozdziale przedstawione zostały miary i techniki użyte podczas
+eksperymentów związanych z odkrywaniem relacji i grup między użytkownikami.
 
 \subsubsection{Wykrywanie grup}
 \label{subsubsection:koncepcja-wykrywaniegrup}
 % gephi, modularity
-Do wykrywania grup wśród sieci społecznych zastosowałem model opisany w sekcji
-\ref{subsection:modelgrupirelacjispolecznych}. Znalezione w ten sposób grupy
+Do wykrywania grup wśród sieci społecznych zastosowałem model opisany w
+rozdziale \ref{subsection:modelgrupirelacjispolecznych}. Znalezione w ten sposób grupy
 użytkowników poddane zostały analizie -- z podziałem na kolejne mecze.
 Grupy te zostały zagregowane w trzy przedziały: od 3 do 4 osób, od 5 do 9 osób
 oraz więcej niż 9 osób. Na takich zagregowanych grupach został przeprowadzony
@@ -276,7 +276,7 @@ wydarzeniami a liczby wierzchołków w pierwszym z nich.
 
 
 \subsection{Geolokacja}
-W niniejszej sekcji opisuję wielkości, które zostały zastosowane podczas
+W niniejszym rozdziale opisuję wielkości, które zostały zastosowane podczas
 przeprowadzania eksperymentów, w których najważniejszym elementem było położenie
 fizyczne, czyli współrzędne przypisane do wpisu.
 
@@ -436,7 +436,7 @@ Kolejne kroki, które przekształciły tweety do takiej postaci to:
   
   
   \item Oznaczenie wyrazów zaprzeczonych przedrostkiem \texttt{NOT\_} (opisuję
-  dokładniej w sekcji \ref{subsection:sentyment-algorytm}). \\
+  dokładniej w rozdziale \ref{subsection:sentyment-algorytm}). \\
   \texttt{didn't \textbf{NOT\_think NOT\_i NOT\_could NOT\_respect NOT\_any 
   NOT\_more NOT\_than NOT\_i NOT\_already NOT\_did}, bute what a gentleman he 
   is for not \textbf{NOT\_to NOT\_celebrate NOT\_that NOT\_goal:)}}
@@ -476,23 +476,16 @@ Kolejne kroki, które przekształciły tweety do takiej postaci to:
 
 \subsection{Zastosowanie algorytmu}
 \label{subsection:sentyment-algorytm}
-% + dobór parametrów, emotikony, zaprzeczenia
- 
-%Do przeprowadzenia analizy sentymentu na zebranych tweetach skorzystałem z
-%metody opracowanej przez Alexandra Paka i Patricka Paroubek'a, którą 
-%przedstawiłem w sekcji \ref{subsubsection:pakandparoubek}.
-%Jest to technika, która pozwala badać sentyment nie posiadając wcześniej
-%słownika sentymentu. Dlatego też pierwszym krokiem jest zbudowanie takiego
-%słownika z zebranych danych.
-%W tym celu wybiera się podzbiór wpisów, które zawierają emotikony.
-%W związku ze 140-znakowym ograniczeniem na długość znaków przyjmuje się
-%założenie, że dana emotikona nadaje wydźwięk całemu wpisowi.
 
-Według artykułu \cite{EmoticonAnalysisTwitter} 20 emotikon pokrywa w 90\%
-stosowanie tych znaków graficznych we wpisach (na 100 wpisów z emotikonami, 90 z
-nich zawiera emotikonę ze zbioru tych 20) na Twitterze. Dlatego też skorzystałem
-z tego zbioru do własnych badań dzieląc emotikony na wyrażające wydźwięk pozytywny i
-negatywny w sposób\footnote{emotikona \texttt{D:} została pominięta, gdyż
+W celu przeprowadzenia analizy sentymentu wykorzystano algorytm Paka i
+Paroubek'a \ref{subsubsection:pakandparoubek}. Pierwszym krokiem było zbudowanie
+słownika sentymentu ze zgromadzonego zbioru danych. Aby to osiągnąć należy
+skorzystać z wpisów z emotikonami wskazującymi wydźwięk. 
+
+Według artykułu \cite{EmoticonAnalysisTwitter} 20 różnych emotikon używane
+jest w 90\% wpisów z jakimikolwiek emotikonami.
+Dlatego też użyto tego zbioru do badań dzieląc emotikony na
+wyrażające wydźwięk pozytywny i negatywny w sposób\footnote{emotikona \texttt{D:} została pominięta, gdyż
 pokrywała więcej przypadków niż tylko użycie emotikony (np.:
 \texttt{Accepte\textbf{d:} Mary, John, Jane})} przedstawiony w tabeli
 \ref{tab:wydzwiek-emotikon}.
@@ -529,7 +522,7 @@ występowania wyrazów w kontekście pozytywnym i negatywnym.
 Najpierw badano sentyment całego wpisu (na podstawie emotikony -- gdy była ich
 większa ilość wybierano ten sentyment, który przeważał) a następnie dla każdego
 wyrazu z tego wpisu zwiększano licznik odpowiednio wystąpień pozytywnych lub
-negatywnych. Oczywiście wpisy były już poddane normalizacji.
+negatywnych.
 W ten sposób uzyskano słownik sentymentu zbudowany z zebranych danych, który
 zawierał 34183 słowa, a najpopularniejsze z nich zaprezentowane są w tabeli
 \ref{tab:liczebnosc-slow-sentymentu}, gdzie:
@@ -620,8 +613,10 @@ zaprezentowane w artykule \cite{thumbsUp2002}, które polega na dodaniu
 przedrostka \texttt{NOT\_} do wszystkich słów pomiędzy wyrazem negującym
 a najbliższym znakiem przestankowym. Lista wyrazów negujących
 została zaczerpnięta z \cite{englishNots1983}. Słowa zanegowane miały osobno
-liczone liczby wystąpień w kontekstach pozytwnych i negatywnych. W takiej formie
-brały udział w ocenie sentymentu wpisów z Twittera.
+liczone liczby wystąpień w kontekstach pozytwnych i negatywnych.
+Dzięki temu uzyskane wyniki są bardziej dokładne, gdyż wyrazy zaprzeczeniami i
+bez są traktowane osobno, mając w ten sposób różny wpływ na ogólny wydźwięk
+wypowiedzi.
 
 
 
@@ -642,10 +637,8 @@ Wygenerowałem słownik ze zbioru uczącego. Wpisy ze zbioru testowego oznaczył
 spodziewanym sentymentem -- był to sentyment emotikony jaką zawierały. Następnie
 przeprowadziłem testy poprawności klasyifkacji zbioru testowego słowami ze
 zbioru uczącego dla wyrazów o minimalnej długości od 1 do 10 i minimalnej
-liczbie wystąpień od 1 do 100 -- daje to w sumie 1000 testów.
-Najwyższy stopień poprawności klasyfikacji uzyskałem dla parametrów równych:
-minimalna długość wyrazu -- 3, \mbox{minimalna częstotliwość wystąpień -- 1}.
-Wyniki testów przedstawiam na wykresie \ref{image:pak-paroubek-parametry}.
+liczbie wystąpień od 1 do 100 -- daje to w sumie 1000 testów 
+\refimg{image:pak-paroubek-parametry}.
 
 \begin{figure}[ht!]
 \centering
@@ -653,3 +646,9 @@ Wyniki testów przedstawiam na wykresie \ref{image:pak-paroubek-parametry}.
 \caption{Dobór parametrów algorytmu analizy sentymentu}
 \label{image:pak-paroubek-parametry}
 \end{figure}
+
+Jak widać na wykresie \refimg{image:pak-paroubek-parametry} 
+najwyższy stopień poprawności klasyfikacji (oś pionowa) uzyskano dla parametrów
+równych: minimalna długość wyrazu -- 3, minimalna częstotliwość wystąpień -- 1.
+Wyniki poprawności klasyfikacji wyraźnie spadają, gdy minimalna długość wyrazu
+przekracza 6 znaków.

@@ -2,7 +2,7 @@
 \label{chapter:architektura}
 W tym rozdziale opisuję architekturę zbudowanego systemu, wykorzystane
 technologie i użyte narzędzia.
-W sekcji \ref{section:architekturasystemu} opisana jest architektura, w
+W rozdziale \ref{section:architekturasystemu} opisana jest architektura, w
 \ref{section:zastosowanetechnologie} omówione są technologie, a w ostatniej
 części \ref{section:bibliotekiinarzedzia} wymienione są użyte biblioteki i
 narzędzia.
@@ -11,7 +11,7 @@ narzędzia.
 
 \begin{figure}[ht!]
 \centering
-\includegraphics[width=160mm]{img/architektura.png}
+\includegraphics[width=150mm]{img/architektura.png}
 \caption{Architektura systemu}
 \label{image:architektura-systemu}
 \end{figure}
@@ -20,9 +20,11 @@ w której zostały zaimplementowane wszystkie potrzebne mechanizmy.
 Aplikacja ta komunikuje się z pojedynczą bazą danych, w której zawarte
 są wszystkie rekordy potrzebne zarówno do zbierania danych jak i te, które są
 wynikiem analiz. Dodatkowo odpowiada ona za komunikację z usługami w chmurze --
-czyli zbieraniem danych z Twittera i \textit{georeversingiem} lokacji z Open
-Street Map. Wszystkie analizy zebranych danych również zostały przeprowadzone
-przy użyciu aplikacji Javowej.
+czyli zbieraniem danych z Twittera i \textit{georeversingiem}\footnote{georeversing
+ -- odkrywanie informacji o miejscu na Ziemi
+(kontynent, kraj, miasto, itp.) przy pomocy jedynie współrzędnych
+geograficznych} lokalizacji z Open Street Map. Wszystkie analizy zebranych
+danych również zostały przeprowadzone przy użyciu aplikacji Javowej.
 
 Oprócz niej wykorzystano także program Gephi, którego wyniki działania zapisano
 do plików, a następnie przy użyciu wyżej wymienionej aplikacji przeparsowano i
@@ -87,6 +89,8 @@ PostgreSQL.
 Na rysunku \ref{image:schemat-bazy} zaprezentowany jest schemat bazy danych. W
 przedstawionych tabelach zostały zapisane wszystkie informacje potrzebne do
 pobierania danych z nasłuchiwanych meczów.
+
+Opis najważniejszych tabel został załączony na końcu pracy.
 
 \begin{figure}[ht!]
 \centering
