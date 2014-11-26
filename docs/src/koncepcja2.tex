@@ -4,15 +4,15 @@ zachowań użytkowników sieci społecznościowych.}
 
 W tym rozdziale opisany jest sposób realizacji celów mojej pracy magisterskiej
 -- czyli sposób powiązania ze sobą analizy sentymentu i geolokacji w kontekście
-badania zachowań użytkowników sieci społecznościowych. W podrozdziale
+badania zachowań użytkowników sieci społecznościowych. W rozdziale
 \ref{section:modelsystemu} zaprezentowany został model systemu z uwzględnieniem
-przetwarzania wstępnego w \ref{subsection:zbieraniedanych}, modelu analizy
-sentymentu w \ref{subsection:modelanalizysentymentu}, modelu grup społecznych w
-\ref{subsection:modelgrupirelacjispolecznych} i modelu geolokacji w
-\ref{subsection:modelgeolokacji}. Następnie przedstawione są wielkości
-wykorzystywane w eskperymentach w \ref{section:wielkosciwykorzystywane}, a na
-końcu szczegółowo została opisana koncepcja i algorytm analizy sentymentu w
-\ref{section:koncepcjaialgorytmanalizysentymentu}.
+przetwarzania wstępnego \rref{subsection:zbieraniedanych}, modelu analizy
+sentymentu \rref{subsection:modelanalizysentymentu}, modelu grup społecznych
+\rref{subsection:modelgrupirelacjispolecznych} i~modelu geolokacji
+\rref{subsection:modelgeolokacji}. Następnie przedstawione są miary i algorytmy
+wykorzystywane w eskperymentach \rref{section:wielkosciwykorzystywane}, a na
+końcu szczegółowo została opisana koncepcja algorytmu 
+analizy \mbox{sentymentu~\rref{section:koncepcjaialgorytmanalizysentymentu}}.
 
 
 
@@ -75,11 +75,9 @@ słowami kluczowymi byłoby np. 100 z 1000 wpisów, wówczas program nadal
 otrzymałby tylko 10 z nich.}. Każdemu wpisowi nadawany jest identyfikator meczu (wprowadzonego
 wcześniej do bazy danych) i w takiej postaci jest on zapisywany do bazy.
 
-Takie podejście to pozwala na elastyczną
-wymianę słów kluczowych do nasłuchiwania, gdyż program na wejściu potrzebuje
-jedynie identyfikator meczu, do którego już są przypisane słowa kluczowe.
-
-
+Takie podejście pozwala na elastyczną wymianę słów kluczowych do nasłuchiwania,
+gdyż program na wejściu potrzebuje jedynie identyfikator meczu, do którego już
+są przypisane słowa kluczowe.
 
 
 \subsection{Model analizy sentymentu}
@@ -103,7 +101,7 @@ Dla każego tweeta w bazie obliczana była jego wartość \textit{valence}
 Aby do tego doszło tweet był wcześniej oczyszczany z elementów, które mogły
 zakłócić wyliczenie tej wartości. Proces przebiegał zgodnie z algorytmem Paka i
 Paroubek'a \rref{subsubsection:pakandparoubek}, a szczegóły jego działania wraz
-z zastosowaną przez ze mnie modyfikacją (polegającą na dodaniu wykrywania
+z zastosowaną modyfikacją (polegającą na dodaniu wykrywania
 negacji) zostały opisane w rozdziale
 \ref{section:koncepcjaialgorytmanalizysentymentu}.
 
@@ -141,11 +139,10 @@ Do konkretnych eksperymentów dane te były odpowiednio agregowane (np. zliczano
 liczbę powiązań między wierzchołkami i traktowano je jako pojedynczą relację w
 jakiejś jednostce czasu -- na przykład w pojedynczym meczu).
 
-Odkrywanie grup przeprowadziłem przy pomocy algorytmu szybkiego wykrywania grup
-w dużych sieciach \ang{fast unfolding of communities in large networks}
-\rref{subsection:fastufoldingofcommunities}, który został zaimplementowany w
-środowisku Gephi. Wyniki klasyfikacji wierzchołków do odpowiednich grup zostały
-następnie zapisane w bazie danych.
+Odkrywanie grup przeprowadzono przy pomocy algorytmu szybkiego wykrywania grup w
+dużych sieciach \ang{fast unfolding of communities in large networks}
+\rref{subsection:fastufoldingofcommunities}. Wyniki klasyfikacji wierzchołków do
+odpowiednich grup zostały następnie zapisane w bazie danych.
 
 
 \subsection{Model geolokacji}
@@ -164,8 +161,11 @@ tweetów z całego zbioru). Schemat przetwarzania tych danych prezentuje rysunek
 \end{figure}
 
 Przy pomocy serwisu \textit{Open Street Map}\footnote{www.openstreetmap.com} i
-skorzystaniu z API służącego do georeversingu dla każdego tweeta posiadającego
-współrzędne pobrano informacje szczegółowe na temat miejsca, na które te
+skorzystaniu z API służącego do georeversingu\footnote{georeversing
+ -- odkrywanie informacji o miejscu na Ziemi
+(kontynent, kraj, miasto, itp.) przy pomocy jedynie współrzędnych
+geograficznych} dla każdego tweeta
+posiadającego współrzędne pobrano informacje szczegółowe na temat miejsca, na które te
 współrzędne wskazują. W ten sposób uzyskano takie dane jak: kraj,
 stan/województwo (ang. \textit{state}), powiat/hrabstwo (ang. \textit{county})
 oraz miasto (ang. \textit{city}).
@@ -244,7 +244,7 @@ eksperymentów związanych z odkrywaniem relacji i grup między użytkownikami.
 \subsubsection{Wykrywanie grup}
 \label{subsubsection:koncepcja-wykrywaniegrup}
 % gephi, modularity
-Do wykrywania grup wśród sieci społecznych zastosowałem model opisany w
+Do wykrywania grup wśród sieci społecznych zastosowano model opisany w
 rozdziale \ref{subsection:modelgrupirelacjispolecznych}. Znalezione w ten sposób grupy
 użytkowników poddane zostały analizie -- z podziałem na kolejne mecze.
 Grupy te zostały zagregowane w trzy przedziały: od 3 do 4 osób, od 5 do 9 osób
@@ -345,10 +345,10 @@ czy ich ulubiona drużyna gra mecz u siebie czy na wyjeździe.
 \label{section:koncepcjaialgorytmanalizysentymentu}
 % ==============================================================================
 
-W tym miejscu opisuję dokładnie koncepcję wyznaczania wydźwięku wypowiedzi i
-zastosowany algorytm do analizy sentymentu. Przedstawiam czynności wstępne,
-prezentuję wybrany algorytm i zastosowane w nim modyfikacje oraz opisuję sposób
-aplikacji algorytmu na przykładowych tweetach.
+W tym miejscu opisano dokładnie dokładnie koncepcję wyznaczania wydźwięku
+wypowiedzi i zastosowany algorytm do analizy sentymentu. Przedstawione są
+czynności wstępne, wybrany algorytm i zastosowane w nim modyfikacje oraz
+sposób aplikacji algorytmu na przykładowych tweetach.
 
 \subsection{Przygotowanie tekstu}
 \label{subsection:normalizacjatekstu}
@@ -356,7 +356,7 @@ aplikacji algorytmu na przykładowych tweetach.
 
 W związku z tym, że wpisy są tworzone przez zwykłych użytkowników posiadają one
 wiele znaków i elementów, które z punktu widzenia analizy sentymentu są zbędne,
-a czasami prowadzące do błędów. Dlatego też tekst należy poddać normalizacji,
+a czasami prowadzące do błędów. Dlatego też tekst należy poddać oczyszczeniu,
 usunięciu zbędnych elementów, szumów i spamu. Przykładowe wpisy przed i po
 normalizacji przedstawia tabela \ref{tab:wpisy-normalizacja}.
 
@@ -455,7 +455,7 @@ Kolejne kroki, które przekształciły tweety do takiej postaci to:
 	
 	\item Usunięcie wyrazów zdefiniowanych w stop liście (powszechne wyrazy danego
 	języka, które mogą być pominięte nie tracąc jednocześnie żadnej informacji).
-	Zastosowałem stop listę z serwisu \mbox{WebPageAnalyse.com} 
+	Zastosowano stop listę z serwisu \mbox{WebPageAnalyse.com} 
 	\cite{WebPageAnalyse} zawierającą 528 słów.
 
 	\texttt{\sout{You up for} Arsenal match \sout{later on what} time \sout{maybe if} 
@@ -608,7 +608,7 @@ $AVG\_VALENCE$ jest średnią arytmetyczną wartości $valence$ wszystkich wpis�
 W oryginalnym algorytmie \rref{subsubsection:pakandparoubek} nie ma żadnego sposobu na
 wykrywanie i obsługę negacji. Oczywistym jednak jest, iż zaprzeczenia zmieniają
 znaczenie dalszej części tekstu i muszą być w jakiś sposób obsłużone.
-Wpisy na Twitterze są krótkie, więc postanowiłem zastosować podejście
+Wpisy na Twitterze są krótkie, więc zastosowano podejście
 zaprezentowane w artykule \cite{thumbsUp2002}, które polega na dodaniu
 przedrostka \texttt{NOT\_} do wszystkich słów pomiędzy wyrazem negującym
 a najbliższym znakiem przestankowym. Lista wyrazów negujących
@@ -626,23 +626,21 @@ wypowiedzi.
 
 \subsection{Dobór parametrów algorytmu analizy sentymentu}
 \label{subsubsection:doborparametrow}
-Użyty przeze mnie algorytm zakłada dobór parametrów przed przeprowadzeniem
-analizy sentymentu. Parametry te dotyczą słów ze zbudowanego słownika --
+Użyty algorytm \rref{subsubsection:pakandparoubek} zakłada dobór parametrów
+przed przeprowadzeniem analizy sentymentu. Parametry te dotyczą słów ze zbudowanego słownika --
 decydując, które z nich wezmą udział w procesie analizy. Są to: minimalna
-długość słowa, minimalna liczba występowania słowa. Doboru parametrów dokonałem
-w sposób zaprezentowany w opisie algorytmu \rref{subsubsection:pakandparoubek}.
-Wykorzystałem listę wpisów z emotikonami, podzieliłem je na zbiór uczący i
+długość słowa, minimalna liczba występowania słowa. 
+Wykorzystano listę wpisów z emotikonami i podzielono je na zbiór uczący oraz
 testowy w stosunku 20\% do 80\%.
-Wygenerowałem słownik ze zbioru uczącego. Wpisy ze zbioru testowego oznaczyłem
+Wygenerowano słownik ze zbioru uczącego. Wpisy ze zbioru testowego oznaczono
 spodziewanym sentymentem -- był to sentyment emotikony jaką zawierały. Następnie
-przeprowadziłem testy poprawności klasyifkacji zbioru testowego słowami ze
+przeprowadzono testy poprawności klasyifkacji zbioru testowego słowami ze
 zbioru uczącego dla wyrazów o minimalnej długości od 1 do 10 i minimalnej
-liczbie wystąpień od 1 do 100 -- daje to w sumie 1000 testów 
-\refimg{image:pak-paroubek-parametry}.
+liczbie wystąpień od 1 do 100 -- daje to w sumie 1000 testów.
 
 \begin{figure}[ht!]
 \centering
-\includegraphics[width=160mm]{img/pak-paroubek-params_pl.png}
+\includegraphics[width=130mm]{img/pak-paroubek-params_pl.png}
 \caption{Dobór parametrów algorytmu analizy sentymentu}
 \label{image:pak-paroubek-parametry}
 \end{figure}

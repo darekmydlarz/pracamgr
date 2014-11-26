@@ -150,8 +150,8 @@ charakterystycznych danej sieci. Najważniejsze miary to \cite{estrada}:
 
 
 \subsubsection{Stopień wierzchołka}
-Miara określająca liczbę krawędzi wchodzących i 
-  wychodzących z wierzchołka \refimg{image:stopien-wierzcholka}
+Miara określająca liczbę krawędzi wchodzących i wychodzących z wierzchołka
+\refimg{image:stopien-wierzcholka}.
   
 \begin{figure}[ht!]
 \centering
@@ -192,9 +192,9 @@ $\rho(i, j)$ -- liczba wszystkich najkrótszych ścieżek pomiędzy $i$ oraz $j$
 
 \bigskip
 
-Przykładowo aby obliczyć wartość tej miary dla wierzchołka $B$ posłużmy się rysunkiem 
-\ref{image:betweenness}.
-Najkrótsze ścieżki między węzłami innymi niż $B$ to: $ABC,$ $ABD$, $ABE$, $CBD$, $CBE$, $DE$.
+Wartośc closeness dla wierzchołka B \refimg{image:betweenness} oblicza się przy
+pomocy najkrótszych ścieżki między węzłami innymi niż $B$: $ABC,$ $ABD$,
+$ABE$, $CBD$, $CBE$, $DE$.
 \mbox{W 5 z 6 z nich} znajduje się węzeł $B$, stąd wynika jego wartość \textit{betweenness}
 równa $5/6$. 
 
@@ -230,7 +230,7 @@ $N$ -- liczba wszystkich wierzchołków.
 Wartość \textit{closeness} dla pojedynczego wierzchołka liczymy sumując
 odległości między nim a pozostałymi wierzchołkami, a następnie wartość $N - 1$
 dzielimy przez wyliczoną przed chwilą sumę.
-Przykładowy graf \ref{image:closeness} i tabela \ref{tab:closeness} z
+Przykładowy graf \refimg{image:closeness} i tabela \ref{tab:closeness} z
 obliczeniami tej wielkości znajdują się poniżej.
 
 
@@ -295,9 +295,8 @@ $\lambda$ -- stała, równa największej wartości własnej macierzy sąsiedztwa
 
 \bigskip
 
-Przykładowe wartości wielkości \textit{eigenvector}
-zaprezentowano na rysunku \ref{image:eigenvector}. Wartości te zostały
-obliczone przy pomocy narzędzia Gephi\footnote{https://gephi.github.io/}.
+Przykładowe wartości wielkości \textit{eigenvector} \refimg{image:eigenvector}
+zostały obliczone przy pomocy narzędzia Gephi\footnote{https://gephi.github.io/}.
 
 \begin{figure}[ht!]
 \centering
@@ -358,9 +357,8 @@ ciężkich obliczeń. Istnieją jednak prostsze metody, takie jak między innymi
 \end{itemize}
 
 Ostatni algorytm wykorzystano w zaprezentowanych w tej pracy badaniach.
-Jego implementacja znajduje się w programie
-Gephi\footnote{https://gephi.github.io/}. Algorytm jest heurestyczną metodą
-opartą na wyliczaniu modularności wierzchołków i jej optymalizacji.
+Jego implementacja znajduje się w programie Gephi. Algorytm jest heurestyczną
+metodą opartą na wyliczaniu modularności wierzchołków i jej optymalizacji.
 Opiera się na dekompozycji dużej sieci na podzbiory społeczności, w których
 wierzchołki są ze sobą ściśle połączone. Identyfikacja tych społeczności jest
 niezwykla ważna i prowadzi do odkrywania nieznanych podsieci.
@@ -437,10 +435,8 @@ przeprowadzania ankiet, pytania ludzi co sądzą na dany temat. Internauci samod
 przedstawiają swoje opinie w Internecie, a przy pomocy analizy sentymentu bardzo
 łatwe staje się zbadanie nastrojów.
 
-
-
-Badanie sentymentu nie jest trywialne. Związane jest bezpośrednio z
-przetwarzaniem języka naturalnego, z którym związane są między innymi
+Badanie sentymentu nie jest trywialne. Wiąże się bezpośrednio z
+przetwarzaniem języka naturalnego, przy którym spotkać można między innymi
 następujące trudności \cite{ChallengeOfSpokenLanguage,
 NaturalLanguageProcessingFuture}:
 
@@ -589,7 +585,7 @@ komputerze. Wymienić można kilka podejść, między innymi:
   wyszukiwarkę i pozycjonowanie w niej stron internetowych.  
 \end{itemize}
 
-Ze względu na prostotę i małą długość tekstów do analizy zdecydowałem się
+Ze względu na prostotę i małą długość tekstów do analizy zdecydowano się
 na reprezentowanie i przetwarzanie tekstu w postaci \textit{bag of words}.
 
 
