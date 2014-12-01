@@ -10,11 +10,12 @@
 \usepackage{ulem} % przekreslanie tekstu
 \usepackage{tablefootnote} % przypisy w tabeli
 \usepackage{array} % wyrownanie w tabeli ze znacznikiem p{}
-\usepackage{draftwatermark} % watermark
 \usepackage{ulem} % wylaczenie underline w \emph
-\SetWatermarkText{wersja robocza}
-\SetWatermarkScale{0.7}
-\SetWatermarkLightness{0.95}
+%\usepackage{draftwatermark} % watermark
+%\SetWatermarkText{wersja robocza}
+%\SetWatermarkScale{0.7}
+%\SetWatermarkLightness{0.95}
+
 \usepackage[toc,page]{appendix}
 \hypersetup{%
     pdfborder = {0 0 0}
@@ -83,9 +84,10 @@
 
 \titlepages
 
+\include{podziekowanie}
 \include{streszczenie}
 \clearpage
-\setcounter{page}{4}
+\setcounter{page}{5}
 %\setcounter{tocdepth}{1}
 \tableofcontents
 \clearpage
