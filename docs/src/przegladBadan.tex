@@ -15,7 +15,7 @@ zostać zastosowana.
 Następnie opisana jest analiza sentymentu wypowiedzi i jej zastosowanie.
 Po niej omówiona jest geolokacja wraz z opisem tego co można dzięki niej się
 dowiedzieć.
-Na końcu skupiono się nad opisem serwisu społecznościowego Twitter, który
+Na końcu skupiono się na opisie serwisu społecznościowego Twitter, który
 został wykorzystany jako źródło danych do analizy sieci społecznych.
 
 
@@ -173,11 +173,11 @@ W przypadku grafów skierowanych możemy jeszcze mówić o stopniu wchodzącym
 \end{figure}
   
   
-\subsubsection{Pośrednictwo (ang. \textit{betweenness}) }  
+\subsubsection{Pośrednictwo \ang{betweenness} }  
 Liczba najkrótszych ścieżek w grafie, które przechodzą przez dany węzeł podzielona
 przez liczbę wszystkich najkrótszych ścieżek grafu. Przez najkrótszą ścieżkę 
 rozumie się taką ścieżkę między dwoma węzłami grafu, dla której liczba krawędzi
-jest najmniejsza.
+jest najmniejsza. Wielkość tę wyraża się wzorem:
   
 \begin{equation}
 BC(k) = \sum\limits_{i}\sum\limits_{j}\frac{\rho(i, k, j)}{\rho(i, j)}, \quad i \neq j \neq k
@@ -192,11 +192,11 @@ $\rho(i, j)$ -- liczba wszystkich najkrótszych ścieżek pomiędzy $i$ oraz $j$
 
 \bigskip
 
-Wartośc closeness dla wierzchołka B \refimg{image:betweenness} oblicza się przy
-pomocy najkrótszych ścieżki między węzłami innymi niż $B$: $ABC,$ $ABD$,
-$ABE$, $CBD$, $CBE$, $DE$.
-\mbox{W 5 z 6 z nich} znajduje się węzeł $B$, stąd wynika jego wartość \textit{betweenness}
-równa $5/6$. 
+Wartośc \textit{betweenness} dla wierzchołka B \refimg{image:betweenness}
+oblicza się przy pomocy najkrótszych ścieżek między węzłami innymi niż $B$, to
+jest: $ABC,$ $ABD$, $ABE$, $CBD$, $CBE$, $DE$.
+\mbox{W 5 z 6 z nich} znajduje się węzeł $B$, stąd jego wartość
+\textit{betweenness} jest równa $5/6$.
 
 \begin{figure}[ht!]
 \centering
@@ -208,7 +208,7 @@ równa $5/6$.
 Węzły o wysokiej wartości współczynnika \textit{betweenness} są interesujące
 ponieważ mogą kontrolować przepływać informacji wewnątrz sieci oraz
 mogą być zmuszone do przetwarzania większej ilości informacji.
-Z tego wynika też, że mogą być skutecznym celem ataków.
+Dlatego też mogą być skutecznym celem ataków.
     
   
 \clearpage  
@@ -230,7 +230,7 @@ $N$ -- liczba wszystkich wierzchołków.
 Wartość \textit{closeness} dla pojedynczego wierzchołka liczymy sumując
 odległości między nim a pozostałymi wierzchołkami, a następnie wartość $N - 1$
 dzielimy przez wyliczoną przed chwilą sumę.
-Przykładowy graf \refimg{image:closeness} i tabela \ref{tab:closeness} z
+Przykładowy graf \refimg{image:closeness} i tabela (tab. \ref{tab:closeness}) z
 obliczeniami tej wielkości znajdują się poniżej.
 
 
@@ -264,7 +264,7 @@ E & 3 & 1 & 2 & 1 & 0 & 7 & 0.57 \\
 \end{table}
   
 Węzłem o najmniejszej sumie odległości do innych wierzchołków -- a co za tym idzie --
-o największej wartości bliskości jest węzeł $B$. Wynika z tego, że jest to
+o największej wartości bliskości jest węzeł $B$. Jest to więc
 wierzchołek najszybciej rozsyłający informacje wewnątrz sieci. 
 
 
@@ -295,8 +295,9 @@ $\lambda$ -- stała, równa największej wartości własnej macierzy sąsiedztwa
 
 \bigskip
 
-Przykładowe wartości wielkości \textit{eigenvector} \refimg{image:eigenvector}
-zostały obliczone przy pomocy narzędzia Gephi\footnote{https://gephi.github.io/}.
+Przykładowe wartości wielkości \textit{eigenvector} zaprezentowano na rysunku
+\ref{image:eigenvector}\footnote{Obliczone przy pomocy narzędzia Gephi --
+https://gephi.github.io/}.
 
 \begin{figure}[ht!]
 \centering
@@ -338,20 +339,22 @@ W analizie sieci społecznych (traktowanych jako graf) przydatne są także
 
 \subsection{Wykrywanie grup w sieciach społecznych}
 \label{subsection:fastufoldingofcommunities}
-Grupa to dwie lub więcej osób, między którymi dłużej niż przez parę chwil 
-dochodzi do interakcji, które wzajemnie na siebie oddziałują oraz spostrzegają
-się w kategorii ,,my''~\cite[s.~268]{SocialPsychology}.
+\textit{Grupa to dwie lub więcej osób, między którymi dłużej niż przez parę
+chwil dochodzi do interakcji, które wzajemnie na siebie oddziałują oraz spostrzegają
+się w kategorii ,,my''}~\cite[s.~268]{SocialPsychology}.
 
 Jednym z elementów analizy sieci społecznych jest wyodrębnianie grup spośród
 wszystkich członków sieci. Użytkownicy w naturalny sposób tworzą między sobą
 takie grupy. Wykrycie ich daje szansę na rożne podejście do analizy różnych grup
 i ich zachowań. Ekstrakcja grup z pośród sieci społecznych może wymagać wielu
-ciężkich obliczeń. Istnieją jednak prostsze metody, takie jak między innymi:
+długotrwałych obliczeń. Istnieją jednak prostsze metody, takie jak między
+innymi:
 
 \begin{itemize}
   \item losowe przejścia po grafie \ang{random walks} badając podobieństwo wierzchołków
    \cite{ComputingCommunitesInLargeNetworks},
-  \item zastosowanie 3 rodzajów metryk i balansowanie ich ważnoścą \cite{FindingCommunityStructure},
+  \item zastosowanie 3 rodzajów metryk i balansowanie ich istotnością
+  \cite{FindingCommunityStructure},
   \item szybkie wykrywanie społeczności \ang{fast unfolding of communities in
   large networks} \cite{FastUnfoldingOfCommunites}.
 \end{itemize}
@@ -368,7 +371,7 @@ W pierwszej fazie, każdy wierzchołek przypisany jest do innej społeczności.
 Następnie dla każdego węzła badani są jego sąsiedzi i oceniana jest jakość
 modularności poprzez usunięcie aktualnej społeczności węzła i włączenie go do
 społeczności sąsiada. Węzeł dołącza do tego sąsiada, u którego zysk
-modualarności jest największy. Ten proces jest wielokrotnie powtarzany aż do
+modularności jest największy. Ten proces jest wielokrotnie powtarzany aż do
 momentu, w którym nie zauważa się żadnego zysku.
 Drugi etap  polega na budowie nowej sieci, której wierzchołkami są społeczności
 wykryte w pierwszej fazie. Wagi krawędzi między nowymi wierzchołkami wyliczane
@@ -383,7 +386,7 @@ i maksymalna modularnośc zostaje osiągnięta.
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% SENTYMENT
 \section{Sentyment wypowiedzi}
 Sentyment (inaczej wydźwięk wypowiedzi) to stosunek lub postawa wobec jakiejś
-sytuacji, zdarzenia. Badanie sentymentu wnosi bardzo dużo informacji.
+sytuacji, zdarzenia. 
 Recenzje, komentarze i opinie odgrywają istotną rolę w ocenie satysfakcji z
 produktu lub usługi czy w badaniu reakcji na wydarzenia. Dane, które zawierają
 takie informacje mają bardzo wysoki potencjał w odkrywaniu wiedzy.
@@ -680,7 +683,7 @@ jest duża szansa, że dane te będą relatywnie rzadkie i metoda ta może prowa
 do przeuczenia.
 
 
-\subsubsection{Metoda wektorów nośnych \ang{support vector machines})}
+\subsubsection{Metoda wektorów nośnych \ang{support vector machines}}
 Metoda wektorów nośnych to metoda klasyfikacji, której główna idea polega na
 znalezieniu hiperpłaszczyzny \refimg{image:svm}, która podzieli teksty na
 pozytywne i negatywne z marginesem pomiędzy klasami tak dużym jak to tylko możliwe.
