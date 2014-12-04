@@ -1,11 +1,20 @@
 \documentclass{beamer}
-\usetheme{warsaw}
+\usetheme{Warsaw}
 \usepackage[polish]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{amsmath}
 \usepackage{graphicx}
+\usepackage{tikz} % custom positions
 \beamertemplatenavigationsymbolsempty % disable navigatoin bar
+\usepackage{changepage} % adjustwidth
+
+
+\def\tikzoverlay{%
+   \tikz[baseline,overlay]\node[every overlay node]
+}%
+
+
 
 
 \title[Analiza sentymentu i geolokacja w siecach społecznych]
@@ -19,62 +28,198 @@ w wybranych portalach społecznościowych}
 Promotor: dr inż. Anna Zygmunt
 \\ \vspace{0.3cm}
 Akademia Górniczo-Hutnicza im. Stanisława Staszica w Krakowie\\
-Wydział Informatyki, Elektroniki i Telekomunikacji\\ 
-Katedra Informatyki}
+Wydział Informatyki, Elektroniki i Telekomunikacji -- Katedra
+Informatyki}
 
 \date{Kraków, 10 grudnia 2014 roku}
 
 \defbeamertemplate*{footline}{shadow theme}
 {%
   \leavevmode%
-  \hbox{\begin{beamercolorbox}[wd=.5\paperwidth,ht=2.5ex,dp=1.125ex,leftskip=.3cm plus1fil,rightskip=.3cm]{author in head/foot}%
-    \usebeamerfont{author in head/foot}\insertframenumber\,/\,\inserttotalframenumber\hfill\insertshortauthor
-  \end{beamercolorbox}%
-  \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.5ex,dp=1.125ex,leftskip=.3cm,rightskip=.3cm plus1fil]{title in head/foot}%
+  \hbox{\begin{beamercolorbox}[wd=.5\paperwidth,ht=2.5ex,dp=1.125ex,leftskip=.1cm plus1fil,rightskip=.1cm]{author in head/foot}%
     \usebeamerfont{title in head/foot}\insertshorttitle%
-  \end{beamercolorbox}}%
-  \vskip0pt%
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.5ex,dp=1.125ex,leftskip=.1cm,rightskip=.1cm plus1fil]{title in head/foot}%
+    \usebeamerfont{author in
+    head/foot}\insertshortauthor
+    \hfill
+    \insertframenumber/\inserttotalframenumber \end{beamercolorbox}}%
+  \vskip0pt% 
 }
 
-\begin {document}
-\begin{frame}
-\titlepage
-\end{frame}
 
+
+
+
+
+\begin {document}
+{
+\setbeamertemplate{headline}{}
+\setbeamertemplate{footline}{}
 \begin{frame}
+\maketitle
+\end{frame}
+}
+
+
+
+
+% ==================================================================================
+\begin{frame}{Agenda}
+% ==================================================================================
 \tableofcontents
 \end{frame}
 
-\section{Cel i motywacje prac}
-\begin{frame}[fragile]{Cel i motywacje prac}
+
+
+
+
+
+
+% ==================================================================================
+\section{Motywacja i cele}
+% ==================================================================================
+\begin{frame}{Motywacja i cele}
+Cel -- zbadanie możliwości połączenia trzech dziedzin:
 \begin{enumerate}
-\item lorem ipsum dolor sit emet consecteur
-\item lorem ipsum dolor sit emet consecteur
-\item lorem ipsum dolor sit emet consecteur
+\item analizy sieci społecznościowych
+\item analizy sentymentu
+\item geolokacji
+\end{enumerate}
+\vspace{0.5cm}
+Motywacje:
+\begin{enumerate}
+\item dziedziny nie łączone wcześniej  
+\item ogromna popularność serwisów społecznościowych
+\item wykorzystanie szerokiej wiedzy zdobytej na studiach
 \end{enumerate}
 \end{frame}
 
-\section{Przebieg prac}
-\begin{frame}[fragile]{Przebieg prac}
+
+
+
+
+
+
+% ==================================================================================
+\section{Sposób realizacji i przebieg prac}
+% ==================================================================================
+\begin{frame}{Sposób realizacji i przebieg prac}
 \begin{enumerate}
-\item lorem ipsum dolor sit emet consecteur
-\item lorem ipsum dolor sit emet consecteur
-\item lorem ipsum dolor sit emet consecteur
+  \item zbieranie danych z Twittera
+%  \begin{itemize}
+%    \item budowa crawlera
+%    \item wybór grupy docelowej
+%  \end{itemize}
+  
+  \item wybór i budowa narzędzi do ekstrakcji wiedzy
+  \begin{itemize}
+	\item klasyfikator sentymentu
+  \end{itemize}
+  
+  \item odkrywanie wiedzy
+  \begin{itemize}
+    \item obliczenie sentymentu wpisów
+	\item identyfikacja zwolenników i przeciwników
+	\item zastosowanie geolokacji
+	\item odkrywanie zachowań użytkowników 
+  \end{itemize}
+  
 \end{enumerate}
+
+\tikzoverlay at (10cm,0cm) {
+	\includegraphics[width=2cm]{img/twitter.png}
+};
 \end{frame}
 
-\section{Rezultaty prac}
-\begin{frame}[fragile]{Rezultaty prac}
+
+
+% ==================================================================================
+\section{Otrzymane rezultaty}
+% ==================================================================================
+\begin{frame}{Zgromadzone dane}
 \begin{enumerate}
-\item lorem ipsum dolor sit emet consecteur
-\item lorem ipsum dolor sit emet consecteur
-\item lorem ipsum dolor sit emet consecteur
+  \item 7 mln tweetów  
+  \item 49\% pozytywnych, 47\% negatywnych
 \end{enumerate}
+\center{
+	\includegraphics[width=9cm]{img/rozklad-wpisow.png}
+}
 \end{frame}
  
 
-\begin{frame}[fragile]{Koniec}
-Dziękuję za uwagę.
+
+
+\begin{frame}{Aktywność użytkowników i rozkład sentymentu}
+\includegraphics[width=11cm]{img/tweety-w-meczu-nums.png}
+\end{frame}
+
+
+
+
+
+
+\begin{frame}{Interakcja między użytkownikami}
+\begin{adjustwidth}{-5cm}{-5cm}
+\begin{table}
+\begin{tabular}{rl}
+\includegraphics[width=0.50\textwidth]{img/reply-sentiment-zwolennik-zwolennik.PNG}
+&
+\includegraphics[width=0.50\textwidth]{img/reply-sentiment-przeciwnik-przeciwnik.PNG}
+\end{tabular}
+\end{table}
+\end{adjustwidth}
+\end{frame}
+
+
+
+
+
+
+\begin{frame}{Struktura grup między meczami}
+\includegraphics[width=1\textwidth]{img/grupy-arsenal-nums.png}
+\end{frame}
+
+
+
+
+
+
+\begin{frame}{Aktywność kibiców, a odległość od stadionu}
+\begin{adjustwidth}{-5cm}{-5cm}
+\begin{table}
+\begin{tabular}{rl}
+\includegraphics[width=5.4cm]{img/odleglosc-od-stadionu-home.png}
+&
+\includegraphics[width=5.3cm]{img/odleglosc-od-stadionu-away.png}
+\end{tabular}
+\end{table}
+\end{adjustwidth}
+\end{frame}
+
+
+
+
+
+
+
+% ==================================================================================
+\begin{frame}{Podsumowanie}
+Osiągnięte wyniki:
+\begin{enumerate}
+\item połączono geolokację, sentyment i sieci społeczne
+\item zbudowano narzędzie do przetwarzania dużej ilości danych z Twittera pod
+kątem analizy sieci społecznych
+\item odkryto ciekawe zależności wśród badanej społeczności
+\end{enumerate}
+
+Możliwe kierunki rozwoju:
+\begin{enumerate}
+\item rozbudowanie narzędzia do analizy sentymentu
+\item odkrywanie tematów rozmów
+\item bliższe przyjrzenie się grupom
+\end{enumerate}
+ 
 \end{frame} 
 
 \end{document}
