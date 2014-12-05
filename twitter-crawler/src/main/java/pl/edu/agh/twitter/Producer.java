@@ -9,6 +9,10 @@ import javax.enterprise.inject.Produces;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 
+/**
+ * Producer of #EntityManager
+ * It's being called under the hood
+ */
 public class Producer {
 
     private final Logger logger = Logger.getLogger(Producer.class);

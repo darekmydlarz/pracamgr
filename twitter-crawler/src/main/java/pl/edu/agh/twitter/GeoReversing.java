@@ -3,11 +3,11 @@ package pl.edu.agh.twitter;
 import com.google.gson.Gson;
 import com.google.inject.Singleton;
 import org.apache.log4j.Logger;
-import pl.edu.agh.twitter.business.Coordinates;
-import pl.edu.agh.twitter.business.geodata.entity.Geodata;
-import pl.edu.agh.twitter.business.geodata.entity.GeodataDAO;
-import pl.edu.agh.twitter.business.tweet.boundary.TweetDAO;
-import pl.edu.agh.twitter.business.tweet.entity.Tweet;
+import pl.edu.agh.twitter.entities.Coordinates;
+import pl.edu.agh.twitter.entities.geodata.entity.Geodata;
+import pl.edu.agh.twitter.entities.geodata.entity.GeodataDAO;
+import pl.edu.agh.twitter.entities.tweet.boundary.TweetDAO;
+import pl.edu.agh.twitter.entities.tweet.entity.Tweet;
 
 import javax.inject.Inject;
 import java.io.BufferedReader;
@@ -17,6 +17,11 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
 
+/**
+ * Utility class. It is fetching data for all geotagged tweets from OpenStreeMap.
+ * It is georeversing places from where tweet were posted.
+ * After all Address data for each tweets are stored into database.
+ */
 @Singleton
 public class GeoReversing implements Startable {
     Logger logger = Logger.getLogger(getClass());
@@ -64,7 +69,6 @@ public class GeoReversing implements Startable {
             try {
                 if(geodataDAO.isAlredyPersisted(tweet.getId())) {
                     ++i;
-//                    System.out.println("SKIPPED " + (++i) + " of " + tweets.size());
                 } else {
                     Address address = restCall(tweet.getCoordinates());
                     Geodata geodata = new Geodata(tweet, address);
@@ -72,7 +76,6 @@ public class GeoReversing implements Startable {
                     System.out.println("Persisted " + (++i) + " of " + tweets.size());
                 }
             } catch (Exception e) {
-//                e.printStackTrace();
                 logger.error(e);
                 logger.error(tweet);
             }
@@ -82,7 +85,7 @@ public class GeoReversing implements Startable {
     private Address restCall(Coordinates coords) throws IOException {
         Gson gson = new Gson();
         URL url = new URL("http://nominatim.openstreetmap.org/reverse?format=json&zoom=18&addressdetails=1" +
-                "&email=dmydlarz@gmail.com&accept-language=en" +
+                "&email=youremail@gmail.com&accept-language=en" +
                 "&lat=" + coords.getLatitude() +
                 "&lon=" + coords.getLongitude());
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -92,10 +95,6 @@ public class GeoReversing implements Startable {
             throw new RuntimeException("Failed : HTTP error code : " + conn.getResponseCode());
         }
         BufferedReader br = new BufferedReader(new InputStreamReader((conn.getInputStream())));
-//        String line;
-//        while((line = br.readLine()) != null) {
-//            System.out.println("line == " + line);
-//        }
         final DataObject fromJson = gson.fromJson(br, DataObject.class);
         conn.disconnect();
         return fromJson.address;

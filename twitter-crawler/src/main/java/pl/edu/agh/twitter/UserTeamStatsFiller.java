@@ -3,11 +3,11 @@ package pl.edu.agh.twitter;
 import ch.lambdaj.Lambda;
 import com.google.common.collect.Lists;
 import org.apache.log4j.Logger;
-import pl.edu.agh.twitter.business.matchevent.boundary.MatchEventDAO;
-import pl.edu.agh.twitter.business.matchevent.entity.MatchEvent;
-import pl.edu.agh.twitter.business.team.boundary.TeamDAO;
-import pl.edu.agh.twitter.business.team.entity.Team;
-import pl.edu.agh.twitter.business.userteamstats.UserTeamStats;
+import pl.edu.agh.twitter.entities.matchevent.boundary.MatchEventDAO;
+import pl.edu.agh.twitter.entities.matchevent.entity.MatchEvent;
+import pl.edu.agh.twitter.entities.team.boundary.TeamDAO;
+import pl.edu.agh.twitter.entities.team.entity.Team;
+import pl.edu.agh.twitter.entities.userteamstats.UserTeamStats;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -16,6 +16,9 @@ import java.math.BigInteger;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * It counts how many positive and negative tweets a particular user had posted about each team
+ */
 public class UserTeamStatsFiller implements Startable {
 
     Logger logger = Logger.getLogger(getClass());

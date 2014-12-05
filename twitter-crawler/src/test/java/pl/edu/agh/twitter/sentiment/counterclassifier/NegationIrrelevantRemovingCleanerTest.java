@@ -2,6 +2,8 @@ package pl.edu.agh.twitter.sentiment.counterclassifier;
 
 import org.junit.Assert;
 import org.junit.Test;
+import pl.edu.agh.twitter.sentiment.cleaner.NegationIrrelevantRemovingCleaner;
+import pl.edu.agh.twitter.sentiment.cleaner.TextCleaner;
 
 public class NegationIrrelevantRemovingCleanerTest {
     @Test

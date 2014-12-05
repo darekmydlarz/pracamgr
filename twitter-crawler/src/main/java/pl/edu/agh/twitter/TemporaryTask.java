@@ -1,20 +1,14 @@
 package pl.edu.agh.twitter;
 
 import com.google.common.collect.Lists;
-import edu.mit.jwi.Dictionary;
-import edu.mit.jwi.IDictionary;
-import edu.mit.jwi.item.IIndexWord;
-import edu.mit.jwi.item.POS;
-import edu.mit.jwi.morph.IStemmer;
-import edu.mit.jwi.morph.WordnetStemmer;
 import org.apache.log4j.Logger;
-import pl.edu.agh.twitter.business.Relationship;
-import pl.edu.agh.twitter.business.matchevent.boundary.MatchEventDAO;
-import pl.edu.agh.twitter.business.matchevent.entity.MatchEvent;
-import pl.edu.agh.twitter.business.team.boundary.TeamDAO;
-import pl.edu.agh.twitter.business.team.entity.Team;
-import pl.edu.agh.twitter.business.tweet.boundary.TweetDAO;
-import pl.edu.agh.twitter.business.tweet.entity.Tweet;
+import pl.edu.agh.twitter.entities.Relationship;
+import pl.edu.agh.twitter.entities.matchevent.boundary.MatchEventDAO;
+import pl.edu.agh.twitter.entities.matchevent.entity.MatchEvent;
+import pl.edu.agh.twitter.entities.team.boundary.TeamDAO;
+import pl.edu.agh.twitter.entities.team.entity.Team;
+import pl.edu.agh.twitter.entities.tweet.boundary.TweetDAO;
+import pl.edu.agh.twitter.entities.tweet.entity.Tweet;
 import pl.edu.agh.twitter.sentiment.EmoticonClassifier;
 import pl.edu.agh.twitter.sentiment.Sentiment;
 
@@ -25,6 +19,11 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
+
+/**
+ * Class where many temporary tasks is coded.
+ * You can change which method to call by changing #start() method implementation.
+ */
 @Singleton
 public class TemporaryTask implements Startable {
     Logger logger = Logger.getLogger(getClass());
@@ -46,6 +45,9 @@ public class TemporaryTask implements Startable {
         }
     }
 
+    /**
+     * Writes all relationships for all teams into file which can be consumed by cfinder
+     */
     private void cfinderDataGenerator() throws IOException {
         List<String> teams = Lists.newArrayList("Arsenal", "Manchester United", "Manchester City", "Chelsea");
         for(String name : teams) {
@@ -55,6 +57,9 @@ public class TemporaryTask implements Startable {
         }
     }
 
+    /**
+     * Writes all relationships for a team into file which can be consumed by cfinder
+     */
     private void cfinderEachTeam(String filename, List<MatchEvent> matchEvents) throws IOException {
         System.out.println("Writing to file: " + filename);
         final List<Relationship> relationships = tweetDAO.getRelationships(matchEvents);
@@ -66,6 +71,10 @@ public class TemporaryTask implements Startable {
         System.out.println("[OK]");
     }
 
+
+    /**
+     * Writes all relationships for MatchEvents list into file which can be consumed by cfinder
+     */
     private void cfinderEachMatch(List<MatchEvent> matchEvents) throws IOException {
         for(MatchEvent matchEvent : matchEvents) {
             System.out.println("Fetching data for: " + matchEvent);
@@ -82,6 +91,9 @@ public class TemporaryTask implements Startable {
         }
     }
 
+    /**
+     * It simply counts geotagged tweets and store that info into MatchEvent entity
+     */
     private void countGeotaggedData() {
         final List<MatchEvent> matchEvents = matchEventDAO.fetchAll();
         for(MatchEvent me : matchEvents) {
@@ -92,33 +104,10 @@ public class TemporaryTask implements Startable {
         }
     }
 
-    private void getAllWithEmoticons() {
-        final int size = tweetDAO.getAllWithEmoticons().size();
-    }
 
-    private void jwiDictionary() {
-        try {
-            IDictionary dict = new Dictionary(getClass().getClassLoader().getResource("dict"));
-            dict.open();
-            IStemmer stemmer = new WordnetStemmer(dict);
-            for (POS pos : POS.values()) {
-                final IIndexWord indexWord = dict.getIndexWord("swims", pos);
-                if (indexWord != null) {
-                    System.out.println(pos);
-                    System.out.println(indexWord);
-                    System.out.println("Lemma: == " + indexWord.getLemma());
-                    System.out.println(indexWord.getWordIDs());
-                    System.out.println(indexWord);
-                    final List<String> stems = stemmer.findStems("swims", pos);
-                    System.out.println(pos + ":" + stems);
-                }
-            }
-            dict.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
+    /**
+     * It prints tweets emoticons with negation to output. Written for debugging purposes.
+     */
     private void getTweetsWithEmoticonAndNegation() {
         final List<Tweet> tweets = tweetDAO.getWithEmoticonsAndPattern(0, 100, "% not %");
         for (Tweet tweet : tweets) {

@@ -6,13 +6,18 @@ import org.apache.log4j.Logger;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import pl.edu.agh.twitter.HibernateUtil;
-import pl.edu.agh.twitter.business.matchevent.entity.MatchEvent;
-import pl.edu.agh.twitter.business.tweet.boundary.TweetDAO;
+import pl.edu.agh.twitter.entities.matchevent.entity.MatchEvent;
+import pl.edu.agh.twitter.entities.tweet.boundary.TweetDAO;
 import twitter4j.*;
 
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Listening class for Twitter API.
+ * It founds particular match and starts listening for tweets connected with it.
+ * After each tweet, it is stored to database and is connected to concrete MatchEvent.
+ */
 public class MatchesCrawler {
     private static TwitterStream twitterStream = new TwitterStreamFactory().getInstance();
     private static final String[] LANGUAGES = new String[]{"en"};

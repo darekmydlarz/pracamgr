@@ -4,21 +4,25 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import org.joda.time.DateTime;
 import pl.edu.agh.twitter.Startable;
-import pl.edu.agh.twitter.business.Country;
-import pl.edu.agh.twitter.business.competition.boundary.CompetitionDAO;
-import pl.edu.agh.twitter.business.competition.entity.Competition;
-import pl.edu.agh.twitter.business.manager.entity.Manager;
-import pl.edu.agh.twitter.business.matchevent.boundary.MatchEventDAO;
-import pl.edu.agh.twitter.business.matchevent.entity.MatchEvent;
-import pl.edu.agh.twitter.business.player.entity.Player;
-import pl.edu.agh.twitter.business.team.boundary.TeamDAO;
-import pl.edu.agh.twitter.business.team.entity.Team;
+import pl.edu.agh.twitter.entities.Country;
+import pl.edu.agh.twitter.entities.competition.boundary.CompetitionDAO;
+import pl.edu.agh.twitter.entities.competition.entity.Competition;
+import pl.edu.agh.twitter.entities.manager.entity.Manager;
+import pl.edu.agh.twitter.entities.matchevent.boundary.MatchEventDAO;
+import pl.edu.agh.twitter.entities.matchevent.entity.MatchEvent;
+import pl.edu.agh.twitter.entities.player.entity.Player;
+import pl.edu.agh.twitter.entities.team.boundary.TeamDAO;
+import pl.edu.agh.twitter.entities.team.entity.Team;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * It this class all listened events are stored.
+ * Here are described all key words which were used to listen streamed tweets.
+ */
 @Singleton
 public class MatchEventsProvider implements Startable {
 

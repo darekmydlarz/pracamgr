@@ -5,6 +5,10 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Simple classifier which is classyfing tweets sentiment by occurences of concrete emoticons in it.
+ * It applies only to tweets with emoticons, though.
+ */
 public class EmoticonClassifier {
     private static final Map<String, Sentiment> emoticonsSentiment;
 
@@ -30,8 +34,6 @@ public class EmoticonClassifier {
         emoticonsSentiment.put("=/", Sentiment.NEG);
         emoticonsSentiment.put("=(", Sentiment.NEG);
     }
-
-    public static final String NEUTRAL_KEY = "";
 
     public static Sentiment getSentimentByEmoticon(final String text) {
         Map<String, Integer> emoticonsCounter = new HashMap<>();

@@ -4,9 +4,9 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import pl.edu.agh.twitter.business.tweet.entity.Tweet;
-import pl.edu.agh.twitter.business.user.boundary.UserDAO;
-import pl.edu.agh.twitter.business.user.entity.User;
+import pl.edu.agh.twitter.entities.tweet.entity.Tweet;
+import pl.edu.agh.twitter.entities.user.boundary.UserDAO;
+import pl.edu.agh.twitter.entities.user.entity.User;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -17,6 +17,10 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * It is crawling are gathered tweets. When a retweet is found (its recognized by a regex) then code below is looking up
+ * for a user which tweet has been retweeted.
+ */
 public class RetweetUserIdFiller implements Startable {
     Logger logger = LoggerFactory.getLogger(getClass());
 

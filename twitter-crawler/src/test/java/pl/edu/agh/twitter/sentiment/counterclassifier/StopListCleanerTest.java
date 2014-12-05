@@ -2,6 +2,7 @@ package pl.edu.agh.twitter.sentiment.counterclassifier;
 
 import org.junit.Assert;
 import org.junit.Test;
+import pl.edu.agh.twitter.sentiment.cleaner.StopListCleaner;
 
 public class StopListCleanerTest {
 

@@ -6,6 +6,9 @@ import org.hibernate.cfg.ImprovedNamingStrategy;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.service.ServiceRegistryBuilder;
 
+/**
+ * Class needed to use Hibernate, to instantiate it, and shutdown after application shutdown.
+ */
 public class HibernateUtil {
     private static final SessionFactory sessionFactory = buildSessionFactory();
     

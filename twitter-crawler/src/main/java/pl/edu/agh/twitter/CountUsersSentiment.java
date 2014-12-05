@@ -4,7 +4,7 @@ import ch.lambdaj.Lambda;
 import com.google.common.collect.ImmutableMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import pl.edu.agh.twitter.business.userteamstats.UserTeamStats;
+import pl.edu.agh.twitter.entities.userteamstats.UserTeamStats;
 import pl.edu.agh.twitter.sentiment.Sentiment;
 
 import javax.inject.Inject;
@@ -13,12 +13,21 @@ import javax.persistence.EntityTransaction;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Utility class to count each user sentiment in different teams matches.
+ * It counts how many particular users were tweeting in positive and negative way about each team
+ * Then it saves it to UserTeamStats entity table
+ */
 public class CountUsersSentiment implements Startable {
     Logger logger = LoggerFactory.getLogger(getClass());
 
     @Inject
     EntityManager em;
 
+    /**
+     * teamId -> <matchId, matchId, ...>
+     * teams matches ids connected with teams ids
+     */
     Map<Long, Integer[]> teamMatches = ImmutableMap.<Long, Integer[]>builder()
             .put(158l, new Integer[]{266, 258, 255, 715, 714, 244, 611, 547, 404, 176})     // arsenal
             .put(408l, new Integer[]{267, 2680, 255, 720, 709, 243, 674, 589, 445})     // chelsea

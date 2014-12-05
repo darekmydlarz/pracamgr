@@ -3,8 +3,8 @@ package pl.edu.agh.twitter;
 import com.google.common.collect.Maps;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import pl.edu.agh.twitter.business.UserTeamCount;
-import pl.edu.agh.twitter.business.user.entity.User;
+import pl.edu.agh.twitter.entities.UserTeamCount;
+import pl.edu.agh.twitter.entities.user.entity.User;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -19,9 +19,16 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Utility class. It scans users tweets with sentiment and store
+ * information about being fan and antifan of particular team.
+ * The data are stored as SQL queries into file (to speed up operations)
+ * but can also be persisted immediately do database.
+ */
 public class TeamPerUserCounter implements Startable {
     Logger logger = LoggerFactory.getLogger(getClass());
 
+    // ids of matches of all teams
     String chelseaMatches = "267, 2680, 255, 720, 709, 243, 674, 589, 445";
     String arsenalMatches = "266, 258, 255, 715, 714, 244, 611, 547, 404, 176";
     String unitedMatches = "265, 256, 249, 725, 699, 197, 612, 567, 486";
@@ -31,7 +38,6 @@ public class TeamPerUserCounter implements Startable {
     EntityManager em;
 
     Map<Long, UserTeamCount> utcMap = Maps.newHashMap();
-
 
     @Override
     public void start() {
@@ -72,7 +78,6 @@ public class TeamPerUserCounter implements Startable {
         int limit = 100_000, rowsNumber = 1_567_435;
         for(int offset = 0; offset < rowsNumber; offset += limit) {
             logger.info("Fetching {} / {}", offset, rowsNumber);
-//            Map<Long, String> usersTopTeam = Maps.newHashMap();
             final List<UserTeamCount> utcList = findUTCList(offset, limit);
             logger.info("ok | appending...");
             for (UserTeamCount userTeamCount : utcList) {
@@ -80,7 +85,6 @@ public class TeamPerUserCounter implements Startable {
                 final User user = em.find(User.class, userTeamCount.getUserId());
                 if(topTeam != null && user.getTopTeam() == null) {
                     final String userId = userTeamCount.getUserId() + "";
-//                    usersTopTeam.put(userId, topTeam);
                     fileWriter.append("UPDATE mgr.users SET top_team = '")
                             .append(topTeam)
                             .append("' WHERE id = ")
@@ -91,7 +95,6 @@ public class TeamPerUserCounter implements Startable {
             }
 
             logger.info("ok");
-//            mergeUsers(usersTopTeam);
         }
         fileWriter.close();
     }
@@ -106,10 +109,8 @@ public class TeamPerUserCounter implements Startable {
     }
 
     private void countUserPerTeamOccurences() {
-        logger.info("DARIOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
         logger.info("Chelsea");
         Iterator<Object[]> it = execute(chelseaMatches);
-        logger.info("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK");
         while(it.hasNext()) {
             Object[] row = it.next();
             UserTeamCount utc = getUTC(((Number) row[0]).longValue());
@@ -118,7 +119,6 @@ public class TeamPerUserCounter implements Startable {
 
         logger.info("Arsenal");
         it = execute(arsenalMatches);
-        logger.info("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK");
         while(it.hasNext()) {
             Object[] row = it.next();
             UserTeamCount utc = getUTC(((Number) row[0]).longValue());
@@ -127,7 +127,6 @@ public class TeamPerUserCounter implements Startable {
 
         logger.info("United");
         it = execute(unitedMatches);
-        logger.info("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK");
         while(it.hasNext()) {
             Object[] row = it.next();
             UserTeamCount utc = getUTC(((Number) row[0]).longValue());
@@ -136,7 +135,6 @@ public class TeamPerUserCounter implements Startable {
 
         logger.info("City");
         it = execute(cityMatches);
-        logger.info("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK");
         while(it.hasNext()) {
             Object[] row = it.next();
             UserTeamCount utc = getUTC(((Number) row[0]).longValue());
@@ -158,16 +156,6 @@ public class TeamPerUserCounter implements Startable {
         }
         transaction.commit();
     }
-
-//    private void persist(List<UserTeamCount> utcList) {
-//        final EntityTransaction transaction = em.getTransaction();
-//        if(!transaction.isActive())
-//            transaction.begin();
-//        for (UserTeamCount userTeamCount : utcList) {
-//            em.merge(userTeamCount);
-//        }
-//        transaction.commit();
-//    }
 
     private Iterator<Object[]> execute(String eventsIds) {
         String query = " select user_id, count(*) " +

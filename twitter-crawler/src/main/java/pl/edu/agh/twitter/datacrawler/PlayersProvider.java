@@ -1,11 +1,14 @@
 package pl.edu.agh.twitter.datacrawler;
 
 import com.google.common.collect.Sets;
-import pl.edu.agh.twitter.business.player.entity.Player;
+import pl.edu.agh.twitter.entities.player.entity.Player;
 
 import javax.inject.Singleton;
 import java.util.Set;
 
+/**
+ * In this class all players are defined with connected key words.
+ */
 @Singleton
 public class PlayersProvider {
     public Set<Player> barcelonaPlayers() {

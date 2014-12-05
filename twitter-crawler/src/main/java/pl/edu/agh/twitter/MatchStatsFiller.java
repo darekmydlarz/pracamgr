@@ -1,14 +1,18 @@
 package pl.edu.agh.twitter;
 
-import pl.edu.agh.twitter.business.matchevent.boundary.MatchEventDAO;
-import pl.edu.agh.twitter.business.matchevent.entity.MatchEvent;
-import pl.edu.agh.twitter.business.matchstats.MatchStats;
+import pl.edu.agh.twitter.entities.matchevent.boundary.MatchEventDAO;
+import pl.edu.agh.twitter.entities.matchevent.entity.MatchEvent;
+import pl.edu.agh.twitter.entities.matchstats.MatchStats;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import java.util.List;
 
+/**
+ * Utility class used to fill match_stats table.
+ * In table there was collected data, e.g. numbers of positive tweets, numbers of replies, number of geolocated tweets.
+ */
 public class MatchStatsFiller implements Startable {
     @Inject
     EntityManager em;

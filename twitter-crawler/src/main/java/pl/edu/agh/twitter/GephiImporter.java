@@ -4,11 +4,11 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
-import pl.edu.agh.twitter.business.matcheventgephi.boundary.MatchEventGephiDAO;
-import pl.edu.agh.twitter.business.matcheventgephi.entity.MatchEventGephi;
-import pl.edu.agh.twitter.business.usergroup.UserGroupName;
-import pl.edu.agh.twitter.business.usergroup.boundary.UserGroupDAO;
-import pl.edu.agh.twitter.business.usergroup.entity.UserGroup;
+import pl.edu.agh.twitter.entities.matcheventgephi.boundary.MatchEventGephiDAO;
+import pl.edu.agh.twitter.entities.matcheventgephi.entity.MatchEventGephi;
+import pl.edu.agh.twitter.entities.usergroup.UserGroupName;
+import pl.edu.agh.twitter.entities.usergroup.boundary.UserGroupDAO;
+import pl.edu.agh.twitter.entities.usergroup.entity.UserGroup;
 
 import javax.inject.Inject;
 import java.io.*;
@@ -17,6 +17,10 @@ import java.net.URL;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Utility class. It is reading Gephi output files for each match, and converts them to objects. After all
+ * converted data objects are stored into database.
+ */
 public class GephiImporter implements Startable {
     Logger logger = Logger.getLogger(getClass());
 
@@ -45,10 +49,6 @@ public class GephiImporter implements Startable {
 
     @Override
     public void start() {
-//        final File[] files = getGephiFiles();
-//        for (File f : files) {
-//            importMatchEventsGephi(f, getMatchEventIdFromFile(f));
-//        }
         try {
             File f = new File(getClass().getClassLoader().getResource("gephi/249-manunited-westham.csv").toURI());
             importMatchEventsGephi(f, 249l);
@@ -148,7 +148,6 @@ public class GephiImporter implements Startable {
                 userGroup.setClusteringCoefficient(Double.valueOf(split[14]));
                 userGroup.setEigenvectorCentrality(Double.valueOf(split[15]));
 
-//                userGroupDAO.persist(userGroup);
                 items.add(userGroup);
                 logger.info("COUNT: " + ++counter + " of 62101");
             }

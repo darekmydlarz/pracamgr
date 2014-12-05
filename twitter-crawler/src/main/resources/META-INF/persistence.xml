@@ -5,13 +5,13 @@
         http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd"
              version="1.0">
     <persistence-unit name="mgr">
-        <class>pl.edu.agh.twitter.business.tweet.entity.Tweet</class>
-        <class>pl.edu.agh.twitter.business.user.entity.User</class>
-        <class>pl.edu.agh.twitter.business.competition.entity.Competition</class>
-        <class>pl.edu.agh.twitter.business.manager.entity.Manager</class>
-        <class>pl.edu.agh.twitter.business.matchevent.entity.MatchEvent</class>
-        <class>pl.edu.agh.twitter.business.player.entity.Player</class>
-        <class>pl.edu.agh.twitter.business.team.entity.Team</class>
+        <class>pl.edu.agh.twitter.entities.tweet.entity.Tweet</class>
+        <class>pl.edu.agh.twitter.entities.user.entity.User</class>
+        <class>pl.edu.agh.twitter.entities.competition.entity.Competition</class>
+        <class>pl.edu.agh.twitter.entities.manager.entity.Manager</class>
+        <class>pl.edu.agh.twitter.entities.matchevent.entity.MatchEvent</class>
+        <class>pl.edu.agh.twitter.entities.player.entity.Player</class>
+        <class>pl.edu.agh.twitter.entities.team.entity.Team</class>
         <properties>
             <property name="hibernate.connection.driver_class" value="org.postgresql.Driver"/>
             <property name="hibernate.connection.url" value="jdbc:postgresql://localhost/postgres"/>
