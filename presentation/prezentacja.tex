@@ -1,4 +1,4 @@
-\documentclass{beamer}
+\documentclass[xcolor=table]{beamer}
 \usetheme{Warsaw}
 \usepackage[polish]{babel}
 \usepackage[utf8]{inputenc}
@@ -8,7 +8,8 @@
 \usepackage{tikz} % custom positions
 \beamertemplatenavigationsymbolsempty % disable navigatoin bar
 \usepackage{changepage} % adjustwidth
-
+\setbeamertemplate{caption}[numbered] % numery w rysunkach
+\usepackage{multirow} % spaning columns in tables
 
 \def\tikzoverlay{%
    \tikz[baseline,overlay]\node[every overlay node]
@@ -106,40 +107,87 @@ Motywacje:
   
 \end{enumerate}
 
-\center{
-	\includegraphics[width=11cm]{img/gruby-model.png}
-}
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=11cm]{img/gruby-model.png}
+\caption{Kolejne etapy realizacji systemu}
+\end{figure}
+
 \end{frame}
 
 % ==================================================================================
 \section{Uzyskane rezultaty}
 % ==================================================================================
-\begin{frame}{Uzyskane rezultaty}
+\begin{frame}{Zebrane dane}
 \begin{itemize}
   \item 7 mln tweetów  
   \item 49\% pozytywnych, 47\% negatywnych
 \end{itemize}
-\center{
-	\includegraphics[width=9cm]{img/rozklad-wpisow.png}
-}
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=6cm]{img/rozklad-wpisow2.png}
+\caption{Struktura zebranych wpisów}
+\end{figure}
 \end{frame}
 
 % ==================================================================================
 \begin{frame}{Aktywność użytkowników i rozkład sentymentu}
-\includegraphics[width=11cm]{img/tweety-w-meczu-nums.png}
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=10cm]{img/tweety-w-meczu-nums2.png}
+\caption{Zmiana liczby wpisów w czasie}
+\end{figure}
+ 
 \end{frame} 
 
 % ==================================================================================
 \begin{frame}{Interakcja między użytkownikami}
-\begin{adjustwidth}{-5cm}{-5cm}
-\begin{table}
-\begin{tabular}{rl}
-\includegraphics[width=0.50\textwidth]{img/reply-sentiment-zwolennik-zwolennik.PNG}
-&
-\includegraphics[width=0.50\textwidth]{img/reply-sentiment-przeciwnik-przeciwnik.PNG}
+
+%\begin{adjustwidth}{-5cm}{-5cm}
+%\begin{table}
+%\begin{tabular}{rl}
+%\includegraphics[width=0.50\textwidth]{img/reply-sentiment-zwolennik-zwolennik.PNG}
+%&
+%\includegraphics[width=0.50\textwidth]{img/reply-sentiment-przeciwnik-przeciwnik.PNG}
+%\end{tabular}
+%\end{table}
+%\end{adjustwidth}
+
+Sentyment wiadomości między zwolennikami i przeciwnikami klubu
+
+\begin{table}[h]
+\begin{tabular}{l|c|r|}
+\cline{2-3}
+& \multicolumn{2}{c|}{Wiadomości między zwolennikami klubu}          
+\\ \cline{2-3} &  
+\multicolumn{1}{p{30mm}|}{Wpis pozytywny} &
+\multicolumn{1}{p{30mm}|}{Wpis negatywny} \\ \hline
+
+\multicolumn{1}{|c|}{Odp. pozytywna} &
+\multicolumn{1}{r|}{\cellcolor[HTML]{34CDF9}15027} & 4661 \\ \hline 
+\multicolumn{1}{|c|}{Odp. negatywna} & \multicolumn{1}{r|}{3495} & 3701                                   
+\\ \hline
 \end{tabular}
 \end{table}
-\end{adjustwidth}
+
+\begin{table}[h]
+\begin{tabular}{l|c|r|}
+\cline{2-3}
+& \multicolumn{2}{c|}{Wiadomości między przeciwnikami klubu}          
+\\ \cline{2-3} &
+
+\multicolumn{1}{p{30mm}|}{Wpis pozytywny} &
+\multicolumn{1}{p{30mm}|}{Wpis negatywny} \\ \hline
+
+\multicolumn{1}{|c|}{Odp. pozytywna} & \multicolumn{1}{r|}{5154} & 7238              
+\\ \hline 
+\multicolumn{1}{|c|}{Odp. negatywna} & \multicolumn{1}{r|}{8306} &
+{\cellcolor[HTML]{34CDF9}21687} \\ \hline
+\end{tabular}
+\end{table}
+
 \end{frame}
 
 % ==================================================================================
@@ -149,15 +197,32 @@ Motywacje:
 
 % ==================================================================================
 \begin{frame}{Aktywność kibiców, a odległość od stadionu}
-\begin{adjustwidth}{-5cm}{-5cm}
-\begin{table}
-\begin{tabular}{rl}
-\includegraphics[width=5.4cm]{img/odleglosc-od-stadionu-home.png}
-&
-\includegraphics[width=5.3cm]{img/odleglosc-od-stadionu-away.png}
-\end{tabular}
-\end{table}
-\end{adjustwidth}
+
+Odległość kibiców od stadionu a miejsce rozgrywania spotkania
+
+\begin{columns}[C] % align columns
+\begin{column}{.48\textwidth}
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=\linewidth]{img/odleglosc-od-stadionu-home.png}
+\caption{Mecze u siebie}
+\end{figure}
+
+\end{column}%
+\hfill%
+\begin{column}{.48\textwidth}
+
+
+\begin{figure}[ht!] 
+\centering
+\includegraphics[width=\linewidth]{img/odleglosc-od-stadionu-away.png}
+\caption{Mecze na wyjeździe}
+\end{figure}
+
+\end{column}%
+\end{columns}
+
 \end{frame}
 
 % ==================================================================================
@@ -179,14 +244,18 @@ Motywacje:
     \item przecwinicy najczęściej odpowiadają sobie nazwajem
     \item zwolennicy najczęściej podają swoje wpisy dalej (retweetują)
   \end{itemize}
-  \item im kibice fizycznie bliżej siebie, tym częściej się ze sobą komunikują
+  \item częstość komunikacji a fizyczna odległość między kibicami
+  \begin{itemize}
+    \item im kibice fizycznie bliżej siebie, tym częściej się ze sobą komunikują
+  \end{itemize} 
+   
 \end{enumerate}
 \end{frame}
 % ==================================================================================
 \begin{frame}{Podsumowanie eksperymentów}
 \begin{itemize}
-  \item użytkownicy sieci społecznościowych zachowują się w taki sam sposób
-  jak w życiu codziennym
+  \item użytkownicy sieci społecznościowych zachowują się w Internecie w taki
+  sam sposób jak w życiu codziennym
   \item najnowsze technologie komputerowe pozwalają na badanie dużych
   społeczności w sposób transparentny
   \item badanie sieci społecznych można zautomatyzować i zastosować również do
