@@ -1,4 +1,4 @@
-package pl.edu.agh.twitter.entities.player.entity;
+package pl.edu.agh.twitter.entities.manager;
 
 import com.google.common.collect.Sets;
 
@@ -9,33 +9,33 @@ import java.util.*;
  * Mapped DB table
  */
 @Entity
-@Table(schema = "mgr", name = "players")
-public class Player {
+@Table(schema = "mgr", name = "managers")
+public class Manager {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue
     private Long id;
     @Column(unique = true)
     private String lastName;
 
     @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(schema = "mgr", name = "players_nicknames")
+    @CollectionTable(schema = "mgr", name = "managers_nicknames")
     @Column(name = "nickname")
     private Set<String> nicknames = new HashSet<String>();
 
-    public Player() {
+    public Manager() {
     }
 
-    public Player(String lastName, Set<String> nicknames) {
+    public Manager(String lastName) {
         this.lastName = lastName;
-        this.nicknames.addAll(nicknames);
     }
 
-    public Player(String lastName, String ... nicknames) {
+    public Manager(String lastName, Set<String> nicknames) {
+        this.lastName = lastName;
+        this.nicknames = nicknames;
+    }
+
+    public Manager(String lastName, String ... nicknames) {
         this(lastName, Sets.newHashSet(nicknames));
-    }
-
-    public Player(String lastName) {
-        this.lastName = lastName;
     }
 
     public Long getId() {

@@ -9,6 +9,9 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.List;
 
+/**
+ * Mapped DB table
+ */
 @Entity
 @Table(schema = "mgr")
 public class UserTeamCount {

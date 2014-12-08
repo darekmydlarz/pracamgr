@@ -1,7 +1,7 @@
 package pl.edu.agh.twitter;
 
-import pl.edu.agh.twitter.entities.matchevent.boundary.MatchEventDAO;
-import pl.edu.agh.twitter.entities.matchevent.entity.MatchEvent;
+import pl.edu.agh.twitter.entities.matchevent.MatchEventDAO;
+import pl.edu.agh.twitter.entities.matchevent.MatchEvent;
 import pl.edu.agh.twitter.entities.matchstats.MatchStats;
 
 import javax.inject.Inject;

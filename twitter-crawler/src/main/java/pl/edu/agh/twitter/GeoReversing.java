@@ -4,10 +4,10 @@ import com.google.gson.Gson;
 import com.google.inject.Singleton;
 import org.apache.log4j.Logger;
 import pl.edu.agh.twitter.entities.Coordinates;
-import pl.edu.agh.twitter.entities.geodata.entity.Geodata;
-import pl.edu.agh.twitter.entities.geodata.entity.GeodataDAO;
-import pl.edu.agh.twitter.entities.tweet.boundary.TweetDAO;
-import pl.edu.agh.twitter.entities.tweet.entity.Tweet;
+import pl.edu.agh.twitter.entities.geodata.Geodata;
+import pl.edu.agh.twitter.entities.geodata.GeodataDAO;
+import pl.edu.agh.twitter.entities.tweet.TweetDAO;
+import pl.edu.agh.twitter.entities.tweet.Tweet;
 
 import javax.inject.Inject;
 import java.io.BufferedReader;

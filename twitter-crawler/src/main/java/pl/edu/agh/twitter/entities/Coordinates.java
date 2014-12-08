@@ -4,6 +4,9 @@ import twitter4j.GeoLocation;
 
 import javax.persistence.Embeddable;
 
+/**
+ * Class for cooridnates: latitude and longitude
+ */
 @Embeddable
 public class Coordinates {
 	private Double latitude;

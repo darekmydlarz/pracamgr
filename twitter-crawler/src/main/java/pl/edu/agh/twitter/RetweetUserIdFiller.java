@@ -4,9 +4,9 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import pl.edu.agh.twitter.entities.tweet.entity.Tweet;
-import pl.edu.agh.twitter.entities.user.boundary.UserDAO;
-import pl.edu.agh.twitter.entities.user.entity.User;
+import pl.edu.agh.twitter.entities.tweet.Tweet;
+import pl.edu.agh.twitter.entities.user.UserDAO;
+import pl.edu.agh.twitter.entities.user.User;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;

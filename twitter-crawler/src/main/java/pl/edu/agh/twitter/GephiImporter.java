@@ -4,11 +4,10 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
-import pl.edu.agh.twitter.entities.matcheventgephi.boundary.MatchEventGephiDAO;
-import pl.edu.agh.twitter.entities.matcheventgephi.entity.MatchEventGephi;
-import pl.edu.agh.twitter.entities.usergroup.UserGroupName;
-import pl.edu.agh.twitter.entities.usergroup.boundary.UserGroupDAO;
-import pl.edu.agh.twitter.entities.usergroup.entity.UserGroup;
+import pl.edu.agh.twitter.entities.matcheventgephi.MatchEventGephiDAO;
+import pl.edu.agh.twitter.entities.matcheventgephi.MatchEventGephi;
+import pl.edu.agh.twitter.entities.usergroup.UserGroupDAO;
+import pl.edu.agh.twitter.entities.usergroup.UserGroup;
 
 import javax.inject.Inject;
 import java.io.*;
@@ -25,19 +24,13 @@ public class GephiImporter implements Startable {
     Logger logger = Logger.getLogger(getClass());
 
     public enum UserGroupInput {
-        ALL("gephi - Workspace 1 [Nodes].csv", UserGroupName.ALL),
-        LEFT("gephi-all-left.csv", UserGroupName.ALL);
+        ALL("gephi - Workspace 1 [Nodes].csv"),
+        LEFT("gephi-all-left.csv");
 
         private final String path;
-        private final UserGroupName groupName;
 
-        UserGroupInput(String path, UserGroupName groupName) {
+        UserGroupInput(String path) {
             this.path = path;
-            this.groupName = groupName;
-        }
-
-        public UserGroupName getGroupName() {
-            return groupName;
         }
     }
 

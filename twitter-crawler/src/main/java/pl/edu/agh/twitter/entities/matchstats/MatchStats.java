@@ -2,6 +2,9 @@ package pl.edu.agh.twitter.entities.matchstats;
 
 import javax.persistence.*;
 
+/**
+ * Mapped DB table
+ */
 @Entity
 @Table(schema = "mgr")
 public class MatchStats {

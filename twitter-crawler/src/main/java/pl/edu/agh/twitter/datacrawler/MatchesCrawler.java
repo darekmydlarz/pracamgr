@@ -6,8 +6,8 @@ import org.apache.log4j.Logger;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import pl.edu.agh.twitter.HibernateUtil;
-import pl.edu.agh.twitter.entities.matchevent.entity.MatchEvent;
-import pl.edu.agh.twitter.entities.tweet.boundary.TweetDAO;
+import pl.edu.agh.twitter.entities.matchevent.MatchEvent;
+import pl.edu.agh.twitter.entities.tweet.TweetDAO;
 import twitter4j.*;
 
 import java.util.Arrays;

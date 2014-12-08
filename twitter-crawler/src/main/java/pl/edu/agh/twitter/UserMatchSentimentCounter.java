@@ -2,18 +2,22 @@ package pl.edu.agh.twitter;
 
 import com.google.common.collect.Lists;
 import org.apache.log4j.Logger;
-import pl.edu.agh.twitter.entities.matchevent.boundary.MatchEventDAO;
-import pl.edu.agh.twitter.entities.matchevent.entity.MatchEvent;
-import pl.edu.agh.twitter.entities.matcheventgephi.boundary.MatchEventGephiDAO;
-import pl.edu.agh.twitter.entities.matcheventgephi.entity.MatchEventGephi;
-import pl.edu.agh.twitter.entities.paroubektweet.boundary.ParoubekTweetDAO;
-import pl.edu.agh.twitter.entities.paroubektweet.entity.ParoubekTweet;
-import pl.edu.agh.twitter.entities.usermatchsentiment.boundary.UserMatchSentimentDAO;
-import pl.edu.agh.twitter.entities.usermatchsentiment.entity.UserMatchSentiment;
+import pl.edu.agh.twitter.entities.matchevent.MatchEventDAO;
+import pl.edu.agh.twitter.entities.matchevent.MatchEvent;
+import pl.edu.agh.twitter.entities.matcheventgephi.MatchEventGephiDAO;
+import pl.edu.agh.twitter.entities.matcheventgephi.MatchEventGephi;
+import pl.edu.agh.twitter.entities.paroubektweet.ParoubekTweetDAO;
+import pl.edu.agh.twitter.entities.paroubektweet.ParoubekTweet;
+import pl.edu.agh.twitter.entities.usermatchsentiment.UserMatchSentimentDAO;
+import pl.edu.agh.twitter.entities.usermatchsentiment.UserMatchSentiment;
 
 import javax.inject.Inject;
 import java.util.List;
 
+/**
+ * Class witch counts sentiment for each user per each match.
+ * It is crawling over all match events and counts user sentiment for that match.
+ */
 public class UserMatchSentimentCounter implements Startable {
     public static final Double VALENCE_AVG = 0.4786984978198536;
     Logger logger = Logger.getLogger(getClass());

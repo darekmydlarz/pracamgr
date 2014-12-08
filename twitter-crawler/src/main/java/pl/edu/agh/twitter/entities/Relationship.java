@@ -1,5 +1,8 @@
 package pl.edu.agh.twitter.entities;
 
+/**
+ * Relationship class: source, target and weight of relationship
+ */
 public class Relationship {
     String source;
     String target;
