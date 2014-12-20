@@ -1,12 +1,14 @@
 package pl.edu.agh.twitter.sentiment.counterclassifier;
 
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import pl.edu.agh.twitter.sentiment.cleaner.StopListCleaner;
 
 public class StopListCleanerTest {
 
     @Test
+    @Ignore
     public void case1() {
         String[] given = {
                 "RT @J_SPEKZ: Haha quality! #Fellaini #United #Moyes http://t.co/rJB4K1fvZy",
@@ -41,6 +43,7 @@ public class StopListCleanerTest {
     }
 
     @Test
+    @Ignore
     public void case2() {
         String[] given = {
                 "@RickyTait_ @Fragular that's why you lost RVP though. Shit money for all the goals he scored.",
@@ -71,6 +74,7 @@ public class StopListCleanerTest {
     }
 
     @Test
+    @Ignore
     public void case3() {
         String[] given = {
                 "RT @ahmed_hamed11: Have a feeling that lallana will score today ! #ARSSOU",

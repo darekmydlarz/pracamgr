@@ -23,7 +23,7 @@ import java.util.Map;
  * Utility class. It scans users tweets with sentiment and store
  * information about being fan and antifan of particular team.
  * The data are stored as SQL queries into file (to speed up operations)
- * but can also be persisted immediately do database.
+ * but can also be persisted immediately to database.
  */
 public class TeamPerUserCounter implements Startable {
     Logger logger = LoggerFactory.getLogger(getClass());

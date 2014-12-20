@@ -116,15 +116,15 @@ public class NegationParoubekClassifier implements Startable {
     @Override
     public void start() {
         logger.info("Started...");
-//        int offset = 0;
+        int offset = 0;
 
-        int offset = new Random().nextInt(7_000_000);
+//        int offset = new Random().nextInt(7_000_000);
         final int limit = 100;
         while(offset + limit < TWEETS_NUMBER) {
             logger.info("In progress...\t" + offset + "/" + TWEETS_NUMBER);
             final List<Tweet> tweets = tweetDAO.getTweetsLimitOffset(limit, offset);
             logger.info("Tweets fetched...");
-//            processTweets(tweets);
+            processTweets(tweets);
             showInfo(tweets);
             offset += limit;
         }
