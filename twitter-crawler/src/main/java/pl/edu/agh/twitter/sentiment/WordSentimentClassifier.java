@@ -1,7 +1,7 @@
 package pl.edu.agh.twitter.sentiment;
 
 import com.google.common.collect.Maps;
-import pl.edu.agh.twitter.entities.wordfrequency.WordFrequency;
+import pl.edu.agh.twitter.entities.WordFrequency;
 import pl.edu.agh.twitter.sentiment.cleaner.TextCleaner;
 
 import java.util.Arrays;

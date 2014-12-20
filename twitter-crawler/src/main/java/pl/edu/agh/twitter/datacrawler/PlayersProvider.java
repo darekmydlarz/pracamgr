@@ -1,7 +1,7 @@
 package pl.edu.agh.twitter.datacrawler;
 
 import com.google.common.collect.Sets;
-import pl.edu.agh.twitter.entities.player.entity.Player;
+import pl.edu.agh.twitter.entities.Player;
 
 import javax.inject.Singleton;
 import java.util.Set;

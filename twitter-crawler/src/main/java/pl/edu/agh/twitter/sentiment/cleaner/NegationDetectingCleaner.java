@@ -1,7 +1,7 @@
 package pl.edu.agh.twitter.sentiment.cleaner;
 
 import org.apache.commons.lang.StringUtils;
-import pl.edu.agh.twitter.entities.wordfrequency.CountStrategy;
+import pl.edu.agh.twitter.entities.CountStrategy;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

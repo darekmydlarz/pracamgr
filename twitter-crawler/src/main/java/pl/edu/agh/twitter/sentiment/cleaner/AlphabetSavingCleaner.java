@@ -1,6 +1,6 @@
 package pl.edu.agh.twitter.sentiment.cleaner;
 
-import pl.edu.agh.twitter.entities.wordfrequency.CountStrategy;
+import pl.edu.agh.twitter.entities.CountStrategy;
 
 import java.text.Normalizer;
 

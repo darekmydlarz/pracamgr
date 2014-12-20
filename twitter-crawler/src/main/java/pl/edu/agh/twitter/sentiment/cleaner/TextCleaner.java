@@ -1,6 +1,6 @@
 package pl.edu.agh.twitter.sentiment.cleaner;
 
-import pl.edu.agh.twitter.entities.wordfrequency.CountStrategy;
+import pl.edu.agh.twitter.entities.CountStrategy;
 import pl.edu.agh.twitter.sentiment.Sentiment;
 
 /**
@@ -11,7 +11,7 @@ public interface TextCleaner {
     CountStrategy getCountStrategy();
 
     static class Sentence {
-        String text;
+        public String text;
         Sentiment sentiment;
 
         public String getText() {

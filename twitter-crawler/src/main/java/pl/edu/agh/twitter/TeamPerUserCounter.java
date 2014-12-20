@@ -4,7 +4,7 @@ import com.google.common.collect.Maps;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pl.edu.agh.twitter.entities.UserTeamCount;
-import pl.edu.agh.twitter.entities.user.User;
+import pl.edu.agh.twitter.entities.User;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;

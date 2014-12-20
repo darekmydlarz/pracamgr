@@ -4,10 +4,10 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
-import pl.edu.agh.twitter.entities.matcheventgephi.MatchEventGephiDAO;
-import pl.edu.agh.twitter.entities.matcheventgephi.MatchEventGephi;
-import pl.edu.agh.twitter.entities.usergroup.UserGroupDAO;
-import pl.edu.agh.twitter.entities.usergroup.UserGroup;
+import pl.edu.agh.twitter.entities.MatchEventGephiDAO;
+import pl.edu.agh.twitter.entities.MatchEventGephi;
+import pl.edu.agh.twitter.entities.UserGroupDAO;
+import pl.edu.agh.twitter.entities.UserGroup;
 
 import javax.inject.Inject;
 import java.io.*;

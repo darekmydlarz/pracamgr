@@ -1,8 +1,8 @@
 package pl.edu.agh.twitter;
 
-import pl.edu.agh.twitter.entities.matchevent.MatchEventDAO;
-import pl.edu.agh.twitter.entities.matchevent.MatchEvent;
-import pl.edu.agh.twitter.entities.matchstats.MatchStats;
+import pl.edu.agh.twitter.entities.MatchEventDAO;
+import pl.edu.agh.twitter.entities.MatchEvent;
+import pl.edu.agh.twitter.entities.MatchStats;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;

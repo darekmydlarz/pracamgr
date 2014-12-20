@@ -4,12 +4,12 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import org.apache.log4j.Logger;
 import pl.edu.agh.twitter.Startable;
-import pl.edu.agh.twitter.entities.paroubektweet.ParoubekTweetDAO;
-import pl.edu.agh.twitter.entities.paroubektweet.ParoubekTweet;
-import pl.edu.agh.twitter.entities.tweet.TweetDAO;
-import pl.edu.agh.twitter.entities.tweet.Tweet;
-import pl.edu.agh.twitter.entities.wordfrequency.WordFrequencyDAO;
-import pl.edu.agh.twitter.entities.wordfrequency.WordFrequency;
+import pl.edu.agh.twitter.entities.ParoubekTweetDAO;
+import pl.edu.agh.twitter.entities.ParoubekTweet;
+import pl.edu.agh.twitter.entities.TweetDAO;
+import pl.edu.agh.twitter.entities.Tweet;
+import pl.edu.agh.twitter.entities.WordFrequencyDAO;
+import pl.edu.agh.twitter.entities.WordFrequency;
 import pl.edu.agh.twitter.sentiment.cleaner.NegationIrrelevantRemovingCleaner;
 import pl.edu.agh.twitter.sentiment.cleaner.TextCleaner;
 

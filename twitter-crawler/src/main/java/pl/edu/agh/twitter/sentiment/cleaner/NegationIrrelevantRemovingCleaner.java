@@ -7,7 +7,7 @@ import edu.mit.jwi.item.POS;
 import edu.mit.jwi.morph.IStemmer;
 import edu.mit.jwi.morph.WordnetStemmer;
 import org.apache.commons.lang.StringUtils;
-import pl.edu.agh.twitter.entities.wordfrequency.CountStrategy;
+import pl.edu.agh.twitter.entities.CountStrategy;
 import pl.edu.agh.twitter.sentiment.EmoticonClassifier;
 
 import java.io.IOException;

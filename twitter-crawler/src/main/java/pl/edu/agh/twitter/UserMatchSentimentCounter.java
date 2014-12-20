@@ -2,14 +2,14 @@ package pl.edu.agh.twitter;
 
 import com.google.common.collect.Lists;
 import org.apache.log4j.Logger;
-import pl.edu.agh.twitter.entities.matchevent.MatchEventDAO;
-import pl.edu.agh.twitter.entities.matchevent.MatchEvent;
-import pl.edu.agh.twitter.entities.matcheventgephi.MatchEventGephiDAO;
-import pl.edu.agh.twitter.entities.matcheventgephi.MatchEventGephi;
-import pl.edu.agh.twitter.entities.paroubektweet.ParoubekTweetDAO;
-import pl.edu.agh.twitter.entities.paroubektweet.ParoubekTweet;
-import pl.edu.agh.twitter.entities.usermatchsentiment.UserMatchSentimentDAO;
-import pl.edu.agh.twitter.entities.usermatchsentiment.UserMatchSentiment;
+import pl.edu.agh.twitter.entities.MatchEventDAO;
+import pl.edu.agh.twitter.entities.MatchEvent;
+import pl.edu.agh.twitter.entities.MatchEventGephiDAO;
+import pl.edu.agh.twitter.entities.MatchEventGephi;
+import pl.edu.agh.twitter.entities.ParoubekTweetDAO;
+import pl.edu.agh.twitter.entities.ParoubekTweet;
+import pl.edu.agh.twitter.entities.UserMatchSentimentDAO;
+import pl.edu.agh.twitter.entities.UserMatchSentiment;
 
 import javax.inject.Inject;
 import java.util.List;

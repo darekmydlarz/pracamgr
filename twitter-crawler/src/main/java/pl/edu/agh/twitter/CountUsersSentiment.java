@@ -4,7 +4,7 @@ import ch.lambdaj.Lambda;
 import com.google.common.collect.ImmutableMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import pl.edu.agh.twitter.entities.userteamstats.UserTeamStats;
+import pl.edu.agh.twitter.entities.UserTeamStats;
 import pl.edu.agh.twitter.sentiment.Sentiment;
 
 import javax.inject.Inject;

@@ -3,11 +3,11 @@ package pl.edu.agh.twitter;
 import ch.lambdaj.Lambda;
 import com.google.common.collect.Lists;
 import org.apache.log4j.Logger;
-import pl.edu.agh.twitter.entities.matchevent.MatchEventDAO;
-import pl.edu.agh.twitter.entities.matchevent.MatchEvent;
-import pl.edu.agh.twitter.entities.team.TeamDAO;
-import pl.edu.agh.twitter.entities.team.Team;
-import pl.edu.agh.twitter.entities.userteamstats.UserTeamStats;
+import pl.edu.agh.twitter.entities.MatchEventDAO;
+import pl.edu.agh.twitter.entities.MatchEvent;
+import pl.edu.agh.twitter.entities.TeamDAO;
+import pl.edu.agh.twitter.entities.Team;
+import pl.edu.agh.twitter.entities.UserTeamStats;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;

@@ -3,12 +3,12 @@ package pl.edu.agh.twitter;
 import com.google.common.collect.Lists;
 import org.apache.log4j.Logger;
 import pl.edu.agh.twitter.entities.Relationship;
-import pl.edu.agh.twitter.entities.matchevent.MatchEventDAO;
-import pl.edu.agh.twitter.entities.matchevent.MatchEvent;
-import pl.edu.agh.twitter.entities.team.TeamDAO;
-import pl.edu.agh.twitter.entities.team.Team;
-import pl.edu.agh.twitter.entities.tweet.TweetDAO;
-import pl.edu.agh.twitter.entities.tweet.Tweet;
+import pl.edu.agh.twitter.entities.MatchEventDAO;
+import pl.edu.agh.twitter.entities.MatchEvent;
+import pl.edu.agh.twitter.entities.TeamDAO;
+import pl.edu.agh.twitter.entities.Team;
+import pl.edu.agh.twitter.entities.TweetDAO;
+import pl.edu.agh.twitter.entities.Tweet;
 import pl.edu.agh.twitter.sentiment.EmoticonClassifier;
 import pl.edu.agh.twitter.sentiment.Sentiment;
 
