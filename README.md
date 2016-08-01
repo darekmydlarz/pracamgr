@@ -1,4 +1,8 @@
+# Notice
+
+
 :warning: The project is in green step of red-green-refactor TDD process.
+
 :warning: The project is rather Polish than English oriented.
 
 Praca Magisterska
