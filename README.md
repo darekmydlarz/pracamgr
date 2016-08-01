@@ -1,21 +1,24 @@
+:warning: The project is in green step of red-green-refactor TDD process.
+:warning: The project is rather Polish than English oriented.
+
 Praca Magisterska
 =================
 Temat pracy
 -----------
-Moøliwoúci powiπzania danych geolokacyjnych i analizy sentymentu w analizie zachowaÒ uøytkownikÛw w wybranych portalach spo≥ecznoúciowych.
+Mo≈ºliwo≈õci powiƒÖzania danych geolokacyjnych i analizy sentymentu w analizie zachowa≈Ñ u≈ºytkownik√≥w w wybranych portalach spo≈Çeczno≈õciowych.
 
 Promotor/opiekun pracy
 ----------------------
-dr inø. Anna Zygmunt, mgr inø. Bogdan Gliwa
+dr in≈º. Anna Zygmunt, mgr in≈º. Bogdan Gliwa
 
 Autor
 -----
-inø. Dariusz Mydlarz
+in≈º. Dariusz Mydlarz
 
-Akademia GÛrniczo-Hutnicza im. Stanis≥awa Staszica w Krakowie
+Akademia G√≥rniczo-Hutnicza im. Stanis≈Çawa Staszica w Krakowie
 -------------------------------------------------------------
-Wydzia≥ Informatyki, Elektroniki i Telekomunikacji  - Katedra Informatyki  
-Informatyka - Wytwarzanie i integracja systemÛw rozproszonych, Studia stacjonarne II stopnia  
+Wydzia≈Ç Informatyki, Elektroniki i Telekomunikacji  - Katedra Informatyki  
+Informatyka - Wytwarzanie i integracja system√≥w rozproszonych, Studia stacjonarne II stopnia  
 
 Rok akademicki
 --------------
